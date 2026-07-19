@@ -1,0 +1,49 @@
+{
+  "name": "Pizjo",
+  "tagline": "We're the people your diet warned you about.",
+  "description": "Handcrafted pizzas, gourmet burgers, crispy momos, and oven-baked happiness in Ahmedabad. Fresh dough, big flavours, extra cheese — always.",
+  "cuisines": ["Pizza", "Burger", "Momos"],
+  "phone": "+919265370588",
+  "phoneDisplay": "+91 92653 70588",
+  "email": "info@pizjo.in",
+  "whatsapp": "919265370588",
+  "website": "https://www.pizjo.in",
+  "address": {
+    "line1": "Shop 01, Ground Floor, Raj Complex",
+    "line2": "Near Metro Pillar 87, Vastral Road",
+    "area": "Amraiwadi",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "pincode": "382418",
+    "country": "India",
+    "full": "Shop 01, Ground Floor, Raj Complex, Near Metro Pillar 87, Vastral Road, Amraiwadi, Ahmedabad 382418"
+  },
+  "coordinates": {
+    "lat": 23.0052696160,
+    "lng": 72.6413717703
+  },
+  "hours": {
+    "display": "11:15 AM – 11:45 PM",
+    "open": "11:15",
+    "close": "23:45",
+    "days": "Monday – Sunday"
+  },
+  "social": {
+    "facebook": "https://www.facebook.com/share/16v6CwqoEA/",
+    "instagram": "https://www.instagram.com/pizjo_pizza",
+    "zomato": "https://www.zomato.com/ahmedabad/pizjo-amraiwadi",
+    "whatsappLink": "https://wa.me/919265370588"
+  },
+  "ratings": {
+    "zomato": 3.5,
+    "count": 57
+  },
+  "features": [
+    "Pure Vegetarian",
+    "Home Delivery",
+    "Takeaway",
+    "100% Amul Mozzarella"
+  ],
+  "priceRange": "₹49 – ₹699",
+  "avgOrderValue": "₹100 approx."
+}

@@ -1,0 +1,100 @@
+# Node & build tooling
+node_modules/
+.npm/
+.yarn/
+.pnp.*
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.eggs/
+*.egg-info/
+
+# Test artifacts (junk; do not commit)
+playwright-report/
+test-results/
+.playwright/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*.log
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*.cache
+*.swp
+*.swo
+
+# Local env / secrets — NEVER commit
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+
+# Build output
+dist/
+build/
+out/
+*.min.js
+*.min.css
+.turbo/
+
+# Backup files (avoid Copy folders — see AGENTS.md)
+*- Copy.*
+*_Copy.*
+*.bak
+*.tmp
+
+# Agent runtime cruft
+.claude/skills-lock.json.tmp
+.cagent/
+.codegpt/
+.copilot/
+.cline/
+.kiro/
+.continue/
+.cursor/
+.gemini/
+.codex/
+
+# Heavy/regeneratable assets (uncomment if adding heavy assets later)
+# assets/raw/
+# *.psd
+# *.ai
+# *.sketch
+# *.fig
+
+# ──────────────────────────────────────────────
+# Per-project decisions (Pizjo-specific)
+# ──────────────────────────────────────────────
+# Separate dev project — never part of Pizjo repo
+wormxgpt/
+
+# Dev-only scraping / data-pipeline scripts
+scripts/
+
+# The orphaned V1 menu page (replaced by V2 single-page app in index.html)
+pages/menu.html
+pages/menu.js
+
+# AI agent skills + per-session runtime (local tooling, not part of client repo)
+.agents/
+.claude/
+
+# AI agent runtime state (per-session, regenerated)
+skills-lock.json
+
+# Virtual environments
+.venv/
+
+# Local notes — kept on disk, not pushed
+PROJ_V1_AUDIT.md

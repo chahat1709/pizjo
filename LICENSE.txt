@@ -1,0 +1,18 @@
+PIZJO WEB PROJECT — Copyright (c) 2026 Chahat Jain (chahatjain096@gmail.com)
+
+All rights reserved.
+
+This source code, design system, mascot artwork, and associated assets
+are the proprietary intellectual property of the copyright holder.
+
+Unauthorised copying, modification, distribution, public display, or
+re-use — in whole or in part — for any purpose other than personal
+review is expressly prohibited without prior written permission from
+the copyright holder.
+
+For licensing, collaboration, or commercial-use enquiries, contact:
+  chahatjain096@gmail.com
+
+The repository may be made public at the discretion of the copyright
+holder; at that time, this notice may be replaced with an open-source
+license. Until then, this notice governs.

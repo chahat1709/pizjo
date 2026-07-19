@@ -1,0 +1,427 @@
+{
+    "categories": [
+        {
+            "name": "Classic Pizzas (Regular 7\")",
+            "items": [
+                {
+                    "name": "Margherita",
+                    "price": 120,
+                    "description": "A classic delight with 100% real mozzarella cheese",
+                    "image": "https://picsum.photos/seed/pizza1/400/300"
+                },
+                {
+                    "name": "Double Cheese Margherita",
+                    "price": 180,
+                    "description": "The ever-popular Margherita - loaded with extra cheese... oodies of it!",
+                    "image": "https://picsum.photos/seed/pizza2/400/300"
+                },
+                {
+                    "name": "Cheese n Corn",
+                    "price": 160,
+                    "description": "Sweet & Juicy Golden corn and 100% real mozzarella cheese in a delectable combination !",
+                    "image": "https://picsum.photos/seed/pizza3/400/300"
+                },
+                {
+                    "name": "Cheese n Tomato",
+                    "price": 160,
+                    "description": "A delectable combination of cheese and juicy tomato",
+                    "image": "https://picsum.photos/seed/pizza4/400/300"
+                },
+                {
+                    "name": "Achari Do Pyaza",
+                    "price": 160,
+                    "description": "Tangy & spicy achari flavours on a super cheesy onion pizza",
+                    "image": "https://picsum.photos/seed/pizza5/400/300"
+                },
+                {
+                    "name": "Fresh Veggie",
+                    "price": 200,
+                    "description": "Delectable combination of onion & capsicum, a veggie lovers pick",
+                    "image": "https://picsum.photos/seed/pizza6/400/300"
+                },
+                {
+                    "name": "Peppy Paneer",
+                    "price": 220,
+                    "description": "Flavorful trio of juicy paneer, crisp capsicum with spicy red paprika",
+                    "image": "https://picsum.photos/seed/pizza7/400/300"
+                },
+                {
+                    "name": "Farmhouse",
+                    "price": 220,
+                    "description": "Delightful combination of onion, capsicum, tomato & grilled mushroom",
+                    "image": "https://picsum.photos/seed/pizza8/400/300"
+                },
+                {
+                    "name": "Veg Extravaganza",
+                    "price": 250,
+                    "description": "Black olives, capsicum, onion, grilled mushroom, corn, tomato, jalapeno & extra cheese",
+                    "image": "https://picsum.photos/seed/pizza9/400/300"
+                },
+                {
+                    "name": "Veggie Paradise",
+                    "price": 220,
+                    "description": "The awesome foursome! Golden corn, black olives, capsicum, red paprika",
+                    "image": "https://picsum.photos/seed/pizza10/400/300"
+                }
+            ]
+        },
+        {
+            "name": "Classic Pizzas (Medium 10\")",
+            "items": [
+                {
+                    "name": "Margherita",
+                    "price": 216,
+                    "description": "A classic delight with 100% real mozzarella cheese",
+                    "image": "https://picsum.photos/seed/pizza11/400/300"
+                },
+                {
+                    "name": "Double Cheese Margherita",
+                    "price": 324,
+                    "description": "The ever-popular Margherita - loaded with extra cheese... oodies of it!",
+                    "image": "https://picsum.photos/seed/pizza12/400/300"
+                },
+                {
+                    "name": "Cheese n Corn",
+                    "price": 288,
+                    "description": "Sweet & Juicy Golden corn and 100% real mozzarella cheese in a delectable combination !",
+                    "image": "https://picsum.photos/seed/pizza13/400/300"
+                },
+                {
+                    "name": "Cheese n Tomato",
+                    "price": 288,
+                    "description": "A delectable combination of cheese and juicy tomato",
+                    "image": "https://picsum.photos/seed/pizza14/400/300"
+                },
+                {
+                    "name": "Achari Do Pyaza",
+                    "price": 288,
+                    "description": "Tangy & spicy achari flavours on a super cheesy onion pizza",
+                    "image": "https://picsum.photos/seed/pizza15/400/300"
+                },
+                {
+                    "name": "Fresh Veggie",
+                    "price": 360,
+                    "description": "Delectable combination of onion & capsicum, a veggie lovers pick",
+                    "image": "https://picsum.photos/seed/pizza16/400/300"
+                },
+                {
+                    "name": "Peppy Paneer",
+                    "price": 396,
+                    "description": "Flavorful trio of juicy paneer, crisp capsicum with spicy red paprika",
+                    "image": "https://picsum.photos/seed/pizza17/400/300"
+                },
+                {
+                    "name": "Farmhouse",
+                    "price": 396,
+                    "description": "Delightful combination of onion, capsicum, tomato & grilled mushroom",
+                    "image": "https://picsum.photos/seed/pizza18/400/300"
+                },
+                {
+                    "name": "Veg Extravaganza",
+                    "price": 450,
+                    "description": "Black olives, capsicum, onion, grilled mushroom, corn, tomato, jalapeno & extra cheese",
+                    "image": "https://picsum.photos/seed/pizza19/400/300"
+                },
+                {
+                    "name": "Veggie Paradise",
+                    "price": 396,
+                    "description": "The awesome foursome! Golden corn, black olives, capsicum, red paprika",
+                    "image": "https://picsum.photos/seed/pizza20/400/300"
+                }
+            ]
+        },
+        {
+            "name": "Classic Pizzas (Large 13\")",
+            "items": [
+                {
+                    "name": "Margherita",
+                    "price": 300,
+                    "description": "A classic delight with 100% real mozzarella cheese",
+                    "image": "https://picsum.photos/seed/pizza21/400/300"
+                },
+                {
+                    "name": "Double Cheese Margherita",
+                    "price": 450,
+                    "description": "The ever-popular Margherita - loaded with extra cheese... oodies of it!",
+                    "image": "https://picsum.photos/seed/pizza22/400/300"
+                },
+                {
+                    "name": "Cheese n Corn",
+                    "price": 400,
+                    "description": "Sweet & Juicy Golden corn and 100% real mozzarella cheese in a delectable combination !",
+                    "image": "https://picsum.photos/seed/pizza23/400/300"
+                },
+                {
+                    "name": "Cheese n Tomato",
+                    "price": 400,
+                    "description": "A delectable combination of cheese and juicy tomato",
+                    "image": "https://picsum.photos/seed/pizza24/400/300"
+                },
+                {
+                    "name": "Achari Do Pyaza",
+                    "price": 400,
+                    "description": "Tangy & spicy achari flavours on a super cheesy onion pizza",
+                    "image": "https://picsum.photos/seed/pizza25/400/300"
+                },
+                {
+                    "name": "Fresh Veggie",
+                    "price": 500,
+                    "description": "Delectable combination of onion & capsicum, a veggie lovers pick",
+                    "image": "https://picsum.photos/seed/pizza26/400/300"
+                },
+                {
+                    "name": "Peppy Paneer",
+                    "price": 550,
+                    "description": "Flavorful trio of juicy paneer, crisp capsicum with spicy red paprika",
+                    "image": "https://picsum.photos/seed/pizza27/400/300"
+                },
+                {
+                    "name": "Farmhouse",
+                    "price": 550,
+                    "description": "Delightful combination of onion, capsicum, tomato & grilled mushroom",
+                    "image": "https://picsum.photos/seed/pizza28/400/300"
+                },
+                {
+                    "name": "Veg Extravaganza",
+                    "price": 625,
+                    "description": "Black olives, capsicum, onion, grilled mushroom, corn, tomato, jalapeno & extra cheese",
+                    "image": "https://picsum.photos/seed/pizza29/400/300"
+                },
+                {
+                    "name": "Veggie Paradise",
+                    "price": 550,
+                    "description": "The awesome foursome! Golden corn, black olives, capsicum, red paprika",
+                    "image": "https://picsum.photos/seed/pizza30/400/300"
+                }
+            ]
+        },
+        {
+            "name": "Premium Paneer Pizzas",
+            "items": [
+                {
+                    "name": "Tandoori Paneer",
+                    "price": 250,
+                    "description": "It is hot. It is spicy. It is oh-so-Indian. Tandoori paneer with capsicum, red paprika & mint mayo",
+                    "image": "https://picsum.photos/seed/pizza31/400/300"
+                },
+                {
+                    "name": "Makhani Paneer",
+                    "price": 250,
+                    "description": "A true Indian classic! Paneer tikka, onion, capsicum in a creamy makhani sauce",
+                    "image": "https://picsum.photos/seed/pizza32/400/300"
+                },
+                {
+                    "name": "Spicy Paneer",
+                    "price": 250,
+                    "description": "Spicy jalapenos, paneer, crisp capsicum and red paprika",
+                    "image": "https://picsum.photos/seed/pizza33/400/300"
+                },
+                {
+                    "name": "Paneer Onion",
+                    "price": 220,
+                    "description": "Simple yet delicious combination of paneer and crunchy onion",
+                    "image": "https://picsum.photos/seed/pizza34/400/300"
+                }
+            ]
+        },
+        {
+            "name": "Garlic Breads & Sides",
+            "items": [
+                {
+                    "name": "Garlic Breadsticks",
+                    "price": 100,
+                    "description": "Baked to perfection. Your perfect pizza partner! Tastes best with dip",
+                    "image": "https://picsum.photos/seed/pizza35/400/300"
+                },
+                {
+                    "name": "Stuffed Garlic Bread",
+                    "price": 150,
+                    "description": "Freshly Baked Garlic Bread stuffed with mozzarella cheese, sweet corn & tangy and spicy jalape\u00f1os",
+                    "image": "https://picsum.photos/seed/pizza36/400/300"
+                },
+                {
+                    "name": "Paneer Tikka Stuffed Garlic Bread",
+                    "price": 170,
+                    "description": "Freshly Baked Garlic Bread stuffed with paneer tikka, onion and cheese",
+                    "image": "https://picsum.photos/seed/pizza37/400/300"
+                },
+                {
+                    "name": "Cheesy Dip",
+                    "price": 30,
+                    "description": "A cheesy dip to make your garlic bread and pizza even more delicious",
+                    "image": "https://picsum.photos/seed/pizza38/400/300"
+                },
+                {
+                    "name": "Jalapeno Dip",
+                    "price": 30,
+                    "description": "A spicy jalapeno dip",
+                    "image": "https://picsum.photos/seed/pizza39/400/300"
+                },
+                {
+                    "name": "Potato Wedges",
+                    "price": 110,
+                    "description": "Crispy golden baked potato wedges",
+                    "image": "https://picsum.photos/seed/pizza40/400/300"
+                },
+                {
+                    "name": "French Fries",
+                    "price": 100,
+                    "description": "Crispy golden french fries",
+                    "image": "https://picsum.photos/seed/pizza41/400/300"
+                },
+                {
+                    "name": "Peri Peri Fries",
+                    "price": 120,
+                    "description": "Crispy fries tossed in spicy peri peri seasoning",
+                    "image": "https://picsum.photos/seed/pizza42/400/300"
+                }
+            ]
+        },
+        {
+            "name": "Pasta",
+            "items": [
+                {
+                    "name": "Veg Macaroni",
+                    "price": 140,
+                    "description": "Macaroni tossed in a creamy cheese sauce with veggies",
+                    "image": "https://picsum.photos/seed/pizza43/400/300"
+                },
+                {
+                    "name": "Red Sauce Pasta",
+                    "price": 150,
+                    "description": "Penne pasta in a tangy tomato and herb sauce",
+                    "image": "https://picsum.photos/seed/pizza44/400/300"
+                },
+                {
+                    "name": "White Sauce Pasta",
+                    "price": 160,
+                    "description": "Penne pasta in a creamy, cheesy white sauce with mushrooms and corn",
+                    "image": "https://picsum.photos/seed/pizza45/400/300"
+                },
+                {
+                    "name": "Mix Sauce Pasta",
+                    "price": 170,
+                    "description": "The best of both worlds - creamy and tangy mix sauce pasta",
+                    "image": "https://picsum.photos/seed/pizza46/400/300"
+                }
+            ]
+        },
+        {
+            "name": "Burgers & Sandwiches",
+            "items": [
+                {
+                    "name": "Aloo Tikki Burger",
+                    "price": 70,
+                    "description": "Crispy aloo patty with fresh veggies and creamy mayo",
+                    "image": "https://picsum.photos/seed/pizza47/400/300"
+                },
+                {
+                    "name": "Veggie Burger",
+                    "price": 90,
+                    "description": "Mixed veg patty with lettuce, tomato, onion and cheese slice",
+                    "image": "https://picsum.photos/seed/pizza48/400/300"
+                },
+                {
+                    "name": "Paneer Burger",
+                    "price": 120,
+                    "description": "Spicy paneer patty with crisp lettuce and mayo",
+                    "image": "https://picsum.photos/seed/pizza49/400/300"
+                },
+                {
+                    "name": "Bombay Sandwich",
+                    "price": 100,
+                    "description": "Classic 3-layer sandwich with mint chutney, veggies and cheese",
+                    "image": "https://picsum.photos/seed/pizza50/400/300"
+                },
+                {
+                    "name": "Grilled Cheese Sandwich",
+                    "price": 120,
+                    "description": "Oozing with 3 types of cheese, grilled to perfection",
+                    "image": "https://picsum.photos/seed/pizza51/400/300"
+                }
+            ]
+        },
+        {
+            "name": "Beverages",
+            "items": [
+                {
+                    "name": "Cold Coffee",
+                    "price": 120,
+                    "description": "Classic creamy cold coffee",
+                    "image": "https://picsum.photos/seed/pizza52/400/300"
+                },
+                {
+                    "name": "Frappe",
+                    "price": 140,
+                    "description": "Thick, blended iced coffee",
+                    "image": "https://picsum.photos/seed/pizza53/400/300"
+                },
+                {
+                    "name": "Oreo Shake",
+                    "price": 150,
+                    "description": "Thick shake blended with crunchy Oreo cookies",
+                    "image": "https://picsum.photos/seed/pizza54/400/300"
+                },
+                {
+                    "name": "KitKat Shake",
+                    "price": 150,
+                    "description": "Thick shake blended with KitKat chocolate",
+                    "image": "https://picsum.photos/seed/pizza55/400/300"
+                },
+                {
+                    "name": "Virgin Mojito",
+                    "price": 110,
+                    "description": "Refreshing mix of mint, lemon and soda",
+                    "image": "https://picsum.photos/seed/pizza56/400/300"
+                },
+                {
+                    "name": "Blue Lagoon",
+                    "price": 110,
+                    "description": "Tropical blue curacao with lime and soda",
+                    "image": "https://picsum.photos/seed/pizza57/400/300"
+                },
+                {
+                    "name": "Coke (330ml)",
+                    "price": 60,
+                    "description": "Chilled Coca Cola can",
+                    "image": "https://picsum.photos/seed/pizza58/400/300"
+                },
+                {
+                    "name": "Sprite (330ml)",
+                    "price": 60,
+                    "description": "Chilled Sprite can",
+                    "image": "https://picsum.photos/seed/pizza59/400/300"
+                }
+            ]
+        },
+        {
+            "name": "Desserts",
+            "items": [
+                {
+                    "name": "Choco Lava Cake",
+                    "price": 100,
+                    "description": "Chocolate lovers delight! Indulgent, gooey molten lava inside chocolate cake",
+                    "image": "https://picsum.photos/seed/pizza60/400/300"
+                },
+                {
+                    "name": "Brownie",
+                    "price": 90,
+                    "description": "Fudgy chocolate brownie",
+                    "image": "https://picsum.photos/seed/pizza61/400/300"
+                },
+                {
+                    "name": "Brownie with Ice Cream",
+                    "price": 140,
+                    "description": "Warm brownie topped with vanilla ice cream and chocolate sauce",
+                    "image": "https://picsum.photos/seed/pizza62/400/300"
+                },
+                {
+                    "name": "Red Velvet Lava Cake",
+                    "price": 120,
+                    "description": "A sweet twist to our classic lava cake",
+                    "image": "https://picsum.photos/seed/pizza63/400/300"
+                }
+            ]
+        }
+    ]
+}
