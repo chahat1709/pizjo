@@ -1,0 +1,113 @@
+/* ============================================
+   PIZJO — Design Tokens (v4 Zomato-inspired)
+   Clean Light Theme & Pizjo Red Identity
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap');
+
+:root {
+    /* ── 1. Color Palette ── */
+    /* Backgrounds: White and Yellow */
+    --color-bg: #FFFFFF;
+    --color-bg-alt: #FFF9E6; /* Very light yellow for sections */
+    --color-surface: #FFFFFF;
+    --color-surface-hover: #FFF1B8; /* Hover state yellow */
+    
+    /* Accents: Pizjo Yellow */
+    --color-primary: #FFC107; /* Bright yellow from store balloons */
+    --color-primary-dark: #FFB300;
+    --color-primary-light: #FFD54F;
+    --color-primary-glow: rgba(255, 193, 7, 0.25);
+    
+    /* Text: Deep Blue (from store letters) */
+    --color-text: #0F172A;
+    --color-text-secondary: #334155;
+    --color-text-muted: #64748B;
+    --color-text-inverse: #0F172A; /* Text on primary yellow should be dark */
+    
+    /* Semantic / Highlights */
+    --color-veg: #0F8A65;
+    --color-border: #FFD54F; /* Yellow borders */
+    --color-border-strong: #FFA000;
+    --color-whatsapp: #25D366;
+    --color-error: #E85D04; /* Orange/Red from logo outline */
+    
+    /* Additional Store Brand Colors */
+    --color-brand-blue: #1E3A8A; /* Deep blue of PIZJO letters */
+    --color-brand-orange: #EA580C; /* Orange outline */
+
+    /* ── 2. Typography ── */
+    /* Fonts - Bubbly and Casual */
+    --font-display: 'Baloo 2', cursive, sans-serif;
+    --font-body: 'Quicksand', sans-serif;
+    
+    /* Scale (Perfect Fourth 1.333) */
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.333rem;
+    --text-2xl: 1.777rem;
+    --text-3xl: 2.369rem;
+    --text-4xl: 3.157rem;
+    --text-5xl: 4.209rem;
+    --text-6xl: 5.61rem;
+    --text-7xl: 7.478rem;
+    
+    /* Line Heights */
+    --leading-tight: 1.1;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.6;
+
+    /* ── 3. Spacing (4px grid) ── */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+    --space-4xl: 96px;
+    --space-5xl: 128px;
+    --space-6xl: 192px;
+
+    /* ── 4. Architecture ── */
+    --nav-height: 80px;
+    --radius-sm: 8px;
+    --radius-md: 16px; /* Bubbly, pill-like corners */
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-full: 9999px;
+    --max-width: 1400px;
+    --z-base: 1;
+    --z-sticky: 100;
+    --z-modal: 1000;
+
+    /* ── 5. Motion (12 Principles) ── */
+    /* Anticipation & Overshoot (Disney principles) */
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    
+    --duration-fast: 150ms;
+    --duration-normal: 300ms;
+    --duration-slow: 500ms;
+    
+    /* Shadows & Effects (Claymorphism style) */
+    --shadow-glow: 0 0 20px rgba(255, 193, 7, 0.4);
+    --shadow-soft: 0 8px 24px rgba(255, 193, 7, 0.15); /* Warmer shadow */
+    --shadow-clay: 4px 4px 0px var(--color-brand-blue); /* Solid drop shadow for playful vibe */
+    --blur-glass: blur(12px);
+}
+
+/* Global resets specifically dependent on tokens */
+html {
+    scroll-behavior: smooth;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+::selection {
+    background: var(--color-primary);
+    color: var(--color-text-inverse);
+}

@@ -1,0 +1,204 @@
+/* ============================================
+   PIZJO — Menu Page Styles (v2.0)
+   Hero, sidebar nav, category sections, search
+   ============================================ */
+
+/* ── Menu Hero ── */
+.menu-hero {
+    padding: calc(var(--nav-height) + var(--space-4xl)) 0 var(--space-3xl);
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+}
+.menu-hero-title {
+    font-size: var(--text-5xl);
+    margin-bottom: var(--space-sm);
+}
+.menu-hero-subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2xl);
+}
+
+/* ── Search Bar ── */
+.menu-search {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.menu-search-icon {
+    position: absolute;
+    left: var(--space-md);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+}
+.menu-search-input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-full);
+    color: var(--color-text);
+    transition: all var(--duration-fast);
+}
+.menu-search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px var(--color-primary-glow);
+}
+
+/* ── Layout (Sidebar + Main) ── */
+.menu-body {
+    display: flex;
+    gap: var(--space-3xl);
+    padding: var(--space-4xl) var(--space-xl);
+    align-items: flex-start;
+}
+.menu-sidebar {
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-xl));
+    width: 260px;
+    flex-shrink: 0;
+    max-height: calc(100vh - var(--nav-height) - var(--space-3xl));
+    overflow-y: auto;
+}
+
+/* Sidebar Links */
+.sidebar-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+}
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    transition: all var(--duration-fast);
+    font-weight: 500;
+}
+.sidebar-link:hover {
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+.sidebar-link.active {
+    background: var(--color-primary-glow);
+    color: var(--color-primary-light);
+    font-weight: 600;
+}
+.sidebar-icon {
+    font-size: 1.25rem;
+}
+.sidebar-count {
+    margin-left: auto;
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+}
+.sidebar-link.active .sidebar-count {
+    background: var(--color-primary);
+    color: white;
+}
+
+/* ── Mobile Tabs (Hidden on Desktop) ── */
+.menu-tabs-mobile {
+    display: none;
+}
+
+/* ── Main Content Area ── */
+.menu-main {
+    flex: 1;
+    min-width: 0; /* Prevent flex overflow */
+}
+.menu-category-section {
+    scroll-margin-top: calc(var(--nav-height) + var(--space-xl));
+    margin-bottom: var(--space-5xl);
+}
+.menu-category-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+}
+.menu-category-icon {
+    font-size: var(--text-3xl);
+}
+.menu-category-title {
+    font-size: var(--text-3xl);
+    color: var(--color-text);
+}
+.menu-category-count {
+    margin-left: auto;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-weight: 500;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .menu-body { gap: var(--space-xl); }
+    .menu-sidebar { width: 220px; }
+}
+
+@media (max-width: 768px) {
+    .menu-hero { padding-top: calc(var(--nav-height) + var(--space-xl)); }
+    .menu-sidebar { display: none; }
+    
+    .menu-body {
+        flex-direction: column;
+        padding-top: var(--space-md);
+    }
+    
+    /* Horizontal scrolling tabs for mobile */
+    .menu-tabs-mobile {
+        display: flex;
+        gap: var(--space-sm);
+        width: 100vw;
+        margin-left: calc(-1 * var(--space-lg)); /* Break out of container */
+        padding: var(--space-md) var(--space-lg);
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none; /* Firefox */
+        position: sticky;
+        top: var(--nav-height);
+        background: rgba(10, 10, 12, 0.95);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        z-index: var(--z-sticky);
+        border-bottom: 1px solid var(--color-border);
+    }
+    .menu-tabs-mobile::-webkit-scrollbar { display: none; } /* Chrome */
+    
+    .menu-tab {
+        flex-shrink: 0;
+        scroll-snap-align: start;
+        padding: 8px 16px;
+        border-radius: var(--radius-full);
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        color: var(--color-text-secondary);
+        font-weight: 500;
+        font-size: var(--text-sm);
+        white-space: nowrap;
+        transition: all var(--duration-fast);
+    }
+    .menu-tab.active {
+        background: var(--color-primary);
+        color: white;
+        border-color: var(--color-primary);
+    }
+
+    .menu-category-section {
+        scroll-margin-top: calc(var(--nav-height) + 80px); /* Account for tabs */
+        margin-bottom: var(--space-3xl);
+    }
+}
