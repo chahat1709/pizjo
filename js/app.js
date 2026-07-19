@@ -1,216 +1,259 @@
-import { initThreeHero } from './three-hero.js?v=7';
+// Pizjo SPA module — exports initApp(page) called by every page.
+// - Home page renders the menu + cart.
+// - Other pages (about, contact, legal) just mount global nav and skip.
 
-// 1. Initialize 3D Hero
-initThreeHero('three-canvas-container');
+const WHATSAPP_NUMBER = '919265370588';
+const CART_KEY = 'pizjo.cart.v1';
 
-// 2. State Management
-    let menuData = [];
-    let currentCategory = '';
-    let cart = {}; // { itemName: { price, quantity, name } }
+const Sec = window.PizjoSecurity;
+if (!Sec) {
+  console.error('[pizjo] security.js missing');
+}
 
-    const DOM = {
-        grid: document.getElementById('menu-grid'),
-        filter: document.getElementById('categories-filter'),
-        cartToggle: document.getElementById('cart-toggle'),
-        cartClose: document.getElementById('cart-close'),
-        cartSidebar: document.getElementById('cart-sidebar'),
-        cartOverlay: document.getElementById('cart-overlay'),
-        cartItems: document.getElementById('cart-items'),
-        cartCount: document.getElementById('cart-count'),
-        cartTotal: document.getElementById('cart-total'),
-        checkoutBtn: document.getElementById('checkout-btn')
-    };
+const $ = (id) => document.getElementById(id);
 
-    // 3. Load Data
-    async function loadMenu() {
-        try {
-            const res = await fetch('data/menu.json?v=' + Date.now());
-            if (!res.ok) throw new Error('Failed to load menu');
-            
-            const data = await res.json();
-            menuData = data.categories || [];
-            
-            if (menuData.length > 0) {
-                currentCategory = menuData[0].name;
-                renderFilters();
-                renderGrid();
-            }
-        } catch (error) {
-            console.error('Error loading menu:', error);
-            DOM.grid.innerHTML = `<p class="error">Failed to load menu. Please try again later.</p>`;
-            DOM.filter.innerHTML = '';
-        }
+const State = {
+  menu: [],
+  current: '',
+  cart: {},          // name -> {name, price, qty}
+};
+
+// ── Cart persistence ──────────────────────────────────────
+function loadCart() {
+  try {
+    const raw = localStorage.getItem(CART_KEY);
+    if (raw) State.cart = JSON.parse(raw) || {};
+  } catch { State.cart = {}; }
+}
+function saveCart() {
+  try { localStorage.setItem(CART_KEY, JSON.stringify(State.cart)); }
+  catch (e) { console.warn('cart save failed', e); }
+}
+
+// ── Menu ───────────────────────────────────────────────────
+async function loadMenu() {
+  const grid = $('menu-grid');
+  try {
+    const res = await fetch(`data/menu.json?v=${Date.now()}`);
+    if (!res.ok) throw new Error('menu fetch failed');
+    const data = await res.json();
+    State.menu = data.categories || [];
+    if (State.menu.length) {
+      State.current = State.menu[0].name;
+      renderFilters();
+      renderGrid();
     }
+  } catch (err) {
+    console.error('menu load', err);
+    if (grid) grid.textContent = 'Failed to load menu. Please try again later.';
+  }
+}
 
-    // 4. Render
-    function renderFilters() {
-        DOM.filter.innerHTML = menuData.map(cat => `
-            <button class="cat-btn ${cat.name === currentCategory ? 'active' : ''}" data-cat="${cat.name}">
-                ${window.PizjoSecurity.sanitizeHTML(cat.name)}
-            </button>
-        `).join('');
-
-        DOM.filter.querySelectorAll('.cat-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                DOM.filter.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-                e.target.classList.add('active');
-                currentCategory = e.target.getAttribute('data-cat');
-                renderGrid();
-            });
-        });
-    }
-
-    function renderGrid() {
-        const cat = menuData.find(c => c.name === currentCategory);
-        if (!cat) return;
-
-        // Reset animation state
-        DOM.grid.style.opacity = '0';
-        DOM.grid.style.transform = 'translateY(10px)';
-
-        setTimeout(() => {
-            DOM.grid.innerHTML = cat.items.map(item => `
-                <div class="product-card">
-                    <div class="product-info">
-                        <div class="product-badges">
-                            ${item.name.toLowerCase().includes('veg') || item.name.toLowerCase().includes('paneer') || item.name.toLowerCase().includes('margherita') ? '<span class="badge badge-veg">Veg</span>' : ''}
-                            ${item.price > 200 ? '<span class="badge badge-bestseller">Bestseller</span>' : ''}
-                        </div>
-                        <h3 class="product-title">${window.PizjoSecurity.sanitizeHTML(item.name)}</h3>
-                        <span class="product-price">₹${item.price}</span>
-                        <p class="product-desc">${window.PizjoSecurity.sanitizeHTML(item.description || '')}</p>
-                    </div>
-                    <div class="product-image-container">
-                        ${item.image ? `<img src="${window.PizjoSecurity.sanitizeHTML(item.image)}" alt="${window.PizjoSecurity.sanitizeHTML(item.name)}" class="product-image" loading="lazy">` : ''}
-                        <button class="btn-add" data-name="${window.PizjoSecurity.sanitizeHTML(item.name)}" data-price="${item.price}">
-                            ADD
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-
-            // Re-bind add buttons
-            DOM.grid.querySelectorAll('.btn-add').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const name = e.target.getAttribute('data-name');
-                    const price = parseInt(e.target.getAttribute('data-price'));
-                    addToCart(name, price);
-                });
-            });
-
-            // Fade in
-            requestAnimationFrame(() => {
-                DOM.grid.style.transition = 'all 0.4s var(--ease-out)';
-                DOM.grid.style.opacity = '1';
-                DOM.grid.style.transform = 'translateY(0)';
-            });
-        }, 150);
-    }
-
-    // 5. Cart Logic
-    function addToCart(name, price) {
-        if (cart[name]) {
-            cart[name].qty++;
-        } else {
-            cart[name] = { name, price, qty: 1 };
-        }
-        updateCartUI();
-        openCart();
-    }
-
-    function updateCartQty(name, delta) {
-        if (!cart[name]) return;
-        cart[name].qty += delta;
-        if (cart[name].qty <= 0) {
-            delete cart[name];
-        }
-        updateCartUI();
-    }
-
-    function updateCartUI() {
-        let totalItems = 0;
-        let totalPrice = 0;
-        const itemsHTML = [];
-
-        Object.values(cart).forEach(item => {
-            totalItems += item.qty;
-            totalPrice += item.price * item.qty;
-            itemsHTML.push(`
-                <div class="cart-item">
-                    <div>
-                        <div class="cart-item-title">${item.name}</div>
-                        <div class="cart-item-price">₹${item.price}</div>
-                    </div>
-                    <div class="cart-item-controls">
-                        <button class="qty-btn" data-name="${item.name}" data-action="minus">-</button>
-                        <span class="qty-val">${item.qty}</span>
-                        <button class="qty-btn" data-name="${item.name}" data-action="plus">+</button>
-                    </div>
-                </div>
-            `);
-        });
-
-        DOM.cartCount.innerText = totalItems;
-        DOM.cartTotal.innerText = `₹${totalPrice}`;
-
-        if (itemsHTML.length === 0) {
-            DOM.cartItems.innerHTML = `
-                <div class="cart-empty">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="9" cy="21" r="1"></circle>
-                        <circle cx="20" cy="21" r="1"></circle>
-                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                    </svg>
-                    <p>Your cart is looking a little empty.</p>
-                </div>
-            `;
-        } else {
-            DOM.cartItems.innerHTML = itemsHTML.join('');
-            // Bind qty buttons
-            DOM.cartItems.querySelectorAll('.qty-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const name = e.target.getAttribute('data-name');
-                    const action = e.target.getAttribute('data-action');
-                    updateCartQty(name, action === 'plus' ? 1 : -1);
-                });
-            });
-        }
-    }
-
-    function openCart() {
-        DOM.cartSidebar.classList.add('open');
-        DOM.cartOverlay.classList.add('open');
-    }
-    
-    function closeCart() {
-        DOM.cartSidebar.classList.remove('open');
-        DOM.cartOverlay.classList.remove('open');
-    }
-
-    DOM.cartToggle.addEventListener('click', openCart);
-    DOM.cartClose.addEventListener('click', closeCart);
-    DOM.cartOverlay.addEventListener('click', closeCart);
-
-    // 6. Checkout
-    DOM.checkoutBtn.addEventListener('click', () => {
-        const items = Object.values(cart);
-        if (items.length === 0) return;
-
-        // Security check - calculate total server-side style
-        let total = 0;
-        let orderText = "Hello Pizjo! I'd like to place an order:%0a%0a";
-        
-        items.forEach(item => {
-            total += item.price * item.qty;
-            orderText += `*${item.qty}x ${item.name}* (₹${item.price * item.qty})%0a`;
-        });
-        
-        orderText += `%0a*Total: ₹${total}*%0a%0aPlease confirm my order.`;
-        
-        // Pizjo WhatsApp Number
-        const whatsappNumber = "919999999999"; 
-        window.open(`https://wa.me/${whatsappNumber}?text=${orderText}`, "_blank");
+function renderFilters() {
+  const root = $('categories-filter');
+  if (!root) return;
+  root.innerHTML = State.menu
+    .map(
+      (cat) =>
+        `<button class="cat-btn ${cat.name === State.current ? 'active' : ''}" data-cat="${Sec.escapeHTML(cat.name)}">${Sec.escapeHTML(cat.name)}</button>`
+    )
+    .join('');
+  root.querySelectorAll('.cat-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      State.current = e.currentTarget.dataset.cat;
+      root.querySelectorAll('.cat-btn').forEach((b) => b.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+      renderGrid();
     });
+  });
+}
 
-// Start
-loadMenu();
+function vegName(name) {
+  const n = name.toLowerCase();
+  return /\b(veg|paneer|margherita|corn|mushroom|capsicum|onion|tomato|olive|pizza|pasta|sandwich|burger)\b/.test(n);
+}
+function fmtPrice(p) {
+  return '₹' + Number(p).toLocaleString('en-IN');
+}
+
+function renderGrid() {
+  const grid = $('menu-grid');
+  const cat = State.menu.find((c) => c.name === State.current);
+  if (!grid || !cat) return;
+
+  grid.style.opacity = '0';
+  grid.style.transform = 'translateY(8px)';
+  setTimeout(() => {
+    grid.innerHTML = cat.items
+      .map(
+        (it) => `
+          <article class="product-card">
+            <div class="product-info">
+              <div class="product-badges">
+                ${it.veg === false ? '' : (it.veg || vegName(it.name) ? '<span class="badge badge-veg">Veg</span>' : '')}
+                ${it.price > 200 ? '<span class="badge badge-bestseller">Bestseller</span>' : ''}
+              </div>
+              <h3 class="product-title">${Sec.escapeHTML(it.name)}</h3>
+              <span class="product-price">${fmtPrice(it.price)}</span>
+              <p class="product-desc">${Sec.escapeHTML(it.description || '')}</p>
+            </div>
+            <div class="product-image-container">
+              ${it.image ? `<img src="${Sec.escapeHTML(it.image)}" alt="${Sec.escapeHTML(it.name)}" class="product-image" loading="lazy" referrerpolicy="no-referrer">` : ''}
+              <button class="btn-add" data-name="${Sec.escapeHTML(it.name)}" data-price="${Number(it.price)}" type="button">ADD</button>
+            </div>
+          </article>`
+      )
+      .join('');
+
+    grid.querySelectorAll('.btn-add').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        addToCart(btn.dataset.name, parseInt(btn.dataset.price, 10));
+      });
+    });
+    requestAnimationFrame(() => {
+      grid.style.transition = 'all 0.3s var(--ease-out)';
+      grid.style.opacity = '1';
+      grid.style.transform = 'none';
+    });
+  }, 120);
+}
+
+// ── Cart ───────────────────────────────────────────────────
+function addToCart(name, price) {
+  if (!name) return;
+  const guard = Sec.canAddToCart(Object.values(State.cart), name);
+  if (!guard.ok) { alert(guard.reason || 'Cannot add more'); return; }
+  State.cart[name] = State.cart[name] || { name, price, qty: 0 };
+  State.cart[name].qty += 1;
+  saveCart();
+  paintCart();
+  openCart();
+}
+function changeQty(name, delta) {
+  if (!State.cart[name]) return;
+  State.cart[name].qty += delta;
+  if (State.cart[name].qty <= 0) delete State.cart[name];
+  saveCart();
+  paintCart();
+}
+
+function paintCart() {
+  const items = Object.values(State.cart);
+  let totalItems = 0, totalPrice = 0;
+
+  const cards = items.map((it) => {
+    totalItems += it.qty;
+    totalPrice += it.price * it.qty;
+    return `
+      <div class="cart-item">
+        <div>
+          <div class="cart-item-title">${Sec.escapeHTML(it.name)}</div>
+          <div class="cart-item-price">${fmtPrice(it.price)}</div>
+        </div>
+        <div class="cart-item-controls">
+          <button class="qty-btn" data-name="${Sec.escapeHTML(it.name)}" data-action="minus" type="button">−</button>
+          <span class="qty-val">${it.qty}</span>
+          <button class="qty-btn" data-name="${Sec.escapeHTML(it.name)}" data-action="plus" type="button">+</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  const list = $('cart-items');
+  if (list) {
+    list.innerHTML = cards ||
+      `<div class="cart-empty">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <p>Your cart is empty.</p>
+      </div>`;
+    list.querySelectorAll('.qty-btn').forEach((b) => {
+      b.addEventListener('click', () =>
+        changeQty(b.dataset.name, b.dataset.action === 'plus' ? 1 : -1)
+      );
+    });
+  }
+  $('cart-count').textContent = totalItems;
+  $('cart-total').textContent = fmtPrice(totalPrice);
+}
+
+function openCart() {
+  $('cart-sidebar').classList.add('open');
+  $('cart-sidebar').setAttribute('aria-hidden', 'false');
+  $('cart-overlay').classList.add('open');
+  $('cart-overlay').hidden = false;
+}
+function closeCart() {
+  $('cart-sidebar').classList.remove('open');
+  $('cart-sidebar').setAttribute('aria-hidden', 'true');
+  $('cart-overlay').classList.remove('open');
+  $('cart-overlay').hidden = true;
+}
+
+function bindCart() {
+  $('cart-toggle')?.addEventListener('click', openCart);
+  $('cart-close')?.addEventListener('click', closeCart);
+  $('cart-overlay')?.addEventListener('click', closeCart);
+  $('checkout-btn')?.addEventListener('click', checkout);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCart();
+  });
+}
+
+function checkout() {
+  const items = Object.values(State.cart);
+  if (!items.length) return;
+  if (!Sec.rateLimit('checkout', 800)) return;
+
+  let text = "Hello Pizjo! I'd like to place an order:%0a%0a";
+  let total = 0;
+  items.forEach((it) => {
+    const line = `${it.qty}x ${it.name} — ₹${it.price * it.qty}`;
+    text += `*${line}*%0a`;
+    total += it.price * it.qty;
+  });
+  text += `%0a*Total: ₹${total}*%0a%0aPlease confirm.`;
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank', 'noopener,noreferrer');
+}
+
+// ── Reveal on scroll (any page) ────────────────────────────
+function bindReveal() {
+  const els = document.querySelectorAll('.reveal, .reveal-right');
+  if (!('IntersectionObserver' in window) || !els.length) {
+    els.forEach((e) => e.classList.add('visible'));
+    return;
+  }
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
+    { threshold: 0.12 }
+  );
+  els.forEach((e) => io.observe(e));
+}
+
+// Exposed for other page scripts (about/contact) to call.
+export async function initApp(page = 'home') {
+  loadCart();
+  if (Sec?.init) Sec.init();
+  bindCart();
+  paintCart();
+  bindReveal();
+
+  if (page === 'home') {
+    await loadMenu();
+  }
+}
+
+// Auto-boot if loaded directly on the home page (not via import).
+if (typeof window !== 'undefined' && document.body) {
+  // Make body available immediately for paint…
+  document.addEventListener('DOMContentLoaded', () => {
+    // Heuristic: home has #menu-grid; other pages shouldn't auto-init menu.
+    if ($('menu-grid')) {
+      initApp('home').catch((e) => console.error(e));
+    } else {
+      initApp('other').catch((e) => console.error(e));
+    }
+  });
+}
