@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <title>Legal — Pizjo | Privacy & Terms</title>
@@ -13,247 +13,328 @@
     <link rel="icon" href="../assets/pizjo_logo.webp" type="image/webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/tokens.css">
     <link rel="stylesheet" href="../css/global.css">
     <style>
         .legal-hero {
-            padding: calc(var(--nav-h, 76px) + 96px) 0 48px;
-            background: var(--color-bg-alt, #FFF9E6);
+            padding: calc(var(--nav-height) + var(--space-4xl)) 0 var(--space-3xl);
+            background: var(--amber-neon);
+            border-bottom: 4px solid var(--umber-raw);
             text-align: center;
-            border-bottom: 1px solid var(--color-border, #ECEFF3);
+            position: relative;
+            overflow: hidden;
         }
-        .legal-hero h1 {
-            font-family: 'Outfit', 'Baloo 2', system-ui, sans-serif;
-            font-size: clamp(2.5rem, 5.5vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 8px;
+        .legal-hero-title {
+            font-family: var(--font-marker);
+            font-size: var(--text-6xl);
+            margin-bottom: var(--space-sm);
+            color: var(--umber-raw);
+            transform: rotate(-1deg);
         }
-        .legal-hero p { color: var(--color-text-2, #334155); font-size: 1.1rem; }
-        .legal-wrap { max-width: 760px; margin: 0 auto; padding: 64px 32px; }
+        .legal-hero-subtitle {
+            font-size: var(--text-xl);
+            font-weight: 700;
+            color: var(--umber-raw);
+        }
+        .legal-wrap { max-width: 800px; margin: 0 auto; padding: var(--space-4xl) var(--space-xl); }
         .legal-wrap h2 {
-            font-family: 'Outfit', 'Baloo 2', system-ui, sans-serif;
-            font-size: 1.5rem;
-            margin: 40px 0 12px;
-            color: var(--color-text, #0F172A);
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            margin: var(--space-3xl) 0 var(--space-md);
+            color: var(--color-text);
+            text-transform: uppercase;
         }
         .legal-wrap h3 {
-            font-size: 1.1rem;
-            margin: 24px 0 8px;
-            color: var(--color-text, #0F172A);
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            margin: var(--space-2xl) 0 var(--space-sm);
+            color: var(--color-text);
+            text-transform: uppercase;
         }
         .legal-wrap p, .legal-wrap li {
-            color: var(--color-text-2, #334155);
-            line-height: 1.7;
-            margin-bottom: 12px;
+            color: var(--color-text-secondary);
+            line-height: var(--leading-relaxed);
+            margin-bottom: var(--space-md);
+            font-weight: 500;
+            font-size: var(--text-lg);
         }
-        .legal-wrap ul { padding-left: 20px; list-style: disc; margin-bottom: 16px; }
-        .legal-wrap a { color: var(--color-primary, #FFC107); text-decoration: underline; }
+        .legal-wrap ul { padding-left: var(--space-xl); list-style: disc; margin-bottom: var(--space-lg); }
+        .legal-wrap a { color: var(--umber-raw); text-decoration: underline; font-weight: 700; text-decoration-thickness: 2px; }
+        .legal-wrap a:hover { color: var(--amber-neon); background: var(--umber-raw); }
         .updated {
             display: inline-block;
-            background: var(--color-surface, #FFFFFF);
-            border: 1px solid var(--color-border, #ECEFF3);
-            padding: 6px 14px;
-            border-radius: 9999px;
-            font-size: 0.85rem;
-            color: var(--color-text-2, #334155);
-            margin-top: 8px;
+            background: var(--off-white);
+            border: 3px solid var(--umber-raw);
+            padding: var(--space-xs) var(--space-md);
+            font-family: var(--font-marker);
+            font-size: var(--text-lg);
+            color: var(--umber-raw);
+            margin-top: var(--space-md);
+            transform: rotate(2deg);
+            box-shadow: var(--shadow-grunge);
         }
         .toc {
-            background: var(--color-surface, #FFFFFF);
-            border: 1px solid var(--color-border, #ECEFF3);
-            border-radius: 14px;
-            padding: 20px 24px;
-            margin: 24px 0 40px;
+            background: var(--off-white);
+            border: 4px solid var(--umber-raw);
+            box-shadow: var(--shadow-grunge-lg);
+            padding: var(--space-xl);
+            margin: var(--space-xl) 0 var(--space-4xl);
         }
-        .toc strong { display: block; margin-bottom: 8px; }
-        .toc a { display: block; padding: 4px 0; }
+        .toc strong { display: block; margin-bottom: var(--space-md); font-family: var(--font-display); font-size: var(--text-xl); text-transform: uppercase; }
+        .toc a { display: block; padding: var(--space-xs) 0; font-family: var(--font-body); text-decoration: none; font-weight: 700; }
+        .toc a:hover { color: var(--amber-neon); text-decoration: underline; background: transparent;}
         .back-link {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            margin-top: 32px;
-            padding: 10px 18px;
-            background: var(--color-surface, #FFFFFF);
-            border: 1px solid var(--color-border, #ECEFF3);
-            border-radius: 9999px;
-            color: var(--color-text, #0F172A);
-            font-weight: 600;
-            text-decoration: none;
+            gap: var(--space-xs);
+            margin-top: var(--space-3xl);
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--off-white);
+            border: 3px solid var(--umber-raw);
+            color: var(--umber-raw);
+            font-family: var(--font-display);
+            font-weight: 900;
+            text-transform: uppercase;
+            text-decoration: none !important;
+            box-shadow: var(--shadow-grunge);
+            transition: transform var(--duration-fast);
         }
-        .back-link:hover { border-color: var(--color-primary, #FFC107); }
+        .back-link:hover { box-shadow: var(--shadow-grunge-hover); transform: translate(2px, 2px); color: var(--umber-raw); background: var(--off-white); }
         hr {
             border: 0;
-            border-top: 1px solid var(--color-border, #ECEFF3);
-            margin: 32px 0;
+            border-top: 4px dashed var(--umber-raw);
+            margin: var(--space-4xl) 0;
         }
     </style>
 </head>
-<body>
+<body class="bg-off-white text-umber-raw antialiased relative min-h-screen overflow-x-hidden">
 
-    <section class="legal-hero">
-        <div class="section-container">
-            <nav class="breadcrumb" aria-label="Breadcrumb" style="margin-bottom: 12px;">
-                <a href="../index.html" style="color: var(--color-text-2);">Home</a>
-                <span style="margin: 0 8px; opacity: 0.5;">/</span>
-                <span>Legal</span>
-            </nav>
-            <h1>Privacy & Terms</h1>
-            <p>Plain English. No fine print. Just the honest version.</p>
-            <div class="updated">Last updated: November 2025</div>
+    <!-- Nav -->
+    <nav class="navbar" role="navigation" aria-label="Primary">
+        <div class="container nav-container">
+            <a href="../" class="nav-brand" aria-label="Pizjo home">
+                <img src="../assets/pizjo_logo.webp" alt="Pizjo Logo" class="brand-logo">
+                <span class="brand-text">PIZJO!</span>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html#menu" class="nav-link">Menu</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="cart-toggle" id="cart-toggle" aria-label="Open cart">
+                    CART
+                    <div class="cart-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="cart-badge" id="cart-count">0</span>
+                    </div>
+                </button>
+            </div>
         </div>
-    </section>
+    </nav>
 
-    <main class="legal-wrap">
-
-        <div class="toc">
-            <strong>On this page</strong>
-            <a href="#privacy">1. Privacy Policy</a>
-            <a href="#data">2. What we collect</a>
-            <a href="#cookies">3. Cookies & local storage</a>
-            <a href="#third">4. Third parties</a>
-            <a href="#contact-privacy">5. Contact us about privacy</a>
-            <a href="#terms">6. Terms of Service</a>
-            <a href="#ip">7. Intellectual property</a>
-            <a href="#liability">8. Liability</a>
-            <a href="#changes">9. Changes to this page</a>
+    <!-- Sliding cart -->
+    <div class="cart-overlay" id="cart-overlay" hidden></div>
+    <aside class="cart-sidebar" id="cart-sidebar" aria-label="Shopping cart" aria-hidden="true">
+        <div class="cart-header">
+            <h2>Your Stash</h2>
+            <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
         </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total-row"><span>Total</span><span id="cart-total">₹0</span></div>
+            <button class="btn cart-checkout-btn" id="checkout-btn">
+                Order on WhatsApp
+            </button>
+        </div>
+    </aside>
 
-        <h2 id="privacy">1. Privacy Policy</h2>
-        <p>
-            Pizjo runs this website (pizjo.in) so people can look at our menu, find our store,
-            and order pizza. We collect the absolute minimum data needed to do that well.
-            This page explains exactly what we collect, why, and what we will never do with it.
-        </p>
+    <main id="main">
+        <section class="legal-hero animate-on-scroll">
+            <div class="container">
+                <nav class="breadcrumb" aria-label="Breadcrumb" style="margin-bottom: var(--space-md);">
+                    <a href="../index.html">Home</a>
+                    <span class="breadcrumb-sep">/</span>
+                    <span class="breadcrumb-current">Legal</span>
+                </nav>
+                <h1 class="legal-hero-title">Privacy & Terms</h1>
+                <p class="legal-hero-subtitle">Plain English. No fine print. Just the honest version.</p>
+                <div class="updated">Last updated: November 2025</div>
+            </div>
+        </section>
 
-        <h3 id="data">2. What we collect</h3>
-        <ul>
-            <li>
-                <strong>Order enquiries (if you submit the contact form).</strong>
-                Your name, phone number, optional email, and your message.
-                We use this only to reply to you about your enquiry. We do not add you to marketing lists,
-                and we do not sell or share your details with anyone.
-            </li>
-            <li>
-                <strong>Order contents from your cart.</strong>
-                Stored only in your own browser (see cookies below). We do not transmit
-                your cart contents to our servers until you hit "Order on WhatsApp" — at which point
-                you are forwarded to WhatsApp to talk to us directly. We never see that as a server-side order,
-                it lives entirely in your browser.
-            </li>
-            <li>
-                <strong>Server logs.</strong>
-                Like every website, our hosting provider records your IP address,
-                the page you visited, and the time. We use this only to debug problems and prevent abuse.
-                Logs are kept for at most 90 days.
-            </li>
-        </ul>
+        <section class="legal-wrap animate-on-scroll">
 
-        <h3 id="cookies">3. Cookies & local storage</h3>
-        <p>
-            We use one piece of browser storage: your <strong>cart contents</strong>.
-            It stays in your browser's <code>localStorage</code> and is not a cookie.
-            Nothing tracking, advertising, or analytics-based is set by this site.
-            No Facebook pixel, no Google Analytics, no third-party trackers.
-            Your cart stays on your device; if you clear your browser data it disappears.
-        </p>
+            <div class="toc">
+                <strong>On this page</strong>
+                <a href="#privacy">1. Privacy Policy</a>
+                <a href="#data">2. What we collect</a>
+                <a href="#cookies">3. Cookies & local storage</a>
+                <a href="#third">4. Third parties</a>
+                <a href="#contact-privacy">5. Contact us about privacy</a>
+                <a href="#terms">6. Terms of Service</a>
+                <a href="#ip">7. Intellectual property</a>
+                <a href="#liability">8. Liability</a>
+                <a href="#changes">9. Changes to this page</a>
+            </div>
 
-        <h3 id="third">4. Third parties</h3>
-        <p>
-            A few things on this site are loaded from elsewhere. Those services may
-            collect their own data according to their own privacy policies:
-        </p>
-        <ul>
-            <li>
-                <strong>WhatsApp (Meta Platforms Ireland Ltd).</strong>
-                When you click "Order on WhatsApp" you are redirected to whatsapp.com
-                or wa.me, governed by <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">WhatsApp's privacy policy</a>.
-                We only pre-fill the message; we do not send anything to WhatsApp directly.
-            </li>
-            <li>
-                <strong>Google Maps.</strong>
-                Embedded on the About and Contact pages to show our shop location.
-                Google may set cookies when you load those pages, governed by
-                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's privacy policy</a>.
-            </li>
-            <li>
-                <strong>Google Fonts.</strong>
-                We load web fonts from fonts.googleapis.com so the typography looks
-                consistent across browsers. Google may log the request.
-            </li>
-        </ul>
-        <p>
-            We do not embed social-login, ad networks, or analytics on this site.
-            Pizjo's Instagram, Facebook, and Zomato pages are linked but not embedded —
-            clicking those links sends you to the respective platform.
-        </p>
+            <h2 id="privacy">1. Privacy Policy</h2>
+            <p>
+                Pizjo runs this website (pizjo.in) so people can look at our menu, find our store,
+                and order pizza. We collect the absolute minimum data needed to do that well.
+                This page explains exactly what we collect, why, and what we will never do with it.
+            </p>
 
-        <h3 id="contact-privacy">5. Contact us about privacy</h3>
-        <p>
-            If you have a question about your data, want to correct what you submitted,
-            or want your contact-form entry deleted, write to us:
-        </p>
-        <ul>
-            <li>Email: <a href="mailto:info@pizjo.in">info@pizjo.in</a></li>
-            <li>WhatsApp: <a href="https://wa.me/919265370588" target="_blank" rel="noopener noreferrer">+91 92653 70588</a></li>
-            <li>Visit: Shop 01, Ground Floor, Raj Complex, Near Metro Pillar 87, Vastral Road, Amraiwadi, Ahmedabad 382418</li>
-        </ul>
-        <p>We answer within 7 working days.</p>
+            <h3 id="data">2. What we collect</h3>
+            <ul>
+                <li>
+                    <strong>Order enquiries (if you submit the contact form).</strong>
+                    Your name, phone number, optional email, and your message.
+                    We use this only to reply to you about your enquiry. We do not add you to marketing lists,
+                    and we do not sell or share your details with anyone.
+                </li>
+                <li>
+                    <strong>Order contents from your cart.</strong>
+                    Stored only in your own browser (see cookies below). We do not transmit
+                    your cart contents to our servers until you hit "Order on WhatsApp" — at which point
+                    you are forwarded to WhatsApp to talk to us directly. We never see that as a server-side order,
+                    it lives entirely in your browser.
+                </li>
+                <li>
+                    <strong>Server logs.</strong>
+                    Like every website, our hosting provider records your IP address,
+                    the page you visited, and the time. We use this only to debug problems and prevent abuse.
+                    Logs are kept for at most 90 days.
+                </li>
+            </ul>
 
-        <hr>
+            <h3 id="cookies">3. Cookies & local storage</h3>
+            <p>
+                We use one piece of browser storage: your <strong>cart contents</strong>.
+                It stays in your browser's <code>localStorage</code> and is not a cookie.
+                Nothing tracking, advertising, or analytics-based is set by this site.
+                No Facebook pixel, no Google Analytics, no third-party trackers.
+                Your cart stays on your device; if you clear your browser data it disappears.
+            </p>
 
-        <h2 id="terms">6. Terms of Service</h2>
-        <p>
-            By using this website you agree to these simple terms. They're short on
-            purpose — restaurants and lawyers don't need to make these things complicated.
-        </p>
-        <ul>
-            <li>This site is for browsing Pizjo's menu and contacting us. Don't use it to spam our contact form, scrape our menu, or disrupt the service.</li>
-            <li>Menu items and prices shown here are the ones we usually offer. Final price is always confirmed by the Pizjo team on WhatsApp before we cook anything.</li>
-            <li>We try to keep this site online, fast, and correct, but we can't guarantee zero downtime. Use it as-is, at your own risk.</li>
-            <li>Food-safety and consumer-protection concerns are governed by Indian law (Food Safety and Standards Act, 2006; Information Technology Act, 2000; Consumer Protection Act, 2019).</li>
-            <li>If something goes wrong with your order, contact us within 24 hours on +91 92653 70588 and we'll make it right.</li>
-        </ul>
+            <h3 id="third">4. Third parties</h3>
+            <p>
+                A few things on this site are loaded from elsewhere. Those services may
+                collect their own data according to their own privacy policies:
+            </p>
+            <ul>
+                <li>
+                    <strong>WhatsApp (Meta Platforms Ireland Ltd).</strong>
+                    When you click "Order on WhatsApp" you are redirected to whatsapp.com
+                    or wa.me, governed by <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">WhatsApp's privacy policy</a>.
+                    We only pre-fill the message; we do not send anything to WhatsApp directly.
+                </li>
+                <li>
+                    <strong>Google Maps.</strong>
+                    Embedded on the About and Contact pages to show our shop location.
+                    Google may set cookies when you load those pages, governed by
+                    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's privacy policy</a>.
+                </li>
+                <li>
+                    <strong>Google Fonts.</strong>
+                    We load web fonts from fonts.googleapis.com so the typography looks
+                    consistent across browsers. Google may log the request.
+                </li>
+            </ul>
+            <p>
+                We do not embed social-login, ad networks, or analytics on this site.
+                Pizjo's Instagram, Facebook, and Zomato pages are linked but not embedded —
+                clicking those links sends you to the respective platform.
+            </p>
 
-        <h3 id="ip">7. Intellectual property</h3>
-        <p>
-            The Pizjo brand, name, logo, mascot artwork (the "FOOD KART" character
-            or similar), and all images of our food and store are owned by Pizjo
-            (Amraiwadi, Ahmedabad). You may not copy or reuse them without our written permission.
-        </p>
-        <p>
-            The <strong>website code, design system, and 3D / animated mascot</strong>
-            are developed by an independent developer (the "builder") and licensed to
-            Pizjo for use on this site only, subject to written agreement between
-            Pizjo and the builder. The builder retains ownership of the code,
-            design tokens, and reusable component patterns, and may use them in
-            other client work.
-        </p>
+            <h3 id="contact-privacy">5. Contact us about privacy</h3>
+            <p>
+                If you have a question about your data, want to correct what you submitted,
+                or want your contact-form entry deleted, write to us:
+            </p>
+            <ul>
+                <li>Email: <a href="mailto:info@pizjo.in">info@pizjo.in</a></li>
+                <li>WhatsApp: <a href="https://wa.me/919265370588" target="_blank" rel="noopener noreferrer">+91 92653 70588</a></li>
+                <li>Visit: Shop 01, Ground Floor, Raj Complex, Near Metro Pillar 87, Vastral Road, Amraiwadi, Ahmedabad 382418</li>
+            </ul>
+            <p>We answer within 7 working days.</p>
 
-        <h3 id="liability">8. Liability</h3>
-        <p>
-            We do our best to keep this site correct, secure, and respectful of
-            your privacy. To the maximum extent permitted by Indian law, we are
-            not liable for indirect, incidental, or consequential losses arising
-            from use of this site. Maximum aggregate liability for direct claims
-            related to this site is limited to one Indian rupee (₹1), unless
-            and except a written agreement with Pizjo provides otherwise.
-        </p>
+            <hr>
 
-        <h3 id="changes">9. Changes to this page</h3>
-        <p>
-            We may update this page from time to time. The "last updated" date
-            at the top will always reflect the current version. Material changes
-            affecting your rights will be announced on this page; we don't email
-            you about policy edits.
-        </p>
+            <h2 id="terms">6. Terms of Service</h2>
+            <p>
+                By using this website you agree to these simple terms. They're short on
+                purpose — restaurants and lawyers don't need to make these things complicated.
+            </p>
+            <ul>
+                <li>This site is for browsing Pizjo's menu and contacting us. Don't use it to spam our contact form, scrape our menu, or disrupt the service.</li>
+                <li>Menu items and prices shown here are the ones we usually offer. Final price is always confirmed by the Pizjo team on WhatsApp before we cook anything.</li>
+                <li>We try to keep this site online, fast, and correct, but we can't guarantee zero downtime. Use it as-is, at your own risk.</li>
+                <li>Food-safety and consumer-protection concerns are governed by Indian law (Food Safety and Standards Act, 2006; Information Technology Act, 2000; Consumer Protection Act, 2019).</li>
+                <li>If something goes wrong with your order, contact us within 24 hours on +91 92653 70588 and we'll make it right.</li>
+            </ul>
 
-        <a href="../index.html" class="back-link">← Back to Pizjo Home</a>
+            <h3 id="ip">7. Intellectual property</h3>
+            <p>
+                The Pizjo brand, name, logo, mascot artwork (the "FOOD KART" character
+                or similar), and all images of our food and store are owned by Pizjo
+                (Amraiwadi, Ahmedabad). You may not copy or reuse them without our written permission.
+            </p>
+            <p>
+                The <strong>website code, design system, and 3D / animated mascot</strong>
+                are developed by an independent developer (the "builder") and licensed to
+                Pizjo for use on this site only, subject to written agreement between
+                Pizjo and the builder. The builder retains ownership of the code,
+                design tokens, and reusable component patterns, and may use them in
+                other client work.
+            </p>
 
+            <h3 id="liability">8. Liability</h3>
+            <p>
+                We do our best to keep this site correct, secure, and respectful of
+                your privacy. To the maximum extent permitted by Indian law, we are
+                not liable for indirect, incidental, or consequential losses arising
+                from use of this site. Maximum aggregate liability for direct claims
+                related to this site is limited to one Indian rupee (₹1), unless
+                and except a written agreement with Pizjo provides otherwise.
+            </p>
+
+            <h3 id="changes">9. Changes to this page</h3>
+            <p>
+                We may update this page from time to time. The "last updated" date
+                at the top will always reflect the current version. Material changes
+                affecting your rights will be announced on this page; we don't email
+                you about policy edits.
+            </p>
+
+            <a href="../index.html" class="back-link">← Back to Pizjo Home</a>
+
+        </section>
     </main>
 
-    <script src="../js/security.js"></script>
-    <script type="module" src="../js/app.js"></script>
+    <footer class="footer">
+        <div class="container footer-grid animate-on-scroll">
+            <div class="footer-brand">
+                PIZJO!
+            </div>
+            <div class="footer-links">
+                <a href="legal.html#privacy">Privacy Policy</a>
+                <a href="legal.html#terms">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="https://wa.me/919265370588">WhatsApp</a>
+            </div>
+            <div class="footer-bottom">
+                © 2025 Pizjo. Stay Cheese-Obsessed.
+            </div>
+        </div>
+    </footer>
 
+    <script src="../js/security.js?v=4"></script>
+    <script type="module" src="../js/app.js?v=7"></script>
 </body>
 </html>

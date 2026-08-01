@@ -1,47 +1,48 @@
 /* ============================================
-   PIZJO — Design Tokens (v4 Zomato-inspired)
-   Clean Light Theme & Pizjo Red Identity
+   PIZJO — Design Tokens (v5 Cheesy Underground)
+   Grunge Aesthetic, Hard Shadows, Neon Accents
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap');
 
 :root {
     /* ── 1. Color Palette ── */
-    /* Backgrounds: White and Yellow */
-    --color-bg: #FFFFFF;
-    --color-bg-alt: #FFF9E6; /* Very light yellow for sections */
-    --color-surface: #FFFFFF;
-    --color-surface-hover: #FFF1B8; /* Hover state yellow */
+    --amber-neon: #FFBF00;
+    --umber-raw: #3E2723;
+    --off-white: #F5F2EB;
     
-    /* Accents: Pizjo Yellow */
-    --color-primary: #FFC107; /* Bright yellow from store balloons */
-    --color-primary-dark: #FFB300;
-    --color-primary-light: #FFD54F;
-    --color-primary-glow: rgba(255, 193, 7, 0.25);
+    /* Backgrounds */
+    --color-bg: var(--off-white);
+    --color-surface: var(--off-white);
+    --color-surface-hover: rgba(255, 191, 0, 0.2);
     
-    /* Text: Deep Blue (from store letters) */
-    --color-text: #0F172A;
-    --color-text-secondary: #334155;
-    --color-text-muted: #64748B;
-    --color-text-inverse: #0F172A; /* Text on primary yellow should be dark */
+    /* Accents */
+    --color-primary: var(--amber-neon);
+    --color-primary-dark: #E5AB00;
+    --color-primary-light: #FFCF33;
+    
+    /* Text */
+    --color-text: var(--umber-raw);
+    --color-text-secondary: #4A3B2C;
+    --color-text-muted: rgba(62, 39, 35, 0.6);
+    --color-text-inverse: var(--umber-raw); /* Grunge style uses dark text on neon */
     
     /* Semantic / Highlights */
     --color-veg: #0F8A65;
-    --color-border: #FFD54F; /* Yellow borders */
-    --color-border-strong: #FFA000;
+    --color-border: var(--umber-raw);
     --color-whatsapp: #25D366;
-    --color-error: #E85D04; /* Orange/Red from logo outline */
     
-    /* Additional Store Brand Colors */
-    --color-brand-blue: #1E3A8A; /* Deep blue of PIZJO letters */
-    --color-brand-orange: #EA580C; /* Orange outline */
+    /* Additional Colors */
+    --color-brand-blue: var(--umber-raw);
+    --color-brand-orange: var(--amber-neon);
 
     /* ── 2. Typography ── */
-    /* Fonts - Bubbly and Casual */
-    --font-display: 'Baloo 2', cursive, sans-serif;
-    --font-body: 'Quicksand', sans-serif;
+    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-body: 'Hanken Grotesk', sans-serif;
+    --font-marker: 'Permanent Marker', cursive;
+    --font-scribble: 'Caveat', cursive;
     
-    /* Scale (Perfect Fourth 1.333) */
+    /* Scale (Perfect Fourth) */
     --text-xs: 0.75rem;
     --text-sm: 0.875rem;
     --text-base: 1rem;
@@ -55,7 +56,7 @@
     --text-7xl: 7.478rem;
     
     /* Line Heights */
-    --leading-tight: 1.1;
+    --leading-tight: 0.9; /* Tighter for display text */
     --leading-normal: 1.5;
     --leading-relaxed: 1.6;
 
@@ -73,31 +74,35 @@
 
     /* ── 4. Architecture ── */
     --nav-height: 80px;
-    --radius-sm: 8px;
-    --radius-md: 16px; /* Bubbly, pill-like corners */
-    --radius-lg: 24px;
-    --radius-xl: 32px;
-    --radius-full: 9999px;
+    --radius-sm: 0px; /* Grunge is sharp */
+    --radius-md: 0px;
+    --radius-lg: 0px;
+    --radius-xl: 0px;
+    --radius-full: 0px;
     --max-width: 1400px;
     --z-base: 1;
     --z-sticky: 100;
     --z-modal: 1000;
 
     /* ── 5. Motion (12 Principles) ── */
-    /* Anticipation & Overshoot (Disney principles) */
-    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
-    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-    
+    /* timing-under-300ms */
     --duration-fast: 150ms;
-    --duration-normal: 300ms;
-    --duration-slow: 500ms;
+    --duration-normal: 250ms; /* Under 300ms */
+    --duration-slow: 300ms;
     
-    /* Shadows & Effects (Claymorphism style) */
-    --shadow-glow: 0 0 20px rgba(255, 193, 7, 0.4);
-    --shadow-soft: 0 8px 24px rgba(255, 193, 7, 0.15); /* Warmer shadow */
-    --shadow-clay: 4px 4px 0px var(--color-brand-blue); /* Solid drop shadow for playful vibe */
-    --blur-glass: blur(12px);
+    /* easing-entrance-ease-out */
+    --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+    /* easing-exit-ease-in */
+    --ease-in: cubic-bezier(0.4, 0.0, 1, 1);
+    
+    /* physics-active-state */
+    --squish-scale: 0.98;
+
+    /* Shadows & Effects (Grunge style) */
+    --shadow-grunge: 4px 4px 0px 0px var(--umber-raw);
+    --shadow-grunge-lg: 8px 8px 0px 0px var(--umber-raw);
+    --shadow-grunge-hover: 2px 2px 0px 0px var(--umber-raw);
+    --border-thick: 4px solid var(--umber-raw);
 }
 
 /* Global resets specifically dependent on tokens */
@@ -108,6 +113,6 @@ html {
 }
 
 ::selection {
-    background: var(--color-primary);
-    color: var(--color-text-inverse);
+    background: var(--amber-neon);
+    color: var(--umber-raw);
 }
