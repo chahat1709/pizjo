@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <title>About — Pizjo | Our Story | Amraiwadi, Ahmedabad</title>
@@ -13,161 +13,228 @@
     <link rel="icon" href="../assets/pizjo_logo.webp" type="image/webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/tokens.css">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/about.css">
 </head>
-<body>
-    <!-- ═══════════ ABOUT HERO ═══════════ -->
-    <section class="about-hero" id="about-hero">
-        <div class="section-container">
-            <nav class="breadcrumb" aria-label="Breadcrumb">
-                <a href="../index.html">Home</a>
-                <span class="breadcrumb-sep">/</span>
-                <span class="breadcrumb-current">About</span>
-            </nav>
-            <h1 class="about-hero-title reveal">Our Story</h1>
-            <p class="about-hero-subtitle reveal">Born out of late-night cravings and a serious love for cheese.</p>
-        </div>
-    </section>
+<body class="bg-off-white text-umber-raw antialiased relative min-h-screen overflow-x-hidden">
+    <a href="#main" class="skip-to-content">Skip to content</a>
 
-    <!-- ═══════════ ORIGIN STORY ═══════════ -->
-    <section class="section" id="origin">
-        <div class="section-container">
-            <div class="about-story-grid">
-                <div class="about-story-content reveal">
-                    <span class="section-label">How It Started</span>
-                    <h2 class="section-title">From a Simple Idea to Ahmedabad's Cheesiest Obsession</h2>
-                    <p class="about-text">Every great pizza starts with a story — ours started with a craving at 2 AM and the realization that Amraiwadi deserved better pizza. Not the mass-produced, frozen-dough kind. The real thing.</p>
-                    <p class="about-text">We set out to build a place where every pizza is handcrafted with fresh dough (rested for 24 hours), loaded with 100% Amul Mozzarella, and baked to perfection. No shortcuts. No compromises. Just pure, oven-baked happiness.</p>
-                    <p class="about-text">Today, Pizjo serves 155+ items across 15 categories — from our signature Bahubali Pizza to crispy momos, cheesy calizzas, stuffed garlic breads, and refreshing coolers. Every item on our menu is 100% pure vegetarian.</p>
-                </div>
-                <div class="about-story-visual reveal-right">
-                    <div class="about-image-card">
-                        <img src="../assets/pizjo_mascot.jpeg" alt="Pizjo team" class="about-image" width="400" height="400" loading="lazy">
-                        <div class="about-image-badge">Est. 2025 🍕</div>
+    <!-- Nav -->
+    <nav class="navbar" role="navigation" aria-label="Primary">
+        <div class="container nav-container">
+            <a href="../" class="nav-brand" aria-label="Pizjo home">
+                <img src="../assets/pizjo_logo.webp" alt="Pizjo Logo" class="brand-logo">
+                <span class="brand-text">PIZJO!</span>
+            </a>
+            <div class="nav-links" id="nav-links">
+                <a href="../index.html#menu" class="nav-link">Menu</a>
+                <a href="about.html" class="nav-link active">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-controls="nav-links" aria-label="Toggle menu" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <div class="nav-actions">
+                <button class="cart-toggle" id="cart-toggle" aria-label="Open cart">
+                    CART
+                    <div class="cart-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="9" cy="21" r="1"></circle>
+                            <circle cx="20" cy="21" r="1"></circle>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                        </svg>
+                        <span class="cart-badge" id="cart-count">0</span>
                     </div>
-                </div>
+                </button>
             </div>
         </div>
-    </section>
+    </nav>
 
-    <!-- ═══════════ PILLARS ═══════════ -->
-    <section class="section section-alt" id="values">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-label reveal">Our Values</span>
-                <h2 class="section-title reveal">What Makes Us Different</h2>
-            </div>
-            <div class="values-grid stagger-children">
-                <div class="value-card card reveal">
-                    <div class="value-icon">🧀</div>
-                    <h3 class="value-title">100% Amul Mozzarella</h3>
-                    <p class="value-desc">We only use genuine Amul Mozzarella cheese. Real cheese, real stretch, real taste. No substitutes. Ever.</p>
-                </div>
-                <div class="value-card card reveal">
-                    <div class="value-icon">🫓</div>
-                    <h3 class="value-title">24-Hour Rested Dough</h3>
-                    <p class="value-desc">Our dough is made fresh daily and rested for 24 hours. This slow fermentation creates the perfect crust — light, airy, and full of flavour.</p>
-                </div>
-                <div class="value-card card reveal">
-                    <div class="value-icon">💚</div>
-                    <h3 class="value-title">Pure Vegetarian</h3>
-                    <p class="value-desc">Our entire kitchen is 100% pure vegetarian. Every ingredient, every sauce, every topping is carefully sourced and verified.</p>
-                </div>
-                <div class="value-card card reveal">
-                    <div class="value-icon">🔥</div>
-                    <h3 class="value-title">No Shortcuts</h3>
-                    <p class="value-desc">We don't do frozen dough. We don't do processed ingredients. Every item is handcrafted, oven-baked, and served with love.</p>
-                </div>
-                <div class="value-card card reveal">
-                    <div class="value-icon">📍</div>
-                    <h3 class="value-title">Local Love</h3>
-                    <p class="value-desc">Born in Amraiwadi. Built for Ahmedabad. We're proud to serve our community with the best food at honest prices.</p>
-                </div>
-                <div class="value-card card reveal">
-                    <div class="value-icon">🎯</div>
-                    <h3 class="value-title">155+ Items, One Standard</h3>
-                    <p class="value-desc">From a ₹49 veg pocket to a ₹699 party pack — every item meets the same quality standard. No exceptions.</p>
-                </div>
-            </div>
+    <!-- Sliding cart -->
+    <div class="cart-overlay" id="cart-overlay" hidden></div>
+    <aside class="cart-sidebar" id="cart-sidebar" role="dialog" aria-modal="true" aria-label="Shopping cart" aria-hidden="true">
+        <div class="cart-header">
+            <h2>Your Stash</h2>
+            <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
         </div>
-    </section>
-
-    <!-- ═══════════ NUMBERS ═══════════ -->
-    <section class="section numbers-section" id="numbers">
-        <div class="section-container">
-            <div class="numbers-grid">
-                <div class="number-item reveal">
-                    <span class="number-value">155+</span>
-                    <span class="number-label">Menu Items</span>
-                </div>
-                <div class="number-item reveal">
-                    <span class="number-value">15</span>
-                    <span class="number-label">Categories</span>
-                </div>
-                <div class="number-item reveal">
-                    <span class="number-value">100%</span>
-                    <span class="number-label">Pure Veg</span>
-                </div>
-                <div class="number-item reveal">
-                    <span class="number-value">₹49</span>
-                    <span class="number-label">Starting Price</span>
-                </div>
-            </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total-row"><span>Total</span><span id="cart-total">₹0</span></div>
+            <button class="btn cart-checkout-btn" id="checkout-btn">
+                Order on WhatsApp
+            </button>
         </div>
-    </section>
+    </aside>
 
-    <!-- ═══════════ VISIT US ═══════════ -->
-    <section class="section" id="visit">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-label reveal">Visit Us</span>
-                <h2 class="section-title reveal">Come Say Hi! 👋</h2>
+    <main id="main">
+        <!-- ═══════════ ABOUT HERO ═══════════ -->
+        <section class="about-hero" id="about-hero">
+            <div class="container">
+                <nav class="breadcrumb animate-on-scroll" aria-label="Breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <span class="breadcrumb-sep">/</span>
+                    <span class="breadcrumb-current">About</span>
+                </nav>
+                <h1 class="about-hero-title animate-on-scroll">Our Story</h1>
+                <p class="about-hero-subtitle animate-on-scroll">Born out of late-night cravings and a serious love for cheese.</p>
             </div>
-            <div class="visit-grid">
-                <div class="visit-info reveal">
-                    <div class="visit-card">
-                        <span class="visit-icon">📍</span>
-                        <div>
-                            <h4>Address</h4>
-                            <p>Shop 01, Ground Floor, Raj Complex<br>Near Metro Pillar 87, Vastral Road<br>Amraiwadi, Ahmedabad 382418</p>
-                        </div>
+        </section>
+
+        <!-- ═══════════ ORIGIN STORY ═══════════ -->
+        <section class="section" id="origin">
+            <div class="container">
+                <div class="about-story-grid">
+                    <div class="about-story-content animate-on-scroll">
+                        <span class="section-label">How It Started</span>
+                        <h2 class="section-title">From a Simple Idea to Ahmedabad's Cheesiest Obsession</h2>
+                        <p class="about-text">Every great pizza starts with a story — ours started with a craving at 2 AM and the realization that Amraiwadi deserved better pizza. Not the mass-produced, frozen-dough kind. The real thing.</p>
+                        <p class="about-text">We set out to build a place where every pizza is handcrafted with fresh dough (rested for 24 hours), loaded with 100% Amul Mozzarella, and baked to perfection. No shortcuts. No compromises. Just pure, oven-baked happiness.</p>
+                        <p class="about-text">Today, Pizjo serves 155+ items across 15 categories — from our signature Bahubali Pizza to crispy momos, cheesy calizzas, stuffed garlic breads, and refreshing coolers. Every item on our menu is 100% pure vegetarian.</p>
                     </div>
-                    <div class="visit-card">
-                        <span class="visit-icon">🕐</span>
-                        <div>
-                            <h4>Opening Hours</h4>
-                            <p>Monday – Sunday<br>11:15 AM – 11:45 PM</p>
-                        </div>
-                    </div>
-                    <div class="visit-card">
-                        <span class="visit-icon">📞</span>
-                        <div>
-                            <h4>Contact</h4>
-                            <p><a href="tel:+919265370588">+91 92653 70588</a><br><a href="mailto:info@pizjo.in">info@pizjo.in</a></p>
+                    <div class="about-story-visual animate-on-scroll">
+                        <div class="about-image-card">
+                            <img src="../assets/pizjo_mascot.jpeg" alt="Pizjo team" class="about-image" width="400" height="400" loading="lazy">
+                            <div class="about-image-badge">Est. 2025 🍕</div>
                         </div>
                     </div>
                 </div>
-                <div class="visit-map reveal-right">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.5!2d72.6413717703!3d23.0052696160!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDAwJzE5LjAiTiA3MsKwMzgnMjkuMCJF!5e0!3m2!1sen!2sin!4v1"
-                        width="100%" height="350" style="border:0; border-radius: var(--radius-lg);" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="Pizjo location on Google Maps">
-                    </iframe>
+            </div>
+        </section>
+
+        <!-- ═══════════ PILLARS ═══════════ -->
+        <section class="section" id="values">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-label">Our Values</span>
+                    <h2 class="section-title">What Makes Us Different</h2>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card animate-on-scroll">
+                        <div class="value-icon">🧀</div>
+                        <h3 class="value-title">100% Amul Mozzarella</h3>
+                        <p class="value-desc">We only use genuine Amul Mozzarella cheese. Real cheese, real stretch, real taste. No substitutes. Ever.</p>
+                    </div>
+                    <div class="value-card animate-on-scroll">
+                        <div class="value-icon">🫓</div>
+                        <h3 class="value-title">24-Hour Rested Dough</h3>
+                        <p class="value-desc">Our dough is made fresh daily and rested for 24 hours. This slow fermentation creates the perfect crust — light, airy, and full of flavour.</p>
+                    </div>
+                    <div class="value-card animate-on-scroll">
+                        <div class="value-icon">💚</div>
+                        <h3 class="value-title">Pure Vegetarian</h3>
+                        <p class="value-desc">Our entire kitchen is 100% pure vegetarian. Every ingredient, every sauce, every topping is carefully sourced and verified.</p>
+                    </div>
+                    <div class="value-card animate-on-scroll">
+                        <div class="value-icon">🔥</div>
+                        <h3 class="value-title">No Shortcuts</h3>
+                        <p class="value-desc">We don't do frozen dough. We don't do processed ingredients. Every item is handcrafted, oven-baked, and served with love.</p>
+                    </div>
+                    <div class="value-card animate-on-scroll">
+                        <div class="value-icon">📍</div>
+                        <h3 class="value-title">Local Love</h3>
+                        <p class="value-desc">Born in Amraiwadi. Built for Ahmedabad. We're proud to serve our community with the best food at honest prices.</p>
+                    </div>
+                    <div class="value-card animate-on-scroll">
+                        <div class="value-icon">🎯</div>
+                        <h3 class="value-title">155+ Items, One Standard</h3>
+                        <p class="value-desc">From a ₹49 veg pocket to a ₹699 party pack — every item meets the same quality standard. No exceptions.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <script src="../js/security.js"></script>
-    <script src="../js/app.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            await initApp('about');
-        });
-    </script>
+        <!-- ═══════════ NUMBERS ═══════════ -->
+        <section class="section numbers-section" id="numbers">
+            <div class="container">
+                <div class="numbers-grid">
+                    <div class="number-item animate-on-scroll">
+                        <span class="number-value">155+</span>
+                        <span class="number-label">Menu Items</span>
+                    </div>
+                    <div class="number-item animate-on-scroll">
+                        <span class="number-value">15</span>
+                        <span class="number-label">Categories</span>
+                    </div>
+                    <div class="number-item animate-on-scroll">
+                        <span class="number-value">100%</span>
+                        <span class="number-label">Pure Veg</span>
+                    </div>
+                    <div class="number-item animate-on-scroll">
+                        <span class="number-value">₹49</span>
+                        <span class="number-label">Starting Price</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ VISIT US ═══════════ -->
+        <section class="section" id="visit">
+            <div class="container">
+                <div class="section-header animate-on-scroll">
+                    <span class="section-label">Visit Us</span>
+                    <h2 class="section-title">Come Say Hi! 👋</h2>
+                </div>
+                <div class="visit-grid">
+                    <div class="visit-info animate-on-scroll">
+                        <div class="visit-card">
+                            <span class="visit-icon">📍</span>
+                            <div>
+                                <h4>Address</h4>
+                                <p>Shop 01, Ground Floor, Raj Complex<br>Near Metro Pillar 87, Vastral Road<br>Amraiwadi, Ahmedabad 382418</p>
+                            </div>
+                        </div>
+                        <div class="visit-card">
+                            <span class="visit-icon">🕐</span>
+                            <div>
+                                <h4>Opening Hours</h4>
+                                <p>Monday – Sunday<br>11:15 AM – 11:45 PM</p>
+                            </div>
+                        </div>
+                        <div class="visit-card">
+                            <span class="visit-icon">📞</span>
+                            <div>
+                                <h4>Contact</h4>
+                                <p><a href="tel:+919265370588">+91 92653 70588</a><br><a href="mailto:info@pizjo.in">info@pizjo.in</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visit-map animate-on-scroll">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.5!2d72.6413717703!3d23.0052696160!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDAwJzE5LjAiTiA3MsKwMzgnMjkuMCJF!5e0!3m2!1sen!2sin!4v1"
+                            width="100%" height="350" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Pizjo location on Google Maps">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid animate-on-scroll">
+            <div class="footer-brand">
+                PIZJO!
+            </div>
+            <div class="footer-links">
+                <a href="legal.html#privacy">Privacy Policy</a>
+                <a href="legal.html#terms">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="https://wa.me/919265370588">WhatsApp</a>
+            </div>
+            <div class="footer-bottom">
+                © 2025 Pizjo. Stay Cheese-Obsessed.
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/security.js?v=4"></script>
+    <script type="module" src="../js/app.js?v=7"></script>
 </body>
 </html>

@@ -74,6 +74,7 @@ window.PizjoSecurity = (() => {
 
     return {
         sanitizeHTML,
+        escapeHTML: sanitizeHTML,
         rateLimit,
         validatePrice,
         hardenExternalLinks,

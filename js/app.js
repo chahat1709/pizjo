@@ -30,22 +30,79 @@ function saveCart() {
   catch (e) { console.warn('cart save failed', e); }
 }
 
+const FALLBACK_MENU = [
+  {
+    name: "Single Pizza Combos",
+    items: [
+      { name: "Pick 1: Margherita Combo", price: 139, description: "Margherita Regular + Stuffed Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Pick 2: Margherita Cheese Combo", price: 159, description: "Margherita Regular + Cheese Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Pick 3: Golden Corn Combo", price: 169, description: "Golden Corn Regular + Stuffed Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Pick 4: Veg Loaded Combo", price: 189, description: "Veg Loaded Regular + Stuffed Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true }
+    ]
+  },
+  {
+    name: "Premium Pizza Combos",
+    items: [
+      { name: "Pick 5: Capsicum & Paneer Combo", price: 199, description: "Capsicum & Paneer Regular + Stuffed Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Pick 6: Spicy Veg Feast & Shake", price: 219, description: "Spicy Veg. Feast Regular + Stuffed Garlic Bread + Vanilla Shake", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Pick 7: Peri-Peri Paneer Combo", price: 229, description: "Peri-Peri Paneer Regular + Stuffed Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Pick 8: Paneer Tikka Combo", price: 239, description: "Paneer Tikka Regular + Stuffed Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80", veg: true }
+    ]
+  },
+  {
+    name: "Double Pizza & Calzone Combos",
+    items: [
+      { name: "Pick 9: Twin Margherita & Capsicum", price: 329, description: "Margherita Regular + Capsicum Regular + Stuffed Garlic Bread + 2 Coke", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Pick 10: 4-Topping Pizza Feast", price: 329, description: "Margherita Regular + Capsicum Regular + Onion Regular + Tomato Regular", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Pick 11: Extravaganza Double Combo", price: 379, description: "Veg Extravaganza Regular + Double Cheese Margherita + Stuffed Garlic Bread + 2 Coke", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Pick 12: Calzone Mega Combo", price: 399, description: "Cheese Calizza + Normal Veg Calizza (Any 2) + Stuffed Garlic Bread + 2 Coke", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80", veg: true }
+    ]
+  },
+  {
+    name: "Burgers",
+    items: [
+      { name: "Classic Aloo Tikki Burger", price: 70, description: "Crispy golden potato patty with house spices and mayo", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Crispy Veg Burger", price: 80, description: "Crunchy mixed vegetable patty with lettuce and creamy mayo", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Mix Veg Momo Burger", price: 89, description: "Special fusion burger loaded with steamed mix veg momos", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Veg Cheese Burger", price: 100, description: "Classic veg patty topped with a thick melt of Amul cheese", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80", veg: true }
+    ]
+  },
+  {
+    name: "French Fries",
+    items: [
+      { name: "Salted Fries (Medium)", price: 79, description: "Classic golden salted potato fries (180g)", image: "https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Peri-Peri Fries (Medium)", price: 100, description: "Crispy fries tossed in hot & spicy African peri-peri seasoning", image: "https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=600&q=80", veg: true },
+      { name: "Cheesy Salted Fries (Medium)", price: 130, description: "Golden salted fries loaded with warm liquid Amul cheese", image: "https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=600&q=80", veg: true }
+    ]
+  }
+];
+
+function sanitizeImagePaths(categories) {
+  return (categories || []).map(cat => ({
+    ...cat,
+    items: (cat.items || []).map(it => ({
+      ...it,
+      image: it.image ? it.image.replace(/^\.\.\//, '') : ''
+    }))
+  }));
+}
+
 // ── Menu ───────────────────────────────────────────────────
 async function loadMenu() {
-  const grid = $('menu-grid');
   try {
-    const res = await fetch(`data/menu.json?v=${Date.now()}`);
+    const res = await fetch(`data/menu.json?v=1`);
     if (!res.ok) throw new Error('menu fetch failed');
     const data = await res.json();
-    State.menu = data.categories || [];
-    if (State.menu.length) {
-      State.current = State.menu[0].name;
-      renderFilters();
-      renderGrid();
-    }
+    State.menu = sanitizeImagePaths(data.categories);
   } catch (err) {
-    console.error('menu load', err);
-    if (grid) grid.textContent = 'Failed to load menu. Please try again later.';
+    console.warn('menu load fetch warning, using built-in fallback:', err);
+    State.menu = FALLBACK_MENU;
+  }
+
+  if (State.menu.length) {
+    State.current = State.menu.find(c => c.name.toLowerCase().includes('special'))?.name || State.menu[0].name;
+    renderFilters();
+    renderGrid();
   }
 }
 
@@ -83,33 +140,35 @@ function renderGrid() {
 
   grid.style.opacity = '0';
   grid.style.transform = 'translateY(8px)';
-  setTimeout(() => {
+    setTimeout(() => {
     grid.innerHTML = cat.items
       .map(
         (it) => `
-          <article class="product-card">
+          <article class="product-card animate-on-scroll">
             <div class="product-info">
               <div class="product-badges">
                 ${it.veg === false ? '' : (it.veg || vegName(it.name) ? '<span class="badge badge-veg">Veg</span>' : '')}
                 ${it.price > 200 ? '<span class="badge badge-bestseller">Bestseller</span>' : ''}
               </div>
               <h3 class="product-title">${Sec.escapeHTML(it.name)}</h3>
-              <span class="product-price">${fmtPrice(it.price)}</span>
               <p class="product-desc">${Sec.escapeHTML(it.description || '')}</p>
             </div>
             <div class="product-image-container">
               ${it.image ? `<img src="${Sec.escapeHTML(it.image)}" alt="${Sec.escapeHTML(it.name)}" class="product-image" loading="lazy" referrerpolicy="no-referrer">` : ''}
-              <button class="btn-add" data-name="${Sec.escapeHTML(it.name)}" data-price="${Number(it.price)}" type="button">ADD</button>
+            </div>
+            <div class="product-footer">
+              <span class="product-price" style="font-size: 1.5rem;">${fmtPrice(it.price)}</span>
+              <button class="btn-add" data-name="${Sec.escapeHTML(it.name)}" data-price="${Number(it.price)}" type="button" aria-label="Add to cart">
+                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              </button>
             </div>
           </article>`
       )
       .join('');
+    
+    // Bind scroll animations to the newly injected cards
+    bindReveal();
 
-    grid.querySelectorAll('.btn-add').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        addToCart(btn.dataset.name, parseInt(btn.dataset.price, 10));
-      });
-    });
     requestAnimationFrame(() => {
       grid.style.transition = 'all 0.3s var(--ease-out)';
       grid.style.opacity = '1';
@@ -119,7 +178,7 @@ function renderGrid() {
 }
 
 // ── Cart ───────────────────────────────────────────────────
-function addToCart(name, price) {
+export function addToCart(name, price) {
   if (!name) return;
   const guard = Sec.canAddToCart(Object.values(State.cart), name);
   if (!guard.ok) { alert(guard.reason || 'Cannot add more'); return; }
@@ -129,6 +188,7 @@ function addToCart(name, price) {
   paintCart();
   openCart();
 }
+window.addToCart = addToCart;
 function changeQty(name, delta) {
   if (!State.cart[name]) return;
   State.cart[name].qty += delta;
@@ -151,9 +211,9 @@ function paintCart() {
           <div class="cart-item-price">${fmtPrice(it.price)}</div>
         </div>
         <div class="cart-item-controls">
-          <button class="qty-btn" data-name="${Sec.escapeHTML(it.name)}" data-action="minus" type="button">−</button>
+          <button class="qty-btn" data-name="${Sec.escapeHTML(it.name)}" data-action="minus" type="button" aria-label="Decrease quantity">−</button>
           <span class="qty-val">${it.qty}</span>
-          <button class="qty-btn" data-name="${Sec.escapeHTML(it.name)}" data-action="plus" type="button">+</button>
+          <button class="qty-btn" data-name="${Sec.escapeHTML(it.name)}" data-action="plus" type="button" aria-label="Increase quantity">+</button>
         </div>
       </div>`;
   }).join('');
@@ -168,14 +228,11 @@ function paintCart() {
         </svg>
         <p>Your cart is empty.</p>
       </div>`;
-    list.querySelectorAll('.qty-btn').forEach((b) => {
-      b.addEventListener('click', () =>
-        changeQty(b.dataset.name, b.dataset.action === 'plus' ? 1 : -1)
-      );
-    });
   }
-  $('cart-count').textContent = totalItems;
-  $('cart-total').textContent = fmtPrice(totalPrice);
+  const cartCount = $('cart-count');
+  const cartTotal = $('cart-total');
+  if (cartCount) cartCount.textContent = totalItems;
+  if (cartTotal) cartTotal.textContent = fmtPrice(totalPrice);
 }
 
 function openCart() {
@@ -196,6 +253,21 @@ function bindCart() {
   $('cart-close')?.addEventListener('click', closeCart);
   $('cart-overlay')?.addEventListener('click', closeCart);
   $('checkout-btn')?.addEventListener('click', checkout);
+  
+  // Event Delegation for cart quantity adjustments
+  $('cart-items')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.qty-btn');
+    if (!btn) return;
+    changeQty(btn.dataset.name, btn.dataset.action === 'plus' ? 1 : -1);
+  });
+
+  // Event Delegation for Add to Cart buttons on the homepage
+  $('menu-grid')?.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-add');
+    if (!btn) return;
+    addToCart(btn.dataset.name, parseInt(btn.dataset.price, 10));
+  });
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeCart();
   });
@@ -219,17 +291,24 @@ function checkout() {
 }
 
 // ── Reveal on scroll (any page) ────────────────────────────
+let revealObserver = null;
 function bindReveal() {
-  const els = document.querySelectorAll('.reveal, .reveal-right');
-  if (!('IntersectionObserver' in window) || !els.length) {
-    els.forEach((e) => e.classList.add('visible'));
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.animate-on-scroll:not(.observed)').forEach((e) => {
+      e.classList.add('is-visible', 'observed');
+    });
     return;
   }
-  const io = new IntersectionObserver(
-    (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
-    { threshold: 0.12 }
-  );
-  els.forEach((e) => io.observe(e));
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('is-visible')),
+      { threshold: 0.12 }
+    );
+  }
+  document.querySelectorAll('.animate-on-scroll:not(.observed)').forEach((e) => {
+    e.classList.add('observed');
+    revealObserver.observe(e);
+  });
 }
 
 // Exposed for other page scripts (about/contact) to call.
@@ -239,6 +318,15 @@ export async function initApp(page = 'home') {
   bindCart();
   paintCart();
   bindReveal();
+
+  const mobileToggle = document.getElementById('mobile-menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (mobileToggle && navLinks) {
+    mobileToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      mobileToggle.setAttribute('aria-expanded', isOpen);
+    });
+  }
 
   if (page === 'home') {
     await loadMenu();
