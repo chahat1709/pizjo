@@ -1,6 +1,5 @@
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { GLTFLoader, DRACOLoader } from 'three';
 
 const GLB_URL = 'assets/dist/hero/hero_draco.glb'; // Draco-compressed Blender export
 // Local draco decoder (served from project assets so we don't hit a CDN at runtime).
