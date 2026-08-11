@@ -97,6 +97,34 @@ export function initThreeHero(containerId, opts = {}) {
             model.position.y = -0.15;
             model.rotation.y = Math.PI * 0.25;
             pizza.add(model);
+
+            // ---- Blender-baked animation (build_pizza_anim.py) ----
+            // Single "PizzaLife" clip (0..210f @30fps). Subclip it:
+            //   Assemble (0..90)  -> play once, layers drop into place
+            //   Idle    (90..210) -> loop-safe float + spin
+            const clip = gltf.animations && gltf.animations[0];
+            if (clip) {
+                const mixer = new THREE.AnimationMixer(model);
+                const FPS = 30;
+                const assemble = THREE.AnimationUtils.subclip(
+                    clip, 'Assemble', 0, 90, FPS
+                );
+                const idle = THREE.AnimationUtils.subclip(
+                    clip, 'Idle', 90, 210, FPS
+                );
+                const assembleAction = mixer.clipAction(assemble);
+                assembleAction.clampWhenFinished = true;
+                assembleAction.loop = THREE.LoopOnce;
+                assembleAction.play();
+                mixer.addEventListener('finished', (e) => {
+                    if (e.action === assembleAction) {
+                        mixer.clipAction(idle).play();
+                    }
+                });
+                pizza.userData.mixer = mixer;
+                window.__pizjoMixer = mixer; // test hook
+            }
+
             if (poster) poster.classList.add('hero-poster-fade');
             const dt = ((performance && performance.now) ? performance.now() : Date.now()) - t0;
             if (telemetry && telemetry.track) telemetry.track('hero_glb_loaded', { ms: Math.round(dt) });
@@ -126,7 +154,11 @@ export function initThreeHero(containerId, opts = {}) {
         const dt = t - last;
         last = t;
 
-        pizza.rotation.y += dt * 0.25; // slow base spin
+        // Blender-baked animation drives rotation/float (PizzaLife clip).
+        if (pizza.userData.mixer) {
+            pizza.userData.mixer.update(dt);
+        }
+        // No JS spin here: baked Idle clip rotates the model. Only hover lift.
         if (fallback) {
             const target = exploded ? 1.4 : 0;
             pizza.children.forEach((c) => {
