@@ -134,8 +134,10 @@
 
                 <div class="hero-visual animate-on-scroll">
                     <div class="hero-visual-box">
-                        <!-- Animated Pizza Image -->
-                        <img src="assets/pizza_hero.png" alt="Delicious Pizza" class="hero-pizza-img">
+                        <!-- Animated Pizza Image (LQIP poster while 3D loads) -->
+                        <img src="assets/pizza_hero.png" alt="Delicious Pizza" class="hero-pizza-img" id="hero-poster">
+                        <!-- Three.js GLTF pizza mounts here (Blender MCP asset) -->
+                        <div id="three-canvas-container" aria-label="3D pizza model"></div>
                     </div>
                     <div class="badge"
                         style="position: absolute; bottom: -20px; right: -20px; font-size: var(--text-2xl); transform: rotate(-10deg);">
@@ -285,8 +287,39 @@
     </footer>
 
     <script src="js/security.js?v=4"></script>
-    <script src="js/test-helpers.js" defer></script>
-    <script type="module" src="js/app.js?v=8"></script>
+    <!--
+      Test helpers: only load when explicitly opted in.
+      Production users never get this script. Playwright sets `?test=1` or runs
+      on a staging hostname; we check both. (PR-2 hardening.)
+    -->
+    <script>
+      (function () {
+        var host = location.hostname;
+        var isLocal = host === 'localhost' || host === '127.0.0.1' || host.endsWith('.local');
+        var isStaging = host.indexOf('staging') !== -1 || host.indexOf('-pr-') !== -1;
+        var optIn = /[?&]test=1\b/.test(location.search);
+        if (isLocal || isStaging || optIn) {
+          var s = document.createElement('script');
+          s.src = 'js/test-helpers.js';
+          s.defer = true;
+          document.head.appendChild(s);
+        }
+      })();
+    </script>
+    <!--
+      Local three.js bundle — built by `npm run build:vendor`.
+      No runtime CDN dependency. The bundle includes three core + GLTF/DRACO loaders.
+      If you change three version or add addons, re-run the build.
+    -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "./assets/dist/vendor/three-bundle.js",
+        "three/addons/": "./assets/dist/vendor/three-bundle.js"
+      }
+    }
+    </script>
+    <script type="module" src="js/app.js?v=10"></script>
 </body>
 
 </html>
