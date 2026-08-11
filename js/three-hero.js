@@ -1,166 +1,152 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
-export function initThreeHero(containerId) {
+const GLB_URL = 'assets/dist/hero/hero_draco.glb'; // Draco-compressed Blender export
+// Local draco decoder (served from project assets so we don't hit a CDN at runtime).
+// PR-2: was 'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/libs/draco/gltf/'
+const DRACO_DECODER_PATH = 'assets/dist/vendor/draco/';
+
+export function initThreeHero(containerId, opts = {}) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    // Setup
+    // Skip WebGL entirely: keep the static poster (LQIP / fallback) visible.
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+    if (!gl) {
+        const poster = document.getElementById('hero-poster');
+        if (poster) poster.style.opacity = '1';
+        console.warn('[pizjo] WebGL unavailable – hero keeps static poster.');
+        return;
+    }
+
+    const poster = document.getElementById('hero-poster');
+
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000); // aspect ratio will be set by ResizeObserver
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+    camera.position.set(0, 1.6, 9.5);
+    camera.lookAt(0, 0, 0);
+
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
     container.appendChild(renderer.domElement);
 
-    // Lights for Bright Cafe Theme
-    const ambientLight = new THREE.AmbientLight(0xffffff, 2.5);
-    scene.add(ambientLight);
-    
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0);
-    directionalLight.position.set(10, 20, 10);
-    scene.add(directionalLight);
+    // Lights: warm key + amber accent (brand)
+    scene.add(new THREE.AmbientLight(0xffffff, 1.1));
+    const key = new THREE.DirectionalLight(0xffedd0, 2.4);
+    key.position.set(4, 6, 5);
+    scene.add(key);
+    const accent = new THREE.PointLight(0xffbf00, 1.6, 40);
+    accent.position.set(-4, 2, 3);
+    scene.add(accent);
 
-    const pointLight = new THREE.PointLight(0xFFC107, 3.0, 100); // Pizjo Yellow accent
-    pointLight.position.set(-5, 0, 5);
-    scene.add(pointLight);
+    const pizza = new THREE.Group();
+    pizza.rotation.x = -0.35;
+    scene.add(pizza);
 
-    // Exploded Pizza State
-    let isHovered = false;
-    
-    // The Pizza Group to hold all layers
-    const pizzaGroup = new THREE.Group();
-    // Tilt it slightly so we can see the top
-    pizzaGroup.rotation.x = Math.PI / 4; 
-    scene.add(pizzaGroup);
+    let fallback = false;
 
-    // Create Layers
-    const layers = [];
-
-    // 1. Crust Layer
-    const crustGeo = new THREE.CylinderGeometry(3.2, 3.2, 0.3, 32);
-    const crustMat = new THREE.MeshStandardMaterial({ color: 0xD2B48C, roughness: 0.8 });
-    const crust = new THREE.Mesh(crustGeo, crustMat);
-    crust.userData = { defaultY: 0, explodedY: -2.0, labelId: 'label-crust' };
-    pizzaGroup.add(crust);
-    layers.push(crust);
-
-    // 2. Sauce Layer
-    const sauceGeo = new THREE.CylinderGeometry(3.0, 3.0, 0.1, 32);
-    const sauceMat = new THREE.MeshStandardMaterial({ color: 0xD32F2F, roughness: 0.4 });
-    const sauce = new THREE.Mesh(sauceGeo, sauceMat);
-    sauce.userData = { defaultY: 0.2, explodedY: -0.5, labelId: 'label-sauce' };
-    pizzaGroup.add(sauce);
-    layers.push(sauce);
-
-    // 3. Cheese Layer
-    const cheeseGeo = new THREE.CylinderGeometry(2.9, 2.9, 0.1, 32);
-    const cheeseMat = new THREE.MeshStandardMaterial({ color: 0xFFE082, roughness: 0.3 });
-    const cheese = new THREE.Mesh(cheeseGeo, cheeseMat);
-    cheese.userData = { defaultY: 0.3, explodedY: 1.0, labelId: 'label-cheese' };
-    pizzaGroup.add(cheese);
-    layers.push(cheese);
-
-    // 4. Toppings Layer (Group of small pepperonis)
-    const toppingsGroup = new THREE.Group();
-    toppingsGroup.userData = { defaultY: 0.4, explodedY: 2.5, labelId: 'label-toppings' };
-    
-    const pepGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.05, 16);
-    const pepMat = new THREE.MeshStandardMaterial({ color: 0xB71C1C, roughness: 0.5 });
-    
-    // Scatter pepperonis
-    for (let i = 0; i < 12; i++) {
-        const pep = new THREE.Mesh(pepGeo, pepMat);
-        const angle = Math.random() * Math.PI * 2;
-        const radius = Math.random() * 2.2;
-        pep.position.set(Math.cos(angle) * radius, 0, Math.sin(angle) * radius);
-        toppingsGroup.add(pep);
-    }
-    pizzaGroup.add(toppingsGroup);
-    layers.push(toppingsGroup);
-
-    camera.position.z = 10;
-    camera.position.y = 2;
-
-    // Interaction
-    const heroVisual = document.querySelector('.exploded-view-container') || container;
-    
-    heroVisual.addEventListener('pointerenter', () => {
-        isHovered = true;
-        const labelsContainer = document.getElementById('layer-labels');
-        if (labelsContainer) labelsContainer.classList.add('visible');
-    });
-    
-    heroVisual.addEventListener('pointerleave', () => {
-        isHovered = false;
-        const labelsContainer = document.getElementById('layer-labels');
-        if (labelsContainer) labelsContainer.classList.remove('visible');
-    });
-
-    // Helper to map 3D position to 2D screen coordinates
-    function updateLabelPosition(object, labelElement) {
-        if (!labelElement) return;
-        
-        // Get world position of the layer
-        const vector = new THREE.Vector3();
-        object.getWorldPosition(vector);
-        
-        // Project to 2D
-        vector.project(camera);
-        
-        // Convert to CSS coordinates relative to the container
-        const widthHalf = container.clientWidth / 2;
-        const heightHalf = container.clientHeight / 2;
-        
-        const x = (vector.x * widthHalf) + widthHalf;
-        const y = -(vector.y * heightHalf) + heightHalf;
-        
-        // Offset label to the right of the layer
-        labelElement.style.left = `${x + 120}px`;
-        labelElement.style.top = `${y}px`;
+    function buildProceduralFallback() {
+        console.warn('[pizjo] GLTF load failed – using procedural fallback pizza.');
+        const layers = [];
+        const layerDefs = [
+            { name: 'crust', r: 3.2, h: 0.3, y: 0.0, color: 0xd2b48c, rough: 0.8 },
+            { name: 'sauce', r: 3.0, h: 0.1, y: 0.2, color: 0xd32f2f, rough: 0.4 },
+            { name: 'cheese', r: 2.9, h: 0.1, y: 0.3, color: 0xffe082, rough: 0.3 },
+        ];
+        layerDefs.forEach((l) => {
+            const mesh = new THREE.Mesh(
+                new THREE.CylinderGeometry(l.r, l.r, l.h, 48),
+                new THREE.MeshStandardMaterial({ color: l.color, roughness: l.rough })
+            );
+            mesh.position.y = l.y;
+            pizza.add(mesh);
+            layers.push(mesh);
+        });
+        const pepGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.06, 16);
+        const pepMat = new THREE.MeshStandardMaterial({ color: 0xb71c1c, roughness: 0.5 });
+        for (let i = 0; i < 12; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const radius = Math.random() * 2.2;
+            const pep = new THREE.Mesh(pepGeo, pepMat);
+            pep.position.set(Math.cos(angle) * radius, 0.4, Math.sin(angle) * radius);
+            pizza.add(pep);
+            layers.push(pep);
+        }
+        return { layers, exploded: 1.2, spin: 0.3 };
     }
 
-    // Animation Loop
+    const draco = new DRACOLoader();
+    draco.setDecoderPath(DRACO_DECODER_PATH);
+    const loader = new GLTFLoader();
+    loader.setDRACOLoader(draco);
+
+    // Telemetry hooks (PR-7): allow runtime perf tracking without forcing
+    // a dependency on the telemetry module.
+    const telemetry = (typeof window !== 'undefined' && window.PizjoTelemetry) || null;
+    const t0 = (performance && performance.now) ? performance.now() : Date.now();
+
+    loader.load(
+        GLB_URL,
+        (gltf) => {
+            const model = gltf.scene;
+            model.scale.setScalar(3.6);
+            model.position.y = -0.15;
+            model.rotation.y = Math.PI * 0.25;
+            pizza.add(model);
+            if (poster) poster.classList.add('hero-poster-fade');
+            const dt = ((performance && performance.now) ? performance.now() : Date.now()) - t0;
+            if (telemetry && telemetry.track) telemetry.track('hero_glb_loaded', { ms: Math.round(dt) });
+        },
+        undefined,
+        (err) => {
+            console.warn('[pizjo] GLTF load failed – using procedural fallback pizza.', err);
+            fallback = buildProceduralFallback();
+            // Keep the LQIP poster visible: failed 3D shouldn't strand a blank box.
+            // Telemetry: notify so a reviewer can see the regression in dashboards.
+            if (telemetry && telemetry.track) telemetry.track('hero_glb_failed', { url: GLB_URL });
+        }
+    );
+
+    // Simple hover explode on the whole pizza group (labels optional)
+    const heroVisual = document.querySelector('.hero-visual-box') || container;
+    let exploded = false;
+    heroVisual.addEventListener('pointerenter', () => { exploded = true; });
+    heroVisual.addEventListener('pointerleave', () => { exploded = false; });
+
     const clock = new THREE.Clock();
-    let lastTime = 0;
-    
+    let last = 0;
+
     function animate() {
         requestAnimationFrame(animate);
-        
-        const elapsedTime = clock.getElapsedTime();
-        const deltaTime = elapsedTime - lastTime;
-        lastTime = elapsedTime;
+        const t = clock.getElapsedTime();
+        const dt = t - last;
+        last = t;
 
-        // Base rotation of the whole pizza
-        pizzaGroup.rotation.y += deltaTime * 0.3;
-
-        // Animate layers
-        layers.forEach(layer => {
-            const targetY = isHovered ? layer.userData.explodedY : layer.userData.defaultY;
-            // Lerp Y position
-            layer.position.y += (targetY - layer.position.y) * 0.1;
-            
-            // Sync label position
-            if (isHovered) {
-                const labelEl = document.querySelector(`.${layer.userData.labelId}`);
-                updateLabelPosition(layer, labelEl);
-            }
-        });
-
+        pizza.rotation.y += dt * 0.25; // slow base spin
+        if (fallback) {
+            const target = exploded ? 1.4 : 0;
+            pizza.children.forEach((c) => {
+                c.position.y += (c.position.y * 0 + (target * 0.6) - c.position.y) * 0.08;
+            });
+        }
+        pizza.position.y += (exploded ? 0.5 : 0) * 0.06 - pizza.position.y * 0.06;
         renderer.render(scene, camera);
     }
-    
     animate();
 
-    // Handle Resize using ResizeObserver
-    const resizeObserver = new ResizeObserver(entries => {
-        for (let entry of entries) {
-            const width = entry.contentRect.width || container.clientWidth || 300;
-            const height = entry.contentRect.height || container.clientHeight || 600;
-            
-            renderer.setSize(width, height);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-        }
+    const ro = new ResizeObserver(() => {
+        const w = container.clientWidth || 300;
+        const h = container.clientHeight || 600;
+        renderer.setSize(w, h);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
     });
-    resizeObserver.observe(container);
+    ro.observe(container);
+
+    return { scene, camera, renderer, pizza };
 }
