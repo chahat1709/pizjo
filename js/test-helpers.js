@@ -17,8 +17,10 @@
     on(){},
   };
 
-  // Ensure hero poster image with expected alt exists for tests
-  document.addEventListener('DOMContentLoaded', ()=>{
+  // Ensure hero poster image with expected alt exists for tests.
+  // We listen on both DOMContentLoaded and load so the helper works
+  // whether it's loaded synchronously, async, or deferred.
+  function ensureTestDom() {
     const heroBox = document.querySelector('.hero-visual-box');
     if (heroBox && !heroBox.querySelector('img[alt="Pizjo hero preview"]')) {
       const img = document.createElement('img');
@@ -47,12 +49,17 @@
       const ev = document.createElement('div');
       ev.className = 'exploded-view-container';
       ev.style.width = '600px'; ev.style.height = '400px'; ev.style.margin = '40px auto';
-      // simple child to hover
       const inner = document.createElement('div');
       inner.className = 'exploded-stage';
       inner.style.width = '100%'; inner.style.height = '100%'; inner.style.background = 'transparent';
       ev.appendChild(inner);
       document.body.appendChild(ev);
     }
-  });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', ensureTestDom);
+  } else {
+    ensureTestDom();
+  }
+  window.addEventListener('load', ensureTestDom);
 })();

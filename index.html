@@ -293,9 +293,18 @@
       on a staging hostname; we check both. (PR-2 hardening.)
     -->
     <script>
+      /*
+        Test helpers opt-in gate (PR-2 hardening).
+        Loads js/test-helpers.js only on:
+          - localhost / 127.0.0.1 / *.local (local dev)
+          - hosts containing "staging" or "-pr-" (preview deploys)
+          - URL with ?test=1 query param (explicit)
+        Production users never download this script.
+      */
       (function () {
         var host = location.hostname;
-        var isLocal = host === 'localhost' || host === '127.0.0.1' || host.endsWith('.local');
+        var isLocal = host === 'localhost' || host === '127.0.0.1' ||
+                      host === '::1' || host.endsWith('.local');
         var isStaging = host.indexOf('staging') !== -1 || host.indexOf('-pr-') !== -1;
         var optIn = /[?&]test=1\b/.test(location.search);
         if (isLocal || isStaging || optIn) {
