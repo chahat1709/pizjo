@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "blender": {
+      "command": "mcp-blender",
+      "args": ["--port", "9876"]
+    }
+  }
+}

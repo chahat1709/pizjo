@@ -4,13 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test"
+    "test": "playwright test",
+    "build:vendor": "node tools/asset-build/build-vendor.js",
+    "build:draco": "node tools/asset-build/build-draco.js",
+    "build:assets": "npm run build:draco && npm run build:vendor"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.61.1",
-    "playwright": "^1.61.1"
+    "esbuild": "^0.28.2",
+    "playwright": "^1.61.1",
+    "three": "^0.158.0"
   }
 }

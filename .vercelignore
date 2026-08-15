@@ -1,0 +1,16 @@
+node_modules
+.venv
+.git
+.playwright
+test-results
+playwright-report
+.lighthouseci
+.vscode
+.agents
+.gemini
+docs
+tools
+assets/source
+assets/verification
+skills-lock.json
+PROJ_V1_AUDIT.md
