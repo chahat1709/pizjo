@@ -3,35 +3,36 @@
    Grunge Aesthetic, Hard Shadows, Neon Accents
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap');
 
 :root {
     /* ── 1. Color Palette ── */
     --amber-neon: #FFBF00;
     --umber-raw: #3E2723;
     --off-white: #F5F2EB;
-    
+
     /* Backgrounds */
     --color-bg: var(--off-white);
     --color-surface: var(--off-white);
     --color-surface-hover: rgba(255, 191, 0, 0.2);
-    
+
     /* Accents */
     --color-primary: var(--amber-neon);
     --color-primary-dark: #E5AB00;
     --color-primary-light: #FFCF33;
-    
+
     /* Text */
     --color-text: var(--umber-raw);
     --color-text-secondary: #4A3B2C;
     --color-text-muted: rgba(62, 39, 35, 0.6);
-    --color-text-inverse: var(--umber-raw); /* Grunge style uses dark text on neon */
-    
+    --color-text-inverse: var(--umber-raw);
+    /* Grunge style uses dark text on neon */
+
     /* Semantic / Highlights */
     --color-veg: #0F8A65;
     --color-border: var(--umber-raw);
     --color-whatsapp: #25D366;
-    
+
     /* Additional Colors */
     --color-brand-blue: var(--umber-raw);
     --color-brand-orange: var(--amber-neon);
@@ -41,7 +42,7 @@
     --font-body: 'Hanken Grotesk', sans-serif;
     --font-marker: 'Permanent Marker', cursive;
     --font-scribble: 'Caveat', cursive;
-    
+
     /* Scale (Perfect Fourth) */
     --text-xs: 0.75rem;
     --text-sm: 0.875rem;
@@ -54,9 +55,10 @@
     --text-5xl: 4.209rem;
     --text-6xl: 5.61rem;
     --text-7xl: 7.478rem;
-    
+
     /* Line Heights */
-    --leading-tight: 0.9; /* Tighter for display text */
+    --leading-tight: 0.9;
+    /* Tighter for display text */
     --leading-normal: 1.5;
     --leading-relaxed: 1.6;
 
@@ -74,7 +76,8 @@
 
     /* ── 4. Architecture ── */
     --nav-height: 80px;
-    --radius-sm: 0px; /* Grunge is sharp */
+    --radius-sm: 0px;
+    /* Grunge is sharp */
     --radius-md: 0px;
     --radius-lg: 0px;
     --radius-xl: 0px;
@@ -87,14 +90,15 @@
     /* ── 5. Motion (12 Principles) ── */
     /* timing-under-300ms */
     --duration-fast: 150ms;
-    --duration-normal: 250ms; /* Under 300ms */
+    --duration-normal: 250ms;
+    /* Under 300ms */
     --duration-slow: 300ms;
-    
+
     /* easing-entrance-ease-out */
     --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
     /* easing-exit-ease-in */
     --ease-in: cubic-bezier(0.4, 0.0, 1, 1);
-    
+
     /* physics-active-state */
     --squish-scale: 0.98;
 
@@ -110,9 +114,47 @@ html {
     scroll-behavior: smooth;
     background-color: var(--color-bg);
     color: var(--color-text);
+    overflow-x: clip;
 }
 
 ::selection {
     background: var(--amber-neon);
     color: var(--umber-raw);
+}
+
+/* ── 6. Mobile Type Scale (≤768px) ──
+   The desktop scale is huge (up to 120px). On phones it breaks
+   every layout. We scale the whole type ramp down so the same
+   grunge design fits small screens. All components use these
+   tokens, so this cascades everywhere automatically. */
+@media (max-width: 768px) {
+    :root {
+        --text-xs: 0.7rem;
+        --text-sm: 0.8rem;
+        --text-base: 0.95rem;
+        --text-lg: 1.05rem;
+        --text-xl: 1.2rem;
+        --text-2xl: 1.5rem;
+        --text-3xl: 1.9rem;
+        --text-4xl: 2.4rem;
+        --text-5xl: 3rem;
+        --text-6xl: 3.6rem;
+        --text-7xl: 4.5rem;
+        --nav-height: 64px;
+        --space-4xl: 64px;
+        --space-5xl: 80px;
+        --space-6xl: 120px;
+    }
+}
+
+/* ── 7. Small Phone Type Scale (≤480px) ── */
+@media (max-width: 480px) {
+    :root {
+        --text-3xl: 1.7rem;
+        --text-4xl: 2.1rem;
+        --text-5xl: 2.6rem;
+        --text-6xl: 3.1rem;
+        --text-7xl: 3.8rem;
+        --nav-height: 60px;
+    }
 }

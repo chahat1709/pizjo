@@ -98,3 +98,5 @@ skills-lock.json
 
 # Local notes — kept on disk, not pushed
 PROJ_V1_AUDIT.md
+
+.vercel

@@ -24,11 +24,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="css/tokens.css?v=3">
-    <link rel="stylesheet" href="css/global.css?v=3">
-    <link rel="stylesheet" href="css/home.css?v=3">
+    <link rel="stylesheet" href="css/tokens.css?v=5">
+    <link rel="stylesheet" href="css/global.css?v=5">
+    <link rel="stylesheet" href="css/home.css?v=5">
 </head>
 
 <body class="bg-off-white text-umber-raw antialiased relative min-h-screen overflow-x-hidden">
@@ -134,10 +134,8 @@
 
                 <div class="hero-visual animate-on-scroll">
                     <div class="hero-visual-box">
-                        <!-- Animated Pizza Image (LQIP poster while 3D loads) -->
-                        <img src="assets/pizza_hero.png" alt="Delicious Pizza" class="hero-pizza-img" id="hero-poster">
-                        <!-- Three.js GLTF pizza mounts here (Blender MCP asset) -->
-                        <div id="three-canvas-container" aria-label="3D pizza model"></div>
+                        <!-- Static Pizza Image -->
+                        <img src="assets/pizza_hero.png" alt="Delicious Pizza" class="hero-pizza-img">
                     </div>
                     <div class="badge"
                         style="position: absolute; bottom: -20px; right: -20px; font-size: var(--text-2xl); transform: rotate(-10deg);">
@@ -320,13 +318,6 @@
       No runtime CDN dependency. The bundle includes three core + GLTF/DRACO loaders.
       If you change three version or add addons, re-run the build.
     -->
-    <script type="importmap">
-    {
-      "imports": {
-        "three": "./assets/dist/vendor/three-bundle.js"
-      }
-    }
-    </script>
     <script type="module" src="js/app.js?v=10"></script>
 </body>
 

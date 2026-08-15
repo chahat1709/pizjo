@@ -17,13 +17,15 @@ Key new sections (high level):
 
 -------------------------
 ASSET PIPELINE (must-have)
-- Details: Build step converts artist exports into production assets:
-	- Export GLTF/GLB from artist tool (subfolders: hero, parts, LODs).
+- Source: Blender MCP pipeline (blender.org/lab/mcp-server or `mcp-blender`, 218 tools). Model the pizza in Blender, driven via MCP from the agent, with the self-refinement loop: `render_multi_angle` → `analyze_viewport` → `refine_iteration` until geometry converges on the target prompt.
+- Materials: PBR metalness/roughness authored in Blender (SSS map for cheese, normal maps for crust, anisotropic highlights on sauce). Use Poly Haven HDRIs (free, no API key) for studio-lit IBL environments, tune exposure/tone-map presets per scene.
+- Details: Build step converts Blender exports into production assets:
+	- Export GLTF/GLB from Blender via MCP (subfolders: hero, parts, LODs), one asset per exploded-view stage.
 	- Run `gltf-pipeline` + Draco quantization for geometry.
 	- Compress textures to KTX2/Basis via `toktx` (generate mipmaps).
 	- Produce 3 LODs per model (high / medium / low).
-- Deliverables: `pizjo/tools/asset-build/*` scripts and sample compressed hero assets.
-- Acceptance: hero LOD < 1.5MB, full-res model total < 6MB.
+- Deliverables: `pizjo/tools/asset-build/*` scripts, sample compressed hero assets, and `pizjo/tools/blender-mcp/*` scripts (MCP server config, model/export recipes).
+- Acceptance: hero LOD < 1.5MB, full-res model total < 6MB; Blender self-refine loop reaches `CHECK_PRODUCTION_READINESS` score ≥ 90 (manifold, clean naming, origin-aligned).
 
 HERO PRELOAD & STAGED LOADER
 - Flow: 1) LQ poster (blurred PNG) displayed immediately; 2) fetch low LOD GLTF and show assembly animation; 3) after FMP or interaction, swap to medium/high LOD; 4) defer non-critical models/particles until idle.
@@ -84,8 +86,10 @@ SUCCESS METRICS (explicit)
 - Accessibility: Lighthouse >= 90
 
 7-PR ROADMAP (iterative delivery)
-PR 1 — Asset pipeline + sample compressed hero assets (Medium effort)
-	- Add `pizjo/tools/asset-build` scripts and sample compressed GLTF/KTX2 assets. CI: artifact size checks.
+PR 1 — Blender MCP pipeline + asset build + sample compressed hero assets ✅ (implemented)
+	- `tools/blender-mcp/recipes/build_pizza.py` (pizza builder, exports hero + 4 exploded layers), `render_preview.py` (multi-angle render verify), `mcp-config.json`, README.
+	- Sample assets produced: hero 49 KB, parts 3.3/1.8/18.4/27.7 KB (all under budget 1.5 MB / 6 MB); render-verified via EEVEE; Draco compression via `tools/asset-build/build-sample.ps1`.
+	- Follow-ups: bake PBR texture maps in Blender, wire GLBs into Three.js loaders (Draco), KTX2 when toktx installed, MCP live-loop. CI: artifact size checks.
 PR 2 — Hero preload + staged loader + fallback poster (Low→Medium)
 	- Implement LQIP, LOD1 fetch, model swap, fallback static poster. Tests: Playwright poster+swap checks.
 PR 3 — PBR + PMREM IBL + postprocessing stack (Medium)
@@ -101,6 +105,7 @@ PR 7 — Telemetry, budgets, docs & handoff (Medium)
 
 FILES TO MODIFY (doc + code)
 - `pizjo/docs/improvement-plan-v2.md` — update plan (this file)
+- `pizjo/tools/blender-mcp/*` — MCP server config, Blender scene recipes, export script (GLTF per LOD/stage)
 - `pizjo/tools/asset-build/*` — scripts and README
 - `pizjo/src/preloader.js`, `pizjo/src/hero-controller.js` — preload & staged loader
 - `pizjo/src/renderer/*` — material loaders, PMREM setup, postprocessing
