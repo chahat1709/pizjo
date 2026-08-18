@@ -1,340 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 
-    <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
 
-    <title>Legal — Pizjo | Privacy & Terms</title>
-    <meta name="description" content="Pizjo's privacy policy and terms of service. Plain English. We respect your data and your dinner.">
-
-    <link rel="icon" href="../assets/pizjo_logo.webp" type="image/webp">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/tokens.css">
-    <link rel="stylesheet" href="../css/global.css">
-    <style>
-        .legal-hero {
-            padding: calc(var(--nav-height) + var(--space-4xl)) 0 var(--space-3xl);
-            background: var(--amber-neon);
-            border-bottom: 4px solid var(--umber-raw);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .legal-hero-title {
-            font-family: var(--font-marker);
-            font-size: var(--text-6xl);
-            margin-bottom: var(--space-sm);
-            color: var(--umber-raw);
-            transform: rotate(-1deg);
-        }
-        .legal-hero-subtitle {
-            font-size: var(--text-xl);
-            font-weight: 700;
-            color: var(--umber-raw);
-        }
-        .legal-wrap { max-width: 800px; margin: 0 auto; padding: var(--space-4xl) var(--space-xl); }
-        .legal-wrap h2 {
-            font-family: var(--font-display);
-            font-size: var(--text-3xl);
-            margin: var(--space-3xl) 0 var(--space-md);
-            color: var(--color-text);
-            text-transform: uppercase;
-        }
-        .legal-wrap h3 {
-            font-family: var(--font-display);
-            font-size: var(--text-xl);
-            margin: var(--space-2xl) 0 var(--space-sm);
-            color: var(--color-text);
-            text-transform: uppercase;
-        }
-        .legal-wrap p, .legal-wrap li {
-            color: var(--color-text-secondary);
-            line-height: var(--leading-relaxed);
-            margin-bottom: var(--space-md);
-            font-weight: 500;
-            font-size: var(--text-lg);
-        }
-        .legal-wrap ul { padding-left: var(--space-xl); list-style: disc; margin-bottom: var(--space-lg); }
-        .legal-wrap a { color: var(--umber-raw); text-decoration: underline; font-weight: 700; text-decoration-thickness: 2px; }
-        .legal-wrap a:hover { color: var(--amber-neon); background: var(--umber-raw); }
-        .updated {
-            display: inline-block;
-            background: var(--off-white);
-            border: 3px solid var(--umber-raw);
-            padding: var(--space-xs) var(--space-md);
-            font-family: var(--font-marker);
-            font-size: var(--text-lg);
-            color: var(--umber-raw);
-            margin-top: var(--space-md);
-            transform: rotate(2deg);
-            box-shadow: var(--shadow-grunge);
-        }
-        .toc {
-            background: var(--off-white);
-            border: 4px solid var(--umber-raw);
-            box-shadow: var(--shadow-grunge-lg);
-            padding: var(--space-xl);
-            margin: var(--space-xl) 0 var(--space-4xl);
-        }
-        .toc strong { display: block; margin-bottom: var(--space-md); font-family: var(--font-display); font-size: var(--text-xl); text-transform: uppercase; }
-        .toc a { display: block; padding: var(--space-xs) 0; font-family: var(--font-body); text-decoration: none; font-weight: 700; }
-        .toc a:hover { color: var(--amber-neon); text-decoration: underline; background: transparent;}
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            margin-top: var(--space-3xl);
-            padding: var(--space-sm) var(--space-lg);
-            background: var(--off-white);
-            border: 3px solid var(--umber-raw);
-            color: var(--umber-raw);
-            font-family: var(--font-display);
-            font-weight: 900;
-            text-transform: uppercase;
-            text-decoration: none !important;
-            box-shadow: var(--shadow-grunge);
-            transition: transform var(--duration-fast);
-        }
-        .back-link:hover { box-shadow: var(--shadow-grunge-hover); transform: translate(2px, 2px); color: var(--umber-raw); background: var(--off-white); }
-        hr {
-            border: 0;
-            border-top: 4px dashed var(--umber-raw);
-            margin: var(--space-4xl) 0;
-        }
-    </style>
-</head>
-<body class="bg-off-white text-umber-raw antialiased relative min-h-screen overflow-x-hidden">
-
-    <!-- Nav -->
-    <nav class="navbar" role="navigation" aria-label="Primary">
-        <div class="container nav-container">
-            <a href="../" class="nav-brand" aria-label="Pizjo home">
-                <img src="../assets/pizjo_logo.webp" alt="Pizjo Logo" class="brand-logo">
-                <span class="brand-text">PIZJO!</span>
-            </a>
-            <div class="nav-links">
-                <a href="../index.html#menu" class="nav-link">Menu</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </div>
-            <div class="nav-actions">
-                <button class="cart-toggle" id="cart-toggle" aria-label="Open cart">
-                    CART
-                    <div class="cart-icon-wrapper">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <circle cx="9" cy="21" r="1"></circle>
-                            <circle cx="20" cy="21" r="1"></circle>
-                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                        </svg>
-                        <span class="cart-badge" id="cart-count">0</span>
-                    </div>
-                </button>
-            </div>
+  <title>Legal & Privacy - Pizjo Pizza</title>
+<body>
+  <header class="legal-header">
+    <div class="container">
+      <nav class="legal-nav">
+        <a href="../" class="logo">Pizjo 🍕</a>
+        <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="nav-links">
+          <a href="../" class="nav-link">Home</a>
+          <a href="../#about" class="nav-link">About</a>
+          <a href="../#contact" class="nav-link">Contact</a>
+          <a href="legal.html" class="nav-link active">Legal</a>
         </div>
-    </nav>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Sliding cart -->
-    <div class="cart-overlay" id="cart-overlay" hidden></div>
-    <aside class="cart-sidebar" id="cart-sidebar" aria-label="Shopping cart" aria-hidden="true">
-        <div class="cart-header">
-            <h2>Your Stash</h2>
-            <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
+  <main class="legal-main">
+    <section id="privacy" class="section">
+      <div class="container">
+        <h1>Privacy Policy</h1>
+
+        <div class="legal-content">
+          <h2>1. Data Collection</h2>
+          <p>Pizjo Pizza collects the following data to provide and improve our services:</p>
+          <ul>
+            <li><strong>Cart items</strong> (product names, prices, quantities)</li>
+            <li><strong>Performance metrics</strong> (FPS data for website optimization)</li>
+            <li><strong>Contact form submissions</strong> (name, email, phone, message)</li>
+          </ul>
+
+          <h2>2. How We Use Your Data</h2>
+          <p>Collected data is used to:</p>
+          <ul>
+            <li>Process your pizza orders via WhatsApp</li>
+            <li>Improve website performance and user experience</li>
+            <li>Understand customer preferences and menu popularity</li>
+            <li>Communicate with you about your orders and promotions</li>
+            <li>Provide customer support</li>
+          </ul>
+
+          <h2>3. Data Storage & Retention</h2>
+          <p>Your data is stored in the following ways:</p>
+          <ul>
+            <li><strong>Cart data</strong>: Stored locally in your browser using <code>localStorage</code> (cleared when you clear browser data)</li>
+            <li><strong>Contact form data</strong>: Sent to our email via form submission (not stored on our servers)</li>
+            <li><strong>Telemetry data</strong>: Sent to our analytics endpoint only if you opt-in (staging only)</li>
+          </ul>
+          <p><strong>Note:</strong> No personal data is stored on our servers. Cart data is browser-only and temporary.</p>
+
+          <h2>4. Data Sharing & Third Parties</h2>
+          <p>We share your data with:</p>
+          <ul>
+            <li><strong>WhatsApp</strong>: Your order details are sent to our business WhatsApp account for order processing</li>
+            <li><strong>Unsplash</strong>: Pizza images are loaded from Unsplash CDN</li>
+            <li><strong>Google Fonts</strong>: Fonts are loaded from Google Fonts CDN</li>
+          </ul>
+          <p><strong>No data</strong> is sold or shared with third parties for marketing purposes.</p>
+
+          <h2>5. Telemetry & Analytics</h2>
+          <div class="telemetry-section">
+            <p><strong>Analytics Status:</strong> <span id="telemetry-status">Loading...</span></p>
+            <p id="telemetry-description">
+              Analytics are currently in staging mode. When enabled, we collect:
+            </p>
+            <ul id="telemetry-data-list">
+              <li>FPS performance metrics</li>
+              <li>Page load times</li>
+              <li>Navigation patterns</li>
+            </ul>
+            <p id="telemetry-consent-info">
+              You can enable or disable analytics at any time using the controls below.
+            </p>
+            <div class="telemetry-controls">
+              <button id="enable-telemetry" class="btn btn-primary">Enable Analytics</button>
+              <button id="disable-telemetry" class="btn btn-secondary">Disable Analytics</button>
+              <button id="check-telemetry" class="btn btn-info">Check Status</button>
+            </div>
+            <p class="telemetry-note">
+              <strong>Note:</strong> Analytics are staging-only and do not collect data in production.
+            </p>
+          </div>
+
+          <h2>6. Your Rights & Choices</h2>
+          <p>You have the following rights regarding your data:</p>
+          <ul>
+            <li><strong>Opt-out of analytics:</strong> You can disable telemetry collection at any time</li>
+            <li><strong>Delete your data:</strong> Clear your browser's localStorage to remove cart data</li>
+            <li><strong>No tracking cookies:</strong> We do not use tracking cookies</li>
+            <li><strong>No mandatory data collection:</strong> You can browse our menu without storing cart data</li>
+          </ul>
+
+          <h2>7. Children's Privacy</h2>
+          <p>Our services are not directed to individuals under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe we have collected information about a child under 13, please contact us immediately.</p>
+
+          <h2>8. Security Measures</h2>
+          <p>We implement the following security measures:</p>
+          <ul>
+            <li><strong>XSS Prevention:</strong> All user-generated content is escaped before rendering</li>
+            <li><strong>Rate Limiting:</strong> Prevents abuse of our order system</li>
+            <li><strong>Same-Origin Policy:</strong> Service worker only handles requests from our domain</li>
+            <li><strong>Input Validation:</strong> All form inputs are validated before processing</li>
+            <li><strong>HTTPS:</strong> All connections use HTTPS encryption</li>
+          </ul>
+
+          <h2>9. Changes to This Policy</h2>
+          <p>We may update this Privacy Policy periodically. We will notify you of any changes by posting the new Privacy Policy on this page. We will take reasonable steps to let you know when changes are made, such as sending an email notification or posting a notice on our website.</p>
+          <p><strong>Last Updated:</strong> August 16, 2026</p>
         </div>
-        <div class="cart-items" id="cart-items"></div>
-        <div class="cart-footer">
-            <div class="cart-total-row"><span>Total</span><span id="cart-total">₹0</span></div>
-            <button class="btn cart-checkout-btn" id="checkout-btn">
-                Order on WhatsApp
-            </button>
+      </div>
+    </section>
+
+    <section id="terms" class="section">
+      <div class="container">
+        <h2>Terms of Service</h2>
+
+        <div class="legal-content">
+          <h3>1. Order Acceptance</h3>
+          <p>By placing an order through Pizjo Pizza, you agree to:</p>
+          <ul>
+            <li>Provide accurate order information</li>
+            <li>Accept responsibility for order accuracy</li>
+            <li>Follow our menu pricing and availability</li>
+          </ul>
+
+          <h3>2. Delivery & Pickup</h3>
+          <p>Please note:</p>
+          <ul>
+            <li>Delivery times are estimates only</li>
+            <li>We reserve the right to modify or cancel orders</li>
+            <li>Prices are subject to change without notice</li>
+          </ul>
+
+          <h3>3. Payment</h3>
+          <p>Orders are placed via WhatsApp and payment is handled directly with our delivery partners. We accept cash on delivery and digital payments as arranged through WhatsApp.</p>
+
+          <h3>4. Liability</h3>
+          <p>Pizjo Pizza is not responsible for:</p>
+          <ul>
+            <li>Delivery delays or issues</li>
+            <li>Incorrect order fulfillment</li>
+            <li>Payment processing issues</li>
+            <li>Allergies or dietary restrictions</li>
+          </ul>
+          <p><strong>Important:</strong> Please inform us of any food allergies or dietary restrictions when placing your order.</p>
+
+          <h3>5. Intellectual Property</h3>
+          <p>All menu items, branding, and website content are the property of Pizjo Pizza and may not be reproduced without permission.</p>
+
+          <h3>6. Governing Law</h3>
+          <p>These terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions.</p>
+
+          <h3>7. Contact Information</h3>
+          <p>For questions about this Privacy Policy or our Terms of Service, please contact us through our contact form on the website.</p>
         </div>
-    </aside>
+      </div>
+    </section>
 
-    <main id="main">
-        <section class="legal-hero animate-on-scroll">
-            <div class="container">
-                <nav class="breadcrumb" aria-label="Breadcrumb" style="margin-bottom: var(--space-md);">
-                    <a href="../index.html">Home</a>
-                    <span class="breadcrumb-sep">/</span>
-                    <span class="breadcrumb-current">Legal</span>
-                </nav>
-                <h1 class="legal-hero-title">Privacy & Terms</h1>
-                <p class="legal-hero-subtitle">Plain English. No fine print. Just the honest version.</p>
-                <div class="updated">Last updated: November 2025</div>
-            </div>
-        </section>
+    <section id="cookies" class="section">
+      <div class="container">
+        <h2>Cookie Policy</h2>
 
-        <section class="legal-wrap animate-on-scroll">
+        <div class="legal-content">
+          <p><strong>Note:</strong> This website uses minimal localStorage for cart functionality only. No tracking cookies are used.</p>
 
-            <div class="toc">
-                <strong>On this page</strong>
-                <a href="#privacy">1. Privacy Policy</a>
-                <a href="#data">2. What we collect</a>
-                <a href="#cookies">3. Cookies & local storage</a>
-                <a href="#third">4. Third parties</a>
-                <a href="#contact-privacy">5. Contact us about privacy</a>
-                <a href="#terms">6. Terms of Service</a>
-                <a href="#ip">7. Intellectual property</a>
-                <a href="#liability">8. Liability</a>
-                <a href="#changes">9. Changes to this page</a>
-            </div>
+          <h3>What We Store Locally:</h3>
+          <ul>
+            <li><code>pizjo.cart.v1</code> - Your shopping cart items (product names, prices, quantities)</li>
+            <li><code>pizjoTelemetryConsent</code> - Your telemetry preference (opt-in/opt-out)</li>
+          </ul>
 
-            <h2 id="privacy">1. Privacy Policy</h2>
-            <p>
-                Pizjo runs this website (pizjo.in) so people can look at our menu, find our store,
-                and order pizza. We collect the absolute minimum data needed to do that well.
-                This page explains exactly what we collect, why, and what we will never do with it.
-            </p>
+          <h3>Why We Store This Data:</h3>
+          <ul>
+            <li>Cart persistence across page refreshes</li>
+            <li>Analytics consent management</li>
+          </ul>
 
-            <h3 id="data">2. What we collect</h3>
-            <ul>
-                <li>
-                    <strong>Order enquiries (if you submit the contact form).</strong>
-                    Your name, phone number, optional email, and your message.
-                    We use this only to reply to you about your enquiry. We do not add you to marketing lists,
-                    and we do not sell or share your details with anyone.
-                </li>
-                <li>
-                    <strong>Order contents from your cart.</strong>
-                    Stored only in your own browser (see cookies below). We do not transmit
-                    your cart contents to our servers until you hit "Order on WhatsApp" — at which point
-                    you are forwarded to WhatsApp to talk to us directly. We never see that as a server-side order,
-                    it lives entirely in your browser.
-                </li>
-                <li>
-                    <strong>Server logs.</strong>
-                    Like every website, our hosting provider records your IP address,
-                    the page you visited, and the time. We use this only to debug problems and prevent abuse.
-                    Logs are kept for at most 90 days.
-                </li>
-            </ul>
-
-            <h3 id="cookies">3. Cookies & local storage</h3>
-            <p>
-                We use one piece of browser storage: your <strong>cart contents</strong>.
-                It stays in your browser's <code>localStorage</code> and is not a cookie.
-                Nothing tracking, advertising, or analytics-based is set by this site.
-                No Facebook pixel, no Google Analytics, no third-party trackers.
-                Your cart stays on your device; if you clear your browser data it disappears.
-            </p>
-
-            <h3 id="third">4. Third parties</h3>
-            <p>
-                A few things on this site are loaded from elsewhere. Those services may
-                collect their own data according to their own privacy policies:
-            </p>
-            <ul>
-                <li>
-                    <strong>WhatsApp (Meta Platforms Ireland Ltd).</strong>
-                    When you click "Order on WhatsApp" you are redirected to whatsapp.com
-                    or wa.me, governed by <a href="https://www.whatsapp.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">WhatsApp's privacy policy</a>.
-                    We only pre-fill the message; we do not send anything to WhatsApp directly.
-                </li>
-                <li>
-                    <strong>Google Maps.</strong>
-                    Embedded on the About and Contact pages to show our shop location.
-                    Google may set cookies when you load those pages, governed by
-                    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's privacy policy</a>.
-                </li>
-                <li>
-                    <strong>Google Fonts.</strong>
-                    We load web fonts from fonts.googleapis.com so the typography looks
-                    consistent across browsers. Google may log the request.
-                </li>
-            </ul>
-            <p>
-                We do not embed social-login, ad networks, or analytics on this site.
-                Pizjo's Instagram, Facebook, and Zomato pages are linked but not embedded —
-                clicking those links sends you to the respective platform.
-            </p>
-
-            <h3 id="contact-privacy">5. Contact us about privacy</h3>
-            <p>
-                If you have a question about your data, want to correct what you submitted,
-                or want your contact-form entry deleted, write to us:
-            </p>
-            <ul>
-                <li>Email: <a href="mailto:info@pizjo.in">info@pizjo.in</a></li>
-                <li>WhatsApp: <a href="https://wa.me/919265370588" target="_blank" rel="noopener noreferrer">+91 92653 70588</a></li>
-                <li>Visit: Shop 01, Ground Floor, Raj Complex, Near Metro Pillar 87, Vastral Road, Amraiwadi, Ahmedabad 382418</li>
-            </ul>
-            <p>We answer within 7 working days.</p>
-
-            <hr>
-
-            <h2 id="terms">6. Terms of Service</h2>
-            <p>
-                By using this website you agree to these simple terms. They're short on
-                purpose — restaurants and lawyers don't need to make these things complicated.
-            </p>
-            <ul>
-                <li>This site is for browsing Pizjo's menu and contacting us. Don't use it to spam our contact form, scrape our menu, or disrupt the service.</li>
-                <li>Menu items and prices shown here are the ones we usually offer. Final price is always confirmed by the Pizjo team on WhatsApp before we cook anything.</li>
-                <li>We try to keep this site online, fast, and correct, but we can't guarantee zero downtime. Use it as-is, at your own risk.</li>
-                <li>Food-safety and consumer-protection concerns are governed by Indian law (Food Safety and Standards Act, 2006; Information Technology Act, 2000; Consumer Protection Act, 2019).</li>
-                <li>If something goes wrong with your order, contact us within 24 hours on +91 92653 70588 and we'll make it right.</li>
-            </ul>
-
-            <h3 id="ip">7. Intellectual property</h3>
-            <p>
-                The Pizjo brand, name, logo, mascot artwork (the "FOOD KART" character
-                or similar), and all images of our food and store are owned by Pizjo
-                (Amraiwadi, Ahmedabad). You may not copy or reuse them without our written permission.
-            </p>
-            <p>
-                The <strong>website code, design system, and 3D / animated mascot</strong>
-                are developed by an independent developer (the "builder") and licensed to
-                Pizjo for use on this site only, subject to written agreement between
-                Pizjo and the builder. The builder retains ownership of the code,
-                design tokens, and reusable component patterns, and may use them in
-                other client work.
-            </p>
-
-            <h3 id="liability">8. Liability</h3>
-            <p>
-                We do our best to keep this site correct, secure, and respectful of
-                your privacy. To the maximum extent permitted by Indian law, we are
-                not liable for indirect, incidental, or consequential losses arising
-                from use of this site. Maximum aggregate liability for direct claims
-                related to this site is limited to one Indian rupee (₹1), unless
-                and except a written agreement with Pizjo provides otherwise.
-            </p>
-
-            <h3 id="changes">9. Changes to this page</h3>
-            <p>
-                We may update this page from time to time. The "last updated" date
-                at the top will always reflect the current version. Material changes
-                affecting your rights will be announced on this page; we don't email
-                you about policy edits.
-            </p>
-
-            <a href="../index.html" class="back-link">← Back to Pizjo Home</a>
-
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container footer-grid animate-on-scroll">
-            <div class="footer-brand">
-                PIZJO!
-            </div>
-            <div class="footer-links">
-                <a href="legal.html#privacy">Privacy Policy</a>
-                <a href="legal.html#terms">Terms of Service</a>
-                <a href="contact.html">Contact Us</a>
-                <a href="https://wa.me/919265370588">WhatsApp</a>
-            </div>
-            <div class="footer-bottom">
-                © 2025 Pizjo. Stay Cheese-Obsessed.
-            </div>
+          <h3>How to Clear This Data:</h3>
+          <ul>
+            <li>Clear your browser's localStorage</li>
+            <li>Use your browser's "Clear site data" feature</li>
+          </ul>
         </div>
-    </footer>
+      </div>
+    </section>
+  </main>
 
-    <script src="../js/security.js?v=4"></script>
-    <script type="module" src="../js/app.js?v=7"></script>
+  <footer class="legal-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Pizjo Pizza</h3>
+          <p>Fresh, delicious pizza delivered to your door</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="../#about">About Us</a></li>
+            <li><a href="../#contact">Contact</a></li>
+            <li><a href="legal.html#privacy">Privacy Policy</a></li>
+            <li><a href="legal.html#terms">Terms of Service</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <p>📞 WhatsApp: +91 92653 70588</p>
+          <p>✉️ Email: hello@pizjo.in</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Pizjo Pizza. All rights reserved.</p>
+        <p><small>Last updated: August 16, 2026</small></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+  <script>
+    // Initialize telemetry status on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const telemetryStatus = document.getElementById('telemetry-status');
+      const telemetryDescription = document.getElementById('telemetry-description');
+      const telemetryDataList = document.getElementById('telemetry-data-list');
+      const telemetryConsentInfo = document.getElementById('telemetry-consent-info');
+
+      // Check telemetry status
+      if (typeof PizjoTelemetry !== 'undefined') {
+        const isEnabled = PizjoTelemetry.hasConsent();
+        telemetryStatus.textContent = isEnabled ? 'Enabled ✅' : 'Disabled ❌';
+        telemetryStatus.style.color = isEnabled ? '#10b981' : '#ef4444';
+
+        if (isEnabled) {
+          telemetryDescription.textContent = 'Analytics are currently enabled. We collect:';
+          telemetryConsentInfo.textContent = 'You can disable analytics at any time using the button below.';
+        } else {
+          telemetryDescription.textContent = 'Analytics are currently disabled. No data is being collected.';
+          telemetryConsentInfo.textContent = 'Enable analytics to help us improve the website (optional).';
+        }
+      } else {
+        telemetryStatus.textContent = 'Not Available';
+        telemetryDescription.textContent = 'Telemetry API not loaded (staging only).';
+        telemetryDataList.style.display = 'none';
+      }
+
+      // Set up telemetry control buttons
+      document.getElementById('enable-telemetry')?.addEventListener('click', function() {
+        if (typeof PizjoTelemetry !== 'undefined') {
+          PizjoTelemetry.enable();
+          alert('Analytics enabled! Thank you for helping improve Pizjo Pizza.');
+          location.reload();
+        } else {
+          alert('Telemetry feature is staging-only and not available in production.');
+        }
+      });
+
+      document.getElementById('disable-telemetry')?.addEventListener('click', function() {
+        if (typeof PizjoTelemetry !== 'undefined') {
+          PizjoTelemetry.disable();
+          alert('Analytics disabled. Your privacy is important to us.');
+          location.reload();
+        } else {
+          alert('Telemetry feature is staging-only and not available in production.');
+        }
+      });
+
+      document.getElementById('check-telemetry')?.addEventListener('click', function() {
+        if (typeof PizjoTelemetry !== 'undefined') {
+          const isEnabled = PizjoTelemetry.hasConsent();
+          alert(isEnabled
+            ? 'Analytics is currently ENABLED. You can disable it anytime.'
+            : 'Analytics is currently DISABLED. You can enable it anytime.');
+        } else {
+          alert('Telemetry feature is staging-only and not available in production.');
+        }
+      });
+
+      // Mobile menu toggle
+      const mobileToggle = document.getElementById('mobile-menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      if (mobileToggle && navLinks) {
+        mobileToggle.addEventListener('click', () => {
+          const isOpen = navLinks.classList.toggle('open');
+          mobileToggle.setAttribute('aria-expanded', isOpen);
+        });
+      }
+    });
+  </script>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919265370588?text=Hi! I'd like to place an order 🍕" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp" style="position: fixed; bottom: var(--space-xl); right: var(--space-xl); z-index: 1000; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); animation: pulse 2s infinite; text-decoration: none; transition: transform var(--duration-fast), box-shadow var(--duration-fast);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <style>
+            @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+            .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5); }
+            @media (max-width: 480px) { .whatsapp-float { bottom: var(--space-lg); right: var(--space-lg); width: 52px; height: 52px; } }
+        </style>
+    </a>
 </body>
 </html>

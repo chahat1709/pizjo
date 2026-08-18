@@ -373,19 +373,15 @@
     /* Room for image overlap */
 }
 
-/* ── Mobile Layout (≤768px) ── */
+/* ── Mobile Layout (≤768px) — side-by-side preserved ── */
 @media (max-width: 768px) {
     .hero {
         min-height: auto;
-        padding: var(--space-3xl) 0;
+        padding: var(--space-2xl) 0;
     }
 
     .hero-grid {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-3xl);
-        width: 100%;
-        margin: 0;
+        gap: var(--space-lg);
     }
 
     .hero-content {
@@ -394,69 +390,53 @@
     }
 
     .hero-eyebrow {
-        top: -24px;
-        left: 0;
-        font-size: var(--text-2xl);
-    }
-
-    .hero-title {
-        font-size: clamp(2.5rem, 8vw, var(--text-6xl));
-        line-height: 1.1;
-    }
-
-    .hero-title span {
-        display: block;
-    }
-
-    .hero-subtitle {
-        font-size: var(--text-lg);
-        max-width: 100%;
-        padding-left: var(--space-sm);
-        line-height: 1.5;
-    }
-
-    .hero-actions {
-        gap: var(--space-md);
-        margin-top: var(--space-xl);
-        flex-direction: column;
-    }
-
-    .hero-actions .btn {
-        font-size: var(--text-lg);
-        padding: var(--space-lg) var(--space-2xl);
-        width: 100%;
-    }
-
-    .hero-actions .btn:last-child {
-        transform: rotate(0deg);
-    }
-
-    /* Hero visual - square-ish aspect ratio for mobile */
-    .hero-visual {
-        flex: 1;
-        min-width: 0;
-        height: 320px;
-    }
-
-    .hero-visual-box {
-        height: 320px;
-        border-width: 6px;
-    }
-
-    .hero-pizza-img {
-        width: 120%;
-        height: 120%;
-    }
-
-    .hero .hero-visual .badge {
-        right: -12px;
-        bottom: -12px;
+        top: -20px;
+        left: -10px;
         font-size: var(--text-xl);
     }
 
-    /* Cafe section visual has a fixed inline height — override on mobile */
-    #cafe .hero-visual {
+    .hero-title {
+        font-size: clamp(1.8rem, 7vw, var(--text-4xl));
+        line-height: 1.0;
+    }
+
+    .hero-subtitle {
+        font-size: var(--text-base);
+        max-width: 100%;
+        border-left-width: 3px;
+        padding-left: var(--space-sm);
+    }
+
+    .hero-actions {
+        gap: var(--space-sm);
+        margin-top: var(--space-lg);
+    }
+
+    .hero-actions .btn:first-child {
+        font-size: var(--text-base);
+        padding: var(--space-md) var(--space-xl);
+    }
+
+    .hero-actions .btn:last-child {
+        font-size: var(--text-sm);
+        padding: var(--space-md) var(--space-lg);
+    }
+
+    .hero-visual {
+        flex: 1;
+        min-width: 0;
         height: 280px;
+    }
+
+    .hero .hero-visual .badge {
+        right: -8px;
+        bottom: -8px;
+        font-size: var(--text-base);
+    }
+
+    /* Cafe section visual */
+    #cafe .hero-visual {
+        height: 250px;
     }
 
     /* Stack trust strip */
@@ -488,30 +468,44 @@
 
 /* ── Small Phone (≤480px) ── */
 @media (max-width: 480px) {
-    .hero-eyebrow {
-        font-size: var(--text-xl);
-        top: -20px;
-    }
-
-    .hero-subtitle {
-        font-size: var(--text-base);
-        border-left-width: 3px;
-        padding-left: var(--space-xs);
-    }
-
-    .hero-actions {
+    .hero-grid {
         gap: var(--space-md);
     }
 
-    .hero-actions .btn {
+    .hero-eyebrow {
         font-size: var(--text-base);
-        padding: var(--space-md) var(--space-lg);
+        top: -16px;
+        left: -6px;
+    }
+
+    .hero-title {
+        font-size: clamp(1.5rem, 7vw, var(--text-3xl));
+    }
+
+    .hero-subtitle {
+        font-size: var(--text-sm);
+        border-left-width: 2px;
+        padding-left: var(--space-xs);
+    }
+
+    .hero-actions .btn:first-child {
+        font-size: var(--text-sm);
+        padding: var(--space-sm) var(--space-lg);
+    }
+
+    .hero-actions .btn:last-child {
+        font-size: var(--text-xs);
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .hero-visual {
+        height: 220px;
     }
 
     .hero .hero-visual .badge {
-        font-size: var(--text-xl);
-        bottom: -16px;
-        right: -16px;
+        font-size: var(--text-sm);
+        bottom: -6px;
+        right: -6px;
     }
 
     .trust-item-large {
