@@ -64,7 +64,7 @@ const FALLBACK_MENU = [
       { name: "Classic Aloo Tikki Burger", price: 70, description: "Crispy golden potato patty with house spices and mayo", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80", veg: true },
       { name: "Crispy Veg Burger", price: 80, description: "Crunchy mixed vegetable patty with lettuce and creamy mayo", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80", veg: true },
       { name: "Mix Veg Momo Burger", price: 89, description: "Special fusion burger loaded with steamed mix veg momos", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Veg Cheese Burger", price: 100, description: "Classic veg patty topped with a thick melt of Amul cheese", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80", veg: true }
+      { name: "Veg Cheese Burger", price: 100, description: "Classic veg patty topped with a thick melt of Amul cheese", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&w=600&q=80", veg: true }
     ]
   },
   {
@@ -165,7 +165,7 @@ function renderGrid() {
           </article>`
       )
       .join('');
-    
+
     // Bind scroll animations to the newly injected cards
     bindReveal();
 
@@ -253,7 +253,7 @@ function bindCart() {
   $('cart-close')?.addEventListener('click', closeCart);
   $('cart-overlay')?.addEventListener('click', closeCart);
   $('checkout-btn')?.addEventListener('click', checkout);
-  
+
   // Event Delegation for cart quantity adjustments
   $('cart-items')?.addEventListener('click', (e) => {
     const btn = e.target.closest('.qty-btn');
@@ -273,6 +273,11 @@ function bindCart() {
   });
 }
 
+// ⚠️ SECURITY: Sanitize order text to prevent injection
+function sanitizeOrderText(text) {
+  return text.replace(/[<>]/g, '').trim();
+}
+
 function checkout() {
   const items = Object.values(State.cart);
   if (!items.length) return;
@@ -287,7 +292,9 @@ function checkout() {
   });
   text += `%0a*Total: ₹${total}*%0a%0aPlease confirm.`;
 
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank', 'noopener,noreferrer');
+  // ⚠️ SECURITY: Sanitize order text
+  const safeText = sanitizeOrderText(text);
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(safeText)}`, '_blank', 'noopener,noreferrer');
 }
 
 // ── Reveal on scroll (any page) ────────────────────────────
@@ -335,9 +342,7 @@ export async function initApp(page = 'home') {
 
 // Auto-boot if loaded directly on the home page (not via import).
 if (typeof window !== 'undefined' && document.body) {
-  // Make body available immediately for paint…
   document.addEventListener('DOMContentLoaded', () => {
-    // Heuristic: home has #menu-grid; other pages shouldn't auto-init menu.
     if ($('menu-grid')) {
       initApp('home').catch((e) => console.error(e));
     } else {

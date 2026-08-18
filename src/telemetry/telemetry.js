@@ -1,11 +1,17 @@
-// Lightweight runtime telemetry hooks (staging only)
+// Lightweight runtime telemetry hooks with user consent
 (function(global){
+  // Check for user consent
+  const hasConsent = localStorage.getItem('pizjoTelemetryConsent') === 'true';
+
   const telemetry = {
-    enabled: true,
+    enabled: hasConsent, // Respect user consent
     send: (evt, data)=>{
       if (!telemetry.enabled) return;
       // staging-only: post to /__telemetry (no server in repo)
-      try { navigator.sendBeacon && navigator.sendBeacon('/__telemetry', JSON.stringify({evt, data, ts: Date.now()})); } catch(e){}
+      try {
+        navigator.sendBeacon && navigator.sendBeacon('/__telemetry',
+          JSON.stringify({evt, data, ts: Date.now()}));
+      } catch(e){ console.warn('Telemetry send failed:', e); }
     }
   };
 
@@ -22,5 +28,25 @@
     }, intervalMs);
   }
 
-  global.PizjoTelemetry = { telemetry, startFPS };
+  // Public API with consent management
+  global.PizjoTelemetry = {
+    telemetry,
+    startFPS,
+    setConsent: (consent) => {
+      telemetry.enabled = consent === true;
+      localStorage.setItem('pizjoTelemetryConsent', consent === true ? 'true' : 'false');
+      return telemetry.enabled;
+    },
+    hasConsent: () => hasConsent,
+    enable: () => {
+      telemetry.enabled = true;
+      localStorage.setItem('pizjoTelemetryConsent', 'true');
+      return true;
+    },
+    disable: () => {
+      telemetry.enabled = false;
+      localStorage.setItem('pizjoTelemetryConsent', 'false');
+      return false;
+    }
+  };
 })(window);

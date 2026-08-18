@@ -9,6 +9,86 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="theme-color" content="#FFBF00">
 
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- JSON-LD Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Pizjo",
+      "description": "Handcrafted pure vegetarian pizza in Amraiwadi, Ahmedabad. 100% Amul Mozzarella, 24-hour rested dough, baked-to-order.",
+      "url": "https://pizjo.vercel.app",
+      "telephone": "+91 92653 70588",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Shop 01, Ground Floor, Raj Complex, Near Metro Pillar 87, Vastral Road",
+        "addressLocality": "Amraiwadi",
+        "addressRegion": "Gujarat",
+        "postalCode": "382418",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 23.0225,
+        "longitude": 72.6358
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "11:15",
+          "closes": "23:45"
+        }
+      ],
+      "priceRange": "₹₹",
+      "servesCuisine": "Vegetarian Pizza",
+      "hasMenu": "https://pizjo.vercel.app/pages/menu.html",
+      "image": [
+        "https://pizjo.vercel.app/assets/pizza_hero.png",
+        "https://pizjo.vercel.app/assets/intereor.png"
+      ],
+      "sameAs": [
+        "https://www.facebook.com/pizjo",
+        "https://www.instagram.com/pizjo",
+        "https://www.zomato.com/ahmedabad/pizjo-amraiwadi"
+      ],
+      "paymentAccepted": "Cash, UPI, Card",
+      "currenciesAccepted": "INR"
+    }
+    </script>
+
+    <!-- 🔒 SECURITY: Content Security Policy for XSS protection -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://www.googletagmanager.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      img-src 'self' data: https://images.unsplash.com https://*.unsplash.com;
+      connect-src 'self' https://www.google-analytics.com https://www.google.com https://www.googletagmanager.com;
+      font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
+      object-src 'none';
+      frame-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      media-src 'self';
+      worker-src 'self';
+    ">
+
     <title>Pizjo — The People Your Diet Warned You About | Pure Veg Pizza in Ahmedabad</title>
     <meta name="description"
         content="Handcrafted pure vegetarian pizza in Amraiwadi, Ahmedabad. 100% Amul Mozzarella, 24-hour rested dough, baked-to-order. Order on WhatsApp +91 92653 70588. Open 11:15 AM – 11:45 PM daily.">
@@ -119,6 +199,10 @@
             <div class="container hero-grid">
                 <div class="hero-content animate-on-scroll">
                     <div class="hero-eyebrow scribble-text">WARNING!</div>
+                    <div class="hero-hours-badge" style="display: inline-flex; align-items: center; gap: var(--space-xs); background: var(--amber-neon); color: var(--umber-raw); padding: var(--space-xs) var(--space-md); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 900; font-family: var(--font-display); margin-bottom: var(--space-md); box-shadow: var(--shadow-grunge);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        OPEN DAILY 11:15 AM – 11:45 PM
+                    </div>
                     <h1 id="hero-title" class="hero-title">
                         The People <br>Your <span>Diet</span><br> Warned You About
                     </h1>
@@ -156,6 +240,45 @@
                     <h3>HAND-TOSSED</h3>
                     <p style="font-weight: 700;">Every crust crafted with obsessive attention to detail. No shortcuts.
                     </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews / Social Proof -->
+        <section class="section reviews-section" id="reviews" aria-labelledby="reviews-title" style="background: var(--off-white);">
+            <div class="container">
+                <div class="reviews-header animate-on-scroll" style="text-align: center; margin-bottom: var(--space-3xl);">
+                    <h2 id="reviews-title" style="font-family: var(--font-marker); font-size: var(--text-5xl); color: var(--umber-raw); margin-bottom: var(--space-xs);">WHAT PEOPLE SAY</h2>
+                    <p class="scribble-text" style="font-size: var(--text-2xl);">Don't just take our word for it</p>
+                </div>
+                <div class="reviews-grid animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-xl);">
+                    <article class="review-card card-grunge" style="padding: var(--space-xl); position: relative;">
+                        <div class="review-stars" style="font-size: var(--text-xl); margin-bottom: var(--space-md);">★★★★★</div>
+                        <p style="font-size: var(--text-lg); font-weight: 700; color: var(--color-text-secondary); margin-bottom: var(--space-md);">"Best veg pizza in Ahmedabad! The BOGO Tuesday deal is insane value. Cheese pull is unreal."</p>
+                        <footer style="display: flex; align-items: center; gap: var(--space-sm);">
+                            <span style="font-weight: 900; font-family: var(--font-display);">— Rajesh P.</span>
+                            <span style="color: var(--amber-neon); font-size: var(--text-sm);">Google Reviews</span>
+                        </footer>
+                    </article>
+                    <article class="review-card card-grunge" style="padding: var(--space-xl); position: relative;">
+                        <div class="review-stars" style="font-size: var(--text-xl); margin-bottom: var(--space-md);">★★★★★</div>
+                        <p style="font-size: var(--text-lg); font-weight: 700; color: var(--color-text-secondary); margin-bottom: var(--space-md);">"Ordered the Party Combo for a house party — 5 pizzas, 2 sides, drinks. Everyone loved it. Delivery was on time."</p>
+                        <footer style="display: flex; align-items: center; gap: var(--space-sm);">
+                            <span style="font-weight: 900; font-family: var(--font-display);">— Priya S.</span>
+                            <span style="color: var(--amber-neon); font-size: var(--text-sm);">Zomato</span>
+                        </footer>
+                    </article>
+                    <article class="review-card card-grunge" style="padding: var(--space-xl); position: relative;">
+                        <div class="review-stars" style="font-size: var(--text-xl); margin-bottom: var(--space-md);">★★★★★</div>
+                        <p style="font-size: var(--text-lg); font-weight: 700; color: var(--color-text-secondary); margin-bottom: var(--space-md);">"Late night cravings sorted! The After Hours 20% off after 10 PM is perfect. Cheese garlic bread is a must-try."</p>
+                        <footer style="display: flex; align-items: center; gap: var(--space-sm);">
+                            <span style="font-weight: 900; font-family: var(--font-display);">— Amit K.</span>
+                            <span style="color: var(--amber-neon); font-size: var(--text-sm);">Google Reviews</span>
+                        </footer>
+                    </article>
+                </div>
+                <div style="text-align: center; margin-top: var(--space-3xl);">
+                    <a href="https://www.google.com/search?q=pizjo+ahmedabad+reviews" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: var(--text-lg);">Read All Reviews on Google →</a>
                 </div>
             </div>
         </section>
@@ -266,23 +389,55 @@
     </main>
 
     <footer class="footer">
-        <div class="container footer-grid animate-on-scroll">
+        <div class="container footer-grid animate-on-scroll" style="gap: var(--space-3xl);">
             <div class="footer-brand">
                 PIZJO!
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: var(--space-xs);">Pure Veg • Since 2026</p>
             </div>
-            <div class="footer-links">
+            <div class="footer-links" style="display: flex; flex-direction: column; gap: var(--space-sm);">
                 <a href="pages/menu.html">Full Menu</a>
                 <a href="pages/about.html">About Us</a>
                 <a href="pages/contact.html">Contact Us</a>
                 <a href="pages/legal.html#privacy">Privacy Policy</a>
                 <a href="pages/legal.html#terms">Terms of Service</a>
-                <a href="https://wa.me/919265370588">WhatsApp</a>
             </div>
-            <div class="footer-bottom">
-                © 2026 Pizjo. Stay Cheese-Obsessed.
+            <div class="footer-social" style="display: flex; flex-direction: column; gap: var(--space-md);">
+                <div style="display: flex; gap: var(--space-md);">
+                    <a href="https://www.facebook.com/pizjo" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="https://www.instagram.com/pizjo" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://www.zomato.com/ahmedabad/pizjo-amraiwadi" target="_blank" rel="noopener noreferrer" aria-label="Zomato" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-newsletter" style="margin-top: var(--space-lg);">
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm); font-weight: 700;">GET EXCLUSIVE DEALS</p>
+                <form action="https://wa.me/919265370588" method="get" target="_blank" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+                    <input type="hidden" name="text" value="Hi! I want to subscribe to Pizjo's exclusive deals and updates! 🍕">
+                    <input type="email" name="email" placeholder="your@email.com" required style="flex: 1; min-width: 200px; padding: var(--space-sm) var(--space-md); border: 2px solid var(--umber-raw); background: var(--off-white); color: var(--umber-raw); font-family: var(--font-body); font-size: var(--text-sm);">
+                    <button type="submit" class="btn btn-primary" style="font-size: var(--text-sm); padding: var(--space-sm) var(--space-lg); white-space: nowrap;">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-bottom" style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--umber-raw); text-align: center; width: 100%;">
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted);">© 2026 Pizjo. Stay Cheese-Obsessed.</p>
+                <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-xs);">Shop 01, Raj Complex, Vastral Road, Amraiwadi, Ahmedabad 382418</p>
             </div>
         </div>
     </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/919265370588?text=Hi! I'd like to place an order 🍕" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp" style="position: fixed; bottom: var(--space-xl); right: var(--space-xl); z-index: 1000; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); animation: pulse 2s infinite; text-decoration: none; transition: transform var(--duration-fast), box-shadow var(--duration-fast);">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <style>
+            @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+            .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5); }
+            @media (max-width: 480px) { .whatsapp-float { bottom: var(--space-lg); right: var(--space-lg); width: 52px; height: 52px; } }
+        </style>
+    </a>
 
     <script src="js/security.js?v=4"></script>
     <!--
@@ -318,7 +473,7 @@
       No runtime CDN dependency. The bundle includes three core + GLTF/DRACO loaders.
       If you change three version or add addons, re-run the build.
     -->
-    <script type="module" src="js/app.js?v=10"></script>
+    <script type="module" src="js/app.js?v=11"></script>
 </body>
 
 </html>

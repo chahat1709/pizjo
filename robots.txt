@@ -1,0 +1,19 @@
+# Pizjo robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://pizjo.vercel.app/sitemap.xml
+
+# Disallow admin/internal paths
+Disallow: /js/
+Disallow: /css/
+Disallow: /assets/
+Disallow: /data/
+Disallow: /pages/legal.html
+Disallow: /sw/
+Disallow: /tools/
+Disallow: /tests/
+Disallow: /check-glb.js
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /.vercelignore
