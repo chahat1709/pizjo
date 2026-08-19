@@ -70,7 +70,7 @@
       script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
       img-src 'self' data: https://images.unsplash.com https://*.unsplash.com;
-      connect-src 'self';
+      connect-src 'self' https://pizjoadmin-9mxbkqqm.manus.space;
       font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
       object-src 'none';
       frame-src 'none';
@@ -305,46 +305,8 @@
                     <h2 id="offers-title" class="offers-title" style="font-family: var(--font-marker); font-size: var(--text-6xl); margin-bottom: var(--space-xs);">MIDNIGHT STEALS</h2>
                     <p class="scribble-text" style="font-size: var(--text-3xl);">Don't tell our accountant...</p>
                 </div>
-                <div class="offers-grid animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--space-3xl); margin-top: var(--space-3xl);">
-                    
-                    <!-- Offer 1: BOGO -->
-                    <div class="card-grunge" style="padding: 0; position: relative; transform: rotate(-2deg); transition: transform 0.3s ease; overflow: hidden; display: flex; flex-direction: column;">
-                        <div class="badge" style="position: absolute; top: 16px; right: 16px; font-size: var(--text-xl); transform: rotate(10deg); background: var(--umber-raw); color: var(--amber-neon); padding: var(--space-sm) var(--space-lg); z-index: 2;">TUESDAYS</div>
-                        <div style="height: 220px; border-bottom: 4px solid var(--umber-raw);">
-                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Pizza" style="width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) saturate(1.2);" loading="lazy" decoding="async">
-                        </div>
-                        <div style="padding: var(--space-2xl); flex: 1; display: flex; flex-direction: column;">
-                            <h3 style="font-size: var(--text-4xl); margin-bottom: var(--space-md);">BOGO Madness</h3>
-                            <p style="font-size: var(--text-lg); font-weight: 700; color: var(--color-text-secondary); margin-bottom: var(--space-2xl); flex: 1;">Buy one large pie, get another one exactly the same for absolutely nothing. Zero. Zilch.</p>
-                            <a data-whatsapp-link data-whatsapp-message="Hi! I want to claim the BOGO Tuesday deal! 🍕" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: var(--text-lg); align-self: flex-start;">Claim Deal</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Offer 2: After Hours -->
-                    <div style="background: var(--umber-raw); color: var(--off-white); border: 4px solid var(--umber-raw); box-shadow: var(--shadow-grunge); padding: 0; position: relative; transform: rotate(1deg); transition: transform 0.3s ease; overflow: hidden; display: flex; flex-direction: column;">
-                        <div class="badge" style="position: absolute; top: 16px; left: 16px; font-size: var(--text-xl); transform: rotate(-5deg); z-index: 2;">20% OFF</div>
-                        <div style="height: 220px; border-bottom: 4px solid var(--amber-neon);">
-                            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80" alt="Late night food" style="width: 100%; height: 100%; object-fit: cover; filter: contrast(1.2) brightness(0.8);" loading="lazy" decoding="async">
-                        </div>
-                        <div style="padding: var(--space-2xl); flex: 1; display: flex; flex-direction: column;">
-                            <h3 style="font-size: var(--text-4xl); color: var(--amber-neon); margin-bottom: var(--space-md);">The After Hours</h3>
-                            <p style="font-size: var(--text-lg); font-weight: 700; color: rgba(245,242,235,0.9); margin-bottom: var(--space-2xl); flex: 1;">Order between 10 PM and midnight. Because the best decisions are made late at night.</p>
-                            <a data-whatsapp-link data-whatsapp-message="Hi! I want to use code LATE20 for 20% off! 🌙" href="#" target="_blank" rel="noopener noreferrer" class="btn" style="background: var(--amber-neon); color: var(--umber-raw); border: 4px solid var(--amber-neon); font-size: var(--text-lg); font-family: var(--font-display); font-weight: 900; text-transform: uppercase; align-self: flex-start;">Apply Code: LATE20</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Offer 3: Party Pack -->
-                    <div class="card-grunge" style="padding: 0; position: relative; transform: rotate(2deg); transition: transform 0.3s ease; overflow: hidden; display: flex; flex-direction: column;">
-                        <div class="badge" style="position: absolute; top: 16px; right: 16px; font-size: var(--text-xl); transform: rotate(-8deg); background: var(--umber-raw); color: var(--amber-neon); padding: var(--space-sm) var(--space-lg); z-index: 2;">🎉 PARTIES</div>
-                        <div style="height: 220px; border-bottom: 4px solid var(--umber-raw);">
-                            <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?auto=format&fit=crop&w=800&q=80" alt="Party fries" style="width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) saturate(1.2);" loading="lazy" decoding="async">
-                        </div>
-                        <div style="padding: var(--space-2xl); flex: 1; display: flex; flex-direction: column;">
-                            <h3 style="font-size: var(--text-4xl); margin-bottom: var(--space-md);">Party Combo</h3>
-                            <p style="font-size: var(--text-lg); font-weight: 700; color: var(--color-text-secondary); margin-bottom: var(--space-2xl); flex: 1;">5 pizzas + 2 sides + drinks for the whole squad. Starting at ₹999. Perfect for house parties!</p>
-                            <a data-whatsapp-link data-whatsapp-message="Hi! I want to order a Party Combo pack! 🎉" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: var(--text-lg); align-self: flex-start;">Order Party Pack</a>
-                        </div>
-                    </div>
+                <div id="live-offers" class="offers-grid animate-on-scroll" aria-live="polite" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--space-3xl); margin-top: var(--space-3xl);">
+                    <p class="live-offers-empty">Checking for today's live deals…</p>
                 </div>
             </div>
         </section>
@@ -435,10 +397,11 @@
         </style>
     </a>
 
-    <script src="js/config.js?v=1"></script>
+    <script src="js/config.js?v=2"></script>
     <script src="js/security.js?v=5"></script>
     <script src="js/catalog.js?v=1"></script>
     <script src="js/site.js?v=1"></script>
+    <script src="js/admin-storefront-sync.js?v=1"></script>
     <!--
       Test helpers: only load when explicitly opted in.
       Production users never get this script. Playwright sets `?test=1` or runs
@@ -472,7 +435,7 @@
       No runtime CDN dependency. The bundle includes three core + GLTF/DRACO loaders.
       If you change three version or add addons, re-run the build.
     -->
-    <script type="module" src="js/app.js?v=11"></script>
+    <script type="module" src="js/app.js?v=12"></script>
     <script type="module">
       import { initThreeHero } from './js/three-hero.js';
       document.addEventListener('DOMContentLoaded', () => initThreeHero('hero-3d-container'));
