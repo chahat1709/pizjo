@@ -94,9 +94,10 @@ function sanitizeImagePaths(categories) {
 // ── Menu ───────────────────────────────────────────────────
 async function loadMenu() {
   try {
-    const catalog = State.catalog.length && State.menu.length
+    let catalog = State.catalog.length && State.menu.length
       ? { items: State.catalog, categories: State.menu }
       : await window.PizjoCatalog.load(CONFIG.menuUrl || 'data/menu.json?v=2');
+    catalog = await window.PizjoStorefrontSync?.hydrateCatalog(catalog) || catalog;
     State.catalog = catalog.items;
     State.menu = catalog.categories.map((category) => ({
       ...category,
@@ -378,8 +379,8 @@ export async function initApp(page = 'home') {
   if (Sec?.init) Sec.init();
   if (window.PizjoCatalog) {
     try {
-      const catalog = await window.PizjoCatalog.load(CONFIG.menuUrl || 'data/menu.json?v=2');
-      await window.PizjoStorefrontSync?.hydrateCatalog(catalog);
+      let catalog = await window.PizjoCatalog.load(CONFIG.menuUrl || 'data/menu.json?v=2');
+      catalog = await window.PizjoStorefrontSync?.hydrateCatalog(catalog) || catalog;
       State.catalog = catalog.items;
       State.menu = catalog.categories.map((category) => ({
         ...category,

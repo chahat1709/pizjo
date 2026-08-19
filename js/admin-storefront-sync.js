@@ -41,15 +41,17 @@
     const payload = await availability();
     const states = new Map((payload.items || []).map(item => [item.catalogId, item.isAvailable !== false]));
     if (!states.size) return catalog;
-    catalog.items.forEach(item => {
-      if (states.has(item.id)) item.isAvailable = states.get(item.id);
-    });
-    (catalog.categories || []).forEach(category => {
-      (category.items || []).forEach(item => {
-        if (states.has(item.id)) item.isAvailable = states.get(item.id);
-      });
-    });
-    return catalog;
+    const applyAvailability = item => states.has(item.id)
+      ? { ...item, isAvailable: states.get(item.id) }
+      : item;
+    return {
+      ...catalog,
+      items: catalog.items.map(applyAvailability),
+      categories: (catalog.categories || []).map(category => ({
+        ...category,
+        items: (category.items || []).map(applyAvailability),
+      })),
+    };
   }
 
   function offerValue(offer) {
