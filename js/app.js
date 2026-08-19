@@ -154,11 +154,12 @@ function renderGrid() {
     grid.innerHTML = cat.items
       .map(
         (it) => `
-          <article class="product-card animate-on-scroll">
+          <article class="product-card animate-on-scroll${it.isAvailable === false ? ' is-unavailable' : ''}">
             <div class="product-info">
               <div class="product-badges">
                 ${it.veg === false ? '' : (it.veg || vegName(it.name) ? '<span class="badge badge-veg">Veg</span>' : '')}
                 ${it.price > 200 ? '<span class="badge badge-bestseller">Bestseller</span>' : ''}
+                ${it.isAvailable === false ? '<span class="badge badge-unavailable">Out of stock</span>' : ''}
               </div>
               <h3 class="product-title">${Sec.escapeHTML(it.name)}</h3>
               <p class="product-desc">${Sec.escapeHTML(it.description || '')}</p>
@@ -168,7 +169,7 @@ function renderGrid() {
             </div>
             <div class="product-footer">
               <span class="product-price" style="font-size: 1.5rem;">${fmtPrice(it.price)}</span>
-              <button class="btn-add" data-id="${Sec.escapeHTML(it.id)}" data-price="${Number(it.price)}" type="button" aria-label="Add ${Sec.escapeHTML(it.name)} to cart">
+              <button class="btn-add" data-id="${Sec.escapeHTML(it.id)}" data-price="${Number(it.price)}" type="button" ${it.isAvailable === false ? 'disabled aria-disabled="true" aria-label="' + Sec.escapeHTML(it.name) + ' is currently out of stock"' : 'aria-label="Add ' + Sec.escapeHTML(it.name) + ' to cart"'}>
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
               </button>
             </div>
@@ -193,6 +194,7 @@ export function addToCart(id, price) {
   const catalogItem = State.catalog.find((item) => item.id === id) ||
     (window.PizjoMenuCatalog || []).find((item) => item.id === id);
   if (!catalogItem) return;
+  if (catalogItem.isAvailable === false) { alert(`${catalogItem.name} is currently out of stock.`); return; }
   const guard = Sec.canAddToCart(Object.values(State.cart), id);
   if (!guard.ok) { alert(guard.reason || 'Cannot add more'); return; }
   const canonicalPrice = Number(catalogItem.price);
@@ -208,6 +210,8 @@ export function addToCart(id, price) {
 window.addToCart = addToCart;
 function changeQty(id, delta) {
   if (!State.cart[id]) return;
+  const catalogItem = State.catalog.find((item) => item.id === id);
+  if (delta > 0 && catalogItem?.isAvailable === false) { alert(`${catalogItem.name} is currently out of stock.`); return; }
   const nextQty = State.cart[id].qty + delta;
   if (nextQty > Sec.MAX_ITEM_QTY) return;
   State.cart[id].qty = nextQty;
@@ -311,6 +315,14 @@ function sanitizeOrderText(text) {
 async function checkout() {
   const items = Object.values(State.cart);
   if (!items.length || !Sec.rateLimit('checkout', 800)) return;
+  const unavailable = items.filter(item => State.catalog.find(candidate => candidate.id === item.id)?.isAvailable === false);
+  if (unavailable.length) {
+    unavailable.forEach(item => delete State.cart[item.id]);
+    saveCart();
+    paintCart();
+    alert('Unavailable items were removed from your cart. Please review your order.');
+    return;
+  }
 
   let summary;
   try {
@@ -367,6 +379,7 @@ export async function initApp(page = 'home') {
   if (window.PizjoCatalog) {
     try {
       const catalog = await window.PizjoCatalog.load(CONFIG.menuUrl || 'data/menu.json?v=2');
+      await window.PizjoStorefrontSync?.hydrateCatalog(catalog);
       State.catalog = catalog.items;
       State.menu = catalog.categories.map((category) => ({
         ...category,
@@ -402,6 +415,7 @@ export async function initApp(page = 'home') {
 
   if (page === 'home') {
     await loadMenu();
+    window.PizjoStorefrontSync?.renderOffers();
   }
 }
 

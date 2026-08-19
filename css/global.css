@@ -209,6 +209,119 @@ canvas {
     transform: translateY(-8px) rotate(0deg);
 }
 
+.product-card.is-unavailable {
+    opacity: 0.72;
+}
+
+.product-card.is-unavailable .product-image {
+    filter: grayscale(0.75) contrast(0.8);
+}
+
+.badge-unavailable {
+    background: #A83A2A;
+    color: var(--off-white);
+}
+
+.btn-add:disabled {
+    cursor: not-allowed;
+    background: #C7BEB2;
+    color: var(--umber-raw);
+    box-shadow: none;
+    transform: none;
+}
+
+.live-offers-empty {
+    max-width: 760px;
+    margin: var(--space-3xl) auto 0;
+    padding: var(--space-xl);
+    border: var(--border-thick);
+    box-shadow: var(--shadow-grunge);
+    font-family: var(--font-display);
+    font-weight: 900;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.live-offer-card {
+    min-height: 300px;
+    position: relative;
+    overflow: visible;
+    padding: var(--space-xl);
+    transform: rotate(-1deg);
+}
+
+.live-offer-card:nth-child(even) {
+    transform: rotate(1deg);
+}
+
+.live-offer-card-dark {
+    background: var(--umber-raw);
+    color: var(--off-white);
+    border: 4px solid var(--umber-raw);
+    box-shadow: var(--shadow-grunge);
+}
+
+.live-offer-badge {
+    position: absolute;
+    top: calc(var(--space-md) * -1);
+    right: var(--space-md);
+    z-index: 2;
+}
+
+.live-offer-copy {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.live-offer-copy h3 {
+    font-size: var(--text-3xl);
+    margin: var(--space-sm) 0 var(--space-md);
+}
+
+.live-offer-copy p {
+    font-size: var(--text-base);
+    font-weight: 700;
+    line-height: var(--leading-normal);
+}
+
+.live-offer-value {
+    font-family: var(--font-marker);
+    font-size: var(--text-3xl) !important;
+    color: var(--amber-neon);
+}
+
+.live-offer-card:not(.live-offer-card-dark) .live-offer-value {
+    color: var(--umber-raw);
+}
+
+.live-offer-conditions,
+.live-offer-terms {
+    margin-top: var(--space-md);
+    font-size: var(--text-sm) !important;
+}
+
+.live-offer-terms {
+    color: var(--color-text-muted);
+}
+
+.live-offer-card-dark .live-offer-terms {
+    color: rgba(245, 242, 235, 0.68);
+}
+
+.live-offer-copy .btn {
+    margin-top: auto;
+    padding-top: var(--space-md);
+}
+
+.live-offer-dark-action {
+    background: var(--amber-neon);
+    border: 3px solid var(--amber-neon);
+    color: var(--umber-raw);
+    box-shadow: 3px 3px 0 rgba(245, 242, 235, 0.85);
+}
+
 .product-info {
     flex: 1;
     display: flex;
