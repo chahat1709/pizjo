@@ -5,17 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-
-  <!-- Google Analytics (GA4) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://images.unsplash.com https://*.unsplash.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; frame-src https://www.google.com https://www.google.com/maps/; base-uri 'self'; form-action 'self' https://wa.me;">
+  <script src="../js/config.js?v=1"></script>
 
   <title>Legal & Privacy - Pizjo Pizza</title>
+</head>
 <body>
   <header class="legal-header">
     <div class="container">
@@ -49,7 +43,7 @@
           <ul>
             <li><strong>Cart items</strong> (product names, prices, quantities)</li>
             <li><strong>Performance metrics</strong> (FPS data for website optimization)</li>
-            <li><strong>Contact form submissions</strong> (name, email, phone, message)</li>
+            <li><strong>Contact details</strong> (name, phone, email, and message) are placed into a WhatsApp message only when you choose to submit the form</li>
           </ul>
 
           <h2>2. How We Use Your Data</h2>
@@ -66,8 +60,8 @@
           <p>Your data is stored in the following ways:</p>
           <ul>
             <li><strong>Cart data</strong>: Stored locally in your browser using <code>localStorage</code> (cleared when you clear browser data)</li>
-            <li><strong>Contact form data</strong>: Sent to our email via form submission (not stored on our servers)</li>
-            <li><strong>Telemetry data</strong>: Sent to our analytics endpoint only if you opt-in (staging only)</li>
+            <li><strong>Contact form data</strong>: Sent to our business WhatsApp account only after you submit; Pizjo does not store it in this website</li>
+            <li><strong>Optional telemetry</strong>: Available only on designated staging builds and sent only after explicit opt-in</li>
           </ul>
           <p><strong>Note:</strong> No personal data is stored on our servers. Cart data is browser-only and temporary.</p>
 
@@ -188,7 +182,7 @@
 
           <h3>What We Store Locally:</h3>
           <ul>
-            <li><code>pizjo.cart.v1</code> - Your shopping cart items (product names, prices, quantities)</li>
+            <li><code>pizjo.cart.v2</code> - Your shopping cart items (product names, prices, quantities)</li>
             <li><code>pizjoTelemetryConsent</code> - Your telemetry preference (opt-in/opt-out)</li>
           </ul>
 
@@ -219,8 +213,8 @@
         <div class="footer-section">
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="../#about">About Us</a></li>
-            <li><a href="../#contact">Contact</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
             <li><a href="legal.html#privacy">Privacy Policy</a></li>
             <li><a href="legal.html#terms">Terms of Service</a></li>
           </ul>
@@ -240,7 +234,10 @@
     </div>
   </footer>
 
-  <script src="../js/app.js"></script>
+  <script src="../js/config.js?v=1"></script>
+  <script src="../js/security.js?v=5"></script>
+  <script src="../js/site.js?v=1"></script>
+  <script type="module" src="../js/app.js?v=11"></script>
   <script>
     // Initialize telemetry status on page load
     document.addEventListener('DOMContentLoaded', function() {
@@ -300,20 +297,11 @@
         }
       });
 
-      // Mobile menu toggle
-      const mobileToggle = document.getElementById('mobile-menu-toggle');
-      const navLinks = document.querySelector('.nav-links');
-      if (mobileToggle && navLinks) {
-        mobileToggle.addEventListener('click', () => {
-          const isOpen = navLinks.classList.toggle('open');
-          mobileToggle.setAttribute('aria-expanded', isOpen);
-        });
-      }
     });
   </script>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/919265370588?text=Hi! I'd like to place an order 🍕" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp" style="position: fixed; bottom: var(--space-xl); right: var(--space-xl); z-index: 1000; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); animation: pulse 2s infinite; text-decoration: none; transition: transform var(--duration-fast), box-shadow var(--duration-fast);">
+    <a data-whatsapp-link data-whatsapp-message="Hi! I'd like to place an order 🍕" href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp" style="position: fixed; bottom: var(--space-xl); right: var(--space-xl); z-index: 1000; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); animation: pulse 2s infinite; text-decoration: none; transition: transform var(--duration-fast), box-shadow var(--duration-fast);">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
         <style>
             @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }

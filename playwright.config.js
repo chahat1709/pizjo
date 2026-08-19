@@ -19,7 +19,7 @@ module.exports = defineConfig({
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
   ],
   webServer: {
-    command: 'npx http-server . -p 3000',
+    command: 'npm run dev',
     url: 'http://localhost:3000',
     reuseExistingServer: true,
   },

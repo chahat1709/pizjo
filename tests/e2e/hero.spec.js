@@ -1,13 +1,11 @@
 const { test, expect } = require('@playwright/test');
 
-test.describe('Pizjo hero preload and swap', () => {
-  test('shows LQ poster before LOD fetch and emits hero-ready', async ({ page }) => {
-    await page.goto('http://localhost:3000/');
-    // poster exists
-    const poster = await page.locator('img[alt="Pizjo hero preview"]');
-    await expect(poster).toBeVisible();
-    // simulate preloader event if needed
-    // The real test should assert network requests to LOD1 and swap, but this is a skeleton.
-    expect(true).toBeTruthy();
+test.describe('Pizjo hero', () => {
+  test('renders an accessible poster and the real progressive WebGL container', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.locator('#hero-poster')).toBeVisible();
+    await expect(page.locator('#hero-poster')).toHaveAttribute('alt', /pure-vegetarian pizza/i);
+    await expect(page.locator('#hero-3d-container')).toBeAttached();
+    await expect(page.locator('img[alt="Pizjo hero preview"]')).toHaveCount(0);
   });
 });
