@@ -41,8 +41,8 @@
 
   async function loadMenu() {
     if (!window.PizjoCatalog) throw new Error('shared catalog runtime missing');
-    const catalog = await window.PizjoCatalog.load('../data/menu.json?v=2');
-    await window.PizjoStorefrontSync?.hydrateCatalog(catalog);
+    let catalog = await window.PizjoCatalog.load('../data/menu.json?v=2');
+    catalog = await window.PizjoStorefrontSync?.hydrateCatalog(catalog) || catalog;
     CATEGORIES = catalog.categories.map((category) => ({
       ...category,
       icon: ICON_FOR(category.name),

@@ -32,12 +32,13 @@ test('applies published availability states by stable catalog ID', async () => {
     categories: [{ items: [{ id: 'pizza-margherita' }, { id: 'pizza-paneer' }, { id: 'burger-veg' }] }],
   };
 
-  await sync.hydrateCatalog(catalog);
+  const hydrated = await sync.hydrateCatalog(catalog);
 
-  assert.equal(catalog.items[0].isAvailable, false);
-  assert.equal(catalog.items[1].isAvailable, true);
-  assert.equal(catalog.items[2].isAvailable, undefined);
-  assert.equal(catalog.categories[0].items[0].isAvailable, false);
+  assert.equal(catalog.items[0].isAvailable, undefined);
+  assert.equal(hydrated.items[0].isAvailable, false);
+  assert.equal(hydrated.items[1].isAvailable, true);
+  assert.equal(hydrated.items[2].isAvailable, undefined);
+  assert.equal(hydrated.categories[0].items[0].isAvailable, false);
 });
 
 test('retains the local catalog when the published admin feed is unavailable', async () => {
