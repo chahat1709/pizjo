@@ -12,7 +12,7 @@ self.addEventListener('install', (evt) => {
 self.addEventListener('activate', (evt) => {
   evt.waitUntil((async ()=>{
     const keys = await caches.keys();
-    await Promise.all(keys.filter(k=>!k.startsWith('pizjo-')).map(k=>caches.delete(k)));
+    await Promise.all(keys.filter((key) => key.startsWith('pizjo-') && key !== CACHE_NAME && key !== MODEL_CACHE).map((key) => caches.delete(key)));
     await self.clients.claim();
   })());
 });

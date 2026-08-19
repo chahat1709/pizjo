@@ -24,12 +24,12 @@ window.PizjoSecurity = (() => {
     }
 
     // ── Cart Price Integrity Check ──
-    function validatePrice(itemId, claimedPrice, menuData) {
-        if (!menuData || !Array.isArray(menuData)) return true; // Skip if no source
+    function validatePrice(itemKey, claimedPrice, menuData) {
+        if (!Array.isArray(menuData)) return false;
         for (const cat of menuData) {
-            for (const sub of (cat.subcategories || [])) {
-                const found = (sub.items || []).find(i => i.id === itemId);
-                if (found) return found.price === claimedPrice;
+            for (const item of (cat.items || [])) {
+                const key = item.id || item.name;
+                if (key === itemKey) return Number(item.price) === Number(claimedPrice);
             }
         }
         return false;
@@ -57,11 +57,41 @@ window.PizjoSecurity = (() => {
     const MAX_ITEM_QTY = 20;
     const MAX_CART_ITEMS = 50;
 
-    function canAddToCart(cartItems, itemId) {
-        if (cartItems.length >= MAX_CART_ITEMS) return { ok: false, reason: 'Cart is full (max 50 items)' };
-        const existing = cartItems.find(i => i.id === itemId);
-        if (existing && existing.qty >= MAX_ITEM_QTY) return { ok: false, reason: `Max ${MAX_ITEM_QTY} per item` };
+    function canAddToCart(cartItems, itemKey) {
+        if (!Array.isArray(cartItems)) return { ok: false, reason: 'Cart data is invalid' };
+        const existing = cartItems.find(i => (i.id || i.name) === itemKey);
+        if (existing && Number(existing.qty) >= MAX_ITEM_QTY) {
+            return { ok: false, reason: `Max ${MAX_ITEM_QTY} per item` };
+        }
+        if (!existing && cartItems.length >= MAX_CART_ITEMS) {
+            return { ok: false, reason: `Cart is full (max ${MAX_CART_ITEMS} different items)` };
+        }
         return { ok: true };
+    }
+
+    function normalizeCart(raw, catalog = []) {
+        if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
+        const source = raw.version && raw.items && typeof raw.items === 'object' ? raw.items : raw;
+        const byId = new Map(catalog.filter(Boolean).map((item) => [String(item.id), item]));
+        const byName = new Map(catalog.filter(Boolean).map((item) => [String(item.name).trim(), item]));
+        return Object.values(source).reduce((cart, item) => {
+            if (!item || typeof item !== 'object') return cart;
+            const candidate = byId.get(String(item.id || '')) || byName.get(String(item.name || '').trim());
+            if (!candidate) return cart;
+            const qty = Math.floor(Number(item.qty));
+            if (!Number.isFinite(qty) || qty < 1) return cart;
+            const id = String(candidate.id);
+            const safeQty = Math.min(qty, MAX_ITEM_QTY);
+            if (Object.keys(cart).length < MAX_CART_ITEMS) {
+                cart[id] = {
+                    id,
+                    name: String(candidate.name).trim().slice(0, 200),
+                    price: Number(candidate.price),
+                    qty: safeQty,
+                };
+            }
+            return cart;
+        }, {});
     }
 
     // ── Init: Run on page load ──
@@ -80,6 +110,7 @@ window.PizjoSecurity = (() => {
         hardenExternalLinks,
         validators,
         canAddToCart,
+        normalizeCart,
         MAX_ITEM_QTY,
         MAX_CART_ITEMS,
         init,

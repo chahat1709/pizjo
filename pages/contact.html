@@ -6,15 +6,7 @@
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
     <meta name="referrer" content="strict-origin-when-cross-origin">
-
-    <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://images.unsplash.com https://*.unsplash.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; frame-src https://www.google.com https://www.google.com/maps/; base-uri 'self'; form-action 'self' https://wa.me;">
 
     <title>Contact — Pizjo | Order on WhatsApp | Amraiwadi, Ahmedabad</title>
     <meta name="description" content="Contact Pizjo — call +91 92653 70588, WhatsApp order, or visit us at Shop 01, Raj Complex, Near Metro Pillar 87, Vastral Road, Amraiwadi, Ahmedabad 382418. Open 11:15 AM – 11:45 PM daily.">
@@ -67,7 +59,7 @@
 
     <!-- Sliding cart -->
     <div class="cart-overlay" id="cart-overlay" hidden></div>
-    <aside class="cart-sidebar" id="cart-sidebar" role="dialog" aria-modal="true" aria-label="Shopping cart" aria-hidden="true">
+    <aside class="cart-sidebar" id="cart-sidebar" role="dialog" aria-modal="true" aria-label="Shopping cart" aria-hidden="true" inert>
         <div class="cart-header">
             <h2>Your Stash</h2>
             <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
@@ -99,13 +91,13 @@
         <section class="section" id="contact-info">
             <div class="container">
                 <div class="contact-grid">
-                    <a href="tel:+919265370588" class="contact-card animate-on-scroll" id="card-phone">
+                    <a data-phone-link href="#" class="contact-card animate-on-scroll" id="card-phone">
                         <div class="contact-card-icon">📞</div>
                         <h3 class="contact-card-title">Call Us</h3>
                         <p class="contact-card-value">+91 92653 70588</p>
                         <p class="contact-card-hint">Tap to call</p>
                     </a>
-                    <a href="https://wa.me/919265370588?text=Hi! I'd like to know more about Pizjo 🍕" target="_blank" rel="noopener noreferrer" class="contact-card contact-card-wa animate-on-scroll" id="card-whatsapp">
+                    <a data-whatsapp-link data-whatsapp-message="Hi! I'd like to know more about Pizjo 🍕" href="#" target="_blank" rel="noopener noreferrer" class="contact-card contact-card-wa animate-on-scroll" id="card-whatsapp">
                         <div class="contact-card-icon">💬</div>
                         <h3 class="contact-card-title">WhatsApp</h3>
                         <p class="contact-card-value">+91 92653 70588</p>
@@ -263,8 +255,7 @@
             </div>
             <div class="footer-newsletter" style="margin-top: var(--space-lg);">
                 <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm); font-weight: 700;">GET EXCLUSIVE DEALS</p>
-                <form action="https://wa.me/919265370588" method="get" target="_blank" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
-                    <input type="hidden" name="text" value="Hi! I want to subscribe to Pizjo's exclusive deals and updates! 🍕">
+                <form data-whatsapp-form data-whatsapp-message="Hi! I want to subscribe to Pizjo's exclusive deals and updates! 🍕" action="#" method="get" target="_blank" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
                     <input type="email" name="email" placeholder="your@email.com" required style="flex: 1; min-width: 200px; padding: var(--space-sm) var(--space-md); border: 2px solid var(--umber-raw); background: var(--off-white); color: var(--umber-raw); font-family: var(--font-body); font-size: var(--text-sm);">
                     <button type="submit" class="btn btn-primary" style="font-size: var(--text-sm); padding: var(--space-sm) var(--space-lg); white-space: nowrap;">Subscribe</button>
                 </form>
@@ -277,7 +268,7 @@
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/919265370588?text=Hi! I'd like to place an order 🍕" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp" style="position: fixed; bottom: var(--space-xl); right: var(--space-xl); z-index: 1000; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); animation: pulse 2s infinite; text-decoration: none; transition: transform var(--duration-fast), box-shadow var(--duration-fast);">
+    <a data-whatsapp-link data-whatsapp-message="Hi! I'd like to place an order 🍕" href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp" style="position: fixed; bottom: var(--space-xl); right: var(--space-xl); z-index: 1000; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); animation: pulse 2s infinite; text-decoration: none; transition: transform var(--duration-fast), box-shadow var(--duration-fast);">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
         <style>
             @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
@@ -286,7 +277,9 @@
         </style>
     </a>
 
-    <script src="../js/security.js?v=4"></script>
+    <script src="../js/config.js?v=1"></script>
+    <script src="../js/security.js?v=5"></script>
+    <script src="../js/site.js?v=1"></script>
     <script type="module" src="../js/app.js?v=11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -347,18 +340,26 @@
 
                 if (!valid) return;
 
-                const safeName = window.PizjoSecurity.escapeHTML(name.value.trim());
-                const safeMsg = window.PizjoSecurity.escapeHTML(message.value.trim());
-                const subjectText = subject.options[subject.selectedIndex]?.text || 'General';
+                const cleanText = (value, max) => String(value || '')
+                    .replace(/[<>]/g, '')
+                    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '')
+                    .trim()
+                    .slice(0, max);
+                const safeName = cleanText(name.value, 100);
+                const safePhone = cleanText(phone.value, 20);
+                const safeMsg = cleanText(message.value, 2000);
+                const subjectText = cleanText(subject.options[subject.selectedIndex]?.text || 'General', 80);
 
-                const waMsg = `Hi Pizjo! 👋\n\n*Name:* ${safeName}\n*Phone:* ${phone.value.trim()}\n*Subject:* ${subjectText}\n\n*Message:*\n${safeMsg}`;
+                const waMsg = `Hi Pizjo!\n\n*Name:* ${safeName}\n*Phone:* ${safePhone}\n*Subject:* ${subjectText}\n\n*Message:*\n${safeMsg}`;
 
                 form.style.display = 'none';
                 document.getElementById('form-success').style.display = 'block';
 
-                const wa = '919265370588';
+                const waUrl = window.PizjoConfig?.whatsappUrl
+                    ? window.PizjoConfig.whatsappUrl(waMsg)
+                    : '#';
                 setTimeout(() => {
-                    window.open(`https://wa.me/${wa}?text=${encodeURIComponent(waMsg)}`, '_blank', 'noopener,noreferrer');
+                    if (waUrl !== '#') window.open(waUrl, '_blank', 'noopener,noreferrer');
                 }, 500);
             });
         });

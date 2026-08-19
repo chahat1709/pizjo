@@ -1,11 +1,16 @@
 const { test, expect } = require('@playwright/test');
 
-test.describe('Exploded view scrub controller', ()=>{
-  test('stage changes on scroll progress', async ({ page })=>{
-    await page.goto('http://localhost:3000/');
-    // This is a functional skeleton; test will check that the page exposes a global controller
-    const hasCtrl = await page.evaluate(()=>!!window.PizjoExplodedController);
-    expect(hasCtrl).toBeTruthy();
-    // More thorough tests require instrumenting the page to setProgress and observe events.
+test.describe('Progressive hero resilience', () => {
+  test('keeps the accessible poster when WebGL is unavailable', async ({ page }) => {
+    await page.addInitScript(() => {
+      const original = HTMLCanvasElement.prototype.getContext;
+      HTMLCanvasElement.prototype.getContext = function (type) {
+        if (type === 'webgl' || type === 'webgl2') return null;
+        return original.call(this, type);
+      };
+    });
+    await page.goto('/');
+    await expect(page.locator('#hero-poster')).toBeVisible();
+    await expect(page.locator('#hero-3d-container')).toBeAttached();
   });
 });

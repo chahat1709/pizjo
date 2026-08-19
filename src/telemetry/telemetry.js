@@ -1,7 +1,7 @@
 // Lightweight runtime telemetry hooks with user consent
 (function(global){
   // Check for user consent
-  const hasConsent = localStorage.getItem('pizjoTelemetryConsent') === 'true';
+  let hasConsent = localStorage.getItem('pizjoTelemetryConsent') === 'true';
 
   const telemetry = {
     enabled: hasConsent, // Respect user consent
@@ -34,17 +34,20 @@
     startFPS,
     setConsent: (consent) => {
       telemetry.enabled = consent === true;
+      hasConsent = telemetry.enabled;
       localStorage.setItem('pizjoTelemetryConsent', consent === true ? 'true' : 'false');
       return telemetry.enabled;
     },
     hasConsent: () => hasConsent,
     enable: () => {
       telemetry.enabled = true;
+      hasConsent = true;
       localStorage.setItem('pizjoTelemetryConsent', 'true');
       return true;
     },
     disable: () => {
       telemetry.enabled = false;
+      hasConsent = false;
       localStorage.setItem('pizjoTelemetryConsent', 'false');
       return false;
     }

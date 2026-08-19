@@ -2,8 +2,9 @@
 // - Home page renders the menu + cart.
 // - Other pages (about, contact, legal) just mount global nav and skip.
 
-const WHATSAPP_NUMBER = '919265370588';
-const CART_KEY = 'pizjo.cart.v1';
+const CONFIG = window.PizjoConfig || {};
+const WHATSAPP_NUMBER = CONFIG.whatsappNumber || '919265370588';
+const CART_KEY = 'pizjo.cart.v3';
 
 const Sec = window.PizjoSecurity;
 if (!Sec) {
@@ -14,20 +15,23 @@ const $ = (id) => document.getElementById(id);
 
 const State = {
   menu: [],
+  catalog: [],
   current: '',
-  cart: {},          // name -> {name, price, qty}
+  cart: {},          // id -> {id, name, price, qty}
 };
 
 // ── Cart persistence ──────────────────────────────────────
 function loadCart() {
   try {
-    const raw = localStorage.getItem(CART_KEY);
-    if (raw) State.cart = JSON.parse(raw) || {};
+    const raw = localStorage.getItem(CART_KEY) || localStorage.getItem('pizjo.cart.v2');
+    if (raw) State.cart = Sec?.normalizeCart ? Sec.normalizeCart(JSON.parse(raw), State.catalog) : {};
+    saveCart();
   } catch { State.cart = {}; }
 }
 function saveCart() {
-  try { localStorage.setItem(CART_KEY, JSON.stringify(State.cart)); }
-  catch (e) { console.warn('cart save failed', e); }
+  try {
+    localStorage.setItem(CART_KEY, JSON.stringify({ version: 3, items: State.cart }));
+  } catch (e) { console.warn('cart save failed', e); }
 }
 
 const FALLBACK_MENU = [
@@ -90,13 +94,19 @@ function sanitizeImagePaths(categories) {
 // ── Menu ───────────────────────────────────────────────────
 async function loadMenu() {
   try {
-    const res = await fetch(`data/menu.json?v=1`);
-    if (!res.ok) throw new Error('menu fetch failed');
-    const data = await res.json();
-    State.menu = sanitizeImagePaths(data.categories);
+    const catalog = State.catalog.length && State.menu.length
+      ? { items: State.catalog, categories: State.menu }
+      : await window.PizjoCatalog.load(CONFIG.menuUrl || 'data/menu.json?v=2');
+    State.catalog = catalog.items;
+    State.menu = catalog.categories.map((category) => ({
+      ...category,
+      icon: category.name.toLowerCase().includes('pizza') ? '🍕' : '🍽️',
+    }));
   } catch (err) {
-    console.warn('menu load fetch warning, using built-in fallback:', err);
-    State.menu = FALLBACK_MENU;
+    console.warn('menu load fetch warning, using validated built-in fallback:', err);
+    const fallback = window.PizjoCatalog.normalize({ categories: FALLBACK_MENU });
+    State.catalog = fallback.items;
+    State.menu = fallback.categories.map((category) => ({ ...category, icon: '🍽️' }));
   }
 
   if (State.menu.length) {
@@ -158,7 +168,7 @@ function renderGrid() {
             </div>
             <div class="product-footer">
               <span class="product-price" style="font-size: 1.5rem;">${fmtPrice(it.price)}</span>
-              <button class="btn-add" data-name="${Sec.escapeHTML(it.name)}" data-price="${Number(it.price)}" type="button" aria-label="Add to cart">
+              <button class="btn-add" data-id="${Sec.escapeHTML(it.id)}" data-price="${Number(it.price)}" type="button" aria-label="Add ${Sec.escapeHTML(it.name)} to cart">
                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
               </button>
             </div>
@@ -178,27 +188,39 @@ function renderGrid() {
 }
 
 // ── Cart ───────────────────────────────────────────────────
-export function addToCart(name, price) {
-  if (!name) return;
-  const guard = Sec.canAddToCart(Object.values(State.cart), name);
+export function addToCart(id, price) {
+  if (!id) return;
+  const catalogItem = State.catalog.find((item) => item.id === id) ||
+    (window.PizjoMenuCatalog || []).find((item) => item.id === id);
+  if (!catalogItem) return;
+  const guard = Sec.canAddToCart(Object.values(State.cart), id);
   if (!guard.ok) { alert(guard.reason || 'Cannot add more'); return; }
-  State.cart[name] = State.cart[name] || { name, price, qty: 0 };
-  State.cart[name].qty += 1;
+  const canonicalPrice = Number(catalogItem.price);
+  if (!Number.isFinite(canonicalPrice) || canonicalPrice < 0) return;
+  State.cart[id] = State.cart[id] || { id, name: catalogItem.name, price: canonicalPrice, qty: 0 };
+  State.cart[id].name = catalogItem.name;
+  State.cart[id].price = canonicalPrice;
+  State.cart[id].qty += 1;
   saveCart();
   paintCart();
   openCart();
 }
 window.addToCart = addToCart;
-function changeQty(name, delta) {
-  if (!State.cart[name]) return;
-  State.cart[name].qty += delta;
-  if (State.cart[name].qty <= 0) delete State.cart[name];
+function changeQty(id, delta) {
+  if (!State.cart[id]) return;
+  const nextQty = State.cart[id].qty + delta;
+  if (nextQty > Sec.MAX_ITEM_QTY) return;
+  State.cart[id].qty = nextQty;
+  if (State.cart[id].qty <= 0) delete State.cart[id];
   saveCart();
   paintCart();
 }
 
 function paintCart() {
-  const items = Object.values(State.cart);
+  const items = Object.values(State.cart).map((item) => {
+    const current = State.catalog.find((candidate) => candidate.id === item.id);
+    return current ? { ...item, name: current.name, price: current.price } : item;
+  });
   let totalItems = 0, totalPrice = 0;
 
   const cards = items.map((it) => {
@@ -211,9 +233,9 @@ function paintCart() {
           <div class="cart-item-price">${fmtPrice(it.price)}</div>
         </div>
         <div class="cart-item-controls">
-          <button class="qty-btn" data-name="${Sec.escapeHTML(it.name)}" data-action="minus" type="button" aria-label="Decrease quantity">−</button>
+          <button class="qty-btn" data-id="${Sec.escapeHTML(it.id)}" data-action="minus" type="button" aria-label="Decrease ${Sec.escapeHTML(it.name)} quantity">−</button>
           <span class="qty-val">${it.qty}</span>
-          <button class="qty-btn" data-name="${Sec.escapeHTML(it.name)}" data-action="plus" type="button" aria-label="Increase quantity">+</button>
+          <button class="qty-btn" data-id="${Sec.escapeHTML(it.id)}" data-action="plus" type="button" aria-label="Increase ${Sec.escapeHTML(it.name)} quantity">+</button>
         </div>
       </div>`;
   }).join('');
@@ -235,17 +257,25 @@ function paintCart() {
   if (cartTotal) cartTotal.textContent = fmtPrice(totalPrice);
 }
 
+let lastCartTrigger = null;
 function openCart() {
-  $('cart-sidebar').classList.add('open');
-  $('cart-sidebar').setAttribute('aria-hidden', 'false');
-  $('cart-overlay').classList.add('open');
-  $('cart-overlay').hidden = false;
+  lastCartTrigger = document.activeElement;
+  const sidebar = $('cart-sidebar');
+  sidebar?.classList.add('open');
+  sidebar?.setAttribute('aria-hidden', 'false');
+  if (sidebar) sidebar.inert = false;
+  $('cart-overlay')?.classList.add('open');
+  if ($('cart-overlay')) $('cart-overlay').hidden = false;
+  $('cart-close')?.focus();
 }
 function closeCart() {
-  $('cart-sidebar').classList.remove('open');
-  $('cart-sidebar').setAttribute('aria-hidden', 'true');
-  $('cart-overlay').classList.remove('open');
-  $('cart-overlay').hidden = true;
+  const sidebar = $('cart-sidebar');
+  sidebar?.classList.remove('open');
+  sidebar?.setAttribute('aria-hidden', 'true');
+  if (sidebar) sidebar.inert = true;
+  $('cart-overlay')?.classList.remove('open');
+  if ($('cart-overlay')) $('cart-overlay').hidden = true;
+  if (lastCartTrigger && typeof lastCartTrigger.focus === 'function') lastCartTrigger.focus();
 }
 
 function bindCart() {
@@ -258,14 +288,14 @@ function bindCart() {
   $('cart-items')?.addEventListener('click', (e) => {
     const btn = e.target.closest('.qty-btn');
     if (!btn) return;
-    changeQty(btn.dataset.name, btn.dataset.action === 'plus' ? 1 : -1);
+    changeQty(btn.dataset.id, btn.dataset.action === 'plus' ? 1 : -1);
   });
 
   // Event Delegation for Add to Cart buttons on the homepage
   $('menu-grid')?.addEventListener('click', (e) => {
     const btn = e.target.closest('.btn-add');
     if (!btn) return;
-    addToCart(btn.dataset.name, parseInt(btn.dataset.price, 10));
+    addToCart(btn.dataset.id, parseInt(btn.dataset.price, 10));
   });
 
   document.addEventListener('keydown', (e) => {
@@ -278,23 +308,36 @@ function sanitizeOrderText(text) {
   return text.replace(/[<>]/g, '').trim();
 }
 
-function checkout() {
+async function checkout() {
   const items = Object.values(State.cart);
-  if (!items.length) return;
-  if (!Sec.rateLimit('checkout', 800)) return;
+  if (!items.length || !Sec.rateLimit('checkout', 800)) return;
 
-  let text = "Hello Pizjo! I'd like to place an order:%0a%0a";
-  let total = 0;
-  items.forEach((it) => {
-    const line = `${it.qty}x ${it.name} — ₹${it.price * it.qty}`;
-    text += `*${line}*%0a`;
-    total += it.price * it.qty;
-  });
-  text += `%0a*Total: ₹${total}*%0a%0aPlease confirm.`;
+  let summary;
+  try {
+    const response = await fetch('/api/order-summary', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: items.map((item) => ({ id: item.id, qty: item.qty })) }),
+    });
+    if (!response.ok) throw new Error(`order summary HTTP ${response.status}`);
+    summary = await response.json();
+  } catch (error) {
+    console.error('[pizjo] trusted order summary unavailable', error);
+    alert('Order verification is temporarily unavailable. Please try again in a moment.');
+    return;
+  }
 
-  // ⚠️ SECURITY: Sanitize order text
+  let text = "Hello Pizjo! I'd like to place an order:\n\n";
+  for (const item of summary.items || []) {
+    const safeName = sanitizeOrderText(item.name).slice(0, 200);
+    text += `*${item.qty}x ${safeName} — ₹${item.lineTotal}*\n`;
+  }
+  text += `\n*Total: ₹${summary.total}*\n\nPlease confirm.`;
   const safeText = sanitizeOrderText(text);
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(safeText)}`, '_blank', 'noopener,noreferrer');
+  const waUrl = CONFIG.whatsappUrl
+    ? CONFIG.whatsappUrl(safeText)
+    : `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(safeText)}`;
+  window.open(waUrl, '_blank', 'noopener,noreferrer');
 }
 
 // ── Reveal on scroll (any page) ────────────────────────────
@@ -320,19 +363,41 @@ function bindReveal() {
 
 // Exposed for other page scripts (about/contact) to call.
 export async function initApp(page = 'home') {
-  loadCart();
   if (Sec?.init) Sec.init();
+  if (window.PizjoCatalog) {
+    try {
+      const catalog = await window.PizjoCatalog.load(CONFIG.menuUrl || 'data/menu.json?v=2');
+      State.catalog = catalog.items;
+      State.menu = catalog.categories.map((category) => ({
+        ...category,
+        icon: category.name.toLowerCase().includes('pizza') ? '🍕' : '🍽️',
+      }));
+    } catch (error) {
+      console.warn('[pizjo] shared catalog preload failed', error);
+    }
+  }
+  loadCart();
+  if ('serviceWorker' in navigator && location.protocol === 'http:') {
+    navigator.serviceWorker.register('/sw/service-worker.js').catch((error) => {
+      console.warn('[pizjo] service worker registration failed', error);
+    });
+  }
   bindCart();
   paintCart();
   bindReveal();
 
   const mobileToggle = document.getElementById('mobile-menu-toggle');
   const navLinks = document.querySelector('.nav-links');
-  if (mobileToggle && navLinks) {
+  if (mobileToggle && navLinks && mobileToggle.dataset.bound !== 'true') {
+    mobileToggle.dataset.bound = 'true';
     mobileToggle.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('open');
-      mobileToggle.setAttribute('aria-expanded', isOpen);
+      mobileToggle.setAttribute('aria-expanded', String(isOpen));
     });
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+    }));
   }
 
   if (page === 'home') {

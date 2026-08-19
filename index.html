@@ -9,15 +9,6 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="theme-color" content="#FFBF00">
 
-    <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script>
-
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
     {
@@ -76,15 +67,15 @@
     <!-- 🔒 SECURITY: Content Security Policy for XSS protection -->
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
-      script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://www.googletagmanager.com;
+      script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com;
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
       img-src 'self' data: https://images.unsplash.com https://*.unsplash.com;
-      connect-src 'self' https://www.google-analytics.com https://www.google.com https://www.googletagmanager.com;
+      connect-src 'self';
       font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
       object-src 'none';
       frame-src 'none';
       base-uri 'self';
-      form-action 'self';
+      form-action 'self' https://wa.me;
       media-src 'self';
       worker-src 'self';
     ">
@@ -109,6 +100,11 @@
     <link rel="stylesheet" href="css/tokens.css?v=5">
     <link rel="stylesheet" href="css/global.css?v=5">
     <link rel="stylesheet" href="css/home.css?v=5">
+    <script type="importmap">
+    {
+      "imports": { "three": "./assets/dist/vendor/three-bundle.js" }
+    }
+    </script>
 </head>
 
 <body class="bg-off-white text-umber-raw antialiased relative min-h-screen overflow-x-hidden">
@@ -144,7 +140,7 @@
                             <circle cx="20" cy="21" r="1"></circle>
                             <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                         </svg>
-                        <span class="cart-badge" id="cart-count">0</span>
+                        <span class="cart-badge" id="cart-count" aria-live="polite" aria-atomic="true">0</span>
                     </div>
                 </button>
             </div>
@@ -153,7 +149,7 @@
 
     <!-- Sliding cart -->
     <div class="cart-overlay" id="cart-overlay" hidden></div>
-    <aside class="cart-sidebar" id="cart-sidebar" role="dialog" aria-modal="true" aria-label="Shopping cart" aria-hidden="true">
+    <aside class="cart-sidebar" id="cart-sidebar" role="dialog" aria-modal="true" aria-label="Shopping cart" aria-hidden="true" inert>
         <div class="cart-header">
             <h2>Your Stash</h2>
             <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
@@ -162,7 +158,7 @@
             <!-- Dynamic Cart Items -->
         </div>
         <div class="cart-footer">
-            <div class="cart-total-row"><span>Total</span><span id="cart-total">₹0</span></div>
+            <div class="cart-total-row"><span>Total</span><span id="cart-total" aria-live="polite">₹0</span></div>
             <button class="btn cart-checkout-btn" id="checkout-btn">
                 Order on WhatsApp
             </button>
@@ -212,14 +208,15 @@
                     </p>
                     <div class="hero-actions">
                         <a href="#menu" class="btn btn-primary">Feed Me Now</a>
-                        <a href="tel:+919265370588" class="btn btn-secondary">Call to Order</a>
+                        <a data-phone-link data-phone-text href="#" class="btn btn-secondary">Call to Order</a>
                     </div>
                 </div>
 
                 <div class="hero-visual animate-on-scroll">
                     <div class="hero-visual-box">
+                        <div id="hero-3d-container" class="hero-3d-container" aria-hidden="true"></div>
                         <!-- Static Pizza Image -->
-                        <img src="assets/pizza_hero.png" alt="Delicious Pizza" class="hero-pizza-img">
+                        <img id="hero-poster" src="assets/pizza_hero.png" alt="Freshly baked pure-vegetarian pizza at Pizjo" class="hero-pizza-img" width="900" height="900" fetchpriority="high" decoding="async">
                     </div>
                     <div class="badge"
                         style="position: absolute; bottom: -20px; right: -20px; font-size: var(--text-2xl); transform: rotate(-10deg);">
@@ -319,7 +316,7 @@
                         <div style="padding: var(--space-2xl); flex: 1; display: flex; flex-direction: column;">
                             <h3 style="font-size: var(--text-4xl); margin-bottom: var(--space-md);">BOGO Madness</h3>
                             <p style="font-size: var(--text-lg); font-weight: 700; color: var(--color-text-secondary); margin-bottom: var(--space-2xl); flex: 1;">Buy one large pie, get another one exactly the same for absolutely nothing. Zero. Zilch.</p>
-                            <a href="https://wa.me/919265370588?text=Hi! I want to claim the BOGO Tuesday deal! 🍕" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: var(--text-lg); align-self: flex-start;">Claim Deal</a>
+                            <a data-whatsapp-link data-whatsapp-message="Hi! I want to claim the BOGO Tuesday deal! 🍕" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: var(--text-lg); align-self: flex-start;">Claim Deal</a>
                         </div>
                     </div>
                     
@@ -332,7 +329,7 @@
                         <div style="padding: var(--space-2xl); flex: 1; display: flex; flex-direction: column;">
                             <h3 style="font-size: var(--text-4xl); color: var(--amber-neon); margin-bottom: var(--space-md);">The After Hours</h3>
                             <p style="font-size: var(--text-lg); font-weight: 700; color: rgba(245,242,235,0.9); margin-bottom: var(--space-2xl); flex: 1;">Order between 10 PM and midnight. Because the best decisions are made late at night.</p>
-                            <a href="https://wa.me/919265370588?text=Hi! I want to use code LATE20 for 20% off! 🌙" target="_blank" rel="noopener noreferrer" class="btn" style="background: var(--amber-neon); color: var(--umber-raw); border: 4px solid var(--amber-neon); font-size: var(--text-lg); font-family: var(--font-display); font-weight: 900; text-transform: uppercase; align-self: flex-start;">Apply Code: LATE20</a>
+                            <a data-whatsapp-link data-whatsapp-message="Hi! I want to use code LATE20 for 20% off! 🌙" href="#" target="_blank" rel="noopener noreferrer" class="btn" style="background: var(--amber-neon); color: var(--umber-raw); border: 4px solid var(--amber-neon); font-size: var(--text-lg); font-family: var(--font-display); font-weight: 900; text-transform: uppercase; align-self: flex-start;">Apply Code: LATE20</a>
                         </div>
                     </div>
                     
@@ -345,7 +342,7 @@
                         <div style="padding: var(--space-2xl); flex: 1; display: flex; flex-direction: column;">
                             <h3 style="font-size: var(--text-4xl); margin-bottom: var(--space-md);">Party Combo</h3>
                             <p style="font-size: var(--text-lg); font-weight: 700; color: var(--color-text-secondary); margin-bottom: var(--space-2xl); flex: 1;">5 pizzas + 2 sides + drinks for the whole squad. Starting at ₹999. Perfect for house parties!</p>
-                            <a href="https://wa.me/919265370588?text=Hi! I want to order a Party Combo pack! 🎉" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: var(--text-lg); align-self: flex-start;">Order Party Pack</a>
+                            <a data-whatsapp-link data-whatsapp-message="Hi! I want to order a Party Combo pack! 🎉" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: var(--text-lg); align-self: flex-start;">Order Party Pack</a>
                         </div>
                     </div>
                 </div>
@@ -382,7 +379,7 @@
                 <p style="font-size: var(--text-xl); font-weight: 700; color: var(--umber-raw); margin-bottom: var(--space-2xl); max-width: 600px; margin-left: auto; margin-right: auto;">155+ items. Starting at ₹49. Open 11:15 AM – 11:45 PM daily. What are you waiting for?</p>
                 <div style="display: flex; gap: var(--space-lg); justify-content: center; flex-wrap: wrap;">
                     <a href="pages/menu.html" class="btn" style="background: var(--umber-raw); color: var(--amber-neon); border: 4px solid var(--umber-raw); box-shadow: var(--shadow-grunge); font-size: var(--text-2xl); padding: var(--space-lg) var(--space-3xl); font-family: var(--font-display); font-weight: 900; text-transform: uppercase;">View Full Menu</a>
-                    <a href="https://wa.me/919265370588?text=Hi! I'd like to place an order 🍕" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: var(--text-2xl); padding: var(--space-lg) var(--space-3xl);">Order on WhatsApp</a>
+                    <a data-whatsapp-link data-whatsapp-message="Hi! I'd like to place an order 🍕" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: var(--text-2xl); padding: var(--space-lg) var(--space-3xl);">Order on WhatsApp</a>
                 </div>
             </div>
         </section>
@@ -415,11 +412,10 @@
                 </div>
             </div>
             <div class="footer-newsletter" style="margin-top: var(--space-lg);">
-                <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm); font-weight: 700;">GET EXCLUSIVE DEALS</p>
-                <form action="https://wa.me/919265370588" method="get" target="_blank" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
-                    <input type="hidden" name="text" value="Hi! I want to subscribe to Pizjo's exclusive deals and updates! 🍕">
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm); font-weight: 700;">ASK FOR EXCLUSIVE DEALS ON WHATSAPP</p>
+                <form data-whatsapp-form data-whatsapp-message="Hi! I want to subscribe to Pizjo's exclusive deals and updates! 🍕" action="#" method="get" target="_blank" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
                     <input type="email" name="email" placeholder="your@email.com" required style="flex: 1; min-width: 200px; padding: var(--space-sm) var(--space-md); border: 2px solid var(--umber-raw); background: var(--off-white); color: var(--umber-raw); font-family: var(--font-body); font-size: var(--text-sm);">
-                    <button type="submit" class="btn btn-primary" style="font-size: var(--text-sm); padding: var(--space-sm) var(--space-lg); white-space: nowrap;">Subscribe</button>
+                    <button type="submit" class="btn btn-primary" style="font-size: var(--text-sm); padding: var(--space-sm) var(--space-lg); white-space: nowrap;">Message Us</button>
                 </form>
             </div>
             <div class="footer-bottom" style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--umber-raw); text-align: center; width: 100%;">
@@ -430,7 +426,7 @@
     </footer>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/919265370588?text=Hi! I'd like to place an order 🍕" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp" style="position: fixed; bottom: var(--space-xl); right: var(--space-xl); z-index: 1000; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); animation: pulse 2s infinite; text-decoration: none; transition: transform var(--duration-fast), box-shadow var(--duration-fast);">
+    <a data-whatsapp-link data-whatsapp-message="Hi! I'd like to place an order 🍕" href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp" style="position: fixed; bottom: var(--space-xl); right: var(--space-xl); z-index: 1000; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); animation: pulse 2s infinite; text-decoration: none; transition: transform var(--duration-fast), box-shadow var(--duration-fast);">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
         <style>
             @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
@@ -439,7 +435,10 @@
         </style>
     </a>
 
-    <script src="js/security.js?v=4"></script>
+    <script src="js/config.js?v=1"></script>
+    <script src="js/security.js?v=5"></script>
+    <script src="js/catalog.js?v=1"></script>
+    <script src="js/site.js?v=1"></script>
     <!--
       Test helpers: only load when explicitly opted in.
       Production users never get this script. Playwright sets `?test=1` or runs
@@ -474,6 +473,10 @@
       If you change three version or add addons, re-run the build.
     -->
     <script type="module" src="js/app.js?v=11"></script>
+    <script type="module">
+      import { initThreeHero } from './js/three-hero.js';
+      document.addEventListener('DOMContentLoaded', () => initThreeHero('hero-3d-container'));
+    </script>
 </body>
 
 </html>
