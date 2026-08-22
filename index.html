@@ -92,12 +92,11 @@
     <meta name="geo.placename" content="Amraiwadi, Ahmedabad">
 
     <link rel="icon" href="assets/pizjo_logo-128.webp" type="image/webp">
-    <link rel="preload" as="image" href="assets/pizza_hero-600.webp" imagesrcset="assets/pizza_hero-600.webp 600w, assets/pizza_hero-900.webp 900w" imagesizes="(max-width: 768px) 170px, 635px" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/pizza_hero-300.webp" imagesrcset="assets/pizza_hero-300.webp 300w, assets/pizza_hero-600.webp 600w, assets/pizza_hero-900.webp 900w" imagesizes="(max-width: 768px) 170px, 635px" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800;900&family=Hanken+Grotesk:wght@500;700&display=swap"
-        rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800;900&family=Hanken+Grotesk:wght@500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800;900&family=Hanken+Grotesk:wght@500;700&display=swap"></noscript>
     <link rel="stylesheet" href="css/tokens.css?v=5">
     <link rel="stylesheet" href="css/global.css?v=5">
     <link rel="stylesheet" href="css/home.css?v=5">
@@ -115,7 +114,7 @@
     <nav class="navbar" role="navigation" aria-label="Primary">
         <div class="container nav-container">
             <a href="./" class="nav-brand" aria-label="Pizjo home">
-                <img src="assets/pizjo_logo.webp" alt="Pizjo Logo" class="brand-logo">
+                <img src="assets/pizjo_logo-128.webp" alt="Pizjo Logo" class="brand-logo" width="37" height="37" decoding="async" fetchpriority="high">
                 <span class="brand-text">PIZJO!</span>
             </a>
             <div class="nav-links" id="nav-links">
@@ -194,7 +193,7 @@
             </div>
 
             <div class="container hero-grid">
-                <div class="hero-content animate-on-scroll">
+                <div class="hero-content">
                     <div class="hero-eyebrow scribble-text">WARNING!</div>
                     <div class="hero-hours-badge" style="display: inline-flex; align-items: center; gap: var(--space-xs); background: var(--amber-neon); color: var(--umber-raw); padding: var(--space-xs) var(--space-md); border-radius: var(--radius-full); font-size: var(--text-sm); font-weight: 900; font-family: var(--font-display); margin-bottom: var(--space-md); box-shadow: var(--shadow-grunge);">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
@@ -213,11 +212,12 @@
                     </div>
                 </div>
 
-                <div class="hero-visual animate-on-scroll">
+                <div class="hero-visual">
                     <div class="hero-visual-box">
                         <div id="hero-3d-container" class="hero-3d-container" aria-hidden="true"></div>
+                        <div class="skeleton hero-skeleton" id="hero-skeleton" aria-hidden="true"></div>
                         <!-- Static Pizza Image - WebP with srcset -->
-                        <img id="hero-poster" src="assets/pizza_hero-600.webp" srcset="assets/pizza_hero-600.webp 600w, assets/pizza_hero-900.webp 900w" sizes="(max-width: 768px) 170px, 635px" alt="Freshly baked pure-vegetarian pizza at Pizjo" class="hero-pizza-img" width="600" height="600" fetchpriority="high" decoding="async">
+                        <img id="hero-poster" src="assets/pizza_hero-300.webp" srcset="assets/pizza_hero-300.webp 300w, assets/pizza_hero-600.webp 600w, assets/pizza_hero-900.webp 900w" sizes="(max-width: 768px) 170px, 635px" alt="Freshly baked pure-vegetarian pizza at Pizjo" class="hero-pizza-img" width="300" height="300" fetchpriority="high" decoding="async" style="opacity:0;transition:opacity 0.4s ease" onload="this.style.opacity=1;document.getElementById('hero-skeleton')?.remove()">
                     </div>
                     <div class="badge"
                         style="position: absolute; bottom: -20px; right: -20px; font-size: var(--text-2xl); transform: rotate(-10deg);">
@@ -291,8 +291,21 @@
                     </div>
                     <a href="pages/menu.html" class="btn btn-secondary" style="transform: rotate(-2deg); font-size: var(--text-lg);">View Full Menu →</a>
                 </div>
-                <div class="categories-filter animate-on-scroll" id="categories-filter"></div>
-                <div class="menu-grid" id="menu-grid"></div>
+                <div class="categories-filter animate-on-scroll" id="categories-filter">
+                    <div class="skeleton" style="height:36px;width:90px;display:inline-block;margin-right:8px"></div>
+                    <div class="skeleton" style="height:36px;width:110px;display:inline-block;margin-right:8px"></div>
+                    <div class="skeleton" style="height:36px;width:85px;display:inline-block"></div>
+                </div>
+                <div class="menu-grid" id="menu-grid">
+                    <div class="skeleton-grid" id="menu-skeleton" aria-hidden="true">
+                        <div class="skeleton-card"><div class="skeleton skeleton-img" style="height:160px"></div><div class="skeleton skeleton-text long"></div><div class="skeleton skeleton-text short"></div><div class="skeleton" style="height:36px"></div></div>
+                        <div class="skeleton-card"><div class="skeleton skeleton-img" style="height:160px"></div><div class="skeleton skeleton-text long"></div><div class="skeleton skeleton-text short"></div><div class="skeleton" style="height:36px"></div></div>
+                        <div class="skeleton-card"><div class="skeleton skeleton-img" style="height:160px"></div><div class="skeleton skeleton-text long"></div><div class="skeleton skeleton-text short"></div><div class="skeleton" style="height:36px"></div></div>
+                        <div class="skeleton-card"><div class="skeleton skeleton-img" style="height:160px"></div><div class="skeleton skeleton-text long"></div><div class="skeleton skeleton-text short"></div><div class="skeleton" style="height:36px"></div></div>
+                        <div class="skeleton-card"><div class="skeleton skeleton-img" style="height:160px"></div><div class="skeleton skeleton-text long"></div><div class="skeleton skeleton-text short"></div><div class="skeleton" style="height:36px"></div></div>
+                        <div class="skeleton-card"><div class="skeleton skeleton-img" style="height:160px"></div><div class="skeleton skeleton-text long"></div><div class="skeleton skeleton-text short"></div><div class="skeleton" style="height:36px"></div></div>
+                    </div>
+                </div>
                 <div style="text-align: center; margin-top: var(--space-3xl);">
                     <a href="pages/menu.html" class="btn btn-primary animate-on-scroll" style="font-size: var(--text-xl); padding: var(--space-lg) var(--space-3xl);">Browse All 155+ Items</a>
                 </div>
