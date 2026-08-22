@@ -1,0 +1,47 @@
+{
+  "name": "pizjo-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Pizjo",
+  "description": "Standalone offline Windows restaurant operations application for Pizjo.",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test test/data-store.test.cjs",
+    "test:e2e": "node test/desktop-e2e.cjs",
+    "smoke": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File test\\launch-smoke.ps1",
+    "pack:dir": "electron-builder --win --dir",
+    "dist": "electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "in.pizjo.desktop",
+    "productName": "Pizjo Admin",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.cjs",
+      "preload.cjs",
+      "data-store.cjs",
+      "renderer/**",
+      "data/menu.json",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^37.2.6",
+    "electron-builder": "^26.0.12",
+    "playwright": "^1.62.1"
+  }
+}
