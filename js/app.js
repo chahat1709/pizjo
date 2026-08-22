@@ -148,10 +148,15 @@ function renderGrid() {
   const grid = $('menu-grid');
   const cat = State.menu.find((c) => c.name === State.current);
   if (!grid || !cat) return;
+  // Remove skeleton on first render
+  const skel = document.getElementById('menu-skeleton');
+  const catFilter = document.getElementById('categories-filter');
+  if (catFilter) catFilter.querySelectorAll('.skeleton').forEach(el => el.style.display='none');
 
   grid.style.opacity = '0';
   grid.style.transform = 'translateY(8px)';
     setTimeout(() => {
+    if (skel) skel.remove();
     grid.innerHTML = cat.items
       .map(
         (it) => `
@@ -166,7 +171,7 @@ function renderGrid() {
               <p class="product-desc">${Sec.escapeHTML(it.description || '')}</p>
             </div>
             <div class="product-image-container">
-              ${it.image ? `<img src="${Sec.escapeHTML(it.image)}" alt="${Sec.escapeHTML(it.name)}" class="product-image" loading="lazy" referrerpolicy="no-referrer">` : ''}
+              ${it.image ? `<img src="${Sec.escapeHTML(it.image.replace(/w=600/g, 'w=300'))}" srcset="${Sec.escapeHTML(it.image.replace(/w=600/g, 'w=300'))} 300w, ${Sec.escapeHTML(it.image)} 600w" sizes="(max-width:480px) 155px, 180px" alt="${Sec.escapeHTML(it.name)}" class="product-image" loading="lazy" decoding="async" width="300" height="200" referrerpolicy="no-referrer">` : ''}
             </div>
             <div class="product-footer">
               <span class="product-price" style="font-size: 1.5rem;">${fmtPrice(it.price)}</span>
