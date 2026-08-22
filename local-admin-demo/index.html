@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>Pizjo Admin — Local Test Mode</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="offline-ribbon">LOCAL TEST MODE · NO LOGIN · DATA STAYS IN THIS BROWSER</div>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#dashboard" aria-label="Pizjo Admin home">
+          <img src="assets/pizjo_logo.webp" alt="Pizjo" />
+          <span>OPS<br /><em>LOCAL</em></span>
+        </a>
+        <nav id="main-nav" aria-label="Admin navigation">
+          <a href="#dashboard" data-route="dashboard">Dashboard</a>
+          <a href="#orders" data-route="orders">Orders</a>
+          <a href="#sales" data-route="sales">Sales</a>
+          <a href="#inventory" data-route="inventory">Inventory</a>
+          <a href="#menu" data-route="menu">Menu</a>
+          <a href="#offers" data-route="offers">Offers</a>
+          <a href="#billing" data-route="billing">Billing</a>
+          <a href="#team" data-route="team">Team</a>
+          <a href="#social" data-route="social">Social</a>
+        </nav>
+        <div class="sidebar-foot">
+          <strong>Test-safe workspace</strong>
+          <p>No production orders, offers, stock, logins, or customer data are used here.</p>
+          <button class="btn btn-outline" id="reset-demo">Reset local demo data</button>
+        </div>
+      </aside>
+      <main class="workspace">
+        <header class="topbar">
+          <div><p class="eyebrow">PIZJO COMMAND CENTER</p><h1 id="page-title">Dashboard</h1></div>
+          <div class="top-actions"><span class="test-badge">Offline local demo</span><button id="quick-order" class="btn">+ Test order</button></div>
+        </header>
+        <section id="notice" aria-live="polite"></section>
+        <section id="app" aria-live="polite"><div class="loading">Loading local Pizjo workspace…</div></section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+# Project TODO
+
+- [x] Define database entities and relationships for 81 catalog items across 11 categories, orders, order lines, inventory, menu availability, invoices, employees, shifts, activity events, social accounts, and social posts.
+- [x] Enforce authenticated admin-only access through protected tRPC procedures and server-side role checks.
+- [x] Implement a dashboard landing page with today’s revenue, order count, low-stock alerts, and recent-order feed.
+- [x] Build order intake for WhatsApp orders, including validated item lines, payment data, notes, status transitions, filters by date and status, and order history.
+- [x] Build sales reporting with daily, weekly, and monthly revenue summaries, top-selling items, order counts, and average order value charts built with Recharts.
+- [x] Implement inventory levels, low-stock thresholds, stock movements, and per-menu-item out-of-stock controls.
+- [ ] Verify the live out-of-stock rendering, disabled add-to-cart control, and checkout guard with a temporarily unavailable admin menu item, then restore its availability.
+- [x] Implement menu management for reviewing, adding, editing, categorizing, pricing, and toggling the availability of menu items.
+- [x] Implement bill and invoice creation with INR line items, totals, printable layout, and safe invoice numbering.
+- [x] Implement employee profiles, admin/staff roles, shift scheduling, safe deactivation, and immutable activity logging for operational actions.
+- [x] Implement editable social account directory, external platform links, and editable post idea/caption records with draft, scheduled, and published states.
+- [x] Build responsive, accessible dashboard navigation and management pages using the provided DashboardLayout component.
+- [x] Add positive-path integration coverage inside the protected admin project for successful order creation, inventory adjustment, and invoice issuance without contaminating production operating data.
+- [x] Add and run an isolated Windows local-demo browser test covering local order creation, inventory availability, invoice generation, and no production-service requests.
+- [x] Complete the production-readiness report after published admin and storefront availability integration are verified.
+- [ ] Create a final project checkpoint after all completed items are marked done.
+- [x] Match the admin panel’s visual system, navigation, typography, surfaces, buttons, and operational language to the existing Pizjo storefront design.
+- [x] Verify the matched admin design at desktop and mobile breakpoints without affecting secure operational workflows.
+- [x] Define and implement protected offer campaigns with discount types, date windows, eligibility settings, active/paused state, and safe storefront display data.
+- [x] Build a storefront-matched Offers workspace with campaign creation, editing, activation controls, filtering, and navigation access.
+- [x] Add automated offer-rule coverage and verify the offers workspace on desktop and mobile.
+- [x] Configure the Pizjo storefront to retrieve and render availability data from the published admin service.
+- [x] Configure the Pizjo storefront to retrieve and render active offer campaigns from the published admin service.
+- [x] Verify the published cross-origin feeds, storefront fallback behavior, and live customer-facing integration.
+- [x] Document the current cloud dependencies and define an offline-safe local testing boundary that does not alter production data.
+- [x] Create a local-run workflow for reviewing the Pizjo Admin interface and protected business rules without requiring a live business login.
+- [x] Validate the local test workflow on the connected Windows computer and document the later online-rollout steps.
+- [x] Build the selected offline demo mode with no business-login requirement and browser-local, resettable Pizjo test data.
+- [x] Provide a Windows launcher and concise local testing guide while preventing the demo from calling production admin or storefront services.
+- [x] Confirm the saved offline/local-run documentation artifact before the final handoff checkpoint.
+- [ ] Consolidate the verified local offline admin-demo, storefront integration, tests, and documentation in the Pizjo GitHub repository.
+- [ ] Validate, commit, and push the consolidated Pizjo repository changes to the configured GitHub remote.
