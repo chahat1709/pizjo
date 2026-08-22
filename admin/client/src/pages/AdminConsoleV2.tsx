@@ -1,0 +1,95 @@
+import LegacyAdminConsole, { MenuPage, OrdersPage, SalesPage, SocialPage, TeamPage } from "@/pages/AdminConsole";
+import OffersPage from "@/pages/OffersPage";
+import DashboardLayout from "@/components/DashboardLayout";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { trpc } from "@/lib/trpc";
+import { Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { CalendarRange, PencilLine, Save, UsersRound } from "lucide-react";
+import { useMemo, useState } from "react";
+import { toast } from "sonner";
+import { useLocation } from "wouter";
+
+type OrderStatus = "pending" | "preparing" | "ready" | "delivered" | "cancelled";
+type SocialPlatform = "instagram" | "facebook" | "zomato" | "whatsapp";
+const statusOptions: Array<"all" | OrderStatus> = ["all", "pending", "preparing", "ready", "delivered", "cancelled"];
+const money = (paise: number) => new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format((paise ?? 0) / 100);
+const toStart = (value: string) => value ? new Date(`${value}T00:00:00`) : undefined;
+const toEnd = (value: string) => value ? new Date(`${value}T23:59:59.999`) : undefined;
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return <div className="grid gap-2"><Label>{label}</Label>{children}</div>;
+}
+
+function EnhancementShell({ children }: { children: React.ReactNode }) {
+  return <DashboardLayout>{children}</DashboardLayout>;
+}
+
+function OrderDateHistory() {
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [status, setStatus] = useState<"all" | OrderStatus>("all");
+  const input = useMemo(() => ({ from: toStart(from), to: toEnd(to), status: status === "all" ? undefined : status }), [from, to, status]);
+  const history = trpc.admin.orders.list.useQuery(input);
+  return <Card className="mt-6"><CardHeader><CardTitle className="flex items-center gap-2 text-base"><CalendarRange className="h-4 w-4 text-primary" />Filterable order history</CardTitle><CardDescription>Combine date range and status filters for kitchen, delivery, and reconciliation review.</CardDescription></CardHeader><CardContent><div className="grid gap-3 md:grid-cols-3"><Field label="From"><Input type="date" value={from} onChange={event => setFrom(event.target.value)} /></Field><Field label="To"><Input type="date" value={to} onChange={event => setTo(event.target.value)} /></Field><Field label="Status"><Select value={status} onValueChange={value => setStatus(value as typeof status)}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{statusOptions.map(option => <SelectItem key={option} value={option} className="capitalize">{option}</SelectItem>)}</SelectContent></Select></Field></div><div className="mt-5 divide-y divide-border rounded-xl border border-border">{history.isLoading ? <p className="p-5 text-sm text-muted-foreground">Loading matching orders…</p> : history.data?.length ? history.data.map(order => <div className="flex flex-col gap-2 p-4 sm:flex-row sm:items-center sm:justify-between" key={order.id}><div><p className="font-medium">{order.orderNumber} <span className="ml-2 text-sm font-normal text-muted-foreground">{order.customerName || "Walk-in customer"}</span></p><p className="mt-1 text-xs text-muted-foreground">{new Date(order.placedAt).toLocaleString("en-IN")} · {order.items.map(item => `${item.quantity}× ${item.itemName}`).join(", ")}</p></div><div className="flex items-center gap-3"><Badge variant="outline" className="capitalize">{order.status}</Badge><p className="font-semibold">{money(order.totalPaise)}</p></div></div>) : <p className="p-5 text-sm text-muted-foreground">No stored orders match this date and status selection.</p>}</div></CardContent></Card>;
+}
+
+function OrdersEnhanced() { return <><OrdersPage /><OrderDateHistory /></>; }
+
+function SalesEnhanced() {
+  const summary = trpc.admin.sales.summary.useQuery();
+  const range = useMemo(() => { const to = new Date(); const from = new Date(); from.setDate(to.getDate() - 29); from.setHours(0, 0, 0, 0); return { from, to }; }, []);
+  const report = trpc.admin.sales.report.useQuery(range);
+  const chartData = useMemo(() => (report.data?.daily ?? []).map(point => ({ ...point, averageOrderValuePaise: point.orders ? Math.round(point.revenuePaise / point.orders) : 0 })), [report.data]);
+  return <><SalesPage /><div className="mt-6 grid gap-4 md:grid-cols-3"><Kpi label="Today" value={money(summary.data?.dailyRevenuePaise ?? 0)} /><Kpi label="Last 7 days" value={money(summary.data?.weeklyRevenuePaise ?? 0)} /><Kpi label="This month" value={money(summary.data?.monthlyRevenuePaise ?? 0)} /></div><div className="mt-6 grid gap-6 xl:grid-cols-2"><ReportChart title="Daily order count" data={chartData} dataKey="orders" type="bar" formatter={value => `${value} orders`} /><ReportChart title="Daily average order value" data={chartData} dataKey="averageOrderValuePaise" type="line" formatter={value => money(Number(value))} /></div></>;
+}
+
+function Kpi({ label, value }: { label: string; value: string }) { return <Card><CardContent className="p-5"><p className="text-sm text-muted-foreground">{label} revenue</p><p className="mt-2 text-2xl font-semibold">{value}</p><p className="mt-2 text-xs text-muted-foreground">Delivered orders only</p></CardContent></Card>; }
+function ReportChart({ title, data, dataKey, type, formatter }: { title: string; data: Array<Record<string, number | string>>; dataKey: string; type: "bar" | "line"; formatter: (value: number | string) => string }) { return <Card><CardHeader><CardTitle className="text-base">{title}</CardTitle><CardDescription>Last 30 days of stored, delivered order data.</CardDescription></CardHeader><CardContent>{data.length ? <ResponsiveContainer width="100%" height={260}>{type === "bar" ? <BarChart data={data}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="date" tickFormatter={value => String(value).slice(5)} /><YAxis allowDecimals={false} /><Tooltip formatter={formatter} /><Bar dataKey={dataKey} fill="var(--chart-3)" radius={[6, 6, 0, 0]} /></BarChart> : <LineChart data={data}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="date" tickFormatter={value => String(value).slice(5)} /><YAxis tickFormatter={value => `₹${Math.round(value / 100)}`} /><Tooltip formatter={formatter} /><Line type="monotone" dataKey={dataKey} stroke="var(--chart-4)" strokeWidth={3} dot={false} /></LineChart>}</ResponsiveContainer> : <p className="py-16 text-center text-sm text-muted-foreground">No delivered orders exist for this report period.</p>}</CardContent></Card>; }
+
+function MenuEditor() {
+  const menu = trpc.admin.catalog.list.useQuery();
+  const categories = trpc.admin.catalog.categories.useQuery();
+  const [id, setId] = useState("");
+  const selected = menu.data?.find(item => item.id === Number(id));
+  const [name, setName] = useState(""); const [description, setDescription] = useState(""); const [price, setPrice] = useState(""); const [categoryId, setCategoryId] = useState("");
+  const utils = trpc.useUtils();
+  const update = trpc.admin.catalog.update.useMutation({ onSuccess: () => { utils.admin.catalog.list.invalidate(); toast.success("Menu item updated"); }, onError: error => toast.error(error.message) });
+  const selectItem = (value: string) => { setId(value); const item = menu.data?.find(entry => entry.id === Number(value)); if (item) { setName(item.name); setDescription(item.description || ""); setPrice(String(item.pricePaise / 100)); setCategoryId(String(item.categoryId)); } };
+  return <Card className="mt-6"><CardHeader><CardTitle className="flex items-center gap-2 text-base"><PencilLine className="h-4 w-4 text-primary" />Edit existing menu item</CardTitle><CardDescription>Update item details, category, price, and availability while retaining the stable catalog identifier.</CardDescription></CardHeader><CardContent><div className="grid gap-4 lg:grid-cols-5"><Field label="Menu item"><Select value={id} onValueChange={selectItem}><SelectTrigger><SelectValue placeholder="Select item" /></SelectTrigger><SelectContent>{menu.data?.map(item => <SelectItem key={item.id} value={String(item.id)}>{item.name}</SelectItem>)}</SelectContent></Select></Field><Field label="Name"><Input value={name} onChange={event => setName(event.target.value)} disabled={!selected} /></Field><Field label="Price (₹)"><Input type="number" min="0" value={price} onChange={event => setPrice(event.target.value)} disabled={!selected} /></Field><Field label="Category"><Select value={categoryId} onValueChange={setCategoryId} disabled={!selected}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{categories.data?.map(category => <SelectItem key={category.id} value={String(category.id)}>{category.name}</SelectItem>)}</SelectContent></Select></Field><div className="flex items-end"><Button className="w-full" disabled={!selected || !name || !price || !categoryId || update.isPending} onClick={() => selected && update.mutate({ id: selected.id, name, description: description || null, pricePaise: Math.round(Number(price) * 100), categoryId: Number(categoryId) })}><Save className="mr-2 h-4 w-4" />Save edits</Button></div></div><div className="mt-4"><Field label="Description"><Textarea value={description} onChange={event => setDescription(event.target.value)} disabled={!selected} /></Field></div></CardContent></Card>;
+}
+
+function MenuEnhanced() { return <><MenuPage /><MenuEditor /></>; }
+
+function TeamEditor() {
+  const employees = trpc.admin.employees.list.useQuery();
+  const [id, setId] = useState(""); const selected = employees.data?.find(employee => employee.id === Number(id)); const [fullName, setFullName] = useState(""); const [phone, setPhone] = useState(""); const [email, setEmail] = useState(""); const [jobTitle, setJobTitle] = useState(""); const [accessRole, setAccessRole] = useState<"admin" | "staff">("staff"); const [isActive, setIsActive] = useState(true);
+  const utils = trpc.useUtils(); const save = trpc.admin.employees.save.useMutation({ onSuccess: () => { utils.admin.employees.list.invalidate(); toast.success("Employee profile updated"); }, onError: error => toast.error(error.message) });
+  const selectEmployee = (value: string) => { setId(value); const employee = employees.data?.find(entry => entry.id === Number(value)); if (employee) { setFullName(employee.fullName); setPhone(employee.phone || ""); setEmail(employee.email || ""); setJobTitle(employee.jobTitle || ""); setAccessRole(employee.accessRole); setIsActive(employee.isActive); } };
+  return <Card className="mt-6"><CardHeader><CardTitle className="flex items-center gap-2 text-base"><UsersRound className="h-4 w-4 text-primary" />Manage existing employee</CardTitle><CardDescription>Update profile details, role, and active status. A matching authenticated email is linked and assigned the chosen access role.</CardDescription></CardHeader><CardContent><div className="grid gap-4 md:grid-cols-3"><Field label="Employee"><Select value={id} onValueChange={selectEmployee}><SelectTrigger><SelectValue placeholder="Select employee" /></SelectTrigger><SelectContent>{employees.data?.map(employee => <SelectItem key={employee.id} value={String(employee.id)}>{employee.fullName}</SelectItem>)}</SelectContent></Select></Field><Field label="Full name"><Input value={fullName} onChange={event => setFullName(event.target.value)} disabled={!selected} /></Field><Field label="Job title"><Input value={jobTitle} onChange={event => setJobTitle(event.target.value)} disabled={!selected} /></Field><Field label="Phone"><Input value={phone} onChange={event => setPhone(event.target.value)} disabled={!selected} /></Field><Field label="Email"><Input value={email} onChange={event => setEmail(event.target.value)} disabled={!selected} /></Field><Field label="Access role"><Select value={accessRole} onValueChange={value => setAccessRole(value as typeof accessRole)} disabled={!selected}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="staff">Staff</SelectItem><SelectItem value="admin">Admin</SelectItem></SelectContent></Select></Field><Field label="Profile status"><Select value={isActive ? "active" : "inactive"} onValueChange={value => setIsActive(value === "active")} disabled={!selected}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="active">Active</SelectItem><SelectItem value="inactive">Inactive / removed</SelectItem></SelectContent></Select></Field><div className="flex items-end"><Button className="w-full" disabled={!selected || !fullName || save.isPending} onClick={() => selected && save.mutate({ id: selected.id, fullName, phone: phone || null, email: email || null, jobTitle: jobTitle || null, accessRole, isActive })}><Save className="mr-2 h-4 w-4" />Save profile</Button></div></div></CardContent></Card>;
+}
+
+function TeamEnhanced() { return <><TeamPage /><TeamEditor /></>; }
+
+function SocialEditor() {
+  const accounts = trpc.admin.social.accounts.useQuery(); const posts = trpc.admin.social.posts.useQuery(); const [accountId, setAccountId] = useState(""); const [postId, setPostId] = useState(""); const account = accounts.data?.find(item => item.id === Number(accountId)); const post = posts.data?.find(item => item.id === Number(postId));
+  const [handle, setHandle] = useState(""); const [url, setUrl] = useState(""); const [accountActive, setAccountActive] = useState(true); const [title, setTitle] = useState(""); const [caption, setCaption] = useState(""); const [postStatus, setPostStatus] = useState<"draft" | "scheduled" | "published">("draft"); const [scheduledAt, setScheduledAt] = useState("");
+  const utils = trpc.useUtils(); const saveAccount = trpc.admin.social.saveAccount.useMutation({ onSuccess: () => { utils.admin.social.accounts.invalidate(); toast.success("Social account updated"); }, onError: error => toast.error(error.message) }); const savePost = trpc.admin.social.savePost.useMutation({ onSuccess: () => { utils.admin.social.posts.invalidate(); toast.success("Post updated"); }, onError: error => toast.error(error.message) });
+  const selectAccount = (value: string) => { setAccountId(value); const record = accounts.data?.find(item => item.id === Number(value)); if (record) { setHandle(record.handle); setUrl(record.url); setAccountActive(record.isActive); } };
+  const selectPost = (value: string) => { setPostId(value); const record = posts.data?.find(item => item.id === Number(value)); if (record) { setTitle(record.title); setCaption(record.caption); setPostStatus(record.status); setScheduledAt(record.scheduledAt ? new Date(record.scheduledAt).toISOString().slice(0, 16) : ""); } };
+  return <div className="mt-6 grid gap-6 xl:grid-cols-2"><Card><CardHeader><CardTitle className="text-base">Edit linked account</CardTitle><CardDescription>Change handle, public URL, or active state for a platform.</CardDescription></CardHeader><CardContent className="space-y-4"><Field label="Account"><Select value={accountId} onValueChange={selectAccount}><SelectTrigger><SelectValue placeholder="Select account" /></SelectTrigger><SelectContent>{accounts.data?.map(item => <SelectItem key={item.id} value={String(item.id)} className="capitalize">{item.platform}</SelectItem>)}</SelectContent></Select></Field><Field label="Handle"><Input value={handle} onChange={event => setHandle(event.target.value)} disabled={!account} /></Field><Field label="Public URL"><Input value={url} onChange={event => setUrl(event.target.value)} disabled={!account} /></Field><Field label="Account state"><Select value={accountActive ? "active" : "inactive"} onValueChange={value => setAccountActive(value === "active")} disabled={!account}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="active">Active</SelectItem><SelectItem value="inactive">Inactive</SelectItem></SelectContent></Select></Field><Button disabled={!account || !handle || !url || saveAccount.isPending} onClick={() => account && saveAccount.mutate({ platform: account.platform, handle, url, isActive: accountActive })}><Save className="mr-2 h-4 w-4" />Save account</Button></CardContent></Card><Card><CardHeader><CardTitle className="text-base">Edit post record</CardTitle><CardDescription>Maintain draft, scheduled, and published content states without automatic posting.</CardDescription></CardHeader><CardContent className="space-y-4"><Field label="Post"><Select value={postId} onValueChange={selectPost}><SelectTrigger><SelectValue placeholder="Select post" /></SelectTrigger><SelectContent>{posts.data?.map(item => <SelectItem key={item.id} value={String(item.id)}>{item.title}</SelectItem>)}</SelectContent></Select></Field><Field label="Title"><Input value={title} onChange={event => setTitle(event.target.value)} disabled={!post} /></Field><Field label="Caption"><Textarea value={caption} onChange={event => setCaption(event.target.value)} disabled={!post} /></Field><div className="grid gap-4 sm:grid-cols-2"><Field label="Status"><Select value={postStatus} onValueChange={value => setPostStatus(value as typeof postStatus)} disabled={!post}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{["draft", "scheduled", "published"].map(value => <SelectItem key={value} value={value} className="capitalize">{value}</SelectItem>)}</SelectContent></Select></Field><Field label="Scheduled time"><Input type="datetime-local" value={scheduledAt} onChange={event => setScheduledAt(event.target.value)} disabled={!post || postStatus !== "scheduled"} /></Field></div><Button disabled={!post || !title || !caption || savePost.isPending} onClick={() => post && savePost.mutate({ id: post.id, socialAccountId: post.socialAccountId, platform: post.platform, title, caption, status: postStatus, scheduledAt: scheduledAt ? new Date(scheduledAt) : null })}><Save className="mr-2 h-4 w-4" />Save post</Button></CardContent></Card></div>;
+}
+
+function SocialEnhanced() { return <><SocialPage /><SocialEditor /></>; }
+
+export default function AdminConsoleV2() {
+  const [location] = useLocation();
+  if (location.startsWith("/invoice/") || location === "/inventory" || location === "/invoices" || location === "/") return <LegacyAdminConsole />;
+  const content = location === "/orders" ? <OrdersEnhanced /> : location === "/sales" ? <SalesEnhanced /> : location === "/menu" ? <MenuEnhanced /> : location === "/offers" ? <OffersPage /> : location === "/team" ? <TeamEnhanced /> : location === "/social" ? <SocialEnhanced /> : <LegacyAdminConsole />;
+  return <EnhancementShell>{content}</EnhancementShell>;
+}
