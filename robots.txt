@@ -1,13 +1,8 @@
-# Pizjo robots.txt
+# Pizjo public storefront crawl policy
 User-agent: *
 Allow: /
 
-Sitemap: https://pizjo.vercel.app/sitemap.xml
-
-# Disallow admin/internal paths
-Disallow: /js/
-Disallow: /css/
-Disallow: /assets/
+# Keep private/internal implementation paths out of search results.
 Disallow: /data/
 Disallow: /pages/legal.html
 Disallow: /sw/
@@ -17,3 +12,5 @@ Disallow: /check-glb.js
 Disallow: /package.json
 Disallow: /package-lock.json
 Disallow: /.vercelignore
+
+Sitemap: https://pizjo.vercel.app/sitemap.xml
