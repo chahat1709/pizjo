@@ -1,0 +1,16 @@
+{
+  "name": "Pizjo — Pure Veg Pizza in Ahmedabad",
+  "short_name": "Pizjo",
+  "description": "Browse the Pizjo pure vegetarian menu in Amraiwadi, Ahmedabad and order on WhatsApp.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF8E8",
+  "theme_color": "#FFBF00",
+  "icons": [
+    {
+      "src": "/assets/pizjo_logo-128.webp",
+      "sizes": "128x128",
+      "type": "image/webp"
+    }
+  ]
+}
