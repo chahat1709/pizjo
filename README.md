@@ -45,16 +45,21 @@ npm run build:assets
 
 Cart data is stored locally in the browser under `pizjo.cart.v2`. Orders and contact requests are handed off to the business WhatsApp account only after the user chooses to submit. Optional telemetry is disabled by default and is available only to designated staging builds after explicit consent.
 
+## Handover
+Full system + website handover package: see `docs/HANDOFF.md` (master) + `docs/CREDENTIALS_TEMPLATE.md` (fill after payment). Live: Storefront `https://pizjo.vercel.app` + Admin `https://pizjoadmin-9mxbkqqm.manus.space` + Local demo `local-admin-demo/start-local.cmd`.
+
 ## Project structure
 
 - `index.html`: homepage and primary conversion flow.
-- `pages/`: full menu, about, contact, and legal pages.
+- `pages/`: full menu, about, contact, and legal pages + `404.html` `robots.txt` `sitemap.xml`.
 - `js/app.js`: shared boot logic, stable-ID cart, menu loading, service-worker registration, and trusted checkout handoff.
 - `js/catalog.js`: shared catalog loading, normalization, stable IDs, and catalog lookup.
 - `js/site.js`: shared business-link hydration, WhatsApp handoff forms, and mobile navigation.
 - `js/security.js`: escaping, validation, rate limiting, cart normalization, and external-link hardening.
-- `js/config.js`: shared public business configuration.
+- `js/config.js`: shared public business configuration (`whatsappNumber`, `adminBaseUrl`).
 - `api/order-summary.js`: server-side catalog-backed order validation and total calculation.
-- `data/menu.json`: menu content source.
+- `data/menu.json`: menu content source (81 items).
+- `admin/`: protected admin app (client/server/drizzle) + feeds `api/storefront/*`.
+- `local-admin-demo/` + `local-admin-desktop/`: offline demo + Electron desktop.
 - `sw/service-worker.js`: versioned asset and image caching.
 - `tests/e2e/`: active Playwright regression suite.
