@@ -1000,7 +1000,13 @@ button:disabled,
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: var(--space-xl);
 }
-.hero-skeleton { position: absolute; inset: 0; border-radius: 0; }
+.hero-skeleton { position: absolute; inset: 0; border-radius: 0; animation: none; background: #E8E0D0; }
+
+/* ── Below-fold rendering (cuts style/layout work on first paint) ── */
+.reviews-section, .offers-section, #cafe, .footer {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
+}
 @media (prefers-reduced-motion: reduce) {
     .skeleton, .skeleton-img { animation: none; background: #E8E0D0; }
 }

@@ -171,7 +171,7 @@ function renderGrid() {
               <p class="product-desc">${Sec.escapeHTML(it.description || '')}</p>
             </div>
             <div class="product-image-container">
-              ${it.image ? `<img src="${Sec.escapeHTML(it.image.replace(/w=600/g, 'w=300'))}" srcset="${Sec.escapeHTML(it.image.replace(/w=600/g, 'w=300'))} 300w, ${Sec.escapeHTML(it.image)} 600w" sizes="(max-width:480px) 155px, 180px" alt="${Sec.escapeHTML(it.name)}" class="product-image" loading="lazy" decoding="async" width="300" height="200" referrerpolicy="no-referrer">` : ''}
+              ${it.image ? `<img src="${Sec.escapeHTML(it.image.replace(/w=600/g, 'w=300').replace(/fm=jpg/g, 'fm=webp').replace(/q=80/g, 'q=60'))}" srcset="${Sec.escapeHTML(it.image.replace(/w=600/g, 'w=300').replace(/fm=jpg/g, 'fm=webp').replace(/q=80/g, 'q=60'))} 300w, ${Sec.escapeHTML(it.image.replace(/fm=jpg/g, 'fm=webp').replace(/q=80/g, 'q=60'))} 600w" sizes="(max-width:480px) 155px, 180px" alt="${Sec.escapeHTML(it.name)}" class="product-image" loading="lazy" decoding="async" width="300" height="200" referrerpolicy="no-referrer">` : ''}
             </div>
             <div class="product-footer">
               <span class="product-price" style="font-size: 1.5rem;">${fmtPrice(it.price)}</span>

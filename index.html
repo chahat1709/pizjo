@@ -227,7 +227,7 @@
                         <div id="hero-3d-container" class="hero-3d-container" aria-hidden="true"></div>
                         <div class="skeleton hero-skeleton" id="hero-skeleton" aria-hidden="true"></div>
                         <!-- Static Pizza Image - WebP with srcset -->
-                        <img id="hero-poster" src="assets/pizza_hero-300.webp" srcset="assets/pizza_hero-300.webp 300w, assets/pizza_hero-600.webp 600w, assets/pizza_hero-900.webp 900w" sizes="(max-width: 768px) 170px, 635px" alt="Freshly baked pure-vegetarian pizza at Pizjo" class="hero-pizza-img" width="300" height="300" fetchpriority="high" decoding="async" style="opacity:0;transition:opacity 0.4s ease" onload="this.style.opacity=1;document.getElementById('hero-skeleton')?.remove()">
+                        <img id="hero-poster" src="assets/pizza_hero-300.webp" srcset="assets/pizza_hero-300.webp 300w, assets/pizza_hero-600.webp 600w, assets/pizza_hero-900.webp 900w" sizes="(max-width: 768px) 170px, 635px" alt="Freshly baked pure-vegetarian pizza at Pizjo" class="hero-pizza-img" width="300" height="300" fetchpriority="high" decoding="sync" style="opacity:1" onload="document.getElementById('hero-skeleton')?.remove()">
                     </div>
                     <div class="badge"
                         style="position: absolute; bottom: -20px; right: -20px; font-size: var(--text-2xl); transform: rotate(-10deg);">
