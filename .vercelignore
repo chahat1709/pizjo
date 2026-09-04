@@ -10,7 +10,16 @@ playwright-report
 .gemini
 docs
 tools
+scripts
+tests
+test-results
+playwright-report
+admin
+local-admin-desktop
+local-admin-demo
 assets/source
 assets/verification
 skills-lock.json
 PROJ_V1_AUDIT.md
+SECURITY_AUDIT_REPORT.md
+SECURITY_FIXES_COMPLETE.md

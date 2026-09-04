@@ -18,7 +18,8 @@
   async function requestJSON(url, fallback) {
     if (!url) return fallback;
     try {
-      const response = await fetch(url, { credentials: 'omit', cache: 'no-store' });
+      const signal = typeof AbortSignal !== 'undefined' && AbortSignal.timeout ? AbortSignal.timeout(1500) : undefined;
+      const response = await fetch(url, { credentials: 'omit', cache: 'no-store', signal });
       if (!response.ok) return fallback;
       return await response.json();
     } catch {
