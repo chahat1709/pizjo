@@ -16,8 +16,9 @@ This document is the single source for client handover. Gate the ZIP + this doc 
 ```
 
 ## 2) Storefront — what's built
-- 5 pages: Home (hero + stash menu + offers + hangout + CTA), Full Menu (15 cats, search, 81 items), About, Contact, Legal + `404.html:1` `robots.txt:1` `sitemap.xml:1`
-- Cart `pizjo.cart.v1` localStorage, WhatsApp checkout `js/app.js:316` with server validation `api/order-summary.js:1`
+- 7 pages: Home (hero + stash menu + offers + hangout + CTA), Full Menu (11 cats, search, 81 items), About, Contact, Legal, **Track order** (`pages/track.html:1`), **KDS kitchen screen** (`pages/kds.html:1`, staff-only, noindex) + `404.html:1` `robots.txt:1` `sitemap.xml:1`
+- Cart `pizjo.cart.v3` localStorage, WhatsApp checkout `js/app.js:321` with server validation `api/order-summary.js:1` — **promo engine live** (`data/offers.json:1`: BOGO Tuesdays, LATE20 22:00–24:00 IST, server-validated day/time/mins, unit-tested `tests/unit/order-summary.test.cjs:1`)
+- **Order log** `js/orders.js:1` (`pizjo.orders.v1`): order IDs `PZ-YYYYMMDD-XXXX`, phone tracking, strict status machine, WhatsApp handoff import (`#order=`), GST breakup helper (prices treated as GST-inclusive @5%, CGST 2.5 + SGST 2.5, SAC 9963 — confirm with CA before printing fiscal bills)
 - Security: CSP `vercel.json:11` + `index.html:67`, XSS escape `js/security.js:1`, rate-limit, validation
 - Performance: WebP `assets/pizza_hero-300.webp:1` 21.8KB (vs 915KB PNG), lazy Three `index.html:440` only desktop idle, fonts 2 families non-blocking `index.html:99`, skeleton `css/global.css:968` `index.html:216`
 - Lighthouse mobile 81 (FCP 3.6s, LCP 3.6s, TBT 0, CLS 0)
@@ -45,7 +46,9 @@ Deployed at `pizjoadmin-9mxbkqqm.manus.space`. Env `admin/.env` → `adminBaseUr
 - Google Business Profile (Maps Place ID for `pages/contact.html:163` iframe), WhatsApp Business `+91 92653 70588` in `js/config.js:1`
 
 ## 6) Common tasks for client (no dev needed)
-- Update menu: edit `data/menu.json` or via Admin → Publish → storefront auto-hydrates
+- Update menu: edit `data/menu.json` or via Admin → Publish → storefront auto-hydrates (81 items / 11 categories — marketing copy fixed to match, was falsely "155+/15")
+- KDS: open `pages/kds.html` on the counter tablet (do NOT public-link it), bump Pending → Preparing → Ready → Delivered; import customer orders via pasted tracking link; manual counter orders via + button
+- Track: customers use `pages/track.html` (linked from cart) with order ID + mobile; print thermal bill from there
 - Change price/photo: Admin Console → Catalog → Save, or direct `data/menu.json` push triggers Vercel deploy
 - Add offer: Admin → Offers → Create → appears in `index.html:308` `#live-offers` within 2min, else empty state
 - Update hours/phone: `js/config.js:1` + `index.html:198` badge

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me;">
+
+    <title>KDS — Kitchen Display | Pizjo Staff</title>
+    <meta name="description" content="Pizjo kitchen display system. Staff only.">
+
+    <link rel="icon" href="../assets/pizjo_logo-128.webp" type="image/webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800;900&family=Hanken+Grotesk:wght@500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800;900&family=Hanken+Grotesk:wght@500;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../css/tokens.css?v=5">
+    <link rel="stylesheet" href="../css/global.css?v=5">
+    <style>
+        body { background: #1a1512; color: var(--off-white); }
+        .kds-top { position: sticky; top: 0; z-index: 50; background: var(--umber-raw); border-bottom: 4px solid var(--amber-neon); padding: var(--space-md) var(--space-lg); display: flex; align-items: center; gap: var(--space-md); flex-wrap: wrap; }
+        .kds-top h1 { font-family: var(--font-marker); color: var(--amber-neon); font-size: var(--text-3xl); margin-right: auto; }
+        .kds-clock { font-family: var(--font-display); font-weight: 900; font-size: var(--text-xl); }
+        .kds-btn { background: var(--amber-neon); color: var(--umber-raw); border: 3px solid var(--amber-neon); font-family: var(--font-display); font-weight: 900; padding: var(--space-sm) var(--space-md); cursor: pointer; font-size: var(--text-sm); text-transform: uppercase; }
+        .kds-btn.ghost { background: transparent; color: var(--amber-neon); }
+        .kds-cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); padding: var(--space-lg); align-items: start; }
+        @media (max-width: 900px) { .kds-cols { grid-template-columns: 1fr; } }
+        .kds-col h2 { font-family: var(--font-marker); font-size: var(--text-2xl); padding: var(--space-sm) var(--space-md); margin-bottom: var(--space-md); border: 3px solid; }
+        .kds-col[data-col="pending"] h2 { color: #FFAB91; border-color: #FFAB91; }
+        .kds-col[data-col="preparing"] h2 { color: var(--amber-neon); border-color: var(--amber-neon); }
+        .kds-col[data-col="ready"] h2 { color: #69F0AE; border-color: #69F0AE; }
+        .kds-card { background: #2a2320; border: 3px solid var(--off-white); padding: var(--space-md); margin-bottom: var(--space-md); }
+        .kds-card.late { border-color: #FF5252; }
+        .kds-card-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-sm); }
+        .kds-id { font-family: var(--font-display); font-weight: 900; font-size: var(--text-lg); }
+        .kds-timer { font-family: var(--font-marker); font-size: var(--text-xl); color: var(--amber-neon); }
+        .kds-card.late .kds-timer { color: #FF5252; }
+        .kds-items { margin: var(--space-sm) 0; padding-left: var(--space-lg); }
+        .kds-items li { margin-bottom: 4px; font-weight: 700; }
+        .kds-meta { font-size: var(--text-sm); opacity: .85; }
+        .kds-card-actions { display: flex; gap: var(--space-sm); margin-top: var(--space-md); flex-wrap: wrap; }
+        .kds-empty { opacity: .5; font-weight: 700; padding: var(--space-xl); text-align: center; border: 3px dashed rgba(245,242,235,.3); }
+        .kds-done { padding: var(--space-lg); }
+        .kds-done summary { cursor: pointer; font-weight: 900; font-family: var(--font-display); }
+        dialog { background: var(--off-white); color: var(--umber-raw); border: 4px solid var(--umber-raw); padding: var(--space-2xl); max-width: 480px; width: calc(100% - 32px); }
+        dialog input, dialog select { width: 100%; padding: var(--space-sm) var(--space-md); border: 2px solid var(--umber-raw); margin-bottom: var(--space-md); font-size: var(--text-base); }
+    </style>
+</head>
+<body class="antialiased">
+    <a href="#main" class="skip-to-content">Skip to content</a>
+    <header class="kds-top">
+        <h1>KDS · PIZJO</h1>
+        <span class="kds-clock" id="kds-clock" aria-live="off">--:--</span>
+        <button class="kds-btn ghost" id="kds-sound" type="button" aria-pressed="true">Sound: ON</button>
+        <button class="kds-btn ghost" id="kds-import-btn" type="button">Import link</button>
+        <button class="kds-btn" id="kds-add-btn" type="button">+ Manual order</button>
+    </header>
+
+    <main id="main">
+        <div class="kds-cols" id="kds-cols">
+            <section class="kds-col" data-col="pending" aria-label="Pending orders"><h2>PENDING <span id="count-pending"></span></h2><div id="col-pending"></div></section>
+            <section class="kds-col" data-col="preparing" aria-label="Preparing orders"><h2>PREPARING <span id="count-preparing"></span></h2><div id="col-preparing"></div></section>
+            <section class="kds-col" data-col="ready" aria-label="Ready orders"><h2>READY <span id="count-ready"></span></h2><div id="col-ready"></div></section>
+        </div>
+        <div class="kds-done">
+            <details>
+                <summary>Delivered / cancelled (<span id="count-done">0</span>) — <button class="kds-btn ghost" id="kds-clear" type="button" style="font-size:var(--text-xs);">Clear</button></summary>
+                <div id="col-done" style="margin-top:var(--space-md);"></div>
+            </details>
+        </div>
+    </main>
+
+    <dialog id="kds-dialog" aria-label="Manual order">
+        <h2 style="font-family:var(--font-marker);margin-bottom:var(--space-md);">MANUAL ORDER</h2>
+        <label>Item<select id="kds-item"></select></label>
+        <label>Qty<input type="number" id="kds-qty" value="1" min="1" max="20"></label>
+        <label>Phone (optional)<input type="tel" id="kds-phone" inputmode="tel" placeholder="10-digit mobile"></label>
+        <div style="display:flex;gap:var(--space-md);">
+            <button class="kds-btn" id="kds-save" type="button" style="background:var(--amber-neon);color:var(--umber-raw);">Add</button>
+            <button class="kds-btn ghost" id="kds-cancel" type="button" style="color:var(--umber-raw);border-color:var(--umber-raw);">Cancel</button>
+        </div>
+    </dialog>
+
+    <script src="../js/config.js?v=2" defer></script>
+    <script src="../js/security.js?v=5" defer></script>
+    <script src="../js/orders.js?v=1" defer></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const O = window.PizjoOrders;
+      let soundOn = true;
+      let knownIds = new Set(O.load().map(o => o.id));
+      const imported = O.importFromHash();
+      if (imported) knownIds.add(imported);
+
+      function esc(s) {
+        return window.PizjoSecurity ? window.PizjoSecurity.escapeHTML(String(s ?? '')) : String(s ?? '');
+      }
+      function elapsed(ts) {
+        const m = Math.floor((Date.now() - ts) / 60000);
+        return m < 1 ? 'just now' : m < 60 ? m + 'm' : Math.floor(m / 60) + 'h ' + (m % 60) + 'm';
+      }
+      function beep() {
+        if (!soundOn) return;
+        try {
+          const ctx = new (window.AudioContext || window.webkitAudioContext)();
+          const o = ctx.createOscillator(), g = ctx.createGain();
+          o.connect(g); g.connect(ctx.destination);
+          o.frequency.value = 880; g.gain.value = 0.15;
+          o.start(); o.stop(ctx.currentTime + 0.25);
+        } catch {}
+      }
+
+      function card(order) {
+        const late = Date.now() - order.createdAt > 20 * 60000 && (order.status === 'pending' || order.status === 'preparing');
+        const nexts = { pending: ['preparing'], preparing: ['ready'], ready: ['delivered'] }[order.status] || [];
+        const btns = nexts.map(n => `<button class="kds-btn" data-bump="${esc(order.id)}" data-next="${n}" type="button">→ ${n}</button>`).join('')
+          + (order.status !== 'delivered' && order.status !== 'cancelled' ? `<button class="kds-btn ghost" data-bump="${esc(order.id)}" data-next="cancelled" type="button">Cancel</button>` : '');
+        const items = order.items.map(i => `<li>${i.qty}× ${esc(i.name)}</li>`).join('');
+        const wa = (window.PizjoConfig ? window.PizjoConfig.whatsappUrl(`Hi! About order ${order.id}: `) : '#');
+        return `<article class="kds-card${late ? ' late' : ''}">
+          <div class="kds-card-head"><span class="kds-id">${esc(order.id)}</span><span class="kds-timer">${esc(elapsed(order.createdAt))}</span></div>
+          <ul class="kds-items">${items}</ul>
+          <div class="kds-meta">₹${Number(order.total).toLocaleString('en-IN')}${order.discount ? ` · ${esc(order.discount.code)} −₹${order.discount.amount}` : ''}${order.phone ? ` · ${esc(order.phone)}` : ''}</div>
+          <div class="kds-card-actions">${btns}<a class="kds-btn ghost" target="_blank" rel="noopener noreferrer" href="${esc(wa)}">Msg</a></div>
+        </article>`;
+      }
+
+      function render() {
+        const orders = O.load();
+        const fresh = orders.filter(o => !knownIds.has(o.id) && o.status === 'pending');
+        if (fresh.length) { beep(); fresh.forEach(o => knownIds.add(o.id)); }
+        for (const col of ['pending', 'preparing', 'ready']) {
+          const list = orders.filter(o => o.status === col);
+          document.getElementById('col-' + col).innerHTML = list.length ? list.map(card).join('') : '<div class="kds-empty">No orders</div>';
+          document.getElementById('count-' + col).textContent = list.length ? `(${list.length})` : '';
+        }
+        const done = orders.filter(o => o.status === 'delivered' || o.status === 'cancelled');
+        document.getElementById('count-done').textContent = done.length;
+        document.getElementById('col-done').innerHTML = done.slice(0, 20).map(o =>
+          `<div style="padding:var(--space-sm) 0;border-bottom:1px solid rgba(245,242,235,.2);font-weight:700;">${esc(o.id)} · ${esc(o.status)} · ₹${Number(o.total).toLocaleString('en-IN')}</div>`).join('') || '<div class="kds-empty">None yet</div>';
+      }
+
+      document.getElementById('kds-cols').addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-bump]');
+        if (!btn) return;
+        O.setStatus(btn.dataset.bump, btn.dataset.next);
+        render();
+      });
+      document.getElementById('kds-clear').addEventListener('click', (e) => {
+        e.preventDefault();
+        try {
+          const keep = O.load().filter(o => o.status !== 'delivered' && o.status !== 'cancelled');
+          localStorage.setItem(O.ORDERS_KEY, JSON.stringify(keep));
+        } catch {}
+        render();
+      });
+      document.getElementById('kds-sound').addEventListener('click', (e) => {
+        soundOn = !soundOn;
+        e.currentTarget.textContent = soundOn ? 'Sound: ON' : 'Sound: OFF';
+        e.currentTarget.setAttribute('aria-pressed', String(soundOn));
+      });
+      document.getElementById('kds-import-btn').addEventListener('click', () => {
+        const link = prompt('Paste the order link from WhatsApp / tracking page:');
+        if (!link) return;
+        const m = String(link).match(/#order=([A-Za-z0-9+/=_-]+)/);
+        if (!m) { alert('No order found in that link.'); return; }
+        const prev = location.hash;
+        location.hash = '#order=' + m[1];
+        const id = O.importFromHash();
+        location.hash = prev.replace(/#order=[A-Za-z0-9+/=_-]+/, '');
+        if (id) { knownIds.add(id); render(); alert(`Imported ${id}`); }
+        else alert('Could not import that order.');
+      });
+
+      // Manual order dialog (needs catalog)
+      let catalog = [];
+      fetch('../data/menu.json?v=2').then(r => r.json()).then(d => {
+        catalog = (d.categories || []).flatMap(c => c.items || []);
+        document.getElementById('kds-item').innerHTML = catalog.map(i => `<option value="${esc(i.id)}">${esc(i.name)} — ₹${i.price}</option>`).join('');
+      }).catch(() => {});
+      const dlg = document.getElementById('kds-dialog');
+      document.getElementById('kds-add-btn').addEventListener('click', () => dlg.showModal());
+      document.getElementById('kds-cancel').addEventListener('click', () => dlg.close());
+      document.getElementById('kds-save').addEventListener('click', () => {
+        const item = catalog.find(i => String(i.id) === document.getElementById('kds-item').value);
+        if (!item) { alert('Menu still loading — try again in a moment.'); return; }
+        const qty = Math.max(1, Math.min(20, parseInt(document.getElementById('kds-qty').value, 10) || 1));
+        const lineTotal = item.price * qty;
+        const order = O.create({ items: [{ id: item.id, name: item.name, qty, unitPrice: item.price, lineTotal }], subtotal: lineTotal, discount: null, total: lineTotal, promoCode: '', phone: document.getElementById('kds-phone').value, source: 'kds-counter' });
+        knownIds.add(order.id);
+        dlg.close();
+        render();
+      });
+
+      window.addEventListener('storage', (e) => { if (e.key === O.ORDERS_KEY) render(); });
+      setInterval(() => {
+        const c = document.getElementById('kds-clock');
+        if (c) c.textContent = new Date().toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' });
+        render();
+      }, 15000);
+      document.getElementById('kds-clock').textContent = new Date().toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' });
+      render();
+    });
+    </script>
+</body>
+</html>

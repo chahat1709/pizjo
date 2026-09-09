@@ -51,8 +51,10 @@ Full system + website handover package: see `docs/HANDOFF.md` (master) + `docs/C
 ## Project structure
 
 - `index.html`: homepage and primary conversion flow.
-- `pages/`: full menu, about, contact, and legal pages + `404.html` `robots.txt` `sitemap.xml`.
-- `js/app.js`: shared boot logic, stable-ID cart, menu loading, service-worker registration, and trusted checkout handoff.
+- `pages/`: full menu, about, contact, legal, track-order, and staff KDS pages + `404.html` `robots.txt` `sitemap.xml`.
+- `data/offers.json`: promo campaigns validated server-side by `api/order-summary.js`.
+- `js/app.js`: shared boot logic, stable-ID cart, menu loading, service-worker registration, promo apply, and trusted checkout handoff with order logging.
+- `js/orders.js`: browser-local order store (IDs, phone tracking, status machine, GST breakup, handoff import) shared by checkout, track page, and KDS.
 - `js/catalog.js`: shared catalog loading, normalization, stable IDs, and catalog lookup.
 - `js/site.js`: shared business-link hydration, WhatsApp handoff forms, and mobile navigation.
 - `js/security.js`: escaping, validation, rate limiting, cart normalization, and external-link hardening.

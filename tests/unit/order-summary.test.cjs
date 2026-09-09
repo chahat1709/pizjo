@@ -33,3 +33,27 @@ test('rejects non-POST requests', async () => {
   const result = await invoke({}, 'GET');
   assert.equal(result.status, 405);
 });
+
+test('returns subtotal with no promo (backward compatible)', async () => {
+  const item = menu.categories[0].items[0];
+  const result = await invoke({ items: [{ id: item.id, qty: 2 }] });
+  assert.equal(result.status, 200);
+  assert.equal(result.body.subtotal, item.price * 2);
+  assert.equal(result.body.discount, null);
+  assert.equal(result.body.total, item.price * 2);
+});
+
+test('rejects unknown promo codes', async () => {
+  const item = menu.categories[0].items[0];
+  const result = await invoke({ items: [{ id: item.id, qty: 1 }], promoCode: 'NOPE123' });
+  assert.equal(result.status, 400);
+  assert.equal(result.body.code, 'INVALID_PROMO');
+});
+
+test('validates promo day/time windows server-side', async () => {
+  const item = menu.categories[0].items[0];
+  // BOGO requires Tuesday + 2 items; a 1-item cart must fail with PROMO_NOT_APPLICABLE or day error
+  const result = await invoke({ items: [{ id: item.id, qty: 1 }], promoCode: 'BOGO' });
+  assert.equal(result.status, 400);
+  assert.match(result.body.code, /PROMO_NOT_APPLICABLE|INVALID_PROMO/);
+});
