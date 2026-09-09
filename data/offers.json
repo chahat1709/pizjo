@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "updated": "2026-09-09",
+  "currency": "₹",
+  "promos": [
+    {
+      "code": "BOGO",
+      "title": "BOGO Tuesday Madness",
+      "description": "Buy one, get the cheapest item free. Tuesdays only, minimum 2 items in cart.",
+      "type": "bogo_cheapest_free",
+      "days": [2],
+      "minItems": 2,
+      "maxDiscount": 399
+    },
+    {
+      "code": "LATE20",
+      "title": "The After Hours — 20% OFF",
+      "description": "20% off your entire order between 10 PM and midnight (IST).",
+      "type": "percent",
+      "value": 20,
+      "startHour": 22,
+      "endHour": 24,
+      "minTotal": 0,
+      "maxDiscount": 500
+    }
+  ],
+  "inquiryOnly": [
+    {
+      "title": "Party Combo",
+      "description": "5 pizzas + 2 sides + drinks for the whole squad. Custom-packed — order on WhatsApp.",
+      "action": "whatsapp",
+      "message": "Hi! I want to order a Party Combo pack! 🎉"
+    }
+  ]
+}

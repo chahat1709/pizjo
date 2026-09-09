@@ -168,10 +168,19 @@
             <!-- Dynamic Cart Items -->
         </div>
         <div class="cart-footer">
+            <div class="cart-promo" style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-sm);">
+                <input type="text" id="promo-input" placeholder="Promo code (BOGO / LATE20)" aria-label="Promo code" maxlength="16" style="flex: 1; min-width: 0; padding: var(--space-sm) var(--space-md); border: 2px solid var(--umber-raw); background: var(--off-white); color: var(--umber-raw); font-family: var(--font-body); font-size: var(--text-sm); text-transform: uppercase;">
+                <button type="button" id="promo-apply" class="btn btn-secondary" style="font-size: var(--text-sm); padding: var(--space-sm) var(--space-md); white-space: nowrap;">Apply</button>
+            </div>
+            <p id="promo-msg" role="status" style="font-size: var(--text-sm); font-weight: 700; min-height: 1.2em; margin-bottom: var(--space-sm);"></p>
+            <div class="cart-phone" style="margin-bottom: var(--space-md);">
+                <input type="tel" id="order-phone" placeholder="Mobile for order tracking (10-digit)" aria-label="Mobile number for order tracking" maxlength="13" inputmode="tel" autocomplete="tel" style="width: 100%; padding: var(--space-sm) var(--space-md); border: 2px solid var(--umber-raw); background: var(--off-white); color: var(--umber-raw); font-family: var(--font-body); font-size: var(--text-sm);">
+            </div>
             <div class="cart-total-row"><span>Total</span><span id="cart-total" aria-live="polite">₹0</span></div>
             <button class="btn cart-checkout-btn" id="checkout-btn">
                 Order on WhatsApp
             </button>
+            <p style="font-size: var(--text-xs); text-align: center; margin-top: var(--space-sm);"><a href="pages/track.html">Track an existing order →</a></p>
         </div>
     </aside>
 
@@ -304,7 +313,7 @@
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: var(--space-3xl);">
-                    <a href="pages/menu.html" class="btn btn-primary animate-on-scroll" style="font-size: var(--text-xl); padding: var(--space-lg) var(--space-3xl);">Browse All 155+ Items</a>
+                    <a href="pages/menu.html" class="btn btn-primary animate-on-scroll" style="font-size: var(--text-xl); padding: var(--space-lg) var(--space-3xl);">Browse All 81+ Items</a>
                 </div>
             </div>
         </section>
@@ -349,7 +358,7 @@
         <section style="background: var(--amber-neon); border-top: 8px solid var(--umber-raw); border-bottom: 8px solid var(--umber-raw); padding: var(--space-4xl) 0; text-align: center; position: relative; overflow: hidden;">
             <div class="container animate-on-scroll">
                 <h2 style="font-family: var(--font-marker); font-size: var(--text-5xl); color: var(--umber-raw); margin-bottom: var(--space-md); transform: rotate(-1deg);">HUNGRY YET?</h2>
-                <p style="font-size: var(--text-xl); font-weight: 700; color: var(--umber-raw); margin-bottom: var(--space-2xl); max-width: 600px; margin-left: auto; margin-right: auto;">155+ items. Starting at ₹49. Open 11:15 AM – 11:45 PM daily. What are you waiting for?</p>
+                <p style="font-size: var(--text-xl); font-weight: 700; color: var(--umber-raw); margin-bottom: var(--space-2xl); max-width: 600px; margin-left: auto; margin-right: auto;">81+ items. Starting at ₹20. Open 11:15 AM – 11:45 PM daily. What are you waiting for?</p>
                 <div style="display: flex; gap: var(--space-lg); justify-content: center; flex-wrap: wrap;">
                     <a href="pages/menu.html" class="btn" style="background: var(--umber-raw); color: var(--amber-neon); border: 4px solid var(--umber-raw); box-shadow: var(--shadow-grunge); font-size: var(--text-2xl); padding: var(--space-lg) var(--space-3xl); font-family: var(--font-display); font-weight: 900; text-transform: uppercase;">View Full Menu</a>
                     <a data-whatsapp-link data-whatsapp-message="Hi! I'd like to place an order 🍕" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: var(--text-2xl); padding: var(--space-lg) var(--space-3xl);">Order on WhatsApp</a>
@@ -413,6 +422,7 @@
     <script src="js/catalog.js?v=1" defer></script>
     <script src="js/site.js?v=1" defer></script>
     <script src="js/admin-storefront-sync.js?v=1" defer></script>
+    <script src="js/orders.js?v=1" defer></script>
     <!--
       Test helpers: only load when explicitly opted in.
       Production users never get this script. Playwright sets `?test=1` or runs

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me;">
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <title>Track Order — Pizjo | Amraiwadi, Ahmedabad</title>
+    <meta name="description" content="Track your Pizjo pizza order status by order ID and mobile number.">
+
+    <link rel="icon" href="../assets/pizjo_logo-128.webp" type="image/webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800;900&family=Hanken+Grotesk:wght@500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800;900&family=Hanken+Grotesk:wght@500;700&display=swap"></noscript>
+    <link rel="stylesheet" href="../css/tokens.css?v=5">
+    <link rel="stylesheet" href="../css/global.css?v=5">
+    <style>
+        .track-wrap { max-width: 640px; margin: 0 auto; padding: calc(var(--nav-height) + var(--space-2xl)) var(--space-md) var(--space-4xl); }
+        .track-card { background: var(--off-white); border: 4px solid var(--umber-raw); box-shadow: var(--shadow-grunge-lg); padding: var(--space-2xl); }
+        .track-title { font-family: var(--font-marker); font-size: var(--text-4xl); margin-bottom: var(--space-xs); }
+        .track-form { display: flex; flex-direction: column; gap: var(--space-md); margin: var(--space-xl) 0; }
+        .track-form input { padding: var(--space-md); border: 3px solid var(--umber-raw); background: #fff; font-family: var(--font-body); font-size: var(--text-base); }
+        .timeline { list-style: none; margin: var(--space-lg) 0; padding: 0; }
+        .timeline li { display: flex; gap: var(--space-md); align-items: baseline; padding: var(--space-sm) 0; border-bottom: 2px dashed rgba(62,39,35,.2); font-weight: 700; }
+        .timeline li.done { color: var(--umber-raw); }
+        .timeline li.todo { color: var(--color-text-muted); }
+        .timeline .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--color-text-muted); flex-shrink: 0; transform: translateY(1px); }
+        .timeline li.done .dot { background: var(--color-veg); }
+        .bill-table { width: 100%; border-collapse: collapse; margin: var(--space-lg) 0; font-size: var(--text-base); }
+        .bill-table td { padding: var(--space-xs) 0; border-bottom: 1px dashed rgba(62,39,35,.2); }
+        .bill-table .r { text-align: right; white-space: nowrap; }
+        .bill-table .total td { font-weight: 900; font-size: var(--text-xl); border-bottom: none; }
+        .track-actions { display: flex; gap: var(--space-md); flex-wrap: wrap; margin-top: var(--space-lg); }
+        #track-error { color: #B3261E; font-weight: 700; min-height: 1.4em; }
+        @media print {
+            .navbar, .footer, .track-form, .track-actions, .skip-to-content, .whatsapp-float { display: none !important; }
+            body { background: #fff; }
+            .track-wrap { padding: 0; max-width: 72mm; }
+            .track-card { border: none; box-shadow: none; padding: 0; }
+            .bill-print { font-family: monospace; font-size: 12px; color: #000; }
+            .bill-print h1 { font-size: 16px; text-align: center; }
+        }
+    </style>
+</head>
+<body class="bg-off-white text-umber-raw antialiased relative min-h-screen overflow-x-hidden">
+    <a href="#main" class="skip-to-content">Skip to content</a>
+
+    <nav class="navbar" role="navigation" aria-label="Primary">
+        <div class="container nav-container">
+            <a href="../" class="nav-brand" aria-label="Pizjo home">
+                <img src="../assets/pizjo_logo-128.webp" alt="Pizjo Logo" class="brand-logo" width="37" height="37" decoding="async">
+                <span class="brand-text">PIZJO!</span>
+            </a>
+            <div class="nav-links" id="nav-links">
+                <a href="../index.html#menu" class="nav-link">Menu</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-controls="nav-links" aria-label="Toggle menu" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <main id="main">
+        <div class="track-wrap">
+            <div class="track-card">
+                <h1 class="track-title">TRACK ORDER</h1>
+                <p class="scribble-text" style="font-size: var(--text-2xl);">Where's my pizza?</p>
+                <form class="track-form" id="track-form">
+                    <input type="text" id="track-id" placeholder="Order ID (e.g. PZ-20260909-AB12)" aria-label="Order ID" autocomplete="off" style="text-transform: uppercase;">
+                    <input type="tel" id="track-phone" placeholder="Mobile number used at checkout" aria-label="Mobile number" inputmode="tel" autocomplete="tel">
+                    <button type="submit" class="btn btn-primary" style="font-size: var(--text-lg);">Find My Order</button>
+                </form>
+                <p id="track-error" role="status"></p>
+                <div id="track-result" class="bill-print" hidden></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-grid" style="gap: var(--space-2xl);">
+            <div class="footer-brand">PIZJO!</div>
+            <div class="footer-links" style="display: flex; gap: var(--space-xl); flex-wrap: wrap; justify-content: center;">
+                <a href="../index.html#menu">Menu</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-bottom" style="text-align: center; width: 100%;">
+                <p style="font-size: var(--text-sm);">© 2026 Pizjo. Stay Cheese-Obsessed.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/config.js?v=2" defer></script>
+    <script src="../js/security.js?v=5" defer></script>
+    <script src="../js/site.js?v=1" defer></script>
+    <script src="../js/orders.js?v=1" defer></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.PizjoSite) PizjoSite.init();
+      const params = new URLSearchParams(location.search);
+      const idInput = document.getElementById('track-id');
+      const phoneInput = document.getElementById('track-phone');
+      if (params.get('id')) idInput.value = params.get('id');
+      if (params.get('phone')) phoneInput.value = params.get('phone');
+
+      const STAGES = ['pending', 'preparing', 'ready', 'delivered'];
+      const LABELS = { pending: 'Order received', preparing: 'Being prepared', ready: 'Ready / out for delivery', delivered: 'Delivered', cancelled: 'Cancelled' };
+
+      function esc(s) {
+        return window.PizjoSecurity ? window.PizjoSecurity.escapeHTML(String(s ?? '')) : String(s ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+      }
+      function fmt(n) { return '₹' + Number(n).toLocaleString('en-IN'); }
+      function time(ts) { return new Date(ts).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }); }
+
+      function render(order) {
+        const box = document.getElementById('track-result');
+        const g = window.PizjoOrders.gstBreakup(order.total);
+        const stageIdx = order.status === 'cancelled' ? -1 : STAGES.indexOf(order.status);
+        const timeline = STAGES.map((s, i) => {
+          const hit = order.timeline.find(t => t.status === s);
+          const cls = order.status !== 'cancelled' && i <= stageIdx ? 'done' : 'todo';
+          return `<li class="${cls}"><span class="dot"></span><span>${esc(LABELS[s])}${hit ? ` <small>· ${esc(time(hit.at))}</small>` : ''}</span></li>`;
+        }).join('');
+        const rows = order.items.map(i => `<tr><td>${i.qty}× ${esc(i.name)}</td><td class="r">${fmt(i.lineTotal)}</td></tr>`).join('');
+        const waText = `Hi Pizjo! Following up on order ${order.id} (${fmt(order.total)}).`;
+        const waUrl = window.PizjoConfig.whatsappUrl(waText);
+        box.innerHTML = `
+          <h1 style="font-family:var(--font-marker);font-size:var(--text-3xl);">PIZJO!</h1>
+          <p><strong>Order ${esc(order.id)}</strong> · ${esc(time(order.createdAt))}</p>
+          <p>Status: <strong>${esc(LABELS[order.status] || order.status)}</strong></p>
+          <ol class="timeline">${timeline}</ol>
+          <table class="bill-table">
+            ${rows}
+            <tr><td>Subtotal</td><td class="r">${fmt(order.subtotal)}</td></tr>
+            ${order.discount ? `<tr><td>Discount (${esc(order.discount.code)})</td><td class="r">−${fmt(order.discount.amount)}</td></tr>` : ''}
+            <tr class="total"><td>Total</td><td class="r">${fmt(order.total)}</td></tr>
+          </table>
+          <p style="font-size:var(--text-sm);">Incl. GST @5% (CGST 2.5% ₹${g.cgst.toFixed(2)} + SGST 2.5% ₹${g.sgst.toFixed(2)}), SAC 9963. Prices inclusive of all taxes.</p>
+          <div class="track-actions">
+            <button type="button" class="btn btn-secondary" id="print-bill">Print Bill</button>
+            <a class="btn btn-primary" target="_blank" rel="noopener noreferrer" href="${esc(waUrl)}">Ask on WhatsApp</a>
+          </div>`;
+        box.hidden = false;
+        document.getElementById('print-bill').addEventListener('click', () => window.print());
+      }
+
+      document.getElementById('track-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const err = document.getElementById('track-error');
+        const box = document.getElementById('track-result');
+        err.textContent = ''; box.hidden = true; box.innerHTML = '';
+        const order = window.PizjoOrders.get(idInput.value.trim());
+        if (!order) { err.textContent = 'No order found with that ID on this device.'; return; }
+        const phone = window.PizjoOrders.normalizePhone(phoneInput.value);
+        if (order.phone && order.phone !== phone) { err.textContent = 'Mobile number does not match this order.'; return; }
+        render(order);
+      });
+
+      if (params.get('id')) document.getElementById('track-form').requestSubmit();
+    });
+    </script>
+</body>
+</html>

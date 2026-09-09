@@ -226,7 +226,7 @@ function changeQty(id, delta) {
   paintCart();
 }
 
-function paintCart() {
+function paintCart(promoDiscount = 0) {
   const items = Object.values(State.cart).map((item) => {
     const current = State.catalog.find((candidate) => candidate.id === item.id);
     return current ? { ...item, name: current.name, price: current.price } : item;
@@ -264,7 +264,7 @@ function paintCart() {
   const cartCount = $('cart-count');
   const cartTotal = $('cart-total');
   if (cartCount) cartCount.textContent = totalItems;
-  if (cartTotal) cartTotal.textContent = fmtPrice(totalPrice);
+  if (cartTotal) cartTotal.textContent = fmtPrice(Math.max(0, totalPrice - (Number(promoDiscount) || 0)));
 }
 
 let lastCartTrigger = null;
@@ -308,9 +308,47 @@ function bindCart() {
     addToCart(btn.dataset.id, parseInt(btn.dataset.price, 10));
   });
 
+  // Promo code apply (validates live against trusted server pricing)
+  $('promo-apply')?.addEventListener('click', applyPromo);
+  $('promo-input')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); applyPromo(); }
+  });
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeCart();
   });
+}
+
+// ── Promo ────────────────────────────────────────────────
+function getPromoCode() {
+  return String(document.getElementById('promo-input')?.value || '').trim().toUpperCase();
+}
+function setPromoMsg(text, ok) {
+  const el = document.getElementById('promo-msg');
+  if (!el) return;
+  el.textContent = text;
+  el.style.color = ok ? 'var(--color-veg)' : '#B3261E';
+}
+async function applyPromo() {
+  const code = getPromoCode();
+  const items = Object.values(State.cart);
+  if (!code) { setPromoMsg('Enter a code like BOGO or LATE20.', false); return; }
+  if (!items.length) { setPromoMsg('Your cart is empty.', false); return; }
+  setPromoMsg('Checking…', true);
+  try {
+    const response = await fetch('/api/order-summary', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: items.map((i) => ({ id: i.id, qty: i.qty })), promoCode: code }),
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(data.error || 'Promo check failed');
+    setPromoMsg(`${data.discount.code} applied — you save ₹${data.discount.amount}!`, true);
+    paintCart(data.discount.amount);
+  } catch (err) {
+    setPromoMsg(err.message || 'That code does not apply right now.', false);
+    paintCart(0);
+  }
 }
 
 // ⚠️ SECURITY: Sanitize order text to prevent injection
@@ -330,32 +368,66 @@ async function checkout() {
     return;
   }
 
+  const promoCode = getPromoCode();
   let summary;
   try {
     const response = await fetch('/api/order-summary', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items: items.map((item) => ({ id: item.id, qty: item.qty })) }),
+      body: JSON.stringify({ items: items.map((item) => ({ id: item.id, qty: item.qty })), promoCode: promoCode || undefined }),
     });
-    if (!response.ok) throw new Error(`order summary HTTP ${response.status}`);
-    summary = await response.json();
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      if (data.code === 'INVALID_PROMO' || data.code === 'PROMO_NOT_APPLICABLE') {
+        setPromoMsg(data.error || 'That code does not apply.', false);
+        paintCart(0);
+        return;
+      }
+      throw new Error(`order summary HTTP ${response.status}`);
+    }
+    summary = data;
   } catch (error) {
     console.error('[pizjo] trusted order summary unavailable', error);
     alert('Order verification is temporarily unavailable. Please try again in a moment.');
     return;
   }
 
-  let text = "Hello Pizjo! I'd like to place an order:\n\n";
+  const phoneRaw = document.getElementById('order-phone')?.value || '';
+  const phone = window.PizjoOrders ? window.PizjoOrders.normalizePhone(phoneRaw) : '';
+  if (phoneRaw && !phone) {
+    alert('Please enter a valid 10-digit mobile number for tracking, or leave it blank.');
+    return;
+  }
+
+  let order = null;
+  if (window.PizjoOrders) {
+    order = window.PizjoOrders.create({
+      items: summary.items, subtotal: summary.subtotal,
+      discount: summary.discount, total: summary.total,
+      promoCode, phone, source: 'website',
+    });
+  }
+
+  let text = `Hello Pizjo! I'd like to place an order${order ? ` (${order.id})` : ''}:\n\n`;
   for (const item of summary.items || []) {
     const safeName = sanitizeOrderText(item.name).slice(0, 200);
     text += `*${item.qty}x ${safeName} — ₹${item.lineTotal}*\n`;
   }
-  text += `\n*Total: ₹${summary.total}*\n\nPlease confirm.`;
+  text += `\nSubtotal: ₹${summary.subtotal}`;
+  if (summary.discount) text += `\nDiscount (${summary.discount.code}): −₹${summary.discount.amount}`;
+  text += `\n*Total: ₹${summary.total}*`;
+  if (phone) text += `\nMy number: ${phone}`;
+  text += '\n\nPlease confirm.';
   const safeText = sanitizeOrderText(text);
   const waUrl = CONFIG.whatsappUrl
     ? CONFIG.whatsappUrl(safeText)
     : `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(safeText)}`;
   window.open(waUrl, '_blank', 'noopener,noreferrer');
+  if (order) {
+    const trackUrl = `pages/track.html?id=${encodeURIComponent(order.id)}${phone ? `&phone=${encodeURIComponent(phone)}` : ''}`;
+    setPromoMsg(`Order ${order.id} saved.`, true);
+    setTimeout(() => { if (confirm(`Order ${order.id} logged. Open order tracking?`)) location.href = trackUrl; }, 600);
+  }
 }
 
 // ── Reveal on scroll (any page) ────────────────────────────
