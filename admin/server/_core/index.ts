@@ -3,11 +3,11 @@ import express from "express";
 import { createServer } from "http";
 import net from "net";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { registerOAuthRoutes } from "./oauth";
-import { registerStorageProxy } from "./storageProxy";
-import { appRouter } from "../routers";
+import { handleLogin, handleLogout, handleSetup, handleSetupStatus } from "../auth/routes";
 import { listMenuItems, listStorefrontOffers } from "../db";
 import { createContext } from "./context";
+import { appRouter } from "../routers";
+import { ENV } from "./env";
 import { serveStatic, setupVite } from "./vite";
 
 function isPortAvailable(port: number): Promise<boolean> {
@@ -29,21 +29,56 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
   throw new Error(`No available port found starting from ${startPort}`);
 }
 
+function allowedOrigins(): Set<string> {
+  return new Set([ENV.storefrontOrigin, process.env.STOREFRONT_ORIGIN].filter(Boolean) as string[]);
+}
+
+function applyFeedCors(req: express.Request, res: express.Response) {
+  const origin = req.header("origin");
+  if (origin && allowedOrigins().has(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Vary", "Origin");
+  }
+}
+
+function clientIp(req: express.Request): string | null {
+  const forwarded = req.headers["x-forwarded-for"];
+  const first = Array.isArray(forwarded) ? forwarded[0] : (forwarded ?? "").split(",")[0];
+  return (first || req.socket?.remoteAddress || "").trim() || null;
+}
+
+function sendAuthResult(res: express.Response, result: { status: number; headers: Record<string, string>; body: unknown }) {
+  for (const [key, value] of Object.entries(result.headers)) res.setHeader(key, value);
+  res.status(result.status).json(result.body);
+}
+
 async function startServer() {
   const app = express();
   const server = createServer(app);
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
-  registerStorageProxy(app);
-  registerOAuthRoutes(app);
+
+  // Local credential auth (replaced Manus OAuth in the Vercel + Neon migration).
+  app.get("/api/auth/setup-status", async (_req, res) => {
+    sendAuthResult(res, await handleSetupStatus());
+  });
+  app.post("/api/auth/setup", async (req, res) => {
+    sendAuthResult(res, await handleSetup({
+      body: req.body, ip: clientIp(req), host: req.hostname, proto: req.protocol,
+    }));
+  });
+  app.post("/api/auth/login", async (req, res) => {
+    sendAuthResult(res, await handleLogin({
+      body: req.body, ip: clientIp(req), host: req.hostname, proto: req.protocol,
+    }));
+  });
+  app.post("/api/auth/logout", async (req, res) => {
+    sendAuthResult(res, await handleLogout({ body: null, host: req.hostname, proto: req.protocol }));
+  });
+
   app.get("/api/storefront/availability", async (req, res) => {
-    const allowedOrigins = new Set(["https://pizjo.vercel.app", process.env.STOREFRONT_ORIGIN].filter(Boolean));
-    const origin = req.header("origin");
-    if (origin && allowedOrigins.has(origin)) {
-      res.setHeader("Access-Control-Allow-Origin", origin);
-      res.setHeader("Vary", "Origin");
-    }
+    applyFeedCors(req, res);
     try {
       const items = await listMenuItems();
       res.setHeader("Cache-Control", "public, max-age=60");
@@ -57,12 +92,7 @@ async function startServer() {
     }
   });
   app.get("/api/storefront/offers", async (req, res) => {
-    const allowedOrigins = new Set(["https://pizjo.vercel.app", process.env.STOREFRONT_ORIGIN].filter(Boolean));
-    const origin = req.header("origin");
-    if (origin && allowedOrigins.has(origin)) {
-      res.setHeader("Access-Control-Allow-Origin", origin);
-      res.setHeader("Vary", "Origin");
-    }
+    applyFeedCors(req, res);
     try {
       const offers = await listStorefrontOffers();
       res.setHeader("Cache-Control", "public, max-age=60");

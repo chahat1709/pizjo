@@ -8,7 +8,9 @@ if (!connectionString) {
 export default defineConfig({
   schema: "./drizzle/schema.ts",
   out: "./drizzle",
-  dialect: "mysql",
+  // PostgreSQL (Neon) since the Vercel + Neon migration.
+  // The original MySQL snapshots are archived under drizzle/mysql-legacy/.
+  dialect: "postgresql",
   dbCredentials: {
     url: connectionString,
   },

@@ -1,5 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import LoginPage from "@/pages/LoginPage";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -10,6 +11,7 @@ function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
+      <Route path={"/login"} component={LoginPage} />
       <Route path={"/"} component={AdminConsole} />
       <Route path={"/orders"} component={AdminConsole} />
       <Route path={"/sales"} component={AdminConsole} />

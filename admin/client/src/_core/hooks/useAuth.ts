@@ -1,7 +1,6 @@
 import { startLogin } from "@/const";
 import { trpc } from "@/lib/trpc";
-import { TRPCClientError } from "@trpc/client";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 type UseAuthOptions = {
   redirectOnUnauthenticated?: boolean;
@@ -21,62 +20,57 @@ export function useAuth(options?: UseAuthOptions) {
     refetchOnWindowFocus: false,
   });
 
-  const logoutMutation = trpc.auth.logout.useMutation({
-    onSuccess: () => {
-      utils.auth.me.setData(undefined, null);
-    },
-  });
+  const [loggingOut, setLoggingOut] = useState(false);
+  const [logoutError, setLogoutError] = useState<unknown>(null);
 
   const logout = useCallback(async () => {
+    setLoggingOut(true);
+    setLogoutError(null);
     try {
-      await logoutMutation.mutateAsync();
+      await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
     } catch (error: unknown) {
-      if (
-        error instanceof TRPCClientError &&
-        error.data?.code === "UNAUTHORIZED"
-      ) {
-        return;
-      }
-      throw error;
+      setLogoutError(error);
     } finally {
-      // Clear the Preview auto-login token mirrored into sessionStorage, so
-      // header-based sessions (Safari ITP / WebView) are logged out too. The
-      // backend cookie is cleared by the logout mutation.
+      // Clear the mirrored session token used as a Bearer fallback on
+      // browsers that block third-party cookies (Safari ITP / WebView).
       try {
-        sessionStorage.removeItem("manus-cookie");
+        sessionStorage.removeItem("pizjo-session");
       } catch {}
       utils.auth.me.setData(undefined, null);
       await utils.auth.me.invalidate();
+      setLoggingOut(false);
     }
-  }, [logoutMutation, utils]);
+  }, [utils]);
 
   const state = useMemo(() => {
-    localStorage.setItem(
-      "manus-runtime-user-info",
-      JSON.stringify(meQuery.data)
-    );
+    try {
+      localStorage.setItem(
+        "pizjo-runtime-user-info",
+        JSON.stringify(meQuery.data ?? null)
+      );
+    } catch {}
     return {
       user: meQuery.data ?? null,
-      loading: meQuery.isLoading || logoutMutation.isPending,
-      error: meQuery.error ?? logoutMutation.error ?? null,
+      loading: meQuery.isLoading || loggingOut,
+      error: meQuery.error ?? logoutError ?? null,
       isAuthenticated: Boolean(meQuery.data),
     };
   }, [
     meQuery.data,
     meQuery.error,
     meQuery.isLoading,
-    logoutMutation.error,
-    logoutMutation.isPending,
+    logoutError,
+    loggingOut,
   ]);
 
   useEffect(() => {
     if (!redirectOnUnauthenticated) return;
-    if (meQuery.isLoading || logoutMutation.isPending) return;
+    if (meQuery.isLoading || loggingOut) return;
     if (state.user) return;
     if (typeof window === "undefined") return;
     if (redirectPath && window.location.pathname === redirectPath) return;
 
-    // Navigate at this moment only. startLogin() mints the nonce + cookie itself.
+    // Navigate to the local login page at this moment only.
     if (redirectPath) {
       window.location.href = redirectPath;
     } else {
@@ -85,7 +79,7 @@ export function useAuth(options?: UseAuthOptions) {
   }, [
     redirectOnUnauthenticated,
     redirectPath,
-    logoutMutation.isPending,
+    loggingOut,
     meQuery.isLoading,
     state.user,
   ]);

@@ -7,7 +7,9 @@ window.PizjoConfig = Object.freeze({
   maxItemQuantity: 20,
   maxCartEntries: 50,
   menuUrl: 'data/menu.json?v=2',
-  adminBaseUrl: 'https://pizjoadmin-9mxbkqqm.manus.space',
+  // Self-hosted admin (Vercel + Neon migration). Rename if your admin
+  // Vercel project uses a different domain, then redeploy the storefront.
+  adminBaseUrl: 'https://pizjo-admin.vercel.app',
   adminStorefrontHosts: ['pizjo.vercel.app'],
   telemetryConsentKey: 'pizjoTelemetryConsent',
   whatsappUrl(message = '') {

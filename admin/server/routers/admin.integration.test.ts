@@ -8,17 +8,15 @@ function adminContext(): TrpcContext {
   return {
     user: {
       id: 1,
-      openId: "admin-integration-test",
+      username: "admin-integration-test",
+      passwordHash: "scrypt$test",
       name: "Admin Integration Test",
       email: "admin-integration@example.com",
-      loginMethod: "manus",
       role: "admin",
       createdAt: new Date(),
       updatedAt: new Date(),
       lastSignedIn: new Date(),
     },
-    req: { protocol: "https", headers: {} } as TrpcContext["req"],
-    res: {} as TrpcContext["res"],
   };
 }
 

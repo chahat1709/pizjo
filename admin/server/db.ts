@@ -1,5 +1,6 @@
 import { and, asc, desc, eq, gte, inArray, lte } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/mysql2";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 import {
   activityLogs,
   businessSettings,
@@ -19,13 +20,14 @@ import {
   users,
 } from "../drizzle/schema";
 import { catalogBaseline, catalogCategoryCount, catalogItemCount, pizjoCatalog } from "../shared/catalog";
-import { ENV } from "./_core/env";
 
 let connection: ReturnType<typeof drizzle> | null = null;
 
 export async function getDb() {
   if (!connection && process.env.DATABASE_URL) {
-    connection = drizzle(process.env.DATABASE_URL);
+    // max: 1 keeps serverless functions (Vercel) from exhausting the
+    // Postgres connection limit. Use the pooled Neon URL in production.
+    connection = drizzle(postgres(process.env.DATABASE_URL, { max: 1 }));
   }
   return connection;
 }
@@ -36,32 +38,44 @@ async function requireDb() {
   return db;
 }
 
-export async function upsertUser(user: InsertUser): Promise<void> {
-  if (!user.openId) throw new Error("User openId is required for upsert");
+export async function createUser(input: { username: string; passwordHash: string; name?: string | null; role: "admin" | "staff" }): Promise<number> {
   const db = await requireDb();
-  const values: InsertUser = { openId: user.openId };
-  const updateSet: Record<string, unknown> = {};
-
-  (["name", "email", "loginMethod"] as const).forEach(field => {
-    if (user[field] !== undefined) {
-      values[field] = user[field] ?? null;
-      updateSet[field] = user[field] ?? null;
-    }
-  });
-
-  values.lastSignedIn = user.lastSignedIn ?? new Date();
-  updateSet.lastSignedIn = values.lastSignedIn;
-  const role = user.role ?? (user.openId === ENV.ownerOpenId ? "admin" : "staff");
-  values.role = role;
-  updateSet.role = role;
-
-  await db.insert(users).values(values).onDuplicateKeyUpdate({ set: updateSet });
+  const username = input.username.trim().toLowerCase();
+  if (!username) throw new Error("Username is required");
+  const existing = await db.select({ id: users.id }).from(users).where(eq(users.username, username)).limit(1);
+  if (existing.length) throw new Error("Username is already taken");
+  const all = await db.select({ id: users.id }).from(users).limit(1);
+  const rows = await db.insert(users).values({
+    username,
+    passwordHash: input.passwordHash,
+    name: input.name ?? null,
+    // The very first account on a fresh database becomes admin (owner bootstrap).
+    role: all.length === 0 ? "admin" : input.role,
+  }).returning({ id: users.id });
+  return rows[0].id;
 }
 
-export async function getUserByOpenId(openId: string) {
+export async function getUserByUsername(username: string) {
   const db = await requireDb();
-  const result = await db.select().from(users).where(eq(users.openId, openId)).limit(1);
+  const result = await db.select().from(users).where(eq(users.username, username.trim().toLowerCase())).limit(1);
   return result[0];
+}
+
+export async function getUserById(id: number) {
+  const db = await requireDb();
+  const result = await db.select().from(users).where(eq(users.id, id)).limit(1);
+  return result[0];
+}
+
+export async function touchLastSignedIn(id: number) {
+  const db = await requireDb();
+  await db.update(users).set({ lastSignedIn: new Date() }).where(eq(users.id, id));
+}
+
+export async function hasAnyUser() {
+  const db = await requireDb();
+  const result = await db.select({ id: users.id }).from(users).limit(1);
+  return result.length > 0;
 }
 
 export async function recordActivity(input: {
@@ -80,8 +94,9 @@ export async function syncCatalogBaseline() {
   const db = await requireDb();
   for (const [index, category] of pizjoCatalog.categories.entries()) {
     const catalogKey = category.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-    await db.insert(menuCategories).values({ catalogKey, name: category.name, sortOrder: index }).onDuplicateKeyUpdate({
-      set: { name: category.name, sortOrder: index },
+    await db.insert(menuCategories).values({ catalogKey, name: category.name, sortOrder: index }).onConflictDoUpdate({
+      target: menuCategories.catalogKey,
+      set: { name: category.name, sortOrder: index, updatedAt: new Date() },
     });
   }
 
@@ -100,7 +115,8 @@ export async function syncCatalogBaseline() {
       pricePaise: Math.round(item.price * 100),
       isVegetarian: item.veg ?? true,
       sortOrder: item.itemIndex,
-    }).onDuplicateKeyUpdate({
+    }).onConflictDoUpdate({
+      target: menuItems.catalogId,
       set: {
         categoryId,
         name: item.name,
@@ -109,6 +125,7 @@ export async function syncCatalogBaseline() {
         pricePaise: Math.round(item.price * 100),
         isVegetarian: item.veg ?? true,
         sortOrder: item.itemIndex,
+        updatedAt: new Date(),
       },
     });
   }
@@ -155,7 +172,7 @@ export async function updateMenuItem(input: {
 }) {
   const db = await requireDb();
   const { id, ...updates } = input;
-  await db.update(menuItems).set(updates).where(eq(menuItems.id, id));
+  await db.update(menuItems).set({ ...updates, updatedAt: new Date() }).where(eq(menuItems.id, id));
 }
 
 export async function createMenuItem(input: {
@@ -168,8 +185,8 @@ export async function createMenuItem(input: {
 }) {
   const db = await requireDb();
   const last = await db.select().from(menuItems).where(eq(menuItems.categoryId, input.categoryId)).orderBy(desc(menuItems.sortOrder)).limit(1);
-  const result = await db.insert(menuItems).values({ ...input, sortOrder: (last[0]?.sortOrder ?? -1) + 1 });
-  return Number(result[0].insertId);
+  const result = await db.insert(menuItems).values({ ...input, sortOrder: (last[0]?.sortOrder ?? -1) + 1 }).returning({ id: menuItems.id });
+  return Number(result[0].id);
 }
 
 export async function listOrders(input?: { status?: string; from?: Date; to?: Date }) {
@@ -251,8 +268,8 @@ export async function createOrder(input: {
       discountPaise: input.discountPaise,
       totalPaise,
       createdById: input.createdById,
-    });
-    const orderId = Number(inserted[0].insertId);
+    }).returning({ id: orders.id });
+    const orderId = Number(inserted[0].id);
     await tx.insert(orderItems).values(calculatedLines.map(line => ({
       orderId,
       menuItemId: line.product.id,
@@ -278,6 +295,7 @@ export async function updateOrderStatus(input: { orderId: number; status: "pendi
   await db.update(orders).set({
     status: input.status,
     deliveredAt: input.status === "delivered" ? new Date() : order.deliveredAt,
+    updatedAt: new Date(),
   }).where(eq(orders.id, order.id));
   await recordActivity({ actorUserId: input.actorUserId, action: "order.status_changed", entityType: "order", entityId: String(order.id), detail: `${order.status} → ${input.status}` });
 }
@@ -303,7 +321,7 @@ export async function updateBusinessSettings(input: {
   const db = await requireDb();
   const settings = await getBusinessSettings(input.actorUserId);
   const { actorUserId, ...updates } = input;
-  await db.update(businessSettings).set({ ...updates, updatedById: actorUserId }).where(eq(businessSettings.id, settings.id));
+  await db.update(businessSettings).set({ ...updates, updatedById: actorUserId, updatedAt: new Date() }).where(eq(businessSettings.id, settings.id));
 }
 
 export async function getOrCreateInvoice(orderId: number, actorUserId: number) {
@@ -363,8 +381,8 @@ export async function createInventoryItem(input: { name: string; sku?: string | 
     currentStock: input.currentStock,
     lowStockThreshold: input.lowStockThreshold,
     linkedMenuItemId: input.linkedMenuItemId ?? null,
-  });
-  const inventoryItemId = Number(result[0].insertId);
+  }).returning({ id: inventoryItems.id });
+  const inventoryItemId = Number(result[0].id);
   await db.insert(stockMovements).values({ inventoryItemId, changeQuantity: input.currentStock, reason: "opening", performedById: input.actorUserId });
   await recordActivity({ actorUserId: input.actorUserId, action: "inventory.created", entityType: "inventory", entityId: String(inventoryItemId), detail: input.name });
   return inventoryItemId;
@@ -376,7 +394,7 @@ export async function adjustInventory(input: { inventoryItemId: number; changeQu
   if (!item) throw new Error("Inventory item not found");
   const nextStock = nextStockLevel(item.currentStock, input.changeQuantity);
   await db.transaction(async tx => {
-    await tx.update(inventoryItems).set({ currentStock: nextStock }).where(eq(inventoryItems.id, item.id));
+    await tx.update(inventoryItems).set({ currentStock: nextStock, updatedAt: new Date() }).where(eq(inventoryItems.id, item.id));
     await tx.insert(stockMovements).values({
       inventoryItemId: item.id,
       changeQuantity: input.changeQuantity,
@@ -462,7 +480,7 @@ export async function saveEmployee(input: { id?: number; fullName: string; phone
   const db = await requireDb();
   const matchingUser = input.email ? (await db.select().from(users).where(eq(users.email, input.email)).limit(1))[0] : undefined;
   if (matchingUser) {
-    await db.update(users).set({ role: input.accessRole }).where(eq(users.id, matchingUser.id));
+    await db.update(users).set({ role: input.accessRole, updatedAt: new Date() }).where(eq(users.id, matchingUser.id));
   }
   const values = {
     userId: matchingUser?.id ?? null,
@@ -474,12 +492,12 @@ export async function saveEmployee(input: { id?: number; fullName: string; phone
     isActive: input.isActive,
   } as const;
   if (input.id) {
-    await db.update(employees).set(values).where(eq(employees.id, input.id));
+    await db.update(employees).set({ ...values, updatedAt: new Date() }).where(eq(employees.id, input.id));
     await recordActivity({ actorUserId: input.actorUserId, employeeId: input.id, action: "employee.updated", entityType: "employee", entityId: String(input.id), detail: input.fullName });
     return input.id;
   }
-  const result = await db.insert(employees).values(values);
-  const id = Number(result[0].insertId);
+  const result = await db.insert(employees).values(values).returning({ id: employees.id });
+  const id = Number(result[0].id);
   await recordActivity({ actorUserId: input.actorUserId, employeeId: id, action: "employee.created", entityType: "employee", entityId: String(id), detail: input.fullName });
   return id;
 }
@@ -499,8 +517,8 @@ export async function saveShift(input: { employeeId: number; startsAt: Date; end
     status: input.status,
     note: input.note ?? null,
     createdById: input.actorUserId,
-  });
-  const id = Number(result[0].insertId);
+  }).returning({ id: shifts.id });
+  const id = Number(result[0].id);
   await recordActivity({ actorUserId: input.actorUserId, employeeId: input.employeeId, action: "shift.scheduled", entityType: "shift", entityId: String(id) });
   return id;
 }
@@ -519,8 +537,9 @@ export async function listSocialAccounts() {
 export async function saveSocialAccount(input: { platform: "instagram" | "facebook" | "zomato" | "whatsapp"; handle: string; url: string; isActive: boolean; actorUserId: number }) {
   const db = await requireDb();
   const { actorUserId, ...account } = input;
-  await db.insert(socialAccounts).values({ ...account, updatedById: actorUserId }).onDuplicateKeyUpdate({
-    set: { handle: account.handle, url: account.url, isActive: account.isActive, updatedById: actorUserId },
+  await db.insert(socialAccounts).values({ ...account, updatedById: actorUserId }).onConflictDoUpdate({
+    target: socialAccounts.platform,
+    set: { handle: account.handle, url: account.url, isActive: account.isActive, updatedById: actorUserId, updatedAt: new Date() },
   });
 }
 
@@ -541,11 +560,11 @@ export async function saveSocialPost(input: { id?: number; socialAccountId?: num
     publishedAt: input.status === "published" ? new Date() : null,
   } as const;
   if (input.id) {
-    await db.update(socialPosts).set(values).where(eq(socialPosts.id, input.id));
+    await db.update(socialPosts).set({ ...values, updatedAt: new Date() }).where(eq(socialPosts.id, input.id));
     return input.id;
   }
-  const result = await db.insert(socialPosts).values({ ...values, createdById: input.actorUserId });
-  return Number(result[0].insertId);
+  const result = await db.insert(socialPosts).values({ ...values, createdById: input.actorUserId }).returning({ id: socialPosts.id });
+  return Number(result[0].id);
 }
 
 export type OfferDiscountType = "percentage" | "fixed" | "bogo" | "free_item";
@@ -647,12 +666,12 @@ export async function saveOfferCampaign(input: {
     updatedById: input.actorUserId,
   } as const;
   if (input.id) {
-    await db.update(offerCampaigns).set(values).where(eq(offerCampaigns.id, input.id));
+    await db.update(offerCampaigns).set({ ...values, updatedAt: new Date() }).where(eq(offerCampaigns.id, input.id));
     await recordActivity({ actorUserId: input.actorUserId, action: "offer.updated", entityType: "offer", entityId: String(input.id), detail: input.title });
     return input.id;
   }
-  const result = await db.insert(offerCampaigns).values({ ...values, createdById: input.actorUserId });
-  const id = Number(result[0].insertId);
+  const result = await db.insert(offerCampaigns).values({ ...values, createdById: input.actorUserId }).returning({ id: offerCampaigns.id });
+  const id = Number(result[0].id);
   await recordActivity({ actorUserId: input.actorUserId, action: "offer.created", entityType: "offer", entityId: String(id), detail: input.title });
   return id;
 }

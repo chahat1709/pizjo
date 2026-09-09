@@ -1,5 +1,5 @@
 # Pizjo — Full System Handover Package
-**Storefront:** https://pizjo.vercel.app | **Admin:** https://pizjoadmin-9mxbkqqm.manus.space | **Date:** 2026-08-22 | **Version:** 1.0.0
+**Storefront:** https://pizjo.vercel.app | **Admin:** https://pizjo-admin.vercel.app (Vercel + Neon) | **Date:** 2026-09-09 | **Version:** 1.1.0
 
 This document is the single source for client handover. Gate the ZIP + this doc behind final payment.
 
@@ -35,8 +35,8 @@ vercel --prod   # from repo root, uses vercel.json headers + CSP
 ```
 Domain: add custom domain in Vercel → update DNS A/CNAME, SSL auto-renew. Current alias `pizjo.vercel.app`.
 
-**Admin (Manus):**
-Deployed at `pizjoadmin-9mxbkqqm.manus.space`. Env `admin/.env` → `adminBaseUrl`, `adminStorefrontHosts`. Drizzle migrations `admin/drizzle/`.
+**Admin (Vercel + Neon, migrated off Manus):**
+See `admin/docs/vercel-neon-migration.md` (runbook). Vercel project rooted at `admin/`, env `DATABASE_URL` (Neon pooled) + `SESSION_SECRET` (32+ chars) + `STOREFRONT_ORIGIN`. Drizzle baseline `admin/drizzle/0000_init-postgres.sql` (MySQL history archived in `drizzle/mysql-legacy/`). First `/login` creates the owner admin.
 
 ## 5) Credentials to transfer (see CREDENTIALS.md)
 - GitHub `chahat1709/pizjo` PRIVATE `pr7/telemetry-budgets` → transfer to client org or add as owner

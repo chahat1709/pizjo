@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { notifyOwner } from "./notification";
 import { adminProcedure, publicProcedure, router } from "./trpc";
 
 export const systemRouter = router({
@@ -21,9 +20,11 @@ export const systemRouter = router({
       })
     )
     .mutation(async ({ input }) => {
-      const delivered = await notifyOwner(input);
+      // Push notifications left with the Manus platform. Logged for a future
+      // SMS/WhatsApp provider; returns not-delivered so UI stays honest.
+      console.warn("[notifyOwner] no provider configured", input.title);
       return {
-        success: delivered,
+        success: false,
       } as const;
     }),
 });
