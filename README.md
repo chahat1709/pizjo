@@ -5,7 +5,7 @@ Pure-veg pizza brand system for Pizjo, Amraiwadi, Ahmedabad: customer storefront
 | Surface | Live / Run | Status |
 |---|---|---|
 | Storefront (customer) | https://pizjo.vercel.app | Lighthouse mobile 81, validator green |
-| Admin (staff, protected) | https://pizjoadmin-9mxbkqqm.manus.space | 15 tests green |
+| Admin (staff, protected) | https://pizjo-admin.vercel.app (Vercel + Neon) | 19 tests green |
 | Desktop billing (offline) | `local-admin-desktop/` → `npm start` | Electron + SQLite |
 | Local demo (no login) | `local-admin-demo/start-local.cmd` → http://localhost:4173 | Resettable test data |
 

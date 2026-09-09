@@ -9,17 +9,15 @@ function contextFor(role: "admin" | "staff" | null): TrpcContext {
   return {
     user: role ? {
       id: 1,
-      openId: "test-user",
+      username: "test-user",
+      passwordHash: "scrypt$test",
       name: "Test User",
       email: "test@example.com",
-      loginMethod: "manus",
       role,
       createdAt: new Date(),
       updatedAt: new Date(),
       lastSignedIn: new Date(),
     } : null,
-    req: { protocol: "https", headers: {} } as TrpcContext["req"],
-    res: {} as TrpcContext["res"],
   };
 }
 

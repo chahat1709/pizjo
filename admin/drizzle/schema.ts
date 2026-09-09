@@ -1,206 +1,221 @@
 import {
   boolean,
   index,
-  int,
-  mysqlEnum,
-  mysqlTable,
+  integer,
+  pgEnum,
+  pgTable,
   text,
   timestamp,
   uniqueIndex,
   varchar,
-} from "drizzle-orm/mysql-core";
+} from "drizzle-orm/pg-core";
 
 /**
- * Core user table backing auth flow.
- * Extend this file with additional tables as your product grows.
- * Columns use camelCase to match both database fields and generated types.
+ * Pizjo Admin schema — PostgreSQL (Neon-ready).
+ * Ported from the original MySQL schema for the Vercel + Neon migration.
+ * Conventions: paise integers for money, camelCase columns, soft status machines.
  */
-export const users = mysqlTable("users", {
-  /**
-   * Surrogate primary key. Auto-incremented numeric value managed by the database.
-   * Use this for relations between tables.
-   */
-  id: int("id").autoincrement().primaryKey(),
-  /** Manus OAuth identifier (openId) returned from the OAuth callback. Unique per user. */
-  openId: varchar("openId", { length: 64 }).notNull().unique(),
+
+export const roleEnum = pgEnum("role", ["admin", "staff"]);
+export const orderSourceEnum = pgEnum("order_source", ["whatsapp", "walk_in", "phone", "other"]);
+export const orderStatusEnum = pgEnum("order_status", ["pending", "preparing", "ready", "delivered", "cancelled"]);
+export const paymentMethodEnum = pgEnum("payment_method", ["cash", "upi", "card", "other"]);
+export const paymentStatusEnum = pgEnum("payment_status", ["unpaid", "paid", "refunded"]);
+export const stockReasonEnum = pgEnum("stock_reason", ["opening", "restock", "usage", "adjustment", "waste"]);
+export const accessRoleEnum = pgEnum("access_role", ["admin", "staff"]);
+export const shiftStatusEnum = pgEnum("shift_status", ["scheduled", "completed", "cancelled"]);
+export const platformEnum = pgEnum("platform", ["instagram", "facebook", "zomato", "whatsapp"]);
+export const postStatusEnum = pgEnum("post_status", ["draft", "scheduled", "published"]);
+export const discountTypeEnum = pgEnum("discount_type", ["percentage", "fixed", "bogo", "free_item"]);
+export const appliesToEnum = pgEnum("applies_to", ["order", "category", "menu_item"]);
+export const offerStatusEnum = pgEnum("offer_status", ["draft", "scheduled", "active", "paused", "expired"]);
+export const invoiceStatusEnum = pgEnum("invoice_status", ["draft", "issued", "void"]);
+
+/**
+ * Local credential login replaced Manus OAuth in the Vercel + Neon migration.
+ * The first user created via /api/auth/setup becomes admin.
+ */
+export const users = pgTable("users", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  username: varchar("username", { length: 64 }).notNull().unique(),
+  passwordHash: text("passwordHash").notNull(),
   name: text("name"),
   email: varchar("email", { length: 320 }),
-  loginMethod: varchar("loginMethod", { length: 64 }),
-  role: mysqlEnum("role", ["admin", "staff"]).default("staff").notNull(),
+  role: roleEnum("role").default("staff").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
-  lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+  lastSignedIn: timestamp("lastSignedIn"),
 });
 
-export const menuCategories = mysqlTable("menu_categories", {
-  id: int("id").autoincrement().primaryKey(),
+export const menuCategories = pgTable("menu_categories", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
   catalogKey: varchar("catalogKey", { length: 180 }).notNull().unique(),
   name: varchar("name", { length: 180 }).notNull(),
-  sortOrder: int("sortOrder").notNull(),
+  sortOrder: integer("sortOrder").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
-export const menuItems = mysqlTable(
+export const menuItems = pgTable(
   "menu_items",
   {
-    id: int("id").autoincrement().primaryKey(),
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
     catalogId: varchar("catalogId", { length: 240 }).notNull().unique(),
-    categoryId: int("categoryId").notNull().references(() => menuCategories.id, { onDelete: "restrict" }),
+    categoryId: integer("categoryId").notNull().references(() => menuCategories.id, { onDelete: "restrict" }),
     name: varchar("name", { length: 240 }).notNull(),
     description: text("description"),
     imageUrl: text("imageUrl"),
-    pricePaise: int("pricePaise").notNull(),
+    pricePaise: integer("pricePaise").notNull(),
     isVegetarian: boolean("isVegetarian").default(true).notNull(),
     isAvailable: boolean("isAvailable").default(true).notNull(),
     isOutOfStock: boolean("isOutOfStock").default(false).notNull(),
-    sortOrder: int("sortOrder").notNull(),
+    sortOrder: integer("sortOrder").notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   },
   table => [index("menu_items_category_idx").on(table.categoryId)],
 );
 
-export const orders = mysqlTable(
+export const orders = pgTable(
   "orders",
   {
-    id: int("id").autoincrement().primaryKey(),
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
     orderNumber: varchar("orderNumber", { length: 40 }).notNull().unique(),
-    source: mysqlEnum("source", ["whatsapp", "walk_in", "phone", "other"]).default("whatsapp").notNull(),
-    status: mysqlEnum("status", ["pending", "preparing", "ready", "delivered", "cancelled"]).default("pending").notNull(),
+    source: orderSourceEnum("source").default("whatsapp").notNull(),
+    status: orderStatusEnum("status").default("pending").notNull(),
     customerName: varchar("customerName", { length: 180 }),
     customerPhone: varchar("customerPhone", { length: 32 }),
     notes: text("notes"),
-    paymentMethod: mysqlEnum("paymentMethod", ["cash", "upi", "card", "other"]).default("cash").notNull(),
-    paymentStatus: mysqlEnum("paymentStatus", ["unpaid", "paid", "refunded"]).default("unpaid").notNull(),
-    subtotalPaise: int("subtotalPaise").notNull(),
-    taxPaise: int("taxPaise").default(0).notNull(),
-    discountPaise: int("discountPaise").default(0).notNull(),
-    totalPaise: int("totalPaise").notNull(),
+    paymentMethod: paymentMethodEnum("paymentMethod").default("cash").notNull(),
+    paymentStatus: paymentStatusEnum("paymentStatus").default("unpaid").notNull(),
+    subtotalPaise: integer("subtotalPaise").notNull(),
+    taxPaise: integer("taxPaise").default(0).notNull(),
+    discountPaise: integer("discountPaise").default(0).notNull(),
+    totalPaise: integer("totalPaise").notNull(),
     placedAt: timestamp("placedAt").defaultNow().notNull(),
     deliveredAt: timestamp("deliveredAt"),
-    createdById: int("createdById").notNull().references(() => users.id, { onDelete: "restrict" }),
+    createdById: integer("createdById").notNull().references(() => users.id, { onDelete: "restrict" }),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   },
   table => [index("orders_status_placed_idx").on(table.status, table.placedAt), index("orders_customer_phone_idx").on(table.customerPhone)],
 );
 
-export const orderItems = mysqlTable(
+export const orderItems = pgTable(
   "order_items",
   {
-    id: int("id").autoincrement().primaryKey(),
-    orderId: int("orderId").notNull().references(() => orders.id, { onDelete: "cascade" }),
-    menuItemId: int("menuItemId").references(() => menuItems.id, { onDelete: "set null" }),
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+    orderId: integer("orderId").notNull().references(() => orders.id, { onDelete: "cascade" }),
+    menuItemId: integer("menuItemId").references(() => menuItems.id, { onDelete: "set null" }),
     catalogId: varchar("catalogId", { length: 240 }),
     itemName: varchar("itemName", { length: 240 }).notNull(),
-    unitPricePaise: int("unitPricePaise").notNull(),
-    quantity: int("quantity").notNull(),
-    lineTotalPaise: int("lineTotalPaise").notNull(),
+    unitPricePaise: integer("unitPricePaise").notNull(),
+    quantity: integer("quantity").notNull(),
+    lineTotalPaise: integer("lineTotalPaise").notNull(),
   },
   table => [index("order_items_order_idx").on(table.orderId)],
 );
 
-export const inventoryItems = mysqlTable(
+export const inventoryItems = pgTable(
   "inventory_items",
   {
-    id: int("id").autoincrement().primaryKey(),
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
     name: varchar("name", { length: 180 }).notNull(),
     sku: varchar("sku", { length: 80 }),
     unit: varchar("unit", { length: 30 }).notNull(),
-    currentStock: int("currentStock").default(0).notNull(),
-    lowStockThreshold: int("lowStockThreshold").default(0).notNull(),
-    linkedMenuItemId: int("linkedMenuItemId").references(() => menuItems.id, { onDelete: "set null" }),
+    currentStock: integer("currentStock").default(0).notNull(),
+    lowStockThreshold: integer("lowStockThreshold").default(0).notNull(),
+    linkedMenuItemId: integer("linkedMenuItemId").references(() => menuItems.id, { onDelete: "set null" }),
     isActive: boolean("isActive").default(true).notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   },
   table => [uniqueIndex("inventory_sku_unique").on(table.sku), index("inventory_menu_item_idx").on(table.linkedMenuItemId)],
 );
 
-export const stockMovements = mysqlTable(
+export const stockMovements = pgTable(
   "stock_movements",
   {
-    id: int("id").autoincrement().primaryKey(),
-    inventoryItemId: int("inventoryItemId").notNull().references(() => inventoryItems.id, { onDelete: "cascade" }),
-    changeQuantity: int("changeQuantity").notNull(),
-    reason: mysqlEnum("reason", ["opening", "restock", "usage", "adjustment", "waste"]).notNull(),
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+    inventoryItemId: integer("inventoryItemId").notNull().references(() => inventoryItems.id, { onDelete: "cascade" }),
+    changeQuantity: integer("changeQuantity").notNull(),
+    reason: stockReasonEnum("reason").notNull(),
     note: text("note"),
-    performedById: int("performedById").notNull().references(() => users.id, { onDelete: "restrict" }),
+    performedById: integer("performedById").notNull().references(() => users.id, { onDelete: "restrict" }),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
   },
   table => [index("stock_movements_item_created_idx").on(table.inventoryItemId, table.createdAt)],
 );
 
-export const businessSettings = mysqlTable("business_settings", {
-  id: int("id").autoincrement().primaryKey(),
+export const businessSettings = pgTable("business_settings", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
   businessName: varchar("businessName", { length: 180 }).notNull(),
   address: text("address"),
   phone: varchar("phone", { length: 32 }),
   gstin: varchar("gstin", { length: 32 }),
   invoicePrefix: varchar("invoicePrefix", { length: 24 }).default("PIZ").notNull(),
-  taxRateBps: int("taxRateBps").default(0).notNull(),
-  updatedById: int("updatedById").references(() => users.id, { onDelete: "set null" }),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  taxRateBps: integer("taxRateBps").default(0).notNull(),
+  updatedById: integer("updatedById").references(() => users.id, { onDelete: "set null" }),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
-export const invoices = mysqlTable(
+export const invoices = pgTable(
   "invoices",
   {
-    id: int("id").autoincrement().primaryKey(),
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
     invoiceNumber: varchar("invoiceNumber", { length: 48 }).notNull().unique(),
-    orderId: int("orderId").notNull().unique().references(() => orders.id, { onDelete: "restrict" }),
-    status: mysqlEnum("status", ["draft", "issued", "void"]).default("issued").notNull(),
+    orderId: integer("orderId").notNull().unique().references(() => orders.id, { onDelete: "restrict" }),
+    status: invoiceStatusEnum("status").default("issued").notNull(),
     customerName: varchar("customerName", { length: 180 }),
     customerPhone: varchar("customerPhone", { length: 32 }),
-    subtotalPaise: int("subtotalPaise").notNull(),
-    taxPaise: int("taxPaise").default(0).notNull(),
-    discountPaise: int("discountPaise").default(0).notNull(),
-    totalPaise: int("totalPaise").notNull(),
+    subtotalPaise: integer("subtotalPaise").notNull(),
+    taxPaise: integer("taxPaise").default(0).notNull(),
+    discountPaise: integer("discountPaise").default(0).notNull(),
+    totalPaise: integer("totalPaise").notNull(),
     issuedAt: timestamp("issuedAt").defaultNow().notNull(),
-    createdById: int("createdById").notNull().references(() => users.id, { onDelete: "restrict" }),
+    createdById: integer("createdById").notNull().references(() => users.id, { onDelete: "restrict" }),
   },
   table => [index("invoices_issued_at_idx").on(table.issuedAt)],
 );
 
-export const employees = mysqlTable(
+export const employees = pgTable(
   "employees",
   {
-    id: int("id").autoincrement().primaryKey(),
-    userId: int("userId").unique().references(() => users.id, { onDelete: "set null" }),
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+    userId: integer("userId").unique().references(() => users.id, { onDelete: "set null" }),
     fullName: varchar("fullName", { length: 180 }).notNull(),
     phone: varchar("phone", { length: 32 }),
     email: varchar("email", { length: 320 }),
     jobTitle: varchar("jobTitle", { length: 120 }),
-    accessRole: mysqlEnum("accessRole", ["admin", "staff"]).default("staff").notNull(),
+    accessRole: accessRoleEnum("accessRole").default("staff").notNull(),
     isActive: boolean("isActive").default(true).notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   },
   table => [index("employees_active_idx").on(table.isActive)],
 );
 
-export const shifts = mysqlTable(
+export const shifts = pgTable(
   "shifts",
   {
-    id: int("id").autoincrement().primaryKey(),
-    employeeId: int("employeeId").notNull().references(() => employees.id, { onDelete: "cascade" }),
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+    employeeId: integer("employeeId").notNull().references(() => employees.id, { onDelete: "cascade" }),
     startsAt: timestamp("startsAt").notNull(),
     endsAt: timestamp("endsAt").notNull(),
-    status: mysqlEnum("status", ["scheduled", "completed", "cancelled"]).default("scheduled").notNull(),
+    status: shiftStatusEnum("status").default("scheduled").notNull(),
     note: text("note"),
-    createdById: int("createdById").notNull().references(() => users.id, { onDelete: "restrict" }),
+    createdById: integer("createdById").notNull().references(() => users.id, { onDelete: "restrict" }),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
   },
   table => [index("shifts_employee_start_idx").on(table.employeeId, table.startsAt)],
 );
 
-export const activityLogs = mysqlTable(
+export const activityLogs = pgTable(
   "activity_logs",
   {
-    id: int("id").autoincrement().primaryKey(),
-    actorUserId: int("actorUserId").references(() => users.id, { onDelete: "set null" }),
-    employeeId: int("employeeId").references(() => employees.id, { onDelete: "set null" }),
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+    actorUserId: integer("actorUserId").references(() => users.id, { onDelete: "set null" }),
+    employeeId: integer("employeeId").references(() => employees.id, { onDelete: "set null" }),
     action: varchar("action", { length: 140 }).notNull(),
     entityType: varchar("entityType", { length: 80 }).notNull(),
     entityId: varchar("entityId", { length: 80 }),
@@ -210,59 +225,59 @@ export const activityLogs = mysqlTable(
   table => [index("activity_logs_employee_created_idx").on(table.employeeId, table.createdAt)],
 );
 
-export const socialAccounts = mysqlTable("social_accounts", {
-  id: int("id").autoincrement().primaryKey(),
-  platform: mysqlEnum("platform", ["instagram", "facebook", "zomato", "whatsapp"]).notNull().unique(),
+export const socialAccounts = pgTable("social_accounts", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  platform: platformEnum("platform").notNull().unique(),
   handle: varchar("handle", { length: 180 }).notNull(),
   url: text("url").notNull(),
   isActive: boolean("isActive").default(true).notNull(),
-  updatedById: int("updatedById").references(() => users.id, { onDelete: "set null" }),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+  updatedById: integer("updatedById").references(() => users.id, { onDelete: "set null" }),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
 });
 
-export const socialPosts = mysqlTable(
+export const socialPosts = pgTable(
   "social_posts",
   {
-    id: int("id").autoincrement().primaryKey(),
-    socialAccountId: int("socialAccountId").references(() => socialAccounts.id, { onDelete: "set null" }),
-    platform: mysqlEnum("platform", ["instagram", "facebook", "zomato", "whatsapp"]).notNull(),
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+    socialAccountId: integer("socialAccountId").references(() => socialAccounts.id, { onDelete: "set null" }),
+    platform: platformEnum("platform").notNull(),
     title: varchar("title", { length: 240 }).notNull(),
     caption: text("caption").notNull(),
-    status: mysqlEnum("status", ["draft", "scheduled", "published"]).default("draft").notNull(),
+    status: postStatusEnum("status").default("draft").notNull(),
     scheduledAt: timestamp("scheduledAt"),
     publishedAt: timestamp("publishedAt"),
-    createdById: int("createdById").notNull().references(() => users.id, { onDelete: "restrict" }),
+    createdById: integer("createdById").notNull().references(() => users.id, { onDelete: "restrict" }),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   },
   table => [index("social_posts_status_scheduled_idx").on(table.status, table.scheduledAt)],
 );
 
-export const offerCampaigns = mysqlTable(
+export const offerCampaigns = pgTable(
   "offer_campaigns",
   {
-    id: int("id").autoincrement().primaryKey(),
+    id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
     title: varchar("title", { length: 180 }).notNull(),
     displayLabel: varchar("displayLabel", { length: 80 }).notNull(),
     description: text("description"),
     terms: text("terms"),
     promoCode: varchar("promoCode", { length: 48 }).unique(),
-    discountType: mysqlEnum("discountType", ["percentage", "fixed", "bogo", "free_item"]).notNull(),
+    discountType: discountTypeEnum("discountType").notNull(),
     /** Percentage offers use basis points (e.g. 1500 = 15%); fixed offers use paise. */
-    discountValue: int("discountValue").default(0).notNull(),
-    minimumOrderPaise: int("minimumOrderPaise").default(0).notNull(),
-    maximumDiscountPaise: int("maximumDiscountPaise"),
-    appliesTo: mysqlEnum("appliesTo", ["order", "category", "menu_item"]).default("order").notNull(),
-    menuItemId: int("menuItemId").references(() => menuItems.id, { onDelete: "set null" }),
-    categoryId: int("categoryId").references(() => menuCategories.id, { onDelete: "set null" }),
-    status: mysqlEnum("status", ["draft", "scheduled", "active", "paused", "expired"]).default("draft").notNull(),
+    discountValue: integer("discountValue").default(0).notNull(),
+    minimumOrderPaise: integer("minimumOrderPaise").default(0).notNull(),
+    maximumDiscountPaise: integer("maximumDiscountPaise"),
+    appliesTo: appliesToEnum("appliesTo").default("order").notNull(),
+    menuItemId: integer("menuItemId").references(() => menuItems.id, { onDelete: "set null" }),
+    categoryId: integer("categoryId").references(() => menuCategories.id, { onDelete: "set null" }),
+    status: offerStatusEnum("status").default("draft").notNull(),
     startsAt: timestamp("startsAt"),
     endsAt: timestamp("endsAt"),
     isFeatured: boolean("isFeatured").default(false).notNull(),
-    createdById: int("createdById").notNull().references(() => users.id, { onDelete: "restrict" }),
-    updatedById: int("updatedById").references(() => users.id, { onDelete: "set null" }),
+    createdById: integer("createdById").notNull().references(() => users.id, { onDelete: "restrict" }),
+    updatedById: integer("updatedById").references(() => users.id, { onDelete: "set null" }),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   },
   table => [
     index("offer_campaigns_status_window_idx").on(table.status, table.startsAt, table.endsAt),
