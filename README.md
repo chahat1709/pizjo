@@ -1,67 +1,81 @@
-# Pizjo Web
+# Pizjo — Full Brand Software
 
-Pizjo is a static, multi-page restaurant storefront and WhatsApp ordering experience for Pizjo, Amraiwadi, Ahmedabad. It uses semantic HTML, modular CSS, vanilla ES modules, a data-driven menu, a persistent cart, an optional local Three.js hero, a service worker, and Playwright end-to-end tests.
+Pure-veg pizza brand system for Pizjo, Amraiwadi, Ahmedabad: customer storefront + order pipeline, cloud admin, offline desktop billing, and a zero-setup demo.
 
-## Technology
+| Surface | Live / Run | Status |
+|---|---|---|
+| Storefront (customer) | https://pizjo.vercel.app | Lighthouse mobile 81, validator green |
+| Admin (staff, protected) | https://pizjoadmin-9mxbkqqm.manus.space | 15 tests green |
+| Desktop billing (offline) | `local-admin-desktop/` → `npm start` | Electron + SQLite |
+| Local demo (no login) | `local-admin-demo/start-local.cmd` → http://localhost:4173 | Resettable test data |
 
-- HTML, CSS, and vanilla JavaScript ES modules.
-- Three.js and local GLTF/DRACO assets for the progressive hero experience.
-- Playwright with Chromium for browser-level regression tests.
-- Vercel-compatible static deployment headers in `vercel.json`.
+## What each part does
 
-## Local development
+- **Storefront** (`index.html`, `pages/`, `js/`, `api/`) — 81-item menu with search/filter, cart (`pizjo.cart.v3`), server-verified WhatsApp checkout (`api/order-summary.js`), promo codes (BOGO Tuesdays, LATE20 22:00–24:00 IST), order log (`pizjo.orders.v1`) with track-by-phone page, staff KDS board (`pages/kds.html`), thermal GST bill print, CSP/HSTS/rate-limit hardening.
+- **Admin** (`admin/`) — dashboard, orders (`pending→preparing→ready→delivered`), sales reports, inventory, menu CRUD + availability feed, offers campaigns + storefront feed, GST invoices, team/shifts, social planner. React + tRPC + Drizzle/MySQL.
+- **Desktop** (`local-admin-desktop/`) — offline counter billing: orders, invoices (`PZ-00001…`), stock, offers, staff, printable bills. Zero network by design.
+- **Demo** (`local-admin-demo/`) — click-through training copy in the browser. Never touches production.
 
-The site must be served over HTTP because the menu uses `fetch()`, ES modules, and a service worker. Opening `index.html` directly with `file://` is not supported.
+## Quickstart
 
 ```bash
+# Storefront (must be served over HTTP — fetch + ES modules + SW)
 npm install
-npm run dev
-```
+npm run dev          # http://localhost:3000
 
-Open `http://localhost:3000` in a browser.
+# Admin (needs pnpm + DATABASE_URL, see admin/.env.example if present)
+cd admin && pnpm install && pnpm dev
+
+# Desktop billing
+cd local-admin-desktop && npm install && npm start
+
+# Offline demo (Windows, no install)
+local-admin-demo/start-local.cmd   # http://localhost:4173
+```
 
 ## Tests
 
-Install the Playwright browser once, then run the suite:
-
 ```bash
-npx playwright install chromium
-npm run test:all
+npm run test:all      # validate (8 pages, 81 IDs, CSP) + unit + Playwright e2e
+npm run test:report   # open HTML report
+npx playwright install chromium   # first time only
 ```
 
-The unified pipeline validates all public HTML pages—including the 404 route—checks stable catalog IDs and deployment CSP, runs server-side order-summary unit tests, and executes the browser suite. The active suite verifies the accessible hero poster and real WebGL container, graceful behavior when WebGL is unavailable, application-owned service-worker registration, stable-ID cart limits, shared WhatsApp link hydration, malformed-cart recovery, and secondary-page runtime health. The HTML report can be opened with `npm run test:report`.
+The browser suite covers hero/WebGL fallback, cart limits, WhatsApp hydration, promo validation, track + KDS flows, and secondary-page health. Unit suite covers trusted pricing + promo windows (`tests/unit/order-summary.test.cjs`).
 
-## Asset builds
+## Configuration
 
-When Three.js or loader dependencies change, rebuild the local vendor bundle. When the compressed hero model changes, rebuild the Draco assets as well.
+Single source of truth: `js/config.js` (`whatsappNumber`, `adminBaseUrl`, `menuUrl`). Business facts: `data/store.json`. Menu: `data/menu.json` (stable IDs required — enforced by validator). Promos: `data/offers.json` (validated server-side; IST day/time windows).
 
-```bash
-npm run build:vendor
-npm run build:draco
-npm run build:assets
-```
+Menu prices are treated as GST-inclusive @5% (CGST 2.5 + SGST 2.5, SAC 9963) — confirm with CA before fiscal use.
 
-## Privacy and ordering
+## Privacy
 
-Cart data is stored locally in the browser under `pizjo.cart.v2`. Orders and contact requests are handed off to the business WhatsApp account only after the user chooses to submit. Optional telemetry is disabled by default and is available only to designated staging builds after explicit consent.
-
-## Handover
-Full system + website handover package: see `docs/HANDOFF.md` (master) + `docs/CREDENTIALS_TEMPLATE.md` (fill after payment). Live: Storefront `https://pizjo.vercel.app` + Admin `https://pizjoadmin-9mxbkqqm.manus.space` + Local demo `local-admin-demo/start-local.cmd`.
+Cart (`pizjo.cart.v3`) and orders (`pizjo.orders.v1`) stay in the visitor's browser. Orders reach the business only via WhatsApp after explicit submit. Telemetry is opt-in, staging-only.
 
 ## Project structure
 
-- `index.html`: homepage and primary conversion flow.
-- `pages/`: full menu, about, contact, legal, track-order, and staff KDS pages + `404.html` `robots.txt` `sitemap.xml`.
-- `data/offers.json`: promo campaigns validated server-side by `api/order-summary.js`.
-- `js/app.js`: shared boot logic, stable-ID cart, menu loading, service-worker registration, promo apply, and trusted checkout handoff with order logging.
-- `js/orders.js`: browser-local order store (IDs, phone tracking, status machine, GST breakup, handoff import) shared by checkout, track page, and KDS.
-- `js/catalog.js`: shared catalog loading, normalization, stable IDs, and catalog lookup.
-- `js/site.js`: shared business-link hydration, WhatsApp handoff forms, and mobile navigation.
-- `js/security.js`: escaping, validation, rate limiting, cart normalization, and external-link hardening.
-- `js/config.js`: shared public business configuration (`whatsappNumber`, `adminBaseUrl`).
-- `api/order-summary.js`: server-side catalog-backed order validation and total calculation.
-- `data/menu.json`: menu content source (81 items).
-- `admin/`: protected admin app (client/server/drizzle) + feeds `api/storefront/*`.
-- `local-admin-demo/` + `local-admin-desktop/`: offline demo + Electron desktop.
-- `sw/service-worker.js`: versioned asset and image caching.
-- `tests/e2e/`: active Playwright regression suite.
+```
+index.html 404.html robots.txt sitemap.xml site.webmanifest vercel.json
+pages/          menu · about · contact · legal · track · kds (staff, noindex)
+css/ js/        tokens · global · home · app · catalog · site · security · config · orders
+data/           menu.json (81 items) · offers.json · store.json
+api/            order-summary.js (trusted totals + promo validation)
+sw/             versioned service worker
+admin/          cloud admin (client + server + drizzle)
+local-admin-desktop/   offline Electron billing + SQLite
+local-admin-demo/      browser-only training demo
+tests/          e2e/ · unit/ · live verification scripts
+docs/           HANDOFF.md (master) · CREDENTIALS_TEMPLATE.md · review-*.md
+```
+
+## Handover
+
+Client delivery runs through `docs/HANDOFF.md` (scope, deploy, QA, warranty) + `docs/CREDENTIALS_TEMPLATE.md` (fill after payment, never commit). IP transfers on final payment.
+
+## Asset builds
+
+```bash
+npm run build:vendor   # rebuild Three.js bundle on dependency change
+npm run build:draco    # rebuild Draco assets on hero model change
+```
