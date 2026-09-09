@@ -79,13 +79,6 @@ out/
 # Separate dev project — never part of Pizjo repo
 wormxgpt/
 
-# Dev-only scraping / data-pipeline scripts
-scripts/
-
-# The orphaned V1 menu page (replaced by V2 single-page app in index.html)
-pages/menu.html
-pages/menu.js
-
 # AI agent skills + per-session runtime (local tooling, not part of client repo)
 .agents/
 .claude/
