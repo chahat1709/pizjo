@@ -75,6 +75,17 @@ this migration. To roll back the storefront pointer, revert `js/config.js` +
 root `vercel.json` to the Manus origin and redeploy. Git tag pre-migration:
 `v1.0.0-handover`.
 
+## Verification evidence (2026-09-20, local PG16 via Docker)
+
+- `drizzle-kit migrate` from scratch: 15 tables + 14 enum types created.
+- `pnpm vitest run`: **21/21 pass** (incl. 2 DB integration tests skipped without a database).
+- `admin/verify-migration.mjs` against live Express + real Postgres: **11/11 pass**
+  (setup → owner bootstrap → setup lockout → bad-password 401 → login cookie →
+  `auth.me` → catalog sync `{categories:11, items:81}` → order create →
+  81-item availability feed → offers feed → logout).
+- `tsc --noEmit` clean; `vite build` succeeds (29.9s).
+- Security spot-check: `auth.me` returns no `passwordHash` (fixed during verification).
+
 ## Known limitations vs Manus build
 
 - Login rate limit is per-instance in-memory (fine for 2–5 staff; revisit if
