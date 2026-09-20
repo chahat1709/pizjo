@@ -49,7 +49,7 @@ const deployment = JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'), 'u
 const headerKeys = deployment.headers?.flatMap((entry) => entry.headers || []).map((header) => header.key) || [];
 if (!headerKeys.includes('Content-Security-Policy')) failures.push('vercel.json: missing Content-Security-Policy response header');
 const csp = deployment.headers?.flatMap((entry) => entry.headers || []).find((header) => header.key === 'Content-Security-Policy')?.value || '';
-const adminOrigin = 'https://pizjo-admin.vercel.app';
+const adminOrigin = 'https://pizjoadmin-9mxbkqqm.manus.space'; // switch to pizjo-admin.vercel.app at cutover
 if (!csp.includes(adminOrigin)) failures.push('vercel.json: CSP must allow the published Pizjo Admin origin for customer-facing feeds');
 
 const config = fs.readFileSync(path.join(root, 'js/config.js'), 'utf8');
