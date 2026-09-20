@@ -12,7 +12,7 @@ function loadSync(fetchImpl) {
     window: {
       location: { hostname: 'pizjo.vercel.app' },
       PizjoConfig: {
-        adminBaseUrl: 'https://pizjoadmin-9mxbkqqm.manus.space',
+        adminBaseUrl: 'https://pizjo-admin.vercel.app',
         adminStorefrontHosts: ['pizjo.vercel.app'],
       },
       PizjoSecurity: { escapeHTML: (value) => String(value).replace(/[&<>"']/g, '') },

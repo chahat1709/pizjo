@@ -11,6 +11,6 @@ Pizjo Admin is packaged with Electron as a Windows desktop application. Its rend
 | Backup | Operator-selected `.db` backup file with a pre-restore safety copy |
 | Network | No application fetches, API calls, public-site writes, or cloud synchronization |
 
-The existing public Pizjo storefront and its hosted admin remain independent. This desktop edition does not publish inventory, change customer-facing offers, send WhatsApp messages, connect social accounts, process payments, or transfer data to Manus, Cloudflare, Vercel, or any other service.
+The existing public Pizjo storefront and its hosted admin remain independent. This desktop edition does not publish inventory, change customer-facing offers, send WhatsApp messages, connect social accounts, process payments, or transfer data to any cloud service.
 
 The source folder intentionally ignores `node_modules/`, generated installers, and live database files. Those files must remain on the local Windows machine rather than entering the Git repository.

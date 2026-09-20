@@ -32,7 +32,7 @@ export const offerStatusEnum = pgEnum("offer_status", ["draft", "scheduled", "ac
 export const invoiceStatusEnum = pgEnum("invoice_status", ["draft", "issued", "void"]);
 
 /**
- * Local credential login replaced Manus OAuth in the Vercel + Neon migration.
+ * Local credential login (see server/auth/).
  * The first user created via /api/auth/setup becomes admin.
  */
 export const users = pgTable("users", {

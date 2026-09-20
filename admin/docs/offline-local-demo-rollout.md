@@ -4,7 +4,7 @@
 
 The **Pizjo Admin Local Demo** is an isolated Windows test application. It is intended for visual and workflow review before any further online business changes are made. It does not access, copy, or modify live Pizjo order, stock, offer, employee, customer, WhatsApp, social, or billing data.
 
-The published Pizjo Admin remains a separate cloud application. Its protected online mode depends on Manus OAuth for sign-in, a managed database for persisted operations data, and public read-only availability and offers endpoints consumed by the published Pizjo storefront. These cloud dependencies are intentionally absent from the local demo.
+The published Pizjo Admin remains a separate cloud application. Its protected online mode depends on local credential sign-in, a managed Postgres database for persisted operations data, and public read-only availability and offers endpoints consumed by the published Pizjo storefront. These cloud dependencies are intentionally absent from the local demo.
 
 | Mode | Login and storage | What can change | Network behavior |
 |---|---|---|---|

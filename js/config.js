@@ -7,10 +7,9 @@ window.PizjoConfig = Object.freeze({
   maxItemQuantity: 20,
   maxCartEntries: 50,
   menuUrl: 'data/menu.json?v=2',
-  // TEMP: Manus origin restored until admin cutover is deployed.
-  // At cutover, switch to 'https://pizjo-admin.vercel.app' (+ vercel.json CSP
-  // + validator origin) per admin/docs/vercel-neon-migration.md step 3.
-  adminBaseUrl: 'https://pizjoadmin-9mxbkqqm.manus.space',
+  // Self-hosted admin (Vercel + Neon). Rename if the admin Vercel
+  // project uses a different domain, then redeploy the storefront.
+  adminBaseUrl: 'https://pizjo-admin.vercel.app',
   adminStorefrontHosts: ['pizjo.vercel.app'],
   telemetryConsentKey: 'pizjoTelemetryConsent',
   whatsappUrl(message = '') {

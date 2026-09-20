@@ -1,12 +1,12 @@
 # Pizjo Admin — Windows Desktop Application
 
-This is the standalone, offline Pizjo restaurant-operations application. It is separate from the live Pizjo customer website, the Manus-hosted admin, and the browser-only local demo.
+This is the standalone, offline Pizjo restaurant-operations application. It is separate from the live Pizjo customer website, the cloud-hosted admin, and the browser-only local demo.
 
 ## What it does
 
 The desktop application stores restaurant records in a SQLite database on the Windows computer. It supports local owner setup and sign-in, admin/staff roles, menu and stock controls, order intake, status updates, invoices, sales summaries, local offers, local staff accounts, social-planning records, activity history, and manual backup/restore.
 
-It makes no network requests during normal use. It does not need a Manus account, Vercel, Cloudflare, a cloud database, or internet access.
+It makes no network requests during normal use. It does not need any cloud account, Vercel, Cloudflare, a cloud database, or internet access.
 
 ## Install the Windows application
 

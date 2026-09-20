@@ -1,8 +1,12 @@
 # Pizjo Admin and Storefront Production-Readiness Report
 
+> Superseded by `vercel-neon-migration.md`: the admin moved to Vercel + Neon
+> with local credential auth. The previous hosting below is retired; this
+> report is kept as the historical verification record.
+
 ## Status summary
 
-The protected Pizjo Admin application is published at `https://pizjoadmin-9mxbkqqm.manus.space/`. The customer storefront is published at `https://pizjo.vercel.app/`. Both systems are connected through narrowly scoped, read-only customer feeds: menu availability and active offers.
+The protected Pizjo Admin application is published at `https://pizjo-admin.vercel.app/`. The customer storefront is published at `https://pizjo.vercel.app/`. Both systems are connected through narrowly scoped, read-only customer feeds: menu availability and active offers.
 
 | Area | Verified status | Evidence |
 |---|---|---|
