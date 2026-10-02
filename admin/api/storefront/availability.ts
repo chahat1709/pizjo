@@ -1,5 +1,5 @@
 import { listMenuItems } from "../../server/db";
-import { jsonResponse, withFeedCors } from "../_lib";
+import { headersToRecord, jsonResponse, withFeedCors } from "../_lib";
 
 export default async function handler(req: Request): Promise<Response> {
   const headers = new Headers();
@@ -17,6 +17,6 @@ export default async function handler(req: Request): Promise<Response> {
     );
   } catch (error) {
     console.error("[storefront availability]", error);
-    return jsonResponse({ status: 503, headers: {}, body: { error: "Availability data is temporarily unavailable" } });
+    return jsonResponse({ status: 503, headers: headersToRecord(headers), body: { error: "Availability data is temporarily unavailable" } });
   }
 }

@@ -37,3 +37,14 @@ export function jsonResponse(result: { status: number; headers: Record<string, s
   for (const [key, value] of Object.entries(result.headers)) headers.set(key, value);
   return new Response(JSON.stringify(result.body), { status: result.status, headers });
 }
+
+// Copy already-computed headers (e.g. CORS from withFeedCors) onto error
+// responses so failure modes never turn into browser CORS console errors
+// on the storefront.
+export function headersToRecord(headers: Headers): Record<string, string> {
+  const record: Record<string, string> = {};
+  headers.forEach((value, key) => {
+    record[key] = value;
+  });
+  return record;
+}
