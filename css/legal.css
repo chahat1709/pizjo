@@ -1,0 +1,265 @@
+/* ============================================
+   PIZJO — Legal Page Styles (v5 Cheesy Underground)
+   Legal header bar, prose typography, telemetry box, footer
+   ============================================ */
+
+/* ── Legal Header (matches site navbar look) ── */
+.legal-header {
+    position: fixed;
+    top: var(--space-md);
+    left: 50%;
+    transform: translateX(-50%) rotate(1deg);
+    width: 95%;
+    max-width: var(--max-width);
+    height: var(--nav-height);
+    background: var(--off-white);
+    border: 4px solid var(--umber-raw);
+    box-shadow: var(--shadow-grunge);
+    z-index: var(--z-sticky);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-lg);
+}
+
+.legal-header .container {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+}
+
+.legal-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    width: 100%;
+    position: relative;
+    /* anchors the mobile dropdown */
+}
+
+.legal-nav .logo {
+    font-family: var(--font-marker);
+    font-size: var(--text-2xl);
+    color: var(--umber-raw);
+    transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.legal-nav .logo:hover {
+    transform: rotate(-6deg) scale(1.05);
+}
+
+.legal-nav .nav-links {
+    gap: var(--space-xl);
+    transform: none;
+}
+
+.legal-nav .nav-link {
+    font-size: var(--text-lg);
+}
+
+/* ── Legal Main ── */
+.legal-main {
+    padding-top: calc(var(--nav-height) + var(--space-3xl));
+}
+
+.legal-main .section {
+    padding: var(--space-2xl) 0;
+}
+
+.legal-main h1 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-lg);
+    transform: rotate(-1deg);
+}
+
+/* ── Prose Content ── */
+.legal-content {
+    max-width: 72ch;
+}
+
+.legal-content h2 {
+    font-size: var(--text-2xl);
+    margin: var(--space-3xl) 0 var(--space-md);
+    padding-bottom: var(--space-xs);
+    border-bottom: 3px solid var(--amber-neon);
+}
+
+.legal-content h3 {
+    font-size: var(--text-xl);
+    margin: var(--space-2xl) 0 var(--space-sm);
+}
+
+.legal-content p {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-secondary);
+}
+
+.legal-content ul,
+.legal-content ol {
+    list-style: disc;
+    padding-left: var(--space-xl);
+    margin-bottom: var(--space-md);
+}
+
+.legal-content ol {
+    list-style: decimal;
+}
+
+.legal-content li {
+    margin-bottom: var(--space-xs);
+    color: var(--color-text-secondary);
+}
+
+.legal-content li::marker {
+    color: var(--umber-raw);
+}
+
+.legal-content strong {
+    color: var(--color-text);
+}
+
+.legal-content code {
+    font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+    font-size: 0.9em;
+    background: rgba(255, 191, 0, 0.25);
+    border: 2px solid var(--umber-raw);
+    padding: 1px 6px;
+}
+
+.legal-content a {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-decoration-color: var(--amber-neon);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 3px;
+}
+
+.legal-content a:hover {
+    color: var(--amber-neon);
+}
+
+/* ── Telemetry Box ── */
+.telemetry-section {
+    background: var(--off-white);
+    border: 4px solid var(--umber-raw);
+    box-shadow: var(--shadow-grunge);
+    padding: var(--space-xl);
+    margin: var(--space-lg) 0 var(--space-2xl);
+}
+
+.telemetry-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+}
+
+.telemetry-note {
+    font-size: var(--text-sm);
+}
+
+/* Third button style: dark chip for neutral actions */
+.btn-info {
+    background: var(--umber-raw);
+    color: var(--amber-neon);
+    border: 4px solid var(--umber-raw);
+    box-shadow: var(--shadow-grunge);
+}
+
+.btn-info:hover {
+    transform: translate(2px, 2px);
+    box-shadow: var(--shadow-grunge-hover);
+}
+
+/* ── Legal Footer ── */
+.legal-footer {
+    background: var(--umber-raw);
+    color: var(--off-white);
+    padding: var(--space-4xl) 0 var(--space-2xl);
+    margin-top: var(--space-5xl);
+    position: relative;
+}
+
+.legal-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 16px;
+    background: var(--amber-neon);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-3xl);
+}
+
+.footer-section h3 {
+    color: var(--amber-neon);
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-md);
+}
+
+.footer-section p,
+.footer-section li {
+    color: rgba(245, 242, 235, 0.85);
+    font-size: var(--text-base);
+    margin-bottom: var(--space-xs);
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section a {
+    color: var(--off-white);
+    text-decoration: underline;
+    text-decoration-color: var(--amber-neon);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
+    transition: color var(--duration-fast) var(--ease-out);
+}
+
+.footer-section a:hover {
+    color: var(--amber-neon);
+}
+
+.footer-bottom {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-lg);
+    border-top: 2px solid rgba(245, 242, 235, 0.3);
+    text-align: center;
+    font-size: var(--text-sm);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+    }
+}
+
+@media (max-width: 768px) {
+    .legal-header {
+        padding: 0 var(--space-md);
+    }
+
+    .legal-main {
+        padding-top: calc(var(--nav-height) + var(--space-2xl));
+    }
+
+    .legal-nav .nav-links {
+        left: -4px;
+        right: -4px;
+    }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .legal-nav .logo {
+        transition: none;
+    }
+}

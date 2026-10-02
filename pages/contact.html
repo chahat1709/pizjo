@@ -8,6 +8,9 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://images.unsplash.com https://*.unsplash.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; frame-src https://www.google.com https://www.google.com/maps/; base-uri 'self'; form-action 'self' https://wa.me;">
 
+    <!-- Reveal-on-scroll styles hide content only when this class is set, so the page stays readable without JS -->
+    <script>document.documentElement.classList.add('js');</script>
+
     <title>Contact — Pizjo | Order on WhatsApp | Amraiwadi, Ahmedabad</title>
     <meta name="description" content="Contact Pizjo — call +91 92653 70588, WhatsApp order, or visit us at Shop 01, Raj Complex, Near Metro Pillar 87, Vastral Road, Amraiwadi, Ahmedabad 382418. Open 11:15 AM – 11:45 PM daily.">
 
@@ -15,9 +18,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/tokens.css">
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/contact.css">
+    <link rel="stylesheet" href="../css/tokens.css?v=5">
+    <link rel="stylesheet" href="../css/global.css?v=6">
+    <link rel="stylesheet" href="../css/contact.css?v=5">
     <link rel="canonical" href="https://pizjo.vercel.app/pages/contact.html">
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta property="og:title" content="Contact Pizjo | Pure Veg Pizza in Amraiwadi, Ahmedabad">
@@ -54,7 +57,7 @@
                 </svg>
             </button>
             <div class="nav-actions">
-                <button class="cart-toggle" id="cart-toggle" aria-label="Open cart">
+                <button class="cart-toggle" id="cart-toggle" aria-label="Open cart" aria-haspopup="dialog" aria-expanded="false">
                     CART
                     <div class="cart-icon-wrapper">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -254,10 +257,10 @@
             </div>
             <div class="footer-social" style="display: flex; flex-direction: column; gap: var(--space-md);">
                 <div style="display: flex; gap: var(--space-md);">
-                    <a href="https://www.facebook.com/pizjo" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
+                    <a href="https://www.facebook.com/share/16v6CwqoEA/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                     </a>
-                    <a href="https://www.instagram.com/pizjo" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
+                    <a href="https://www.instagram.com/pizjo_pizza" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                     </a>
                     <a href="https://www.zomato.com/ahmedabad/pizjo-amraiwadi" target="_blank" rel="noopener noreferrer" aria-label="Zomato" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
@@ -266,10 +269,10 @@
                 </div>
             </div>
             <div class="footer-newsletter" style="margin-top: var(--space-lg);">
-                <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm); font-weight: 700;">GET EXCLUSIVE DEALS</p>
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm); font-weight: 700;">ASK FOR EXCLUSIVE DEALS ON WHATSAPP</p>
                 <form data-whatsapp-form data-whatsapp-message="Hi! I want to subscribe to Pizjo's exclusive deals and updates! 🍕" action="#" method="get" target="_blank" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
-                    <input type="email" name="email" placeholder="your@email.com" required style="flex: 1; min-width: 200px; padding: var(--space-sm) var(--space-md); border: 2px solid var(--umber-raw); background: var(--off-white); color: var(--umber-raw); font-family: var(--font-body); font-size: var(--text-sm);">
-                    <button type="submit" class="btn btn-primary" style="font-size: var(--text-sm); padding: var(--space-sm) var(--space-lg); white-space: nowrap;">Subscribe</button>
+                    <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required style="flex: 1; min-width: 200px; padding: var(--space-sm) var(--space-md); border: 2px solid var(--umber-raw); background: var(--off-white); color: var(--umber-raw); font-family: var(--font-body); font-size: var(--text-sm);">
+                    <button type="submit" class="btn btn-primary" style="font-size: var(--text-sm); padding: var(--space-sm) var(--space-lg); white-space: nowrap;">Message Us</button>
                 </form>
             </div>
             <div class="footer-bottom" style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--umber-raw); text-align: center; width: 100%;">
@@ -279,20 +282,15 @@
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a data-whatsapp-link data-whatsapp-message="Hi! I'd like to place an order 🍕" href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp" style="position: fixed; bottom: var(--space-xl); right: var(--space-xl); z-index: 1000; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); animation: pulse 2s infinite; text-decoration: none; transition: transform var(--duration-fast), box-shadow var(--duration-fast);">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-        <style>
-            @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
-            .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5); }
-            @media (max-width: 480px) { .whatsapp-float { bottom: var(--space-lg); right: var(--space-lg); width: 52px; height: 52px; } }
-        </style>
+    <!-- Floating WhatsApp Button (styles in global.css .whatsapp-float) -->
+    <a data-whatsapp-link data-whatsapp-message="Hi! I'd like to place an order 🍕" href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
     </a>
 
-    <script src="../js/config.js?v=1"></script>
+    <script src="../js/config.js?v=2"></script>
     <script src="../js/security.js?v=5"></script>
     <script src="../js/site.js?v=1"></script>
-    <script type="module" src="../js/app.js?v=11"></script>
+    <script type="module" src="../js/app.js?v=13"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // ── Contact Form ──

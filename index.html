@@ -8,6 +8,8 @@
 
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta name="theme-color" content="#FFBF00">
+    <!-- Reveal-on-scroll styles hide content only when this class is set, so the page stays readable without JS -->
+    <script>document.documentElement.classList.add('js');</script>
 
     <!-- JSON-LD Schema Markup -->
     <script type="application/ld+json">
@@ -55,8 +57,8 @@
         "https://pizjo.vercel.app/assets/intereor.png"
       ],
       "sameAs": [
-        "https://www.facebook.com/pizjo",
-        "https://www.instagram.com/pizjo",
+        "https://www.facebook.com/share/16v6CwqoEA/",
+        "https://www.instagram.com/pizjo_pizza",
         "https://www.zomato.com/ahmedabad/pizjo-amraiwadi"
       ],
       "paymentAccepted": "Cash, UPI, Card",
@@ -77,7 +79,7 @@
       base-uri 'self';
       form-action 'self' https://wa.me;
       media-src 'self';
-      worker-src 'self';
+      worker-src 'self' blob:;
     ">
 
     <title>Pizjo — The People Your Diet Warned You About | Pure Veg Pizza in Ahmedabad</title>
@@ -95,10 +97,10 @@
     <link rel="preload" as="image" href="assets/pizza_hero-300.webp" imagesrcset="assets/pizza_hero-300.webp 300w, assets/pizza_hero-600.webp 600w, assets/pizza_hero-900.webp 900w" imagesizes="(max-width: 768px) 170px, 635px" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800;900&family=Hanken+Grotesk:wght@500;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800;900&family=Hanken+Grotesk:wght@500;700&display=swap"></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap"></noscript>
     <link rel="stylesheet" href="css/tokens.css?v=5">
-    <link rel="stylesheet" href="css/global.css?v=5">
+    <link rel="stylesheet" href="css/global.css?v=6">
     <link rel="stylesheet" href="css/home.css?v=5">
     <link rel="canonical" href="https://pizjo.vercel.app/">
     <meta name="robots" content="index,follow,max-image-preview:large">
@@ -141,7 +143,7 @@
                 </svg>
             </button>
             <div class="nav-actions">
-                <button class="cart-toggle" id="cart-toggle" aria-label="Open cart">
+                <button class="cart-toggle" id="cart-toggle" aria-label="Open cart" aria-haspopup="dialog" aria-expanded="false">
                     CART
                     <div class="cart-icon-wrapper">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -250,11 +252,11 @@
             <div class="trust-grid animate-on-scroll">
                 <div class="trust-item-large card-grunge">
                     <span class="badge" style="margin-bottom: var(--space-md);">OUR PHILOSOPHY</span>
-                    <h3>More is more. <br>Especially when it comes to cheese.</h3>
+                    <h2>More is more. <br>Especially when it comes to cheese.</h2>
                 </div>
                 <div class="trust-item-small">
-                    <span style="font-size: 4rem;">🔥</span>
-                    <h3>HAND-TOSSED</h3>
+                    <span style="font-size: 4rem;" aria-hidden="true">🔥</span>
+                    <h2>HAND-TOSSED</h2>
                     <p style="font-weight: 700;">Every crust crafted with obsessive attention to detail. No shortcuts.
                     </p>
                 </div>
@@ -268,15 +270,15 @@
                     <p class="scribble-text" style="font-size: var(--text-2xl);">Pure veg comfort food, made for serious cravings.</p>
                 </div>
                 <div class="reviews-grid animate-on-scroll" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-xl);">
-                    <article class="review-card card-grunge" style="padding: var(--space-xl); position: relative;">
+                    <article class="info-card card-grunge">
                         <h3 style="font-family: var(--font-display); margin-bottom: var(--space-sm);">PURE VEG</h3>
                         <p style="font-size: var(--text-lg); font-weight: 700; color: var(--color-text-secondary);">A fully vegetarian menu with pizza, burgers, momos, sides, drinks and desserts.</p>
                     </article>
-                    <article class="review-card card-grunge" style="padding: var(--space-xl); position: relative;">
+                    <article class="info-card card-grunge">
                         <h3 style="font-family: var(--font-display); margin-bottom: var(--space-sm);">ORDER YOUR WAY</h3>
                         <p style="font-size: var(--text-lg); font-weight: 700; color: var(--color-text-secondary);">Browse the menu, then place a direct order on WhatsApp or call the restaurant.</p>
                     </article>
-                    <article class="review-card card-grunge" style="padding: var(--space-xl); position: relative;">
+                    <article class="info-card card-grunge">
                         <h3 style="font-family: var(--font-display); margin-bottom: var(--space-sm);">OPEN DAILY</h3>
                         <p style="font-size: var(--text-lg); font-weight: 700; color: var(--color-text-secondary);">Visit Pizjo in Amraiwadi, Ahmedabad, daily from 11:15 AM to 11:45 PM.</p>
                     </article>
@@ -313,7 +315,7 @@
                     </div>
                 </div>
                 <div style="text-align: center; margin-top: var(--space-3xl);">
-                    <a href="pages/menu.html" class="btn btn-primary animate-on-scroll" style="font-size: var(--text-xl); padding: var(--space-lg) var(--space-3xl);">Browse All 81+ Items</a>
+                    <a href="pages/menu.html" class="btn btn-primary animate-on-scroll" style="font-size: var(--text-xl); padding: var(--space-lg) var(--space-3xl);">Browse All 81 Items</a>
                 </div>
             </div>
         </section>
@@ -346,7 +348,7 @@
                     </div>
                     <div class="hero-visual animate-on-scroll" style="flex: 1; height: 450px;">
                         <div class="hero-visual-box">
-                            <img src="assets/intereor-400.webp" srcset="assets/intereor-400.webp 400w, assets/intereor-800.webp 800w" sizes="(max-width: 768px) 250px, 450px" alt="Pizjo Cafe Interior" style="width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) saturate(1.2);" loading="lazy" decoding="async">
+                            <img src="assets/intereor-400.webp" srcset="assets/intereor-400.webp 400w, assets/intereor-800.webp 800w" sizes="(max-width: 768px) 250px, 450px" alt="Pizjo Cafe Interior" width="400" height="533" style="width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) saturate(1.2);" loading="lazy" decoding="async">
                         </div>
                         <div class="badge" style="position: absolute; top: -20px; left: -20px; font-size: var(--text-2xl); transform: rotate(-15deg); background: var(--umber-raw); color: var(--amber-neon);">WE OUT HERE</div>
                     </div>
@@ -358,7 +360,7 @@
         <section style="background: var(--amber-neon); border-top: 8px solid var(--umber-raw); border-bottom: 8px solid var(--umber-raw); padding: var(--space-4xl) 0; text-align: center; position: relative; overflow: hidden;">
             <div class="container animate-on-scroll">
                 <h2 style="font-family: var(--font-marker); font-size: var(--text-5xl); color: var(--umber-raw); margin-bottom: var(--space-md); transform: rotate(-1deg);">HUNGRY YET?</h2>
-                <p style="font-size: var(--text-xl); font-weight: 700; color: var(--umber-raw); margin-bottom: var(--space-2xl); max-width: 600px; margin-left: auto; margin-right: auto;">81+ items. Starting at ₹20. Open 11:15 AM – 11:45 PM daily. What are you waiting for?</p>
+                <p style="font-size: var(--text-xl); font-weight: 700; color: var(--umber-raw); margin-bottom: var(--space-2xl); max-width: 600px; margin-left: auto; margin-right: auto;">81 items. Starting at ₹20. Open 11:15 AM – 11:45 PM daily. What are you waiting for?</p>
                 <div style="display: flex; gap: var(--space-lg); justify-content: center; flex-wrap: wrap;">
                     <a href="pages/menu.html" class="btn" style="background: var(--umber-raw); color: var(--amber-neon); border: 4px solid var(--umber-raw); box-shadow: var(--shadow-grunge); font-size: var(--text-2xl); padding: var(--space-lg) var(--space-3xl); font-family: var(--font-display); font-weight: 900; text-transform: uppercase;">View Full Menu</a>
                     <a data-whatsapp-link data-whatsapp-message="Hi! I'd like to place an order 🍕" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="font-size: var(--text-2xl); padding: var(--space-lg) var(--space-3xl);">Order on WhatsApp</a>
@@ -382,10 +384,10 @@
             </div>
             <div class="footer-social" style="display: flex; flex-direction: column; gap: var(--space-md);">
                 <div style="display: flex; gap: var(--space-md);">
-                    <a href="https://www.facebook.com/pizjo" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
+                    <a href="https://www.facebook.com/share/16v6CwqoEA/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                     </a>
-                    <a href="https://www.instagram.com/pizjo" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
+                    <a href="https://www.instagram.com/pizjo_pizza" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                     </a>
                     <a href="https://www.zomato.com/ahmedabad/pizjo-amraiwadi" target="_blank" rel="noopener noreferrer" aria-label="Zomato" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
@@ -396,7 +398,7 @@
             <div class="footer-newsletter" style="margin-top: var(--space-lg);">
                 <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm); font-weight: 700;">ASK FOR EXCLUSIVE DEALS ON WHATSAPP</p>
                 <form data-whatsapp-form data-whatsapp-message="Hi! I want to subscribe to Pizjo's exclusive deals and updates! 🍕" action="#" method="get" target="_blank" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
-                    <input type="email" name="email" placeholder="your@email.com" required style="flex: 1; min-width: 200px; padding: var(--space-sm) var(--space-md); border: 2px solid var(--umber-raw); background: var(--off-white); color: var(--umber-raw); font-family: var(--font-body); font-size: var(--text-sm);">
+                    <input type="email" name="email" autocomplete="email" placeholder="your@email.com" required style="flex: 1; min-width: 200px; padding: var(--space-sm) var(--space-md); border: 2px solid var(--umber-raw); background: var(--off-white); color: var(--umber-raw); font-family: var(--font-body); font-size: var(--text-sm);">
                     <button type="submit" class="btn btn-primary" style="font-size: var(--text-sm); padding: var(--space-sm) var(--space-lg); white-space: nowrap;">Message Us</button>
                 </form>
             </div>
@@ -407,14 +409,9 @@
         </div>
     </footer>
 
-    <!-- Floating WhatsApp Button -->
-    <a data-whatsapp-link data-whatsapp-message="Hi! I'd like to place an order 🍕" href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp" style="position: fixed; bottom: var(--space-xl); right: var(--space-xl); z-index: 1000; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); animation: pulse 2s infinite; text-decoration: none; transition: transform var(--duration-fast), box-shadow var(--duration-fast);">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-        <style>
-            @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
-            .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5); }
-            @media (max-width: 480px) { .whatsapp-float { bottom: var(--space-lg); right: var(--space-lg); width: 52px; height: 52px; } }
-        </style>
+    <!-- Floating WhatsApp Button (styles in global.css .whatsapp-float) -->
+    <a data-whatsapp-link data-whatsapp-message="Hi! I'd like to place an order 🍕" href="#" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chat on WhatsApp">
+        <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
     </a>
 
     <script src="js/config.js?v=2" defer></script>
@@ -456,7 +453,7 @@
       No runtime CDN dependency. The bundle includes three core + GLTF/DRACO loaders.
       If you change three version or add addons, re-run the build.
     -->
-    <script type="module" src="js/app.js?v=12"></script>
+    <script type="module" src="js/app.js?v=13"></script>
     <script type="module">
       // Professional: lazy-load 688KB Three.js only on desktop + after first paint
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

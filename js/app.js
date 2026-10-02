@@ -111,7 +111,10 @@ async function loadMenu() {
   }
 
   if (State.menu.length) {
-    State.current = State.menu.find(c => c.name.toLowerCase().includes('special'))?.name || State.menu[0].name;
+    // Open on a real pizza category — offer/special categories made a weak
+    // first impression and aren't why people open a pizza menu.
+    const firstPizza = State.menu.find((c) => /pizza/i.test(c.name) && !/offer|special/i.test(c.name));
+    State.current = firstPizza?.name || State.menu[0].name;
     renderFilters();
     renderGrid();
   }
@@ -131,9 +134,16 @@ function renderFilters() {
       State.current = e.currentTarget.dataset.cat;
       root.querySelectorAll('.cat-btn').forEach((b) => b.classList.remove('active'));
       e.currentTarget.classList.add('active');
+      e.currentTarget.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
       renderGrid();
     });
   });
+  // Center the active pill in the scroll strip without scrolling the page
+  // vertically (container math, not scrollIntoView, on first paint).
+  const active = root.querySelector('.cat-btn.active');
+  if (active) {
+    root.scrollTo({ left: Math.max(0, active.offsetLeft - (root.clientWidth - active.offsetWidth) / 2) });
+  }
 }
 
 function vegName(name) {
@@ -265,9 +275,19 @@ function paintCart(promoDiscount = 0) {
   const cartTotal = $('cart-total');
   if (cartCount) cartCount.textContent = totalItems;
   if (cartTotal) cartTotal.textContent = fmtPrice(Math.max(0, totalPrice - (Number(promoDiscount) || 0)));
+  const cartToggle = $('cart-toggle');
+  if (cartToggle) {
+    cartToggle.setAttribute(
+      'aria-label',
+      totalItems === 0 ? 'Open cart, empty' : `Open cart, ${totalItems} ${totalItems === 1 ? 'item' : 'items'}`
+    );
+  }
 }
 
 let lastCartTrigger = null;
+function setCartExpanded(open) {
+  $('cart-toggle')?.setAttribute('aria-expanded', String(open));
+}
 function openCart() {
   lastCartTrigger = document.activeElement;
   const sidebar = $('cart-sidebar');
@@ -276,6 +296,7 @@ function openCart() {
   if (sidebar) sidebar.inert = false;
   $('cart-overlay')?.classList.add('open');
   if ($('cart-overlay')) $('cart-overlay').hidden = false;
+  setCartExpanded(true);
   $('cart-close')?.focus();
 }
 function closeCart() {
@@ -285,6 +306,7 @@ function closeCart() {
   if (sidebar) sidebar.inert = true;
   $('cart-overlay')?.classList.remove('open');
   if ($('cart-overlay')) $('cart-overlay').hidden = true;
+  setCartExpanded(false);
   if (lastCartTrigger && typeof lastCartTrigger.focus === 'function') lastCartTrigger.focus();
 }
 
@@ -442,7 +464,10 @@ function bindReveal() {
   if (!revealObserver) {
     revealObserver = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('is-visible')),
-      { threshold: 0.12 }
+      // threshold 0 + a 60px bottom inset: tall cards reveal as soon as they
+      // enter the viewport. The old 0.12 ratio meant tall elements never
+      // reached the ratio and stayed invisible.
+      { rootMargin: '0px 0px -60px 0px', threshold: 0 }
     );
   }
   document.querySelectorAll('.animate-on-scroll:not(.observed)').forEach((e) => {

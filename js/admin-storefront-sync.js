@@ -67,15 +67,26 @@
     return `Hi Pizjo! I want to claim the ${offer.title}${code}.`;
   }
 
+  // The offers section is a live feed from the admin service. With no active
+  // campaigns (or the service unreachable) an empty "no deals" section reads
+  // as an unfinished page, so hide the whole section plus its nav links and
+  // restore them only when a real campaign is live.
+  function setOffersVisible(visible) {
+    const root = document.getElementById('live-offers');
+    if (!root) return;
+    root.closest('section')?.toggleAttribute('hidden', !visible);
+    document.querySelectorAll('.nav-links a[href$="#offers"]').forEach((link) => {
+      link.toggleAttribute('hidden', !visible);
+    });
+  }
+
   async function renderOffers() {
     const root = document.getElementById('live-offers');
     if (!root) return;
     const payload = await offers();
     const activeOffers = Array.isArray(payload.offers) ? payload.offers.slice(0, 3) : [];
-    if (!activeOffers.length) {
-      root.innerHTML = '<p class="live-offers-empty">No live deals right now. Keep an eye here — fresh steals can land anytime.</p>';
-      return;
-    }
+    setOffersVisible(activeOffers.length > 0);
+    if (!activeOffers.length) return;
     root.innerHTML = activeOffers.map((offer, index) => {
       const dark = index % 2 === 1;
       const cardClass = dark ? 'live-offer-card live-offer-card-dark' : 'live-offer-card card-grunge';

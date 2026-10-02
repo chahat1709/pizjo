@@ -11,7 +11,13 @@
     });
     root.querySelectorAll('[data-phone-link]').forEach((link) => {
       link.setAttribute('href', config.telUrl());
-      if (link.hasAttribute('data-phone-text')) link.textContent = `+${config.whatsappNumber}`;
+      if (link.hasAttribute('data-phone-text')) {
+        // Display as "+91 92653 70588" instead of the raw "+919265370588" dial string.
+        const digits = String(config.whatsappNumber || '');
+        link.textContent = digits.length === 12
+          ? `+${digits.slice(0, 2)} ${digits.slice(2, 7)} ${digits.slice(7)}`
+          : `+${digits}`;
+      }
     });
     root.querySelectorAll('[data-business-name]').forEach((el) => {
       el.textContent = config.businessName;

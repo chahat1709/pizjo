@@ -18,7 +18,8 @@ body {
     line-height: var(--leading-relaxed);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    /* clip (not hidden): 'hidden' makes body the scroll container and breaks position:sticky children */
+    overflow-x: clip;
     /* Noise SVG background from design */
     background-color: var(--color-bg);
     background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
@@ -161,14 +162,16 @@ canvas {
     position: relative;
 }
 
-/* Scroll Animation Class */
-.animate-on-scroll {
+/* Scroll Animation Class
+   Hidden state is gated behind html.js (set by an inline head script) so
+   content stays visible when JavaScript is disabled or fails to load. */
+html.js .animate-on-scroll {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity var(--duration-slow) var(--ease-out), transform var(--duration-slow) var(--ease-out);
 }
 
-.animate-on-scroll.is-visible {
+html.js .animate-on-scroll.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
@@ -627,6 +630,13 @@ canvas {
     font-size: 32px;
     font-weight: 900;
     cursor: pointer;
+    /* 44px minimum touch target (WCAG 2.5.5) */
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
     transition: transform var(--duration-fast) var(--ease-out);
 }
 
@@ -814,6 +824,44 @@ canvas {
     transform: rotate(2deg);
 }
 
+/* Footer: multi-column layout on wide screens (was a single centred column) */
+@media (min-width: 900px) {
+    .footer-grid {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: start;
+        text-align: left;
+        gap: var(--space-xl) var(--space-3xl);
+    }
+
+    .footer-brand {
+        justify-self: start;
+    }
+
+    .footer-links {
+        justify-self: center;
+    }
+
+    .footer-social {
+        justify-self: end;
+    }
+
+    .footer-newsletter,
+    .footer-bottom {
+        grid-column: 1 / -1;
+    }
+
+    .footer-newsletter {
+        justify-self: center;
+        width: 100%;
+        max-width: 560px;
+    }
+
+    .footer-bottom {
+        text-align: center;
+    }
+}
+
 /* Utilities */
 .scribble-text {
     font-family: var(--font-scribble);
@@ -839,9 +887,67 @@ canvas {
     border: none;
     color: var(--umber-raw);
     cursor: pointer;
+    /* 44px minimum touch target (WCAG 2.5.5) */
+    min-width: 44px;
+    min-height: 44px;
     padding: var(--space-xs);
     align-items: center;
     justify-content: center;
+}
+
+/* Floating WhatsApp Button (shared across all pages; markup is class-only) */
+.whatsapp-float {
+    position: fixed;
+    bottom: calc(var(--space-xl) + env(safe-area-inset-bottom, 0px));
+    right: var(--space-xl);
+    z-index: var(--z-float);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: var(--color-whatsapp);
+    color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    animation: whatsapp-pulse 2s infinite;
+    text-decoration: none;
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.5);
+}
+
+@keyframes whatsapp-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+@media (max-width: 480px) {
+    .whatsapp-float {
+        bottom: calc(var(--space-lg) + env(safe-area-inset-bottom, 0px));
+        right: var(--space-lg);
+        width: 52px;
+        height: 52px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .whatsapp-float {
+        animation: none;
+        transition: none;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1002,8 +1108,10 @@ button:disabled,
 }
 .hero-skeleton { position: absolute; inset: 0; border-radius: 0; animation: none; background: #E8E0D0; }
 
-/* ── Below-fold rendering (cuts style/layout work on first paint) ── */
-.reviews-section, .offers-section, #cafe, .footer {
+/* ── Below-fold rendering (cuts style/layout work on first paint) ──
+   Note: #cafe stays OUT of this list — its lazy image with srcset/sizes makes
+   Chrome's "lazy-loaded images need explicit dimensions" check flag the page. */
+.reviews-section, .offers-section, .footer {
     content-visibility: auto;
     contain-intrinsic-size: auto 800px;
 }

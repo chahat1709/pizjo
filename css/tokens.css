@@ -85,6 +85,8 @@
     --max-width: 1400px;
     --z-base: 1;
     --z-sticky: 100;
+    --z-float: 900;
+    /* floating WhatsApp layer: below cart modal, above sticky nav */
     --z-modal: 1000;
 
     /* ── 5. Motion (12 Principles) ── */
@@ -112,6 +114,8 @@
 /* Global resets specifically dependent on tokens */
 html {
     scroll-behavior: smooth;
+    /* Keep anchor targets clear of the fixed navbar (+ breathing room) */
+    scroll-padding-top: calc(var(--nav-height) + var(--space-xl));
     background-color: var(--color-bg);
     color: var(--color-text);
     overflow-x: clip;

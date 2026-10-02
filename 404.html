@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://images.unsplash.com https://*.unsplash.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me; frame-ancestors 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://images.unsplash.com https://*.unsplash.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me;">
+    <!-- clickjacking protection (frame-ancestors + X-Frame-Options) is delivered as a real HTTP header via vercel.json — frame-ancestors is ignored inside <meta> and only spams the console -->
     <meta name="theme-color" content="#FFBF00">
     <meta name="robots" content="noindex, nofollow">
+    <!-- Reveal-on-scroll styles hide content only when this class is set, so the page stays readable without JS -->
+    <script>document.documentElement.classList.add('js');</script>
 
     <title>Page Not Found — Pizjo</title>
     <meta name="description" content="Oops! This page is as missing as our diet plan. Let's get you back to the good stuff.">
@@ -17,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/tokens.css?v=5">
-    <link rel="stylesheet" href="css/global.css?v=5">
+    <link rel="stylesheet" href="css/global.css?v=6">
     <link rel="stylesheet" href="css/home.css?v=5">
     <style>
         .error-container { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: var(--space-4xl) var(--space-xl); text-align: center; position: relative; overflow: hidden; }
@@ -42,8 +45,8 @@
                 <span class="brand-text">PIZJO!</span>
             </a>
             <div class="nav-links" id="nav-links">
-                <a href="#menu" class="nav-link">Menu</a>
-                <a href="#offers" class="nav-link">Offers</a>
+                <a href="./#menu" class="nav-link">Menu</a>
+                <a href="./#offers" class="nav-link">Offers</a>
                 <a href="pages/about.html" class="nav-link">About</a>
                 <a href="pages/contact.html" class="nav-link">Contact</a>
             </div>
@@ -55,7 +58,7 @@
                 </svg>
             </button>
             <div class="nav-actions">
-                <button class="cart-toggle" id="cart-toggle" aria-label="Open cart">
+                <button class="cart-toggle" id="cart-toggle" aria-label="Open cart" aria-haspopup="dialog" aria-expanded="false">
                     CART
                     <div class="cart-icon-wrapper">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -69,6 +72,22 @@
             </div>
         </div>
     </nav>
+
+    <!-- Sliding cart (minimal variant — 404 has no menu grid to add items from) -->
+    <div class="cart-overlay" id="cart-overlay" hidden></div>
+    <aside class="cart-sidebar" id="cart-sidebar" role="dialog" aria-modal="true" aria-label="Shopping cart" aria-hidden="true" inert>
+        <div class="cart-header">
+            <h2>Your Stash</h2>
+            <button class="cart-close" id="cart-close" aria-label="Close cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total-row"><span>Total</span><span id="cart-total">₹0</span></div>
+            <button class="btn cart-checkout-btn" id="checkout-btn">
+                Order on WhatsApp
+            </button>
+        </div>
+    </aside>
 
     <main id="main">
         <div class="error-container">
@@ -106,10 +125,10 @@
             </div>
             <div class="footer-social" style="display: flex; flex-direction: column; gap: var(--space-md);">
                 <div style="display: flex; gap: var(--space-md);">
-                    <a href="https://www.facebook.com/pizjo" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
+                    <a href="https://www.facebook.com/share/16v6CwqoEA/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                     </a>
-                    <a href="https://www.instagram.com/pizjo" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
+                    <a href="https://www.instagram.com/pizjo_pizza" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                     </a>
                     <a href="https://www.zomato.com/ahmedabad/pizjo-amraiwadi" target="_blank" rel="noopener noreferrer" aria-label="Zomato" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
@@ -124,10 +143,10 @@
         </div>
     </footer>
 
-    <script src="js/config.js?v=1"></script>
+    <script src="js/config.js?v=2"></script>
     <script src="js/security.js?v=5"></script>
     <script src="js/catalog.js?v=1"></script>
     <script src="js/site.js?v=1"></script>
-    <script type="module" src="js/app.js?v=11"></script>
+    <script type="module" src="js/app.js?v=13"></script>
 </body>
 </html>
