@@ -6,7 +6,7 @@ window.PizjoConfig = Object.freeze({
   currency: '₹',
   maxItemQuantity: 20,
   maxCartEntries: 50,
-  menuUrl: 'data/menu.json?v=2',
+  menuUrl: 'data/menu.json?v=3',
   // Self-hosted admin (Vercel + Neon). Rename if the admin Vercel
   // project uses a different domain, then redeploy the storefront.
   adminBaseUrl: 'https://pizjo-admin.vercel.app',

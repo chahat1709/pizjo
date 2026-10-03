@@ -35,7 +35,7 @@ as a static Vite client + serverless API on Vercel.
    pnpm drizzle-kit push
    ```
    (Baseline `0000_init-postgres.sql` creates all 15 tables + enums.)
-4. Seed the 81-item catalog: open the admin UI → Menu → **Sync baseline**
+4. Seed the 158-item catalog: open the admin UI → Menu → **Sync baseline**
    (or call `admin.catalog.sync` via the UI once logged in).
 
 ## 2. Deploy to Vercel (15 min)

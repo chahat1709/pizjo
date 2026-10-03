@@ -1,400 +1,789 @@
 {
   "categories": [
     {
-      "name": "Single Pizza Combos",
+      "name": "Newly Launched Pizza",
       "items": [
         {
-          "name": "Pick 1: Margherita Combo",
-          "price": 139,
-          "description": "Margherita Regular + Stuffed Garlic Bread + Coke",
-          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHBpenphfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "single-pizza-combos-pick-1-margherita-combo"
-        },
-        {
-          "name": "Pick 2: Margherita Cheese Combo",
-          "price": 159,
-          "description": "Margherita Regular + Cheese Garlic Bread + Coke",
-          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBpenphfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "single-pizza-combos-pick-2-margherita-cheese-combo"
-        },
-        {
-          "name": "Pick 3: Golden Corn Combo",
-          "price": 169,
-          "description": "Golden Corn Regular + Stuffed Garlic Bread + Coke",
-          "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHBpenphfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "single-pizza-combos-pick-3-golden-corn-combo"
-        },
-        {
-          "name": "Pick 4: Veg Loaded Combo",
+          "id": "newly-launched-pizza-paneer-spice-supreme",
+          "name": "Paneer Spice Supreme",
           "price": 189,
-          "description": "Veg Loaded Regular + Stuffed Garlic Bread + Coke",
-          "image": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGl6emF8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "single-pizza-combos-pick-4-veg-loaded-combo"
+          "description": "Feel the flavor burst: spicy sauce & gravy, green chilly, capsicum, onion, tomato, olives, jelapenos, red-peprika, gravy marinated paneer",
+          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "newly-launched-pizza-pizjo-retreat",
+          "name": "Pizjo Retreat",
+          "price": 216,
+          "description": "Make your own. . !!!",
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "newly-launched-pizza-fresh-veggie",
+          "name": "Fresh Veggie",
+          "price": 189,
+          "description": "Crunch into freshness: bell-paper, capsicum, onion, tomato, green olives, jelapenos, brocolie, black-olives",
+          "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "newly-launched-pizza-veg-extravaganza",
+          "name": "Veg Extravaganza",
+          "price": 202.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "newly-launched-pizza-deluxe-veggie",
+          "name": "Deluxe Veggie",
+          "price": 202.5,
+          "description": "Indulge in deluxe flavors: peri-peri & chipotle base, bell paper, red-peprika, green olives, jelapenos, black-olives, mushroom, onion, gravy marinated paneer",
+          "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "newly-launched-pizza-veggie-paradise",
+          "name": "Veggie Paradise",
+          "price": 202.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1613564834361-9436948817d1?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "newly-launched-pizza-fire-fused-paneer-crust-hot-spicy",
+          "name": "Fire-fused Paneer Crust (Hot & Spicy)",
+          "price": 202.5,
+          "description": "Paneer perfection meets a fiery touch!, bell-paper, onion, capsicum, schezwan marinated paneer",
+          "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "newly-launched-pizza-farm-house-pizjo-sp",
+          "name": "Farm House (Pizjo Sp.)",
+          "price": 202.5,
+          "description": "Experience homegrown goodness: peri-peri & gravy base, small chopped capsicum, onion, tomato, paneer & corn",
+          "image": "https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "newly-launched-pizza-cheesy-heaven-pie-veggie-cheesy",
+          "name": "Cheesy Heaven Pie (Veggie-cheesy)",
+          "price": 202.5,
+          "description": "A cheesy slice of heaven on earth!, bell-paper, onion, red-peprika, green-olives, brocolie, gravy paneer.",
+          "image": "https://images.unsplash.com/photo-1555072956-7758afb20e8f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "newly-launched-pizza-the-cheese-dominator-cheesiest-one",
+          "name": "The Cheese Dominator (Cheesiest One)",
+          "price": 202.5,
+          "description": "Prepare for a cheesy takeover: cheese blend, 100% mozzrella, chhedar cheese, cheese spread dip, filler cheese",
+          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "newly-launched-pizza-bahubali-pizza",
+          "name": "Bahubali Pizza",
+          "price": 649,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         }
       ]
     },
     {
-      "name": "Premium Pizza Combos",
+      "name": "Signature Pizza",
       "items": [
         {
-          "name": "Pick 5: Capsicum & Paneer Combo",
-          "price": 199,
-          "description": "Capsicum & Paneer Regular + Stuffed Garlic Bread + Coke",
-          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBpenphfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "premium-pizza-combos-pick-5-capsicum-paneer-combo"
+          "id": "signature-pizza-peri-peri-paneer-chef-sp",
+          "name": "Peri-peri Paneer (Chef Sp.)",
+          "price": 175.5,
+          "description": "Feel the fire: peri-peri base, capsicum, onion, bell-paper, jelapenos & peri-peri marinated paneer",
+          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Pick 6: Spicy Veg Feast & Shake",
-          "price": 219,
-          "description": "Spicy Veg. Feast Regular + Stuffed Garlic Bread + Vanilla Shake",
-          "image": "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aWNlZCUyMGNvZmZlZXxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "premium-pizza-combos-pick-6-spicy-veg-feast-shake"
+          "id": "signature-pizza-spicy-vegitarian-feast-spiciest-one",
+          "name": "Spicy Vegitarian Feast (Spiciest One)",
+          "price": 175.5,
+          "description": "Kick up the heat with our spicy veg. Feast: spicy base, green-chilly, capsicum, onion, corn, mushroom, jelapenos & black-olives",
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Pick 7: Peri-Peri Paneer Combo",
-          "price": 229,
-          "description": "Peri-Peri Paneer Regular + Stuffed Garlic Bread + Coke",
-          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBpenphfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "premium-pizza-combos-pick-7-peri-peri-paneer-combo"
+          "id": "signature-pizza-lava-layers-best-for-spicy-lovers",
+          "name": "Lava Layers (Best For Spicy Lovers)",
+          "price": 175.5,
+          "description": "Hot, cheesy, and unforgettable!, tomato, red-peprika, red capsicum, green-olives.",
+          "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Pick 8: Paneer Tikka Combo",
-          "price": 239,
-          "description": "Paneer Tikka Regular + Stuffed Garlic Bread + Coke",
-          "image": "https://images.unsplash.com/photo-1571066811602-716837d681de?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHBpenphfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "premium-pizza-combos-pick-8-paneer-tikka-combo"
+          "id": "signature-pizza-bbq-paneer",
+          "name": "Bbq Paneer",
+          "price": 175.5,
+          "description": "Sizzle and delight: bbq & pizza sauce, capsicum, onion, red capsicum, black olives, green olives, bbq & gravy marinated paneer",
+          "image": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "signature-pizza-paneer-butter-masala",
+          "name": "Paneer Butter Masala",
+          "price": 175.5,
+          "description": "A fusion of spice and comfort: buttery gravy base, onion, tomato, jelapenos & gravy marinated paneer",
+          "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "signature-pizza-veg-loaded",
+          "name": "Veg Loaded",
+          "price": 175.5,
+          "description": "Overflowing with freshness and flavor: capsicum, onion, tomato, jelapenos & black olives",
+          "image": "https://images.unsplash.com/photo-1613564834361-9436948817d1?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "signature-pizza-garden-glory",
+          "name": "Garden Glory",
+          "price": 175.5,
+          "description": "Pure freshness, pure glory!, capsicum, green-olives, jelapenos, brocolie, basil-leaves.",
+          "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "signature-pizza-veg-tandoori",
+          "name": "Veg Tandoori",
+          "price": 175.5,
+          "description": "Tandoori magic on a crust!, capsicum, onion, black-olives, green-olives.",
+          "image": "https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "signature-pizza-veg-delight",
+          "name": "Veg Delight",
+          "price": 175.5,
+          "description": "Savor the veggie goodness: capsicum, onion, mushroom, corn & marinated paneer",
+          "image": "https://images.unsplash.com/photo-1555072956-7758afb20e8f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "signature-pizza-veggie-fiesta",
+          "name": "Veggie Fiesta",
+          "price": 175.5,
+          "description": "Freshness and flavor in every bite!, capsicum, corn, red-peprika",
+          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "signature-pizza-paneer-tikka-bestseller",
+          "name": "Paneer Tikka (Bestseller)",
+          "price": 175.5,
+          "description": "Experience the sizzle: makhni gravy base, capsisum, onion, tomato & gravy marinated paneer",
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "signature-pizza-kadhai-paneer",
+          "name": "Kadhai Paneer",
+          "price": 175.5,
+          "description": "Kadhai magic on a pizza!, capsicum, tomato, red-peprika, gravy marinated paneer.",
+          "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "signature-pizza-paneer-delight",
+          "name": "Paneer Delight",
+          "price": 175.5,
+          "description": "A paneer lover's dream come true!, onion, red-peprika, mixed gravy & peri-peri paneer",
+          "image": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         }
       ]
     },
     {
-      "name": "Double Pizza & Calzone Combos",
+      "name": "Value Pizza",
       "items": [
         {
-          "name": "Pick 9: Twin Margherita & Capsicum",
-          "price": 329,
-          "description": "Margherita Regular + Capsicum Regular + Stuffed Garlic Bread + 2 Coke",
-          "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGl6emF8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "double-pizza-calzone-combos-pick-9-twin-margherita-capsicum"
+          "id": "value-pizza-barbeque-margerita",
+          "name": "Barbeque Margerita",
+          "price": 121.5,
+          "description": "Sizzle with every bite: barbeque-infused margherita delight!",
+          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Pick 10: 4-Topping Pizza Feast",
-          "price": 329,
-          "description": "Margherita Regular + Capsicum Regular + Onion Regular + Tomato Regular",
-          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBpenphfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "double-pizza-calzone-combos-pick-10-4-topping-pizza-feast"
+          "id": "value-pizza-margherita",
+          "name": "Margherita",
+          "price": 108,
+          "description": "Savor the simplicity: margherita magic 100% amul mozzrella",
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Pick 11: Extravaganza Double Combo",
-          "price": 379,
-          "description": "Veg Extravaganza Regular + Double Cheese Margherita + Stuffed Garlic Bread + 2 Coke",
-          "image": "https://images.unsplash.com/photo-1613564834361-9436948817d1?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGl6emF8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "double-pizza-calzone-combos-pick-11-extravaganza-double-combo"
+          "id": "value-pizza-dragon-s-fury-margherita-hot-spicy",
+          "name": "Dragon's Fury Margherita (Hot & Spicy)",
+          "price": 135,
+          "description": "Where spice meets double cheese margherita in a fiery fusion of flavor!",
+          "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Pick 12: Calzone Mega Combo",
-          "price": 399,
-          "description": "Cheese Calizza + Normal Veg Calizza (Any 2) + Stuffed Garlic Bread + 2 Coke",
-          "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGl6emF8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "double-pizza-calzone-combos-pick-12-calzone-mega-combo"
+          "id": "value-pizza-schezwan-margerita",
+          "name": "Schezwan Margerita",
+          "price": 121.5,
+          "description": "Spice up your slice: schezwan twist on classic margherita",
+          "image": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-peri-peri-margerita",
+          "name": "Peri-peri Margerita",
+          "price": 121.5,
+          "description": "Heat up your taste buds: peri-peri meets margherita perfection",
+          "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-triple-tango",
+          "name": "Triple Tango",
+          "price": 162,
+          "description": "Triple the flavor, triple the fun: dive into our triple tango pizza sensation!",
+          "image": "https://images.unsplash.com/photo-1613564834361-9436948817d1?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-mushroon-corn",
+          "name": "Mushroon & Corn",
+          "price": 162,
+          "description": "A marriage of earthy and sweet: corn and mushroom pizza, a delightful harmony of flavors!",
+          "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-paneer-red-peprika",
+          "name": "Paneer & Red Peprika",
+          "price": 162,
+          "description": "Satisfy your cravings with every bite: paneer and red pepper pizza, a burst of flavor in every slice!",
+          "image": "https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-jelapenos-sweet-corn-paneer",
+          "name": "Jelapenos, Sweet Corn & Paneer",
+          "price": 162,
+          "description": "Fiery, sweet, and creamy: jalapenos, sweet corn, and paneer pizza, a flavor-packed sensation!",
+          "image": "https://images.unsplash.com/photo-1555072956-7758afb20e8f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-jelapenos-olives",
+          "name": "Jelapenos & Olives",
+          "price": 162,
+          "description": "Spice meets brine: jalapenos and olives pizza, a zesty mediterranean delight!",
+          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-capsicum-paneer",
+          "name": "Capsicum & Paneer",
+          "price": 162,
+          "description": "Savor the spice, relish the richness: capsicum and paneer pizza, a tantalizing taste adventure",
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-onion-capsicum",
+          "name": "Onion & Capsicum",
+          "price": 148.5,
+          "description": "Vibrant flavors unite: onion and capsicum pizza, a colorful culinary symphony!",
+          "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-golden-corn",
+          "name": "Golden Corn",
+          "price": 135,
+          "description": "Fresh, juicy, and simply delicious: tomato pizza love at first bite!",
+          "image": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-fresh-tomato",
+          "name": "Fresh Tomato",
+          "price": 135,
+          "description": "Fresh, juicy, and simply delicious: tomato pizza love at first bite!",
+          "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-onion-paneer",
+          "name": "Onion & Paneer",
+          "price": 162,
+          "description": "A marriage of sweetness and richness: onion and paneer pizza, a perfect balance of flavors!",
+          "image": "https://images.unsplash.com/photo-1613564834361-9436948817d1?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-tandoori-margerita",
+          "name": "Tandoori Margerita",
+          "price": 121.5,
+          "description": "Flavors of india meet classic margherita: tandoori twist on pizza perfection!",
+          "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-crispy-onion",
+          "name": "Crispy Onion",
+          "price": 135,
+          "description": "Tangy sweetness, savory perfection: onion pizza bliss!",
+          "image": "https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-green-capsicum",
+          "name": "Green Capsicum",
+          "price": 135,
+          "description": "Colorful crunch in every slice: capsicum pizza perfection!",
+          "image": "https://images.unsplash.com/photo-1555072956-7758afb20e8f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-double-cheese-margerita",
+          "name": "Double Cheese Margerita",
+          "price": 135,
+          "description": "Indulge in cheesy bliss: double the delight, margherita perfection",
+          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "value-pizza-margherita-combo-offer",
+          "name": "Margherita Combo Offer",
+          "price": 129,
+          "description": "2 margrita pizza",
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         }
       ]
     },
     {
-      "name": "Special Offers",
+      "name": "Pocket Calzone",
       "items": [
         {
-          "name": "BOGO Margherita (Mon-Fri)",
-          "price": 99,
-          "description": "Buy 1 Get 1 Free Cheese Margherita Pizza (Monday to Friday Special)",
-          "image": "https://images.unsplash.com/photo-1594007654729-407eedc4be65?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHBpenphfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "special-offers-bogo-margherita-mon-fri"
+          "id": "pocket-calzone-paneer-tikka-calzone",
+          "name": "Paneer Tikka Calzone",
+          "price": 175.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Free Margherita on ₹500+ Bill",
-          "price": 0,
-          "description": "Get 1 Free Margherita Pizza on any bill above ₹500!",
-          "image": "https://images.unsplash.com/photo-1555072956-7758afb20e8f?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHBpenphfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "special-offers-free-margherita-on-500-bill"
+          "id": "pocket-calzone-cheese-calzone",
+          "name": "Cheese Calzone",
+          "price": 121.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "pocket-calzone-chipotle-calzone",
+          "name": "Chipotle Calzone",
+          "price": 135,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "pocket-calzone-onion-corn-calzone",
+          "name": "Onion & Corn Calzone",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "pocket-calzone-veggie-stuffed-calzone",
+          "name": "Veggie Stuffed Calzone",
+          "price": 162,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "pocket-calzone-peri-peri-calzone",
+          "name": "Peri-peri Calzone",
+          "price": 175.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1613564834361-9436948817d1?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "pocket-calzone-maxican-calzone",
+          "name": "Maxican Calzone",
+          "price": 189,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "pocket-calzone-bbq-paneer-calzone",
+          "name": "Bbq Paneer Calzone",
+          "price": 189,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         }
       ]
     },
     {
-      "name": "Burgers",
+      "name": "Calizza",
       "items": [
         {
-          "name": "Classic Aloo Tikki Burger",
-          "price": 70,
-          "description": "Crispy golden potato patty with house spices and mayo",
-          "image": "https://images.unsplash.com/photo-1530554764233-e79e16c91d08?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-classic-aloo-tikki-burger"
+          "id": "calizza-exotic-veg-peri-peri-paneer-calizza",
+          "name": "Exotic Veg & Peri-peri Paneer Calizza",
+          "price": 525.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Crispy Veg Burger",
-          "price": 80,
-          "description": "Crunchy mixed vegetable patty with lettuce and creamy mayo",
-          "image": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-crispy-veg-burger"
+          "id": "calizza-paneer-tikka-peri-peri-paneer-calizza",
+          "name": "Paneer Tikka & Peri-peri Paneer Calizza",
+          "price": 538.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Mix Veg Momo Burger",
-          "price": 89,
-          "description": "Special fusion burger loaded with steamed mix veg momos",
-          "image": "https://images.unsplash.com/photo-1633424234673-c8cd0f4df77b?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-mix-veg-momo-burger"
+          "id": "calizza-exotic-veg-bbq-paneer-calizza",
+          "name": "Exotic Veg & Bbq Paneer Calizza",
+          "price": 525.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Spicy Veg Momo Burger",
-          "price": 89,
-          "description": "Hot & spicy momo stuffed inside a soft toasted burger bun",
-          "image": "https://images.unsplash.com/photo-1713330801172-03f8d1c0dde7?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-spicy-veg-momo-burger"
+          "id": "calizza-make-your-own-calizza",
+          "name": "Make Your Own Calizza",
+          "price": 673.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Classic Double Patty Burger",
-          "price": 90,
-          "description": "Double crispy patties with extra lettuce, mayo, and cheese",
-          "image": "https://images.unsplash.com/photo-1549611016-3a70d82b5040?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-classic-double-patty-burger"
+          "id": "calizza-peri-peri-paneer-bbq-calizza",
+          "name": "Peri-peri Paneer & Bbq Calizza",
+          "price": 538.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Spicy Tangy Aloo Tikki Burger",
-          "price": 90,
-          "description": "Zesty spicy aloo tikki with tangy house secret sauce",
-          "image": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-spicy-tangy-aloo-tikki-burger"
+          "id": "calizza-exotic-veg-pesto-paneer-pizza",
+          "name": "Exotic Veg & Pesto Paneer Pizza",
+          "price": 606.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1613564834361-9436948817d1?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Veg Cheese Momo Burger",
-          "price": 99,
-          "description": "Cheesy momo filling inside a toasted brioche bun",
-          "image": "https://images.unsplash.com/photo-1603064752734-4c48eff53d05?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YnVyZ2VyfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "burgers-veg-cheese-momo-burger"
+          "id": "calizza-pesto-paneer-peri-peri-calizza",
+          "name": "Pesto Paneer & Peri-peri Calizza",
+          "price": 633.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Paneer Momo Burger",
-          "price": 99,
-          "description": "Paneer stuffed momos placed inside a burger bun",
-          "image": "https://images.unsplash.com/photo-1610440042657-612c34d95e9f?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YnVyZ2VyfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "burgers-paneer-momo-burger"
+          "id": "calizza-veg-paneer-tikka-calizza",
+          "name": "Veg & Paneer Tikka Calizza",
+          "price": 525.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Paneer Tikka Momo Burger",
-          "price": 99,
-          "description": "Smoky paneer tikka momo fusion burger",
-          "image": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-paneer-tikka-momo-burger"
+          "id": "calizza-veggi-mushroom-delight-calizza",
+          "name": "Veggi & Mushroom Delight Calizza",
+          "price": 444.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1555072956-7758afb20e8f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Corn Cheese Momo Burger",
-          "price": 99,
-          "description": "Melted cheese and sweet corn momo patty burger",
-          "image": "https://images.unsplash.com/photo-1633424234673-c8cd0f4df77b?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-corn-cheese-momo-burger"
+          "id": "calizza-spicy-veggie-maxican",
+          "name": "Spicy Veggie Maxican",
+          "price": 403.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Veggie Double Patty Burger",
-          "price": 100,
-          "description": "Loaded double vegetable patty for ultimate hunger",
-          "image": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YnVyZ2VyfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "burgers-veggie-double-patty-burger"
+          "id": "calizza-cheese-exotic-veg-calizza",
+          "name": "Cheese & Exotic Veg Calizza",
+          "price": 403.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Veg Cheese Burger",
-          "price": 100,
-          "description": "Classic veg patty topped with a thick melt of Amul cheese",
-          "image": "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-veg-cheese-burger"
+          "id": "calizza-classic-cheese-calizza",
+          "name": "Classic Cheese Calizza",
+          "price": 283.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Cheesy Peri-Peri Burger",
-          "price": 110,
-          "description": "Spicy peri-peri seasoned patty drenched in melted cheese",
-          "image": "https://images.unsplash.com/photo-1549611016-3a70d82b5040?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-cheesy-peri-peri-burger"
+          "id": "calizza-cheese-corn-jalepenos-corn-calizza",
+          "name": "Cheese Corn & Jalepenos Corn Calizza",
+          "price": 322.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Corn & Cheese Burger",
-          "price": 110,
-          "description": "Golden sweet corn patty with double cheese layer",
-          "image": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-corn-cheese-burger"
+          "id": "calizza-cheese-veggi-calizza",
+          "name": "Cheese & Veggi Calizza",
+          "price": 349.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Mexican Patty Burger",
-          "price": 120,
-          "description": "Spicy Mexican bean & corn patty with jalapenos and salsa mayo",
-          "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVyZ2VyfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "burgers-mexican-patty-burger"
-        },
-        {
-          "name": "Mexican Double Patty Burger",
-          "price": 130,
-          "description": "Double Mexican patty with extra cheese and hot jalapenos",
-          "image": "https://images.unsplash.com/photo-1633424234673-c8cd0f4df77b?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-mexican-double-patty-burger"
-        },
-        {
-          "name": "Keto Burger (Protein Packed Bliss)",
-          "price": 130,
-          "description": "Low carb, high protein veg patty loaded with fresh cottage cheese",
-          "image": "https://images.unsplash.com/photo-1713330801172-03f8d1c0dde7?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJ1cmdlcnxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "burgers-keto-burger-protein-packed-bliss"
+          "id": "calizza-quattro-formaggi-calizza",
+          "name": "Quattro Formaggi Calizza",
+          "price": 403.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1613564834361-9436948817d1?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         }
       ]
     },
     {
-      "name": "Momos (6 Pcs)",
+      "name": "Offer Combo",
       "items": [
         {
-          "name": "Mix Veg Momos (Steam)",
-          "price": 70,
-          "description": "Steamed dumplings filled with seasoned finely chopped vegetables",
-          "image": "https://images.unsplash.com/photo-1626322751504-930506dd41ca?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGR1bXBsaW5nc3xlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "momos-6-pcs-mix-veg-momos-steam"
+          "id": "offer-combo-special-combo-reg-pizza-burger-coke",
+          "name": "Special Combo (Reg Pizza+ Burger+ Coke)",
+          "price": 159,
+          "description": "Special combo for food lovers.",
+          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Mix Veg Momos (Pan Fry)",
-          "price": 80,
-          "description": "Crispy pan-fried mix vegetable momos",
-          "image": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGR1bXBsaW5nc3xlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "momos-6-pcs-mix-veg-momos-pan-fry"
+          "id": "offer-combo-cheese-calizza-normal-veg-clizza-combo",
+          "name": "Cheese Calizza + Normal Veg Clizza Combo",
+          "price": 538.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Mix Veg Momos (Deep Fry)",
-          "price": 100,
-          "description": "Golden deep-fried crispy mix veg dumplings",
-          "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGR1bXBsaW5nc3xlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "momos-6-pcs-mix-veg-momos-deep-fry"
+          "id": "offer-combo-margerita-regular-capsicum-regular-onion-regular-spicy-paneer",
+          "name": "Margerita Regular + Capsicum Regular + Onion Regular + Spicy Paneer",
+          "price": 444.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Spicy Veg Momos (Steam)",
-          "price": 80,
-          "description": "Steamed momos with hot chilli veg filling",
-          "image": "https://images.unsplash.com/photo-1589047133481-02b4a5327d89?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZHVtcGxpbmdzfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "momos-6-pcs-spicy-veg-momos-steam"
+          "id": "offer-combo-margerita-r-capsicum-r-onion-r-tomato-regular",
+          "name": "Margerita R, Capsicum R, Onion R, tomato Regular",
+          "price": 444.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Paneer Momos (Steam)",
-          "price": 100,
-          "description": "Rich cottage cheese stuffed dumplings, perfectly steamed",
-          "image": "https://images.unsplash.com/photo-1626322751504-930506dd41ca?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGR1bXBsaW5nc3xlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "momos-6-pcs-paneer-momos-steam"
+          "id": "offer-combo-paneer-tikka-regular-supreme-veggie-garlic-bread-coke",
+          "name": "Paneer Tikka Regular + Supreme Veggie Garlic Bread + Coke",
+          "price": 322.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Veg Cheese Momos (Steam)",
-          "price": 100,
-          "description": "Melted cheese and vegetable stuffed steamed momos",
-          "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGR1bXBsaW5nc3xlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "momos-6-pcs-veg-cheese-momos-steam"
+          "id": "offer-combo-peri-peri-paneer-regular-veg-corn-garlic-bread-coke",
+          "name": "Peri-peri Paneer Regular + Veg & Corn Garlic Bread + Coke",
+          "price": 309.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1613564834361-9436948817d1?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Paneer Tikka Momos (Steam)",
-          "price": 100,
-          "description": "Tandoori paneer tikka stuffed steamed momos",
-          "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGR1bXBsaW5nc3xlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "momos-6-pcs-paneer-tikka-momos-steam"
+          "id": "offer-combo-spicy-veg-feast-regular-vanilla-shake",
+          "name": "Spicy Veg. Feast Regular + Vanilla Shake",
+          "price": 295.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Cheese Corn Momos (Steam)",
-          "price": 110,
-          "description": "Juicy sweet corn and mozzarella stuffed momos",
-          "image": "https://images.unsplash.com/photo-1638502338747-f7f368214cce?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZHVtcGxpbmdzfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "momos-6-pcs-cheese-corn-momos-steam"
+          "id": "offer-combo-capsicum-paneer-regular-corn-cheese-garlic-bread-coke",
+          "name": "Capsicum & Paneer Regular + Corn & Cheese Garlic Bread + Coke",
+          "price": 268.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Hot Garlic Schezwan Pan-Fried Momos",
-          "price": 100,
-          "description": "Pan-fried momos tossed in spicy Schezwan hot garlic sauce",
-          "image": "https://images.unsplash.com/photo-1638502521795-89107ac5e246?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZHVtcGxpbmdzfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "momos-6-pcs-hot-garlic-schezwan-pan-fried-momos"
+          "id": "offer-combo-veg-loaded-regular-cheese-garlic-bread-coke",
+          "name": "Veg Loaded Regular + Cheese Garlic Bread + Coke",
+          "price": 255.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1555072956-7758afb20e8f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Darjeeling Momo in Cheese Sauce",
-          "price": 110,
-          "description": "Pan-fried authentic Darjeeling momos smothered in rich cheese sauce",
-          "image": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGR1bXBsaW5nc3xlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "momos-6-pcs-darjeeling-momo-in-cheese-sauce"
+          "id": "offer-combo-golden-corn-regular-cheese-garlic-bread-coke",
+          "name": "Golden Corn Regular + Cheese Garlic Bread + Coke",
+          "price": 228.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Darjeeling Garlic Molten Cheese Momos",
-          "price": 120,
-          "description": "Steamed garlic momos served over a bed of molten lava cheese",
-          "image": "https://images.unsplash.com/photo-1589047133481-02b4a5327d89?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZHVtcGxpbmdzfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "momos-6-pcs-darjeeling-garlic-molten-cheese-momos"
+          "id": "offer-combo-margerita-regular-cheese-garlic-bread-coke",
+          "name": "Margerita Regular + Cheese Garlic Bread + Coke",
+          "price": 214.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Corn & Cheese Molten Cheese Momos",
-          "price": 130,
-          "description": "Steamed corn cheese momos drenched in warm cheesy molten sauce",
-          "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGR1bXBsaW5nc3xlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "momos-6-pcs-corn-cheese-molten-cheese-momos"
+          "id": "offer-combo-margerita-regular-plain-garlic-bread-coke",
+          "name": "Margerita Regular + Plain Garlic Bread + Coke",
+          "price": 187.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Deep Fried Garlic Peri-Peri Momos",
-          "price": 120,
-          "description": "Crispy deep fried momos tossed with zesty peri-peri spice dust",
-          "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGR1bXBsaW5nc3xlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "momos-6-pcs-deep-fried-garlic-peri-peri-momos"
+          "id": "offer-combo-veg-single-combo-pizza",
+          "name": "Veg. Single Combo Pizza",
+          "price": 349,
+          "description": "Onion,capsicum,tomoto,corn",
+          "image": "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Himalayan Paneer Deep Fried Peri-Peri Momos",
-          "price": 130,
-          "description": "Paneer stuffed deep fried momos tossed in spicy Himalayan seasoning",
-          "image": "https://images.unsplash.com/photo-1638502521795-89107ac5e246?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZHVtcGxpbmdzfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "momos-6-pcs-himalayan-paneer-deep-fried-peri-peri-momos"
+          "id": "offer-combo-new-combo",
+          "name": "New Combo",
+          "price": 299,
+          "description": "Margherita r + spicy paneer+ choco lava cake",
+          "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        }
+      ]
+    },
+    {
+      "name": "Stuffed Garlic Breads",
+      "items": [
+        {
+          "id": "stuffed-garlic-breads-peri-peri-paneer-garlic-bread",
+          "name": "Peri-peri Paneer Garlic Bread",
+          "price": 175.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1676976198546-18595f0796f0?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Corn & Cheese Schezwan Pan-Fried Momos",
-          "price": 140,
-          "description": "Cheese corn momos pan-fried in fiery Schezwan glaze",
-          "image": "https://images.unsplash.com/photo-1638502338747-f7f368214cce?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZHVtcGxpbmdzfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "momos-6-pcs-corn-cheese-schezwan-pan-fried-momos"
+          "id": "stuffed-garlic-breads-corn-cheese-garlic-bread",
+          "name": "Corn & Cheese Garlic Bread",
+          "price": 121.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1593527270723-834c53a3fed4?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "stuffed-garlic-breads-paneer-tikka-garlic-bread",
+          "name": "Paneer Tikka Garlic Bread",
+          "price": 189,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1707886114218-fb2bcfbcb1e7?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "stuffed-garlic-breads-supreme-veggie-garlic-bread",
+          "name": "Supreme Veggie Garlic Bread",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1558679582-7fe9071024c9?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "stuffed-garlic-breads-plain-garlic-bread",
+          "name": "Plain Garlic Bread",
+          "price": 81,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1676976198546-18595f0796f0?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "stuffed-garlic-breads-cheese-stuffed-garlic-bread",
+          "name": "Cheese Stuffed Garlic Bread",
+          "price": 108,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1593527270723-834c53a3fed4?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "stuffed-garlic-breads-cheesy-schezwan-garlic-bread",
+          "name": "Cheesy Schezwan Garlic Bread",
+          "price": 108,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1707886114218-fb2bcfbcb1e7?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "stuffed-garlic-breads-veggie-corn-garlic-bread",
+          "name": "Veggie & Corn Garlic Bread",
+          "price": 162,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1558679582-7fe9071024c9?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "stuffed-garlic-breads-corn-jelapenos-cheese-garlic-bread",
+          "name": "Corn, Jelapenos & Cheese Garlic Bread",
+          "price": 135,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1676976198546-18595f0796f0?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "stuffed-garlic-breads-corn-paneer-garlic-bread",
+          "name": "Corn & Paneer Garlic Bread",
+          "price": 135,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1593527270723-834c53a3fed4?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "stuffed-garlic-breads-chilly-cheese-garlic-bread",
+          "name": "Chilly Cheese Garlic Bread",
+          "price": 135,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1707886114218-fb2bcfbcb1e7?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "stuffed-garlic-breads-cheesy-maxican-garlic-bread",
+          "name": "Cheesy Maxican Garlic Bread",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1558679582-7fe9071024c9?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "stuffed-garlic-breads-veggie-stuffed-garlic-bread",
+          "name": "Veggie Stuffed Garlic Bread",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1676976198546-18595f0796f0?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         }
       ]
     },
@@ -402,304 +791,561 @@
       "name": "French Fries",
       "items": [
         {
-          "name": "Salted Fries (Medium)",
-          "price": 79,
-          "description": "Classic golden salted potato fries (180g)",
-          "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGZyZW5jaCUyMGZyaWVzfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "french-fries-salted-fries-medium"
+          "id": "french-fries-salted-fries",
+          "name": "Salted Fries",
+          "price": 106.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Salted Fries (Large)",
-          "price": 110,
-          "description": "Jumbo size classic golden salted potato fries (250g)",
-          "image": "https://images.unsplash.com/photo-1615485290836-4ebcebf44aaf?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZnJlbmNoJTIwZnJpZXN8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "french-fries-salted-fries-large"
+          "id": "french-fries-veg-cheesy-jelapenos-peri-peri-fries",
+          "name": "Veg Cheesy Jelapenos Peri-peri Fries",
+          "price": 243,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1615485290836-4ebcebf44aaf?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Peri-Peri Fries (Medium)",
-          "price": 100,
-          "description": "Crispy fries tossed in hot & spicy African peri-peri seasoning",
-          "image": "https://images.unsplash.com/photo-1598679253544-2c97992403ea?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZnJlbmNoJTIwZnJpZXN8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "french-fries-peri-peri-fries-medium"
+          "id": "french-fries-veg-cheesy-peri-peri-fries",
+          "name": "Veg Cheesy Peri-peri Fries",
+          "price": 229.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1598679253544-2c97992403ea?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Peri-Peri Fries (Large)",
-          "price": 140,
-          "description": "Large portion peri-peri seasoned crispy french fries",
-          "image": "https://images.unsplash.com/photo-1661081090290-9b66fd49d882?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGZyZW5jaCUyMGZyaWVzfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "french-fries-peri-peri-fries-large"
+          "id": "french-fries-cheesy-peri-peri-fries",
+          "name": "Cheesy Peri-peri Fries",
+          "price": 202.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1661081090290-9b66fd49d882?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Cheesy Salted Fries (Medium)",
-          "price": 130,
-          "description": "Golden salted fries loaded with warm liquid Amul cheese",
-          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZyZW5jaCUyMGZyaWVzfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "french-fries-cheesy-salted-fries-medium"
+          "id": "french-fries-cheesy-salted-fries",
+          "name": "Cheesy Salted Fries",
+          "price": 175.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1606755456206-b25206cde27e?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Cheesy Salted Fries (Large)",
-          "price": 170,
-          "description": "Jumbo fries completely covered in melted cheese dip",
-          "image": "https://images.unsplash.com/photo-1607329773021-91a5dbd5986f?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGZyZW5jaCUyMGZyaWVzfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "french-fries-cheesy-salted-fries-large"
-        },
-        {
-          "name": "Cheesy Peri-Peri Fries (Medium)",
-          "price": 150,
-          "description": "Peri-peri spiced fries drizzled with melted cheese sauce",
-          "image": "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZnJlbmNoJTIwZnJpZXN8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "french-fries-cheesy-peri-peri-fries-medium"
-        },
-        {
-          "name": "Cheesy Peri-Peri Fries (Large)",
-          "price": 200,
-          "description": "Large spicy peri-peri fries smothered in double cheese",
-          "image": "https://images.unsplash.com/photo-1615485290836-4ebcebf44aaf?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8ZnJlbmNoJTIwZnJpZXN8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "french-fries-cheesy-peri-peri-fries-large"
-        },
-        {
-          "name": "Veg Cheesy Jalapeno Peri-Peri Fries",
-          "price": 180,
-          "description": "Ultimate fries bowl with peri-peri, jalapenos, and molten cheese",
-          "image": "https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZnJlbmNoJTIwZnJpZXN8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "french-fries-veg-cheesy-jalapeno-peri-peri-fries"
+          "id": "french-fries-peri-peri-fries",
+          "name": "Peri-peri Fries",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1607329773021-91a5dbd5986f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         }
       ]
     },
     {
-      "name": "Garlic Breads & Sides",
+      "name": "Burger Bite",
       "items": [
         {
-          "name": "Plain Garlic Bread (2 Pcs)",
-          "price": 59,
-          "description": "Freshly baked garlic bread with herb butter glaze",
-          "image": "https://images.unsplash.com/photo-1676976198546-18595f0796f0?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGdhcmxpYyUyMGJyZWFkfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "garlic-breads-sides-plain-garlic-bread-2-pcs"
+          "id": "burger-bite-spicy-tangy-aloo-tikki",
+          "name": "Spicy Tangy Aloo Tikki",
+          "price": 121.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Cheese Garlic Bread (2 Pcs)",
-          "price": 79,
-          "description": "Garlic bread topped with 100% Amul Mozzarella melt",
-          "image": "https://images.unsplash.com/photo-1593527270723-834c53a3fed4?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Z2FybGljJTIwYnJlYWR8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "garlic-breads-sides-cheese-garlic-bread-2-pcs"
+          "id": "burger-bite-keto-burger-protein-packed-bliss",
+          "name": "Keto Burger (Protein Packed Bliss)",
+          "price": 175.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1530554764233-e79e16c91d08?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Corn & Cheese Garlic Bread (2 Pcs)",
-          "price": 89,
-          "description": "Garlic bread baked with juicy sweet corn and melted cheese",
-          "image": "https://images.unsplash.com/photo-1707886114218-fb2bcfbcb1e7?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGdhcmxpYyUyMGJyZWFkfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "garlic-breads-sides-corn-cheese-garlic-bread-2-pcs"
+          "id": "burger-bite-classic-double-patty",
+          "name": "Classic Double Patty",
+          "price": 121.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Peri Peri Garlic Bread (2 Pcs)",
-          "price": 89,
-          "description": "Spicy peri-peri seasoned cheesy garlic bread",
-          "image": "https://images.unsplash.com/photo-1558679582-7fe9071024c9?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGdhcmxpYyUyMGJyZWFkfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "garlic-breads-sides-peri-peri-garlic-bread-2-pcs"
+          "id": "burger-bite-veggie-double-patty",
+          "name": "Veggie Double Patty",
+          "price": 135,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1633424234673-c8cd0f4df77b?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "burger-bite-veg-cheese",
+          "name": "Veg Cheese",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1713330801172-03f8d1c0dde7?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "burger-bite-cheesy-peri-peri",
+          "name": "Cheesy Peri-peri",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1549611016-3a70d82b5040?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "burger-bite-corn-cheese",
+          "name": "Corn & Cheese",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "burger-bite-maxican-patty",
+          "name": "Maxican Patty",
+          "price": 162,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1603064752734-4c48eff53d05?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "burger-bite-maxican-double-patty",
+          "name": "Maxican Double Patty",
+          "price": 175.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1610440042657-612c34d95e9f?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "burger-bite-crispy-veg",
+          "name": "Crispy Veg",
+          "price": 108,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "burger-bite-classic-aloo-tikki",
+          "name": "Classic Aloo Tikki",
+          "price": 94.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "burger-bite-crunchy-burger-combo",
+          "name": "Crunchy Burger Combo",
+          "price": 129,
+          "description": "2 classic aaloo tikki burger",
+          "image": "https://images.unsplash.com/photo-1571066811602-716837d681de?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         }
       ]
     },
     {
-      "name": "Dips (30ml)",
+      "name": "Momo Burgers",
       "items": [
         {
-          "name": "Mayo Dip",
-          "price": 20,
-          "description": "Creamy rich mayonnaise dip (30ml)",
-          "image": "https://images.unsplash.com/photo-1734772257288-d53770c7707f?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8c2F1Y2UlMjBkaXB8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "dips-30ml-mayo-dip"
+          "id": "momo-burgers-paneer-momo-burger",
+          "name": "Paneer Momo Burger",
+          "price": 133.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1626322751504-930506dd41ca?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Cheesy Dip",
-          "price": 20,
-          "description": "Warm liquid Amul cheese dip (30ml)",
-          "image": "https://images.unsplash.com/photo-1767065703579-bf0b36885349?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHNhdWNlJTIwZGlwfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "dips-30ml-cheesy-dip"
+          "id": "momo-burgers-paneer-tikka-momo-burger",
+          "name": "Paneer Tikka Momo Burger",
+          "price": 133.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Garlic Mayo Dip",
-          "price": 20,
-          "description": "Garlic infused rich mayo dip (30ml)",
-          "image": "https://images.unsplash.com/photo-1689343118020-21f3655f807a?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNhdWNlJTIwZGlwfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "dips-30ml-garlic-mayo-dip"
+          "id": "momo-burgers-corn-cheese-momo-burger",
+          "name": "Corn Cheese Momo Burger",
+          "price": 133.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Schezwan Dip",
-          "price": 20,
-          "description": "Fiery hot Schezwan chilli dip (30ml)",
-          "image": "https://images.unsplash.com/photo-1551437424-8d2ccf214a19?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8c2F1Y2UlMjBkaXB8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "dips-30ml-schezwan-dip"
+          "id": "momo-burgers-mix-veg-momo-burger",
+          "name": "Mix Veg Momo Burger",
+          "price": 120.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1589047133481-02b4a5327d89?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Mexican Cheesy Dip",
-          "price": 20,
-          "description": "Spicy Mexican seasoned cheese dip (30ml)",
-          "image": "https://images.unsplash.com/photo-1758700835219-0422fdc4dd54?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHNhdWNlJTIwZGlwfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "dips-30ml-mexican-cheesy-dip"
+          "id": "momo-burgers-spicy-veg-momo-burger",
+          "name": "Spicy Veg Momo Burger",
+          "price": 120.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1638502338747-f7f368214cce?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Tandoori Mayo Dip",
-          "price": 20,
-          "description": "Smoky tandoori spiced mayo dip (30ml)",
-          "image": "https://images.unsplash.com/photo-1689343118020-21f3655f807a?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNhdWNlJTIwZGlwfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "dips-30ml-tandoori-mayo-dip"
-        },
-        {
-          "name": "Peri-Peri Mayo Dip",
-          "price": 20,
-          "description": "African peri-peri chilli mayo dip (30ml)",
-          "image": "https://images.unsplash.com/photo-1689343118020-21f3655f807a?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNhdWNlJTIwZGlwfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "dips-30ml-peri-peri-mayo-dip"
-        },
-        {
-          "name": "BBQ Mayo Dip",
-          "price": 20,
-          "description": "Smoky sweet BBQ Mayo dip (30ml)",
-          "image": "https://images.unsplash.com/photo-1767065703579-bf0b36885349?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHNhdWNlJTIwZGlwfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "dips-30ml-bbq-mayo-dip"
+          "id": "momo-burgers-veg-cheese-momo-burger",
+          "name": "Veg Cheese Momo Burger",
+          "price": 133.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1638502521795-89107ac5e246?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         }
       ]
     },
     {
-      "name": "Waffles & Desserts",
+      "name": "Sandwitches",
       "items": [
         {
-          "name": "Vanilla Ice Cream",
-          "price": 39,
-          "description": "Classic creamy vanilla scoop",
-          "image": "https://images.unsplash.com/photo-1613564834361-9436948817d1?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGl6emF8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "waffles-desserts-vanilla-ice-cream"
+          "id": "sandwitches-bahubali-sandwich",
+          "name": "Bahubali Sandwich",
+          "price": 649,
+          "description": "paneer, 3 types of souce (mexican, tandoori, chipotle), loaded cheese, veggie",
+          "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Crunchy Waffle",
-          "price": 99,
-          "description": "Freshly baked crisp Belgian waffle",
-          "image": "https://images.unsplash.com/photo-1512056068661-14ef8b6bfabe?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8d2FmZmxlfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "waffles-desserts-crunchy-waffle"
+          "id": "sandwitches-cheese-chilly-sandwich",
+          "name": "Cheese Chilly Sandwich",
+          "price": 155,
+          "description": "lodead cheese with souce",
+          "image": "https://images.unsplash.com/photo-1530554764233-e79e16c91d08?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
+          "id": "sandwitches-paneer-tikka-sandwich",
+          "name": "Paneer Tikka Sandwich",
+          "price": 194,
+          "description": "paneer with tikka gravy, 3 slice",
+          "image": "https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "sandwitches-veg-club-sandwich",
+          "name": "Veg Club Sandwich",
+          "price": 194,
+          "description": "all veggies and green sauce, 3 slice",
+          "image": "https://images.unsplash.com/photo-1633424234673-c8cd0f4df77b?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        }
+      ]
+    },
+    {
+      "name": "Momos (6 Pcs)",
+      "items": [
+        {
+          "id": "momos-6-pcs-corn-cheese-deep-fried-peri-peri-momo",
+          "name": "Corn & Cheese Deep Fried Peri-peri Momo",
+          "price": 189,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1626322751504-930506dd41ca?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "momos-6-pcs-spicy-veg-deep-fried-garlic-peri-peri-momo",
+          "name": "Spicy Veg Deep Fried Garlic Peri-peri Momo",
+          "price": 175.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "momos-6-pcs-himalayan-paneer-deep-fried-peri-peri-momo",
+          "name": "Himalayan Paneer Deep Fried Peri-peri Momo",
+          "price": 175.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "momos-6-pcs-veg-darjeeling-deep-fried-garlic-peri-peri-momo",
+          "name": "Veg Darjeeling Deep Fried Garlic Peri-peri Momo",
+          "price": 162,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1589047133481-02b4a5327d89?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "momos-6-pcs-veg-darjeeling-deep-fried-peri-peri-momo",
+          "name": "Veg Darjeeling Deep Fried Peri-peri Momo",
+          "price": 162,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1638502338747-f7f368214cce?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "momos-6-pcs-spicy-veg-momos",
+          "name": "Spicy Veg Momos",
+          "price": 108,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1638502521795-89107ac5e246?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "momos-6-pcs-cheese-corn-momos",
+          "name": "Cheese Corn Momos",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1626322751504-930506dd41ca?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "momos-6-pcs-paneer-tikka-momos",
+          "name": "Paneer Tikka Momos",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "momos-6-pcs-veg-cheese-momos",
+          "name": "Veg Cheese Momos",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "momos-6-pcs-paneer-momos",
+          "name": "Paneer Momos",
+          "price": 135,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1589047133481-02b4a5327d89?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "momos-6-pcs-mix-veg-momos",
+          "name": "Mix Veg Momos",
+          "price": 94.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1638502338747-f7f368214cce?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        }
+      ]
+    },
+    {
+      "name": "Pastas",
+      "items": [
+        {
+          "id": "pastas-alfredo-pasta",
+          "name": "Alfredo Pasta",
+          "price": 194,
+          "description": "",
+          "image": "",
+          "veg": true
+        },
+        {
+          "id": "pastas-arrabbiata-pasta",
+          "name": "Arrabbiata Pasta",
+          "price": 194,
+          "description": "",
+          "image": "",
+          "veg": true
+        },
+        {
+          "id": "pastas-pesto-pasta",
+          "name": "Pesto Pasta",
+          "price": 194,
+          "description": "",
+          "image": "",
+          "veg": true
+        },
+        {
+          "id": "pastas-pink-sauce-pasta",
+          "name": "Pink Sauce Pasta",
+          "price": 194,
+          "description": "",
+          "image": "",
+          "veg": true
+        },
+        {
+          "id": "pastas-creamy-mushroom-gravy-pasta",
+          "name": "Creamy Mushroom Gravy Pasta",
+          "price": 220,
+          "description": "",
+          "image": "",
+          "veg": true
+        }
+      ]
+    },
+    {
+      "name": "Delicious Slides",
+      "items": [
+        {
+          "id": "delicious-slides-zingy-parcel",
+          "name": "Zingy Parcel",
+          "price": 64,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1676976198546-18595f0796f0?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "delicious-slides-garlic-cheese-bread",
+          "name": "Garlic (Cheese) Bread",
+          "price": 142,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1593527270723-834c53a3fed4?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "delicious-slides-veg-pocket",
+          "name": "Veg Pocket",
+          "price": 168,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1707886114218-fb2bcfbcb1e7?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        }
+      ]
+    },
+    {
+      "name": "Lava Cakes",
+      "items": [
+        {
+          "id": "lava-cakes-lava-cake",
+          "name": "Lava Cake",
+          "price": 103,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1512056068661-14ef8b6bfabe?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "lava-cakes-choco-lava-cake",
+          "name": "Choco Lava Cake",
+          "price": 129,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1613483515012-8879be29b578?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "lava-cakes-nutella-lava-cake",
+          "name": "Nutella Lava Cake",
+          "price": 129,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1512056068661-14ef8b6bfabe?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        }
+      ]
+    },
+    {
+      "name": "Waffle And Brownie",
+      "items": [
+        {
+          "id": "waffle-and-brownie-chocolate-waffle",
           "name": "Chocolate Waffle",
-          "price": 99,
-          "description": "Waffle smothered in warm melted Belgian chocolate sauce",
-          "image": "https://images.unsplash.com/photo-1613483515012-8879be29b578?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHdhZmZsZXxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "waffles-desserts-chocolate-waffle"
+          "price": 133.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1512056068661-14ef8b6bfabe?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Brownie with Ice Cream",
-          "price": 120,
-          "description": "Rich fudgy chocolate brownie served with vanilla ice cream",
-          "image": "https://images.unsplash.com/photo-1512056068661-14ef8b6bfabe?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8d2FmZmxlfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "waffles-desserts-brownie-with-ice-cream"
+          "id": "waffle-and-brownie-brownie-with-ice-cream",
+          "name": "Brownie With Ice Cream",
+          "price": 162,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1613483515012-8879be29b578?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Sizzling Brownie with Ice Cream",
-          "price": 129,
-          "description": "Hot sizzling brownie on a cast iron plate topped with ice cream",
-          "image": "https://images.unsplash.com/photo-1512056068661-14ef8b6bfabe?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8d2FmZmxlfGVufDB8fDB8fHww",
-          "veg": true,
-          "id": "waffles-desserts-sizzling-brownie-with-ice-cream"
+          "id": "waffle-and-brownie-vanilla-ice-cream",
+          "name": "Vanilla Ice Cream",
+          "price": 52.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1512056068661-14ef8b6bfabe?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "waffle-and-brownie-crunchy-waffle",
+          "name": "Crunchy Waffle",
+          "price": 133.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1613483515012-8879be29b578?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "waffle-and-brownie-sizzling-brownie-with-ice-cream",
+          "name": "Sizzling Brownie With Ice Cream",
+          "price": 174.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1512056068661-14ef8b6bfabe?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         }
       ]
     },
     {
-      "name": "Coolers & Shakes",
+      "name": "Coolers (250ml)",
       "items": [
         {
-          "name": "Lemon Iced Tea",
-          "price": 69,
-          "description": "Chilled refreshing lemon flavoured iced tea",
-          "image": "https://images.unsplash.com/photo-1533007716222-4b465613a984?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGljZWQlMjBjb2ZmZWV8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "coolers-shakes-lemon-iced-tea"
-        },
-        {
-          "name": "Peach Iced Tea",
-          "price": 79,
-          "description": "Sweet peach infused chilled iced tea",
-          "image": "https://images.unsplash.com/photo-1621221814951-fa755dd0c993?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGljZWQlMjBjb2ZmZWV8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "coolers-shakes-peach-iced-tea"
-        },
-        {
-          "name": "Classic Cold Coffee",
-          "price": 89,
-          "description": "Thick blended cold coffee with milk and ice cream",
-          "image": "https://images.unsplash.com/photo-1592663527359-cf6642f54cff?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aWNlZCUyMGNvZmZlZXxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "coolers-shakes-classic-cold-coffee"
-        },
-        {
-          "name": "Chocolate Shake",
-          "price": 89,
-          "description": "Rich chocolate milkshake topped with cocoa dust",
-          "image": "https://images.unsplash.com/photo-1549652127-2e5e59e86a7a?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8aWNlZCUyMGNvZmZlZXxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "coolers-shakes-chocolate-shake"
-        },
-        {
+          "id": "coolers-250ml-vanilla-shake",
           "name": "Vanilla Shake",
-          "price": 99,
-          "description": "Thick vanilla ice cream shake",
-          "image": "https://images.unsplash.com/photo-1589985902809-39d25db22101?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGljZWQlMjBjb2ZmZWV8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "coolers-shakes-vanilla-shake"
+          "price": 133.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1533007716222-4b465613a984?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
+          "id": "coolers-250ml-virjin-mojito",
+          "name": "Virjin Mojito",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1621221814951-fa755dd0c993?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "coolers-250ml-lemon-ice-tea",
+          "name": "Lemon Ice Tea",
+          "price": 93.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1592663527359-cf6642f54cff?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "coolers-250ml-peach-iced-tea",
+          "name": "Peach Iced Tea",
+          "price": 106.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "coolers-250ml-classic-cold-coffee",
+          "name": "Classic Cold Coffee",
+          "price": 159,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1589985902809-39d25db22101?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "coolers-250ml-chocolate-cold-coffee",
           "name": "Chocolate Cold Coffee",
-          "price": 99,
-          "description": "Cold coffee blended with rich chocolate fudge",
-          "image": "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aWNlZCUyMGNvZmZlZXxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "coolers-shakes-chocolate-cold-coffee"
+          "price": 133.65,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1641659736749-8bbae305e475?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
+          "id": "coolers-250ml-chocolate-shake",
+          "name": "Chocolate Shake",
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?auto=format&fit=crop&w=600&q=80",
+          "veg": true
+        },
+        {
+          "id": "coolers-250ml-kitkat-shake",
           "name": "Kitkat Shake",
-          "price": 109,
-          "description": "Thick shake loaded with crushed Kitkat wafer bars",
-          "image": "https://images.unsplash.com/photo-1641659736749-8bbae305e475?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGljZWQlMjBjb2ZmZWV8ZW58MHx8MHx8fDA%3D",
-          "veg": true,
-          "id": "coolers-shakes-kitkat-shake"
+          "price": 148.5,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1576615278693-f8e095e37e01?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         },
         {
-          "name": "Virgin Mojito",
-          "price": 109,
-          "description": "Fizzy lime and fresh mint leaves mocktail cooler",
-          "image": "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1vaml0b3xlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "coolers-shakes-virgin-mojito"
-        },
-        {
+          "id": "coolers-250ml-oreo-brownie-shake",
           "name": "Oreo Brownie Shake",
-          "price": 129,
-          "description": "Ultimate shake with blended Oreo cookies and chocolate brownie",
-          "image": "https://images.unsplash.com/photo-1576615278693-f8e095e37e01?fm=jpg&q=80&w=600&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHdhZmZsZXxlbnwwfHwwfHx8MA%3D%3D",
-          "veg": true,
-          "id": "coolers-shakes-oreo-brownie-shake"
+          "price": 174.15,
+          "description": "",
+          "image": "https://images.unsplash.com/photo-1533007716222-4b465613a984?auto=format&fit=crop&w=600&q=80",
+          "veg": true
         }
       ]
     }

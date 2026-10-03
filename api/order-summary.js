@@ -84,10 +84,13 @@ module.exports = async function handler(req, res) {
         return json(res, 400, { error: 'Invalid order item' });
       }
       seen.add(id);
-      const unitPrice = Number(product.price);
-      const lineTotal = unitPrice * qty;
+      const unitPrice = Math.round(Number(product.price) * 100) / 100;
+      if (!Number.isFinite(unitPrice) || unitPrice < 0) {
+        return json(res, 400, { error: 'Invalid order item' });
+      }
+      const lineTotal = Math.round(unitPrice * qty * 100) / 100;
       items.push({ id, name: product.name, qty, unitPrice, lineTotal });
-      subtotal += lineTotal;
+      subtotal = Math.round((subtotal + lineTotal) * 100) / 100;
       totalQty += qty;
     }
 
@@ -104,7 +107,8 @@ module.exports = async function handler(req, res) {
       discount = { code: promo.code, title: promo.title, amount: check.amount };
     }
 
-    const total = subtotal - (discount ? discount.amount : 0);
+    if (discount) discount.amount = Math.round(discount.amount * 100) / 100;
+    const total = Math.round((subtotal - (discount ? discount.amount : 0)) * 100) / 100;
     return json(res, 200, { items, subtotal, discount, total, currency: '₹' });
   } catch (error) {
     console.error('[order-summary] request failed', error);

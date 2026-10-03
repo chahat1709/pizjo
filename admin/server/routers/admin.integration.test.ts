@@ -21,14 +21,14 @@ function adminContext(): TrpcContext {
 }
 
 describe("protected operational procedures", () => {
-  databaseIt("synchronizes and exposes the persisted 81-item, 11-category catalog baseline", async () => {
+  databaseIt("synchronizes and exposes the persisted 158-item, 17-category catalog baseline", async () => {
     const caller = appRouter.createCaller(adminContext());
     const sync = await caller.admin.catalog.sync();
     const items = await caller.admin.catalog.list();
 
-    expect(sync).toEqual({ categories: 11, items: 81 });
-    expect(items).toHaveLength(81);
-    expect(new Set(items.map(item => item.categoryName)).size).toBe(11);
+    expect(sync).toEqual({ categories: 17, items: 158 });
+    expect(items).toHaveLength(158);
+    expect(new Set(items.map(item => item.categoryName)).size).toBe(17);
   }, 30_000);
 
   databaseIt("rejects invalid persisted-resource inputs without inserting operating data", async () => {

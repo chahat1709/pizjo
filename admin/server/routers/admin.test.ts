@@ -56,8 +56,8 @@ describe("restaurant operational rules", () => {
     expect(() => nextStockLevel(2, -3)).toThrow("Stock cannot fall below zero");
   });
 
-  it("keeps the authoritative catalog baseline at 81 items across 11 categories", () => {
-    expect(catalogItemCount).toBe(81);
-    expect(catalogCategoryCount).toBe(11);
+  it("keeps the authoritative catalog baseline at 158 items across 17 categories", () => {
+    expect(catalogItemCount).toBe(158);
+    expect(catalogCategoryCount).toBe(17);
   });
 });

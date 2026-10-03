@@ -1,6 +1,6 @@
 # Project TODO
 
-- [x] Define database entities and relationships for 81 catalog items across 11 categories, orders, order lines, inventory, menu availability, invoices, employees, shifts, activity events, social accounts, and social posts.
+- [x] Define database entities and relationships for 158 catalog items across 17 categories, orders, order lines, inventory, menu availability, invoices, employees, shifts, activity events, social accounts, and social posts.
 - [x] Enforce authenticated admin-only access through protected tRPC procedures and server-side role checks.
 - [x] Implement a dashboard landing page with today’s revenue, order count, low-stock alerts, and recent-order feed.
 - [x] Build order intake for WhatsApp orders, including validated item lines, payment data, notes, status transitions, filters by date and status, and order history.

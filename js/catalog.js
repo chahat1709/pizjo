@@ -28,6 +28,7 @@
           description: String(item.description || ''),
           image: String(item.image || ''),
           veg: item.veg !== false,
+          b: item.b === true,
           categoryId,
         });
       }) : [];
@@ -45,7 +46,7 @@
     });
   }
 
-  async function load(url = 'data/menu.json?v=2') {
+  async function load(url = 'data/menu.json?v=3') {
     const response = await fetch(url, { credentials: 'same-origin' });
     if (!response.ok) throw new Error(`menu.json HTTP ${response.status}`);
     const catalog = normalize(await response.json());

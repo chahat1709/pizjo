@@ -41,7 +41,7 @@
 
   async function loadMenu() {
     if (!window.PizjoCatalog) throw new Error('shared catalog runtime missing');
-    let catalog = await window.PizjoCatalog.load('../data/menu.json?v=2');
+    let catalog = await window.PizjoCatalog.load('../data/menu.json?v=3');
     catalog = await window.PizjoStorefrontSync?.hydrateCatalog(catalog) || catalog;
     CATEGORIES = catalog.categories.map((category) => ({
       ...category,
@@ -103,7 +103,7 @@
             <article class="product-card${item.isAvailable === false ? ' is-unavailable' : ''}" data-id="${escapeHTML(item.id)}" data-name="${escapeHTML(item.name)}" data-price="${item.price}">
               <div class="product-badges">
                 ${item.veg ? '<span class="badge badge-veg">Veg</span>' : ''}
-                ${item.price > 200 ? '<span class="badge badge-bestseller">Bestseller</span>' : ''}
+                ${item.b ? '<span class="badge badge-bestseller">Bestseller</span>' : ''}
                 ${item.isAvailable === false ? '<span class="badge badge-unavailable">Out of stock</span>' : ''}
               </div>
               <div class="product-info">
@@ -115,7 +115,7 @@
                 <img src="${escapeHTML(item.image)}" alt="${escapeHTML(item.name)}" class="product-image" loading="lazy">
               </div>` : ''}
               <div class="product-footer">
-                <span class="product-price">₹${item.price}</span>
+                <span class="product-price">₹${Number(item.price).toLocaleString('en-IN')}</span>
                 <button class="btn-add" data-id="${escapeHTML(item.id)}" data-price="${item.price}" type="button" ${item.isAvailable === false ? 'disabled aria-disabled="true" aria-label="' + escapeHTML(item.name) + ' is currently out of stock"' : 'aria-label="Add ' + escapeHTML(item.name) + ' to cart"'}>
                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                 </button>

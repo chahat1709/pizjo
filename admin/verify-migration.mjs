@@ -51,9 +51,9 @@ check("good login sets session", r.status === 200 && !!jar.cookie, `status=${r.s
 r = await trpc("auth.me");
 check("auth.me returns owner", r.status === 200 && r.data?.[0]?.result?.data?.json?.username === "owner", JSON.stringify(r.data)?.slice(0, 120));
 
-// 6. catalog sync -> 81/11 on real Postgres (mutation => POST batch)
-r = await call("/api/trpc/admin.catalog.sync?batch=1", { method: "POST", body: { 0: { json: {} } } });
-check("catalog sync 81/11", r.status === 200 && JSON.stringify(r.data).includes('"items":81'), JSON.stringify(r.data)?.slice(0, 120));
+// 6. catalog sync -> 158/17 on real Postgres (mutation => POST batch)
+  const r = await call("/api/trpc/admin.catalog.sync?batch=1", { method: "POST", body: { 0: { json: {} } } });
+  check("catalog sync 158/17", r.status === 200 && JSON.stringify(r.data).includes('"items":158'), JSON.stringify(r.data)?.slice(0, 120));
 
 // 7. create order (walk-in, cash) + status flow
 const menu = await trpc("admin.catalog.list");
@@ -65,7 +65,7 @@ check("order created", r.status === 200 && Number.isInteger(createdId) && create
 // 8. feeds serve the synced catalog
 r = await call("/api/storefront/availability");
 const avail = r.data;
-check("availability feed live", r.status === 200 && Array.isArray(avail?.items) && avail.items.length === 81, `items=${avail?.items?.length}`);
+check("availability feed live", r.status === 200 && Array.isArray(avail?.items) && avail.items.length === 158, `items=${avail?.items?.length}`);
 r = await call("/api/storefront/offers");
 check("offers feed live", r.status === 200 && Array.isArray(r.data?.offers), JSON.stringify(r.data)?.slice(0, 100));
 

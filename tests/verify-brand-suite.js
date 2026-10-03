@@ -15,7 +15,7 @@ const { chromium } = require('playwright');
     return { status: r.status, body: await r.json() };
   });
   out.noPromo = await page.evaluate(async () => {
-    const menu = await (await fetch('data/menu.json?v=2')).json();
+    const menu = await (await fetch('data/menu.json?v=3')).json();
     const item = menu.categories[0].items[0];
     const r = await fetch('/api/order-summary', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ items: [{ id: item.id, qty: 1 }] }) });
     return { status: r.status, body: await r.json() };

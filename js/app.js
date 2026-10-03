@@ -34,49 +34,24 @@ function saveCart() {
   } catch (e) { console.warn('cart save failed', e); }
 }
 
+// Offline fallback: the real Pizjo bestsellers (subset of data/menu.json).
+// Shown only if menu.json fails to load; keep prices in sync with scripts/build-real-menu.js.
 const FALLBACK_MENU = [
   {
-    name: "Single Pizza Combos",
+    name: "Bestsellers",
     items: [
-      { name: "Pick 1: Margherita Combo", price: 139, description: "Margherita Regular + Stuffed Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Pick 2: Margherita Cheese Combo", price: 159, description: "Margherita Regular + Cheese Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Pick 3: Golden Corn Combo", price: 169, description: "Golden Corn Regular + Stuffed Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Pick 4: Veg Loaded Combo", price: 189, description: "Veg Loaded Regular + Stuffed Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true }
+      { name: "Paneer Tikka (Bestseller)", price: 175.5, description: "Experience the sizzle: makhni gravy base, capsisum, onion, tomato & gravy marinated paneer", image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80", veg: true, b: true },
+      { name: "Special Combo (Reg Pizza+ Burger+ Coke)", price: 159, description: "Special combo for food lovers.", image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80", veg: true, b: true },
+      { name: "Corn & Cheese Garlic Bread", price: 121.5, image: "https://images.unsplash.com/photo-1593527270723-834c53a3fed4?auto=format&fit=crop&w=600&q=80", veg: true, b: true },
+      { name: "Plain Garlic Bread", price: 81, image: "https://images.unsplash.com/photo-1676976198546-18595f0796f0?auto=format&fit=crop&w=600&q=80", veg: true, b: true }
     ]
   },
   {
-    name: "Premium Pizza Combos",
+    name: "Momos & More",
     items: [
-      { name: "Pick 5: Capsicum & Paneer Combo", price: 199, description: "Capsicum & Paneer Regular + Stuffed Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Pick 6: Spicy Veg Feast & Shake", price: 219, description: "Spicy Veg. Feast Regular + Stuffed Garlic Bread + Vanilla Shake", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Pick 7: Peri-Peri Paneer Combo", price: 229, description: "Peri-Peri Paneer Regular + Stuffed Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Pick 8: Paneer Tikka Combo", price: 239, description: "Paneer Tikka Regular + Stuffed Garlic Bread + Coke", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80", veg: true }
-    ]
-  },
-  {
-    name: "Double Pizza & Calzone Combos",
-    items: [
-      { name: "Pick 9: Twin Margherita & Capsicum", price: 329, description: "Margherita Regular + Capsicum Regular + Stuffed Garlic Bread + 2 Coke", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Pick 10: 4-Topping Pizza Feast", price: 329, description: "Margherita Regular + Capsicum Regular + Onion Regular + Tomato Regular", image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Pick 11: Extravaganza Double Combo", price: 379, description: "Veg Extravaganza Regular + Double Cheese Margherita + Stuffed Garlic Bread + 2 Coke", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Pick 12: Calzone Mega Combo", price: 399, description: "Cheese Calizza + Normal Veg Calizza (Any 2) + Stuffed Garlic Bread + 2 Coke", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80", veg: true }
-    ]
-  },
-  {
-    name: "Burgers",
-    items: [
-      { name: "Classic Aloo Tikki Burger", price: 70, description: "Crispy golden potato patty with house spices and mayo", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Crispy Veg Burger", price: 80, description: "Crunchy mixed vegetable patty with lettuce and creamy mayo", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Mix Veg Momo Burger", price: 89, description: "Special fusion burger loaded with steamed mix veg momos", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Veg Cheese Burger", price: 100, description: "Classic veg patty topped with a thick melt of Amul cheese", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&w=600&q=80", veg: true }
-    ]
-  },
-  {
-    name: "French Fries",
-    items: [
-      { name: "Salted Fries (Medium)", price: 79, description: "Classic golden salted potato fries (180g)", image: "https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Peri-Peri Fries (Medium)", price: 100, description: "Crispy fries tossed in hot & spicy African peri-peri seasoning", image: "https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=600&q=80", veg: true },
-      { name: "Cheesy Salted Fries (Medium)", price: 130, description: "Golden salted fries loaded with warm liquid Amul cheese", image: "https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=600&q=80", veg: true }
+      { name: "Veg Cheese Momos", price: 148.5, image: "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=600&q=80", veg: true, b: true },
+      { name: "Mix Veg Momos", price: 94.5, image: "https://images.unsplash.com/photo-1638502338747-f7f368214cce?auto=format&fit=crop&w=600&q=80", veg: true, b: true },
+      { name: "Zingy Parcel", price: 64, image: "https://images.unsplash.com/photo-1676976198546-18595f0796f0?auto=format&fit=crop&w=600&q=80", veg: true, b: true }
     ]
   }
 ];
@@ -96,7 +71,7 @@ async function loadMenu() {
   try {
     let catalog = State.catalog.length && State.menu.length
       ? { items: State.catalog, categories: State.menu }
-      : await window.PizjoCatalog.load(CONFIG.menuUrl || 'data/menu.json?v=2');
+      : await window.PizjoCatalog.load(CONFIG.menuUrl || 'data/menu.json?v=3');
     catalog = await window.PizjoStorefrontSync?.hydrateCatalog(catalog) || catalog;
     State.catalog = catalog.items;
     State.menu = catalog.categories.map((category) => ({
@@ -174,7 +149,7 @@ function renderGrid() {
             <div class="product-info">
               <div class="product-badges">
                 ${it.veg === false ? '' : (it.veg || vegName(it.name) ? '<span class="badge badge-veg">Veg</span>' : '')}
-                ${it.price > 200 ? '<span class="badge badge-bestseller">Bestseller</span>' : ''}
+                ${it.b ? '<span class="badge badge-bestseller">Bestseller</span>' : ''}
                 ${it.isAvailable === false ? '<span class="badge badge-unavailable">Out of stock</span>' : ''}
               </div>
               <h3 class="product-title">${Sec.escapeHTML(it.name)}</h3>
@@ -481,7 +456,7 @@ export async function initApp(page = 'home') {
   if (Sec?.init) Sec.init();
   if (window.PizjoCatalog) {
     try {
-      let catalog = await window.PizjoCatalog.load(CONFIG.menuUrl || 'data/menu.json?v=2');
+      let catalog = await window.PizjoCatalog.load(CONFIG.menuUrl || 'data/menu.json?v=3');
       catalog = await window.PizjoStorefrontSync?.hydrateCatalog(catalog) || catalog;
       State.catalog = catalog.items;
       State.menu = catalog.categories.map((category) => ({

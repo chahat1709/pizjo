@@ -54,6 +54,9 @@ out/
 *.bak
 *.tmp
 
+# Skill scaffolding output (local tooling artifacts, not part of the product)
+spark-output/
+
 # Agent runtime cruft
 .claude/skills-lock.json.tmp
 .cagent/

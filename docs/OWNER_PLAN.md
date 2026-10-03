@@ -36,7 +36,7 @@
 ## 5. Price sheet (print this)
 | Package | One-time | Includes |
 |---|---|---|
-| Website + ordering | ₹35,000 | Brand site, 81-item menu, cart, WhatsApp orders, BOGO/LATE20 promo engine, order tracking, KDS screen, GST bill print |
+| Website + ordering | ₹35,000 | Brand site, 158-item real menu, cart, WhatsApp orders, BOGO/LATE20 promo engine, order tracking, KDS screen, GST bill print |
 | + Admin + billing | ₹50,000 | All above + stock, staff/shifts, GST invoices, offers control, sales reports |
 | Monthly care (optional) | ₹3,000/mo | Menu changes, updates, backup, priority support |
 

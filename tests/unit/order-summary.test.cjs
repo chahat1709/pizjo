@@ -50,6 +50,17 @@ test('rejects unknown promo codes', async () => {
   assert.equal(result.body.code, 'INVALID_PROMO');
 });
 
+test('rounds fractional prices to 2dp (no float dust in bills)', async () => {
+  const item = menu.categories.flatMap((c) => c.items).find((i) => i.price !== Math.floor(i.price));
+  assert.ok(item, 'catalog needs a fractional-price item for this test');
+  const qty = 3;
+  const result = await invoke({ items: [{ id: item.id, qty }] });
+  assert.equal(result.status, 200);
+  const expected = Math.round(item.price * qty * 100) / 100;
+  assert.equal(result.body.items[0].lineTotal, expected);
+  assert.equal(result.body.total, expected);
+});
+
 test('validates promo day/time windows server-side', async () => {
   const item = menu.categories[0].items[0];
   // BOGO requires Tuesday + 2 items; a 1-item cart must fail with PROMO_NOT_APPLICABLE or day error
