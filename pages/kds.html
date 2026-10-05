@@ -176,7 +176,7 @@
 
       // Manual order dialog (needs catalog)
       let catalog = [];
-      fetch('../data/menu.json?v=3').then(r => r.json()).then(d => {
+      fetch('/data/menu.json?v=3').then(r => r.json()).then(d => {
         catalog = (d.categories || []).flatMap(c => c.items || []);
         document.getElementById('kds-item').innerHTML = catalog.map(i => `<option value="${esc(i.id)}">${esc(i.name)} — ₹${Number(i.price).toLocaleString('en-IN')}</option>`).join('');
       }).catch(() => {});

@@ -71,7 +71,7 @@ async function loadMenu() {
   try {
     let catalog = State.catalog.length && State.menu.length
       ? { items: State.catalog, categories: State.menu }
-      : await window.PizjoCatalog.load(CONFIG.menuUrl || 'data/menu.json?v=3');
+      : await window.PizjoCatalog.load(CONFIG.menuUrl || '/data/menu.json?v=3');
     catalog = await window.PizjoStorefrontSync?.hydrateCatalog(catalog) || catalog;
     State.catalog = catalog.items;
     State.menu = catalog.categories.map((category) => ({
@@ -456,7 +456,7 @@ export async function initApp(page = 'home') {
   if (Sec?.init) Sec.init();
   if (window.PizjoCatalog) {
     try {
-      let catalog = await window.PizjoCatalog.load(CONFIG.menuUrl || 'data/menu.json?v=3');
+      let catalog = await window.PizjoCatalog.load(CONFIG.menuUrl || '/data/menu.json?v=3');
       catalog = await window.PizjoStorefrontSync?.hydrateCatalog(catalog) || catalog;
       State.catalog = catalog.items;
       State.menu = catalog.categories.map((category) => ({

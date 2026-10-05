@@ -46,7 +46,7 @@
     });
   }
 
-  async function load(url = 'data/menu.json?v=3') {
+  async function load(url = '/data/menu.json?v=3') {
     const response = await fetch(url, { credentials: 'same-origin' });
     if (!response.ok) throw new Error(`menu.json HTTP ${response.status}`);
     const catalog = normalize(await response.json());
