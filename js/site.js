@@ -54,13 +54,20 @@
     }));
   }
 
+  // Static year in the markup is the no-JS fallback; this keeps it current.
+  function setCopyrightYear(root = document) {
+    const year = String(new Date().getFullYear());
+    root.querySelectorAll('[data-year]').forEach((el) => { el.textContent = year; });
+  }
+
   function init() {
     hydrateBusinessLinks();
     bindWhatsAppForms();
     bindMobileMenu();
+    setCopyrightYear();
   }
 
-  global.PizjoSite = Object.freeze({ hydrateBusinessLinks, bindMobileMenu, init });
+  global.PizjoSite = Object.freeze({ hydrateBusinessLinks, bindMobileMenu, setCopyrightYear, init });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();
 })(window);

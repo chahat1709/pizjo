@@ -220,6 +220,8 @@
     text-decoration-thickness: 3px;
     text-underline-offset: 4px;
     transition: color var(--duration-fast) var(--ease-out);
+    display: inline-block;
+    padding: var(--space-sm) 0;
 }
 
 .footer-section a:hover {

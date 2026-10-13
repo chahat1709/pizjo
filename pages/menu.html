@@ -12,14 +12,14 @@
     <meta name="description"
         content="Browse Pizjo's full menu — 158 items across 17 categories. Pizza, Calizza, Burgers, Momos, French Fries, Garlic Breads, Calzone, Pastas, Desserts & Coolers. Starting at ₹53.">
 
-    <link rel="icon" href="../assets/pizjo_logo.webp" type="image/webp">
+    <link rel="icon" href="../assets/pizjo_logo-128.webp" type="image/webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;700&family=Caveat:wght@700&family=Permanent+Marker&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../css/tokens.css?v=5">
-    <link rel="stylesheet" href="../css/global.css?v=6">
+    <link rel="stylesheet" href="../css/global.css?v=7">
     <link rel="stylesheet" href="../css/menu.css?v=5">
     <link rel="canonical" href="https://pizjo.vercel.app/pages/menu.html">
     <meta name="robots" content="index,follow,max-image-preview:large">
@@ -42,7 +42,7 @@
     <nav class="navbar" role="navigation" aria-label="Primary">
         <div class="container nav-container">
             <a href="../index.html" class="nav-brand" aria-label="Pizjo home">
-                <img src="../assets/pizjo_logo.webp" alt="Pizjo Logo" class="brand-logo">
+                <img src="../assets/pizjo_logo-128.webp" alt="Pizjo Logo" class="brand-logo" width="37" height="37" decoding="async">
                 <span class="brand-text">PIZJO!</span>
             </a>
             <div class="nav-links" id="nav-links">
@@ -156,10 +156,50 @@
         </main>
     </section>
 
+    <footer class="footer">
+        <div class="container footer-grid animate-on-scroll" style="gap: var(--space-3xl);">
+            <div class="footer-brand">
+                PIZJO!
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-top: var(--space-xs);">Pure Veg • Since 2025</p>
+            </div>
+            <div class="footer-links" style="display: flex; flex-direction: column; gap: var(--space-sm);">
+                <a href="../index.html#menu">Full Menu</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="legal.html#privacy">Privacy Policy</a>
+                <a href="legal.html#terms">Terms of Service</a>
+            </div>
+            <div class="footer-social" style="display: flex; flex-direction: column; gap: var(--space-md);">
+                <div style="display: flex; gap: var(--space-md);">
+                    <a href="https://www.facebook.com/share/16v6CwqoEA/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="https://www.instagram.com/pizjo_pizza" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://www.zomato.com/ahmedabad/pizjo-amraiwadi" target="_blank" rel="noopener noreferrer" aria-label="Zomato" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--umber-raw); color: var(--amber-neon); border-radius: 50%; transition: transform var(--duration-fast);">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-newsletter" style="margin-top: var(--space-lg);">
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-sm); font-weight: 700;">ASK FOR EXCLUSIVE DEALS ON WHATSAPP</p>
+                <form data-whatsapp-form data-whatsapp-message="Hi! I want to subscribe to Pizjo's exclusive deals and updates! 🍕" action="#" method="get" target="_blank" style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+                    <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required style="flex: 1; min-width: 200px; padding: var(--space-sm) var(--space-md); border: 2px solid var(--umber-raw); background: var(--off-white); color: var(--umber-raw); font-family: var(--font-body); font-size: var(--text-sm);">
+                    <button type="submit" class="btn btn-primary" style="font-size: var(--text-sm); padding: var(--space-sm) var(--space-lg); white-space: nowrap;">Message Us</button>
+                </form>
+            </div>
+            <div class="footer-bottom" style="margin-top: var(--space-2xl); padding-top: var(--space-xl); border-top: 2px solid var(--umber-raw); text-align: center; width: 100%;">
+                <p style="font-size: var(--text-sm); color: var(--color-text-muted);">© <span data-year>2026</span> Pizjo. Stay Cheese-Obsessed.</p>
+                <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-xs);">Shop 01, Raj Complex, Vastral Road, Amraiwadi, Ahmedabad 382418</p>
+            </div>
+        </div>
+    </footer>
+
     <script src="../js/config.js?v=3"></script>
     <script src="../js/security.js?v=5"></script>
     <script src="../js/catalog.js?v=1"></script>
-    <script src="../js/site.js?v=1"></script>
+    <script src="../js/site.js?v=2"></script>
     <script src="../js/admin-storefront-sync.js?v=1"></script>
     <script type="module" src="../js/app.js?v=13"></script>
     <script src="menu.js?v=2"></script>

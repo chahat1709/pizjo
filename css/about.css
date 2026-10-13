@@ -270,6 +270,8 @@
     text-decoration: underline;
     text-decoration-thickness: 2px;
     transition: color var(--duration-fast) var(--ease-out);
+    display: inline-block;
+    padding: var(--space-xs) 0;
 }
 
 .visit-card a:hover {

@@ -810,10 +810,19 @@ html.js .animate-on-scroll.is-visible {
     text-decoration-color: var(--amber-neon);
     text-underline-offset: 4px;
     text-decoration-thickness: 3px;
+    display: inline-block;
+    padding: var(--space-sm) 0;
 }
 
 .footer-links a:hover {
     color: var(--amber-neon);
+}
+
+/* Breadcrumb links sit at ~18px tall without this — too small to tap reliably. */
+.breadcrumb a {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-xs);
+    margin-left: calc(var(--space-xs) * -1);
 }
 
 .footer-bottom {
