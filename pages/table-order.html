@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; img-src 'self' data: https://images.unsplash.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta name="theme-color" content="#FFBF00">
+
+    <title>Order at Your Table - Pizjo</title>
+    <meta name="description" content="Scan, tap and send your Pizjo order straight to the kitchen.">
+
+    <link rel="icon" href="../assets/pizjo_logo-128.webp" type="image/webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800;900&family=Hanken+Grotesk:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="../css/tokens.css?v=5">
+    <link rel="stylesheet" href="../css/table-order.css?v=1">
+</head>
+<body>
+    <a class="skip-link" href="#menu">Skip to menu</a>
+
+    <header class="to-head">
+        <div class="to-head-inner">
+            <p class="to-brand">PIZJO</p>
+            <p class="to-table">Table <strong id="table-number">--</strong></p>
+        </div>
+        <p class="to-sub" id="shop-line">Loading menu...</p>
+    </header>
+
+    <div class="to-alert" id="to-alert" role="alert" hidden></div>
+
+    <nav class="to-chips" id="category-chips" aria-label="Menu categories"></nav>
+
+    <main class="to-main" id="menu" tabindex="-1">
+        <div class="to-loading" id="menu-loading" aria-live="polite">
+            <span class="to-spinner" aria-hidden="true"></span>
+            <p>Getting the menu ready...</p>
+        </div>
+        <div id="menu-sections"></div>
+    </main>
+
+    <aside class="to-status" id="status-panel" hidden aria-live="polite">
+        <div class="to-status-card">
+            <p class="to-status-kicker">Order sent</p>
+            <h2 id="status-title">In the kitchen</h2>
+            <p class="to-status-id" id="status-order-id"></p>
+            <ol class="to-timeline" id="status-timeline">
+                <li data-stage="received"><span class="to-dot" aria-hidden="true"></span>Received</li>
+                <li data-stage="preparing"><span class="to-dot" aria-hidden="true"></span>Preparing</li>
+                <li data-stage="ready"><span class="to-dot" aria-hidden="true"></span>Ready</li>
+                <li data-stage="served"><span class="to-dot" aria-hidden="true"></span>Served</li>
+            </ol>
+            <p class="to-status-total" id="status-total"></p>
+            <button type="button" class="to-btn to-btn-ghost" id="order-more">Order more</button>
+        </div>
+    </aside>
+
+    <div class="to-tray" id="tray" hidden>
+        <button type="button" class="to-tray-btn" id="open-tray" aria-expanded="false" aria-controls="tray-sheet">
+            <span class="to-tray-count" id="tray-count">0 items</span>
+            <span class="to-tray-total" id="tray-total">&#8377;0.00</span>
+            <span class="to-tray-cta">View order</span>
+        </button>
+    </div>
+
+    <dialog class="to-sheet" id="tray-sheet" aria-labelledby="sheet-title">
+        <form method="dialog" class="to-sheet-form" id="tray-form">
+            <div class="to-sheet-head">
+                <h2 id="sheet-title">Your order</h2>
+                <button type="button" class="to-close" id="close-tray" aria-label="Close order tray">&#10005;</button>
+            </div>
+            <ul class="to-lines" id="tray-lines"></ul>
+            <label class="to-notes-label" for="order-notes">Anything the kitchen should know?</label>
+            <textarea id="order-notes" maxlength="200" rows="2" placeholder="Less spicy, no onion, extra cheese..."></textarea>
+            <div class="to-sheet-total">
+                <span>Total (incl. GST)</span>
+                <strong id="sheet-total">&#8377;0.00</strong>
+            </div>
+            <p class="to-sheet-note">Pay at the counter. Prices include 5% GST.</p>
+            <button type="button" class="to-btn to-btn-primary" id="send-order">Send to Kitchen</button>
+        </form>
+    </dialog>
+
+    <dialog class="to-sheet" id="otp-sheet" aria-labelledby="otp-title">
+        <div class="to-sheet-form">
+            <div class="to-sheet-head">
+                <h2 id="otp-title">Confirm your number</h2>
+                <button type="button" class="to-close" id="close-otp" aria-label="Close verification">&#10005;</button>
+            </div>
+            <p class="to-otp-help">We send a 6-digit code so the kitchen can call you if needed.</p>
+
+            <label class="to-label" for="otp-phone">Mobile number</label>
+            <input id="otp-phone" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="14" placeholder="10-digit mobile">
+
+            <button type="button" class="to-btn to-btn-primary" id="request-otp">Send code</button>
+
+            <div id="otp-step-code" hidden>
+                <label class="to-label" for="otp-code">6-digit code</label>
+                <input id="otp-code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000">
+                <p class="to-devcode" id="dev-code" hidden></p>
+                <button type="button" class="to-btn to-btn-primary" id="verify-otp">Verify &amp; send order</button>
+                <button type="button" class="to-btn to-btn-ghost" id="resend-otp">Resend code</button>
+            </div>
+            <p class="to-error" id="otp-error" role="alert"></p>
+        </div>
+    </dialog>
+
+    <footer class="to-foot">
+        <p>Pizjo &middot; Amraiwadi, Ahmedabad</p>
+        <p class="to-foot-fine">Prices include 5% GST (CGST 2.5% + SGST 2.5%).</p>
+    </footer>
+
+    <script type="module" src="../js/table-order.js?v=1"></script>
+</body>
+</html>

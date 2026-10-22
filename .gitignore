@@ -96,3 +96,7 @@ skills-lock.json
 PROJ_V1_AUDIT.md
 
 .vercel
+
+# Table server runtime state (orders, config, staff key, print queue)
+tools/data/
+

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta name="theme-color" content="#3E2723">
+
+    <title>Kitchen Board - Pizjo</title>
+
+    <link rel="icon" href="../assets/pizjo_logo-128.webp" type="image/webp">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800;900&family=Hanken+Grotesk:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="../css/tokens.css?v=5">
+    <link rel="stylesheet" href="../css/table-kds.css?v=1">
+</head>
+<body>
+    <header class="kds-head">
+        <div class="kds-title">
+            <span class="kds-logo">PIZJO</span>
+            <span class="kds-sub">Kitchen Board</span>
+        </div>
+        <div class="kds-meta">
+            <span class="kds-stat"><strong id="stat-orders">0</strong> <span id="stat-orders-label">orders</span> today</span>
+            <span class="kds-stat"><strong id="stat-revenue">&#8377;0</strong> sales</span>
+            <span class="kds-clock" id="clock">--:--</span>
+            <span class="kds-conn" id="conn" data-state="connecting">Connecting</span>
+        </div>
+        <div class="kds-actions">
+            <label class="kds-toggle"><input type="checkbox" id="auto-print" checked> Auto-print</label>
+            <label class="kds-toggle"><input type="checkbox" id="sound-on" checked> Sound</label>
+            <button type="button" class="kds-btn kds-btn-ghost" id="staff-key-btn">Staff key</button>
+        </div>
+    </header>
+
+    <div class="kds-alert" id="kds-alert" role="alert" hidden></div>
+
+    <main class="kds-board" id="board" aria-live="polite">
+        <p class="kds-empty" id="empty">Waiting for the first order of the day.</p>
+    </main>
+
+    <dialog class="kds-dialog" id="key-dialog" aria-labelledby="key-title">
+        <form method="dialog" class="kds-dialog-inner" id="key-form">
+            <h2 id="key-title">Staff key</h2>
+            <p>Printed by the table server at startup. Needed to change order status.</p>
+            <label for="staff-key">Key</label>
+            <input id="staff-key" type="password" autocomplete="off" spellcheck="false">
+            <p class="kds-error" id="key-error" role="alert"></p>
+            <button type="button" class="kds-btn kds-btn-primary" id="save-key">Save</button>
+            <button type="button" class="kds-btn kds-btn-ghost" id="close-key">Close</button>
+        </form>
+    </dialog>
+
+    <script type="module" src="../js/table-kds.js?v=1"></script>
+</body>
+</html>

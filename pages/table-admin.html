@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+    <meta name="theme-color" content="#FFBF00">
+
+    <title>Tables &amp; QR - Pizjo</title>
+
+    <link rel="icon" href="../assets/pizjo_logo-128.webp" type="image/webp">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800;900&family=Hanken+Grotesk:wght@500;600;700&display=swap">
+    <link rel="stylesheet" href="../css/tokens.css?v=5">
+    <link rel="stylesheet" href="../css/table-admin.css?v=1">
+</head>
+<body>
+    <header class="ta-head no-print">
+        <div class="ta-title">
+            <span class="ta-logo">PIZJO</span>
+            <span class="ta-sub">Tables &amp; QR codes</span>
+        </div>
+        <nav class="ta-nav">
+            <a href="table-kds.html">Kitchen board</a>
+            <a href="table-order.html?t=01">Guest view</a>
+            <button type="button" class="ta-btn ta-btn-ghost" id="staff-key-btn">Staff key</button>
+        </nav>
+    </header>
+
+    <div class="ta-alert no-print" id="ta-alert" role="alert" hidden></div>
+
+    <section class="ta-stats no-print" id="stats">
+        <div class="ta-stat">
+            <span class="ta-stat-label">Orders today</span>
+            <strong id="stat-orders">-</strong>
+        </div>
+        <div class="ta-stat">
+            <span class="ta-stat-label">Sales today</span>
+            <strong id="stat-revenue">-</strong>
+        </div>
+        <div class="ta-stat">
+            <span class="ta-stat-label">Tables</span>
+            <strong id="stat-tables">-</strong>
+        </div>
+    </section>
+
+    <section class="ta-tools no-print" aria-label="Table tools">
+        <form class="ta-add" id="add-table">
+            <label for="new-table">Table</label>
+            <input id="new-table" name="number" type="text" inputmode="numeric" maxlength="4" placeholder="13" required>
+            <label for="new-seats">Seats</label>
+            <input id="new-seats" name="seats" type="number" min="1" max="20" value="4" required>
+            <button type="submit" class="ta-btn ta-btn-primary">Add / update</button>
+        </form>
+        <div class="ta-tools-right">
+            <button type="button" class="ta-btn ta-btn-primary" id="print-sheet">Print QR sheet</button>
+            <button type="button" class="ta-btn ta-btn-ghost" id="refresh">Refresh</button>
+        </div>
+    </section>
+
+    <main class="ta-grid" id="table-grid" aria-live="polite"></main>
+
+    <section class="ta-orders no-print">
+        <h2>Recent orders</h2>
+        <p class="ta-hint" id="orders-hint">Enter the staff key to load orders.</p>
+        <ul class="ta-order-list" id="order-list"></ul>
+    </section>
+
+    <dialog class="ta-dialog no-print" id="key-dialog" aria-labelledby="key-title">
+        <form method="dialog" class="ta-dialog-inner">
+            <h2 id="key-title">Staff key</h2>
+            <p>Printed in the table server console at startup. Stored only in this browser.</p>
+            <label for="staff-key">Key</label>
+            <input id="staff-key" type="password" autocomplete="off" spellcheck="false">
+            <p class="ta-error" id="key-error" role="alert"></p>
+            <button type="button" class="ta-btn ta-btn-primary" id="save-key">Save</button>
+            <button type="button" class="ta-btn ta-btn-ghost" id="close-key">Close</button>
+        </form>
+    </dialog>
+
+    <script type="module" src="../js/table-admin.js?v=1"></script>
+</body>
+</html>

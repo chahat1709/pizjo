@@ -1,0 +1,390 @@
+:root {
+  --kds-bg: #2b1d19;
+  --kds-card: #f5f2eb;
+  --kds-line: rgba(245, 242, 235, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--kds-bg);
+  color: var(--off-white);
+  font-family: var(--font-body);
+}
+
+.kds-head {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  padding: 14px 20px;
+  background: var(--umber-raw);
+  border-bottom: 3px solid var(--amber-neon);
+}
+
+.kds-title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.kds-logo {
+  font-family: var(--font-display, 'Bricolage Grotesque', sans-serif);
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--amber-neon);
+}
+
+.kds-sub {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  opacity: 0.75;
+}
+
+.kds-meta {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.kds-stat {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.kds-stat strong {
+  font-family: var(--font-display, 'Bricolage Grotesque', sans-serif);
+  font-size: 20px;
+  color: var(--amber-neon);
+  margin-right: 4px;
+}
+
+.kds-clock {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.kds-conn {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 2px solid currentColor;
+}
+
+.kds-conn[data-state='live'] {
+  color: #6ee7a8;
+}
+
+.kds-conn[data-state='connecting'] {
+  color: var(--amber-neon);
+}
+
+.kds-conn[data-state='offline'] {
+  color: #ff8b80;
+}
+
+.kds-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.kds-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.kds-toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--amber-neon);
+}
+
+.kds-btn {
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 2px solid var(--umber-raw);
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.kds-btn-primary {
+  background: var(--amber-neon);
+  color: var(--umber-raw);
+}
+
+.kds-btn-ghost {
+  background: transparent;
+  color: inherit;
+  border-color: currentColor;
+}
+
+.kds-alert {
+  margin: 0;
+  padding: 12px 20px;
+  background: #ff8b80;
+  color: #2b1d19;
+  font-weight: 700;
+}
+
+.kds-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+  padding: 18px 20px 40px;
+  align-items: start;
+}
+
+.kds-empty {
+  grid-column: 1 / -1;
+  margin: 40px 0;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0.55;
+}
+
+.kds-card {
+  background: var(--kds-card);
+  color: var(--umber-raw);
+  border: 3px solid var(--umber-raw);
+  border-radius: 14px;
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.kds-card[data-status='preparing'] {
+  border-color: var(--amber-neon);
+}
+
+.kds-card[data-status='ready'] {
+  border-color: var(--color-veg);
+}
+
+.kds-card.is-new {
+  animation: kds-flash 1.2s ease-out 2;
+}
+
+@keyframes kds-flash {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 191, 0, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 0 22px rgba(255, 191, 0, 0);
+  }
+}
+
+.kds-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--umber-raw);
+  color: var(--off-white);
+}
+
+.kds-table {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+  font-family: var(--font-display, 'Bricolage Grotesque', sans-serif);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.kds-table strong {
+  display: inline-block;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--amber-neon);
+  letter-spacing: 0;
+}
+
+.kds-age {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(245, 242, 235, 0.14);
+}
+
+.kds-age[data-hot='true'] {
+  background: #ff8b80;
+  color: #2b1d19;
+}
+
+.kds-lines {
+  list-style: none;
+  margin: 0;
+  padding: 12px 14px;
+  flex: 1;
+}
+
+.kds-line {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px dashed rgba(62, 39, 35, 0.18);
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.kds-line:last-child {
+  border-bottom: 0;
+}
+
+.kds-qty {
+  flex: 0 0 auto;
+  min-width: 34px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--amber-neon);
+  font-family: var(--font-display, 'Bricolage Grotesque', sans-serif);
+  font-weight: 900;
+  text-align: center;
+}
+
+.kds-note {
+  margin: 0;
+  padding: 10px 14px;
+  background: #fff5cc;
+  border-top: 2px dashed rgba(62, 39, 35, 0.3);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.kds-foot {
+  display: flex;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 2px solid rgba(62, 39, 35, 0.15);
+  background: rgba(62, 39, 35, 0.05);
+}
+
+.kds-foot .kds-btn {
+  flex: 1;
+}
+
+.kds-foot .kds-btn-primary {
+  border-color: var(--umber-raw);
+}
+
+.kds-foot .kds-btn-ghost {
+  color: var(--umber-raw);
+  border-color: rgba(62, 39, 35, 0.4);
+  flex: 0 0 auto;
+}
+
+.kds-foot .kds-btn[disabled] {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.kds-dialog {
+  width: min(420px, calc(100vw - 24px));
+  border: 3px solid var(--umber-raw);
+  border-radius: 14px;
+  background: var(--off-white);
+  color: var(--umber-raw);
+  padding: 0;
+}
+
+.kds-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.kds-dialog-inner {
+  padding: 20px;
+}
+
+.kds-dialog h2 {
+  margin: 0 0 6px;
+  font-family: var(--font-display, 'Bricolage Grotesque', sans-serif);
+  font-size: 24px;
+}
+
+.kds-dialog p {
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.kds-dialog label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.kds-dialog input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--umber-raw);
+  border-radius: 8px;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.kds-error {
+  min-height: 1.2em;
+  color: #b3261e;
+  font-weight: 700;
+}
+
+.kds-dialog .kds-btn {
+  width: 100%;
+}
+
+.kds-dialog .kds-btn-ghost {
+  margin-top: 8px;
+  color: var(--umber-raw);
+  border-color: rgba(62, 39, 35, 0.4);
+}
+
+@media (max-width: 640px) {
+  .kds-meta {
+    margin-left: 0;
+    gap: 12px;
+  }
+
+  .kds-board {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+}

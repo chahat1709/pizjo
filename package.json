@@ -10,6 +10,7 @@
     "validate": "node scripts/validate-project.mjs",
     "test:unit": "node --test tests/unit/*.test.cjs",
     "test:all": "npm run validate && npm run test:unit && npm test",
+    "table": "node tools/table-server.mjs",
     "build:vendor": "node tools/asset-build/build-vendor.js",
     "build:draco": "node tools/asset-build/build-draco.js",
     "build:assets": "npm run build:draco && npm run build:vendor"
