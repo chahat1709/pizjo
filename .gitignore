@@ -100,3 +100,4 @@ PROJ_V1_AUDIT.md
 # Table server runtime state (orders, config, staff key, print queue)
 tools/data/
 
+docs/CREDENTIALS_TEMPLATE.md
